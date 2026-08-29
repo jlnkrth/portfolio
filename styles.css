@@ -1512,7 +1512,6 @@ a.collections__item:hover {
     position: sticky;
     top: 0;
     z-index: 300;
-    margin: 0 -1.5rem;
     padding: 12px 1.5rem;
     background: linear-gradient(to bottom, var(--bg) 70%, transparent);
   }
