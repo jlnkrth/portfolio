@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "7";
+  var CHROME_CACHE_VERSION = "8";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
 
   var topSlot = document.getElementById("chrome-top");
@@ -801,8 +801,9 @@
       return Promise.all([
         loadScript("/availability.js"),
         loadScript("/now-playing.js"),
-        loadScript("/nav-preview.js?v=7"),
-        loadScript("/sidebar-preview.js?v=7"),
+        loadScript("/nav-preview.js?v=8"),
+        loadScript("/nav-mobile.js?v=8"),
+        loadScript("/sidebar-preview.js?v=8"),
       ]);
     })
     .then(function () {
@@ -810,6 +811,7 @@
       if (window.initNowPlaying) window.initNowPlaying();
       if (window.initNavPreview) window.initNavPreview();
       if (window.initNavCurrent) window.initNavCurrent();
+      if (window.initNavMobile) window.initNavMobile();
       if (window.initSidebarPreview) window.initSidebarPreview();
       window.persistChromeCache();
     })

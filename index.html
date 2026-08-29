@@ -32,6 +32,16 @@
   </head>
   <body>
     <nav class="top-nav" aria-label="Primary">
+      <button
+        type="button"
+        class="top-nav__menu-btn"
+        data-nav-menu-toggle
+        aria-expanded="false"
+        aria-controls="nav-sheet"
+      >
+        Menu
+      </button>
+
       <div class="top-nav__inner">
         <div class="top-nav__track">
           <div class="top-nav__item-wrap" data-nav-preview="notes">
@@ -66,6 +76,7 @@
           </a>
         </div>
       </div>
+
       <span
         class="availability availability--nav"
         data-availability
@@ -81,6 +92,80 @@
         <span class="availability__time">--:--</span>
         <span class="availability__weather" aria-hidden="true"></span>
       </span>
+
+      <div
+        id="nav-sheet"
+        class="nav-sheet"
+        data-nav-sheet
+        hidden
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+      >
+        <div class="nav-sheet__backdrop" data-nav-sheet-close tabindex="-1"></div>
+        <div class="nav-sheet__panel">
+          <div class="nav-sheet__head">
+            <span class="label">Menu</span>
+            <button type="button" class="nav-sheet__close" data-nav-sheet-close aria-label="Close menu">
+              Close
+            </button>
+          </div>
+
+          <nav class="nav-sheet__section" aria-label="Primary">
+            <a class="nav-sheet__link" href="/notes/">
+              <span>Rabbit Hole</span>
+              <span class="nav-sheet__meta" data-nav-count="notes">3 items</span>
+            </a>
+            <a class="nav-sheet__link" href="/books/">
+              <span>Books</span>
+              <span class="nav-sheet__meta" data-nav-count="books">217 items</span>
+            </a>
+            <a class="nav-sheet__link" href="/clients/">
+              <span>Clients</span>
+              <span class="nav-sheet__meta" data-nav-count="clients">20 items</span>
+            </a>
+            <a class="nav-sheet__link" href="/about/">About</a>
+            <a class="nav-sheet__link" href="/projects/">Projects</a>
+          </nav>
+
+          <nav class="nav-sheet__section" aria-label="External">
+            <span class="label nav-sheet__section-label">Elsewhere</span>
+            <a
+              class="nav-sheet__link"
+              href="https://www.commentblocks.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Commentblocks
+            </a>
+            <a
+              class="nav-sheet__link"
+              href="https://www.openlead.ai/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Openlead
+            </a>
+          </nav>
+
+          <div class="nav-sheet__footer">
+            <a
+              class="btn btn--block btn--primary"
+              href="mailto:julian@karmastudio.co?subject=Project%20Inquiry"
+            >
+              Project Inquiry
+            </a>
+            <a
+              class="btn btn--block"
+              href="https://github.com/jlnkrth"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="layout">
@@ -227,11 +312,12 @@
         sessionStorage.removeItem("kreth-sidebar-html");
       } catch (_) {}
     </script>
-    <script src="/availability.js?v=6"></script>
-    <script src="/now-playing.js?v=6"></script>
-    <script src="/nav-preview.js?v=7"></script>
-    <script src="/sidebar-preview.js?v=7"></script>
-    <script src="/projects.js?v=6"></script>
+    <script src="/availability.js?v=8"></script>
+    <script src="/now-playing.js?v=8"></script>
+    <script src="/nav-preview.js?v=8"></script>
+    <script src="/nav-mobile.js?v=8"></script>
+    <script src="/sidebar-preview.js?v=8"></script>
+    <script src="/projects.js?v=8"></script>
     <script>
       document.querySelectorAll("[data-copy]").forEach((el) => {
         el.addEventListener("click", async () => {
