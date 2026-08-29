@@ -12,7 +12,17 @@
       return !sheet.hasAttribute("hidden");
     }
 
+    function syncSheetTop() {
+      var nav = toggle.closest(".top-nav");
+      if (!nav) return;
+      sheet.style.setProperty(
+        "--nav-sheet-top",
+        Math.ceil(nav.getBoundingClientRect().bottom) + "px",
+      );
+    }
+
     function openSheet() {
+      syncSheetTop();
       sheet.removeAttribute("hidden");
       toggle.setAttribute("aria-expanded", "true");
       document.body.classList.add("nav-sheet-open");
@@ -57,6 +67,8 @@
     window.addEventListener("resize", function () {
       if (window.matchMedia("(min-width: 768px)").matches && isOpen()) {
         closeSheet();
+      } else if (isOpen()) {
+        syncSheetTop();
       }
     });
   }

@@ -1500,13 +1500,14 @@ a.collections__item:hover {
 
   .top-nav {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     position: sticky;
     top: 0;
     z-index: 300;
-    padding: 12px 1.5rem;
+    padding: 12px 20px;
     background: linear-gradient(to bottom, var(--bg) 70%, transparent);
   }
 
@@ -1521,12 +1522,6 @@ a.collections__item:hover {
 
   .availability--nav {
     flex-shrink: 0;
-    margin-left: 0;
-    padding: 8px 12px;
-  }
-
-  .availability--nav .availability__location {
-    display: none;
   }
 
   /* Keep the full profile card in the phone flow; navigation stays in the sheet. */
@@ -1792,8 +1787,8 @@ a.collections__item:hover {
 .nav-sheet__panel {
   position: absolute;
   inset: 12px 12px auto;
-  top: 64px;
-  max-height: calc(100dvh - 76px);
+  top: var(--nav-sheet-top, 64px);
+  max-height: calc(100dvh - var(--nav-sheet-top, 64px) - 12px);
   overflow-y: auto;
   overscroll-behavior: contain;
   display: flex;
