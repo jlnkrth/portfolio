@@ -1261,13 +1261,25 @@ a.collections__item:hover {
 }
 
 .sidebar__meta-links {
-  display: flex;
+  display: none;
   justify-content: center;
   gap: 1rem;
   margin-top: 0.5rem;
   padding: 0 2px;
   font-size: 12px;
   line-height: 1.4;
+}
+
+.sidebar__meta-links--admin {
+  display: flex;
+}
+
+.sidebar__meta-links [data-admin-only] {
+  display: none;
+}
+
+body.ed-book-admin .sidebar__meta-links [data-admin-only] {
+  display: inline;
 }
 
 .sidebar__meta-links a {

@@ -53,7 +53,9 @@
 
   function ensureAdminLink() {
     const nav = document.querySelector(".sidebar__meta-links");
-    if (!nav || nav.querySelector("[data-ed-admin]")) return !!nav;
+    if (!nav) return false;
+    nav.classList.add("sidebar__meta-links--admin");
+    if (nav.querySelector("[data-ed-admin]")) return true;
     adminLink = document.createElement("a");
     adminLink.href = "#";
     adminLink.setAttribute("data-ed-admin", "");
