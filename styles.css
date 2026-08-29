@@ -1528,6 +1528,36 @@ a.collections__item:hover {
   .availability--nav .availability__location {
     display: none;
   }
+
+  /* Keep the full profile card in the phone flow; navigation stays in the sheet. */
+  .layout > .sidebar {
+    display: block;
+    width: calc(100% - 3rem);
+    max-width: 692px;
+    margin: 12px auto 0;
+  }
+
+  .layout > .sidebar .collections,
+  .layout > .sidebar .nowplaying {
+    display: none;
+  }
+
+  .layout .header {
+    display: none;
+  }
+
+  .layout > .root {
+    padding-top: 3rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .layout > .sidebar .profile-card .btn {
+    gap: 4px;
+    padding-inline: 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
 }
 
 /* Tablet and desktop: keep the full navigation and profile sidebar visible */
