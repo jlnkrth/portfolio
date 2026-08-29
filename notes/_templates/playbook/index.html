@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>[Article title] — Julian Kreth</title>
+    <meta name="description" content="[Human hook — what changed when you adopted this system.]" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/notes/[slug]/" />
+    <meta property="og:title" content="[Article title]" />
+    <meta property="og:description" content="[Human hook.]" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kreth.work/notes/[slug]/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              <span class="banner__template">[Template - Playbook]</span>
+              <span class="banner__muted">Rules &amp; Common Components</span>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Playbook</span>
+        </div>
+
+        <h1>One Place for Every Decision</h1>
+        <p class="article-dek">A decision log so simple the team actually uses it.</p>
+
+        <aside class="article-tldr" aria-label="Summary">
+          <span class="article-tldr__label">TL;DR</span>
+          <ul>
+            <li>Every decision lives in one file: <code>decisions.md</code>, newest first.</li>
+            <li>Write it down the moment someone says &ldquo;okay, let's do that.&rdquo;</li>
+            <li>Chat is for deciding. It is never the record of what was decided.</li>
+          </ul>
+        </aside>
+        <p class="element-caption">If someone only reads one block, this should still be enough to act.</p>
+
+        <h2>The problem</h2>
+        <p>
+          Teams don't forget decisions. They lose them. The call was made in a
+          thread, the thread scrolled away, and three weeks later two people are
+          having the same argument with the same points and a different outcome.
+          The cost isn't the ten minutes of rehashing — it's that nobody trusts a
+          decision to stay decided, so nothing feels settled.
+        </p>
+
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col">Symptom</th>
+                <th scope="col">Cause</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Same debate every few weeks</td>
+                <td>Decision lived in a Slack thread nobody can find</td>
+              </tr>
+              <tr>
+                <td>&ldquo;Wait, when did we agree to that?&rdquo;</td>
+                <td>Verbal decision, no written record at all</td>
+              </tr>
+              <tr>
+                <td>New teammates re-open settled questions</td>
+                <td>No single place to read what was decided and why</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">Lead with observable symptoms, then tie each one to a concrete cause.</p>
+
+        <h2>The system</h2>
+        <p>
+          One file per project, checked into the repo next to the code it
+          governs. Not a wiki, not a Notion page, not a tool — a text file that
+          shows up in every code review and every checkout.
+        </p>
+        <div class="idx-list">
+          <a class="idx-list__row" href="#"><span>decisions.md</span><span class="idx-list__count">the log</span></a>
+          <a class="idx-list__row" href="#"><span>decisions/0007-drop-dark-mode.md</span><span class="idx-list__count">long form</span></a>
+          <span class="idx-list__divider" aria-hidden="true"></span>
+          <div class="idx-list__row idx-list__row--total"><span>Slack, meetings, DMs</span><span class="idx-list__count">never the record</span></div>
+        </div>
+        <p class="element-caption">One canonical file lowers friction more than any process doc.</p>
+        <p>
+          Most decisions fit in one line of the log. A decision only gets its own
+          numbered file when the reasoning matters more than the outcome — the
+          kind of call someone will want to challenge later.
+        </p>
+
+        <h2>Setup</h2>
+        <p>Seed the file with the decisions you can still remember. Ten minutes, once.</p>
+        <div class="idx-command" data-copy="echo '# Decisions&#10;&#10;Newest first. One line each. Link a numbered file for long reasoning.' > decisions.md">
+          <div class="idx-command__bar">
+            <code class="idx-command__code"><span class="idx-command__prompt">echo</span> '# Decisions' &gt; decisions.md</code>
+            <button class="copy-button" aria-label="Copy code" data-copy-btn>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+          <div class="idx-command__caption">
+            <span>Run once at the project root. That is the whole install.</span>
+          </div>
+        </div>
+        <p class="element-caption">Bootstrap should be one command, not a setup project.</p>
+
+        <h2>Rules</h2>
+        <p>
+          The system works because the rules are few enough to remember without
+          looking them up.
+        </p>
+        <div class="code-block" data-copy="WHEN A DECISION HAPPENS:&#10;1. Write one line: date, decision, who called it.&#10;2. If the reasoning is contested, add a numbered file and link it.&#10;3. Post the line back into the thread where it was decided.&#10;4. To reverse a decision, add a new line. Never edit old ones.">
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>WHEN A DECISION HAPPENS:
+1. Write one line: date, decision, who called it.
+2. If the reasoning is contested, add a numbered file and link it.
+3. Post the line back into the thread where it was decided.
+4. To reverse a decision, add a new line. Never edit old ones.</code></pre>
+        </div>
+        <p class="element-caption">Rules should be copyable, testable, and short enough to memorize.</p>
+
+        <p>
+          One rule is absolute: if it isn't in the log, it wasn't decided.
+          Anyone may reopen an unlogged decision without apology.
+        </p>
+        <h2>What changed in practice</h2>
+        <p>
+          Arguments got shorter, because &ldquo;check the log&rdquo; ends most of
+          them. Reversals got cleaner, because reversing a decision now means
+          writing a new line next to the old one — you see what you're undoing.
+          And new teammates stopped guessing: the log reads like a history of the
+          project's judgment, which is the fastest way to absorb a team's taste.
+        </p>
+        <p>
+          The trick is not the file. It's the rule that chat never counts. Once
+          people trust that everything binding lives in one place, they stop
+          hoarding context in their heads — and the log starts writing itself.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/_templates/principle/">
+            <span class="nav-label">Previous template</span>
+            <span class="nav-title">Principle</span>
+          </a>
+          <a href="/notes/_templates/case-study/">
+            <span class="nav-label">Next template</span>
+            <span class="nav-title">Case study</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+
+    <script src="/components.js"></script>
+  </body>
+</html>

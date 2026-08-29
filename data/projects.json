@@ -1,0 +1,50 @@
+{
+  "projects": [
+    {
+      "slug": "skills",
+      "title": "Skills",
+      "mark": "/skills",
+      "description": "Agent skills for technical SEO audits — install once, run anywhere.",
+      "href": "/projects/skills/",
+      "github": "https://github.com/jlnkrth/skills",
+      "install": "npx skills@latest add jlnkrth/skills",
+      "language": "HTML",
+      "ctaPrimary": {
+        "label": "Skills",
+        "href": "https://skills.sh/",
+        "external": true
+      }
+    },
+    {
+      "slug": "gsc-mcp-server",
+      "title": "GSC MCP Server",
+      "mark": "/gsc",
+      "description": "MCP server for Google Search Console — query analytics from your AI client.",
+      "href": "/projects/gsc-mcp-server/",
+      "github": "https://github.com/jlnkrth/gsc-mcp-server",
+      "npm": "https://www.npmjs.com/package/@jlnkrth/gsc-mcp-server",
+      "install": "npx -y @jlnkrth/gsc-mcp-server",
+      "language": "JavaScript",
+      "ctaPrimary": {
+        "label": "npm",
+        "href": "https://www.npmjs.com/package/@jlnkrth/gsc-mcp-server",
+        "external": true
+      }
+    },
+    {
+      "slug": "html-host",
+      "title": "HTML Host",
+      "mark": "/host",
+      "description": "Self-hosted publisher for sanitized, self-contained HTML page packages.",
+      "href": "/projects/html-host/",
+      "github": "https://github.com/jlnkrth/html-host",
+      "install": "git clone https://github.com/jlnkrth/html-host.git",
+      "language": "JavaScript",
+      "ctaPrimary": {
+        "label": "GitHub",
+        "href": "https://github.com/jlnkrth/html-host",
+        "external": true
+      }
+    }
+  ]
+}

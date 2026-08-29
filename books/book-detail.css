@@ -1,0 +1,156 @@
+/* Book detail pages — dqnamo-style content inside the site layout */
+.book-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-detail__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Flatten main so sections + meta participate in body layout */
+.book-detail__main {
+  display: contents;
+}
+
+.book-detail__main > section[aria-label="Book overview"] {
+  order: 1;
+  min-width: 0;
+}
+
+.book-detail__meta {
+  display: block;
+  order: 2;
+  min-width: 0;
+  width: 100%;
+}
+
+.book-detail__main > section[aria-label="Notes and highlights"] {
+  order: 3;
+  min-width: 0;
+}
+
+.book-detail__meta .idx-list {
+  /* Align with exp-control inset: stage border + pad + panel border + controls pad */
+  box-sizing: border-box;
+  padding-inline: 24px;
+  width: 100%;
+  max-width: none;
+}
+
+/* Sidebar (360px) + overview (692px) + notes (flex) + margins ≈ 1440px */
+@media (min-width: 1440px) {
+  .book-detail {
+    --book-main-width: 692px;
+    /* 9rem root top pad + 4rem root bottom pad + path/title above the grid (~7rem) */
+    --book-detail-chrome: calc(9rem + 4rem + 7rem);
+  }
+
+  .book-detail__body {
+    display: grid;
+    grid-template-columns: minmax(0, var(--book-main-width)) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 24px;
+    row-gap: 24px;
+    align-items: stretch;
+    min-height: calc(100vh - var(--book-detail-chrome));
+  }
+
+  .book-detail__main > section[aria-label="Book overview"] {
+    grid-column: 1;
+    grid-row: 1;
+    order: unset;
+  }
+
+  .book-detail__meta {
+    grid-column: 1;
+    grid-row: 2;
+    order: unset;
+  }
+
+  .book-detail__main > section[aria-label="Notes and highlights"] {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    order: unset;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    height: 0;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  .book-detail__main > section[aria-label="Notes and highlights"] .exp-stage,
+  .book-detail__main > section[aria-label="Notes and highlights"] .exp-stage__panel,
+  .book-detail__main > section[aria-label="Notes and highlights"] .exp-code {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .book-detail__main > section[aria-label="Notes and highlights"] .exp-code__bar {
+    flex-shrink: 0;
+  }
+
+  .book-detail__main > section[aria-label="Notes and highlights"] .exp-code__body {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+  }
+}
+
+.book-detail .exp-title {
+  padding: 0 0 32px;
+}
+
+.book-detail .exp-path {
+  margin-bottom: 8px;
+}
+
+.book-detail .exp-stage__canvas {
+  position: relative;
+}
+
+.book-read-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.book-cover {
+  width: 148px;
+  border-radius: 6px;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.book-cover:hover {
+  transform: rotate(-2deg) scale(1.03);
+}
+
+.book-cover--placeholder {
+  display: grid;
+  place-items: center;
+  width: 148px;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  border: 1px solid var(--gray3);
+  background: var(--gray2);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray9);
+}
+
+.exp-stage + .exp-stage {
+  margin-top: 0;
+}

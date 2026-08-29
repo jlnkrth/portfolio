@@ -1,0 +1,17 @@
+---
+description: Social thread drafts stored in portfolio/social (not published on site)
+globs: portfolio/social/**/*
+alwaysApply: false
+---
+
+# Social posts
+
+Read `social/SOCIAL-GUIDE.md` before creating or editing a social thread.
+
+## Rules
+
+- One folder per post: `social/<slug>/post.md` + `assets/`
+- Use YAML frontmatter with a `thread` array (`text` + optional `image`)
+- Keep `status: draft` until screenshots are in place and copy is proofread
+- Never add social posts to `data/notes.json`, homepage nav, or sitemap
+- Link to related notes via `related_note` slug only after the note is published

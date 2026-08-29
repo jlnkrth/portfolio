@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>[Article title] — Julian Kreth</title>
+    <meta name="description" content="[Counterintuitive fix in one line.]" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/notes/[slug]/" />
+    <meta property="og:title" content="[Article title]" />
+    <meta property="og:description" content="[Counterintuitive fix in one line.]" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kreth.work/notes/[slug]/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              <span class="banner__template">[Template - Case study]</span>
+              <span class="banner__muted">Rules &amp; Common Components</span>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Case study</span>
+        </div>
+
+        <h1>We Replaced Our Dashboard with a Text File</h1>
+        <p class="article-dek">The bet: a status page nobody maintains is worse than no status page.</p>
+
+        <p>
+          We spent four months building a metrics dashboard, and six months
+          watching nobody open it. Charts for everything, filters for everything,
+          and a team that still asked &ldquo;how are we doing?&rdquo; in standup
+          every morning.
+        </p>
+        <p>
+          So we deleted it. In its place we put a single text file,
+          <code class="code-chip">status.md</code>, updated by a script every
+          morning at seven. The file answers three questions and nothing else:
+          what changed, what broke, what needs a decision.
+        </p>
+
+        <h2>Failure mode</h2>
+        <p>
+          The dashboard failed the way most dashboards fail — quietly. It never
+          went down. It just stopped being read, because reading it was work: pick
+          a date range, pick a segment, remember what last week's number was.
+          People wanted an answer, and we had given them a tool for finding
+          answers. Those are not the same product.
+        </p>
+
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col">Symptom</th>
+                <th scope="col">Cause</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&ldquo;How are we doing?&rdquo; asked daily in standup</td>
+                <td>Dashboard shows data, not answers — reading it takes effort</td>
+              </tr>
+              <tr>
+                <td>Charts silently wrong for three weeks</td>
+                <td>Nobody looked; a broken query looks the same as a slow month</td>
+              </tr>
+              <tr>
+                <td>Every question spawns a filter request</td>
+                <td>Tool invites exploration instead of settling the question</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">Name the failure pattern before explaining your fix.</p>
+
+        <h2>The approach</h2>
+        <p>
+          We stopped optimizing for what people could look up and started
+          optimizing for what they would actually read. A text file in the repo
+          is the lowest-friction surface we have: it shows up in the editor, in
+          pull requests, and in Slack when the bot posts it each morning.
+        </p>
+
+        <p>
+          The bet: nobody reads a dashboard, but everybody reads three sentences
+          that arrive by themselves.
+        </p>
+
+        <h2>Architecture</h2>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">Morning status run</p>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">sequenceDiagram
+    participant Cron
+    participant Script as status_script
+    participant Sources as data_sources
+    participant File as status_md
+    participant Slack
+
+    Cron->>Script: 07:00 daily
+    Script->>Sources: pull yesterday's numbers
+    Sources-->>Script: raw metrics
+    Script->>Script: compare to trailing 4 weeks
+    alt something crossed a threshold
+        Script->>File: write "what broke" section
+    else all within range
+        Script->>File: write one-line all-clear
+    end
+    Script->>Slack: post the file to #team</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            The script decides what is worth saying. The file is the interface.
+          </figcaption>
+        </figure>
+
+        <p>Three sections, fixed order, so the file reads the same every day:</p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>what changed</span><span class="idx-list__status">[ deltas past threshold ]</span></div>
+          <div class="idx-list__row"><span>what broke</span><span class="idx-list__status">[ failed checks, empty if none ]</span></div>
+          <div class="idx-list__row"><span>needs a decision</span><span class="idx-list__status idx-list__status--locked">[ human-added only ]</span></div>
+        </div>
+        <p class="element-caption">Fixed section order makes daily status scannable under 30 seconds.</p>
+
+        <div class="code-block" data-copy="thresholds:&#10;  signups_weekly: ±15%&#10;  churn_monthly: ±0.5pp&#10;  error_rate: > 1%&#10;rule: below threshold → not in the file">
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>thresholds:
+  signups_weekly: ±15%
+  churn_monthly: ±0.5pp
+  error_rate: > 1%
+rule: below threshold → not in the file</code></pre>
+        </div>
+        <p class="element-caption">Thresholds convert taste into explicit publishing rules.</p>
+        <p>
+          The thresholds are the real product. They encode what &ldquo;worth
+          mentioning&rdquo; means, in a file anyone can challenge in a pull
+          request.
+        </p>
+
+        <h2>What changed</h2>
+        <p>
+          Standup stopped opening with a status question, because everyone had
+          read the same three sentences an hour earlier. When a number broke, we
+          knew that day — the broken-query problem disappeared, since a script
+          that fails to write the file fails loudly. And the &ldquo;needs a
+          decision&rdquo; section became the queue that feeds our decision log.
+        </p>
+        <div class="dq-sparkline" data-dq-sparkline data-trend="up">
+          <div class="dq-sparkline__head">
+            <div>
+              <p class="dq-sparkline__label">Team members reading daily status</p>
+              <p class="dq-sparkline__value">9 of 9</p>
+            </div>
+            <span class="dq-sparkline__trend" data-direction="up">+350%</span>
+          </div>
+          <div class="dq-sparkline__chart">
+            <svg class="dq-sparkline__svg" viewBox="0 0 220 72" width="220" height="72" aria-hidden="true">
+              <path class="dq-sparkline__fill" d=""></path>
+              <path class="dq-sparkline__path" d=""></path>
+            </svg>
+          </div>
+          <div class="dq-sparkline__controls">
+            <button type="button" class="dq-sparkline__pill" data-dq-sparkline-curve="smooth" data-active="true">Smooth</button>
+            <button type="button" class="dq-sparkline__pill" data-dq-sparkline-curve="sharp">Sharp</button>
+            <button type="button" class="dq-sparkline__replay" data-dq-sparkline-replay>Replay</button>
+          </div>
+        </div>
+        <p class="element-caption">Use one metric to prove adoption, not five metrics to look sophisticated.</p>
+        <p>
+          The lesson generalizes past dashboards. When a tool isn't used, the
+          instinct is to make it more capable. Usually the opposite is true: make
+          it smaller, make it arrive on its own, and make it say less.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/_templates/playbook/">
+            <span class="nav-label">Previous template</span>
+            <span class="nav-title">Playbook</span>
+          </a>
+          <a href="/notes/_templates/">
+            <span class="nav-label">Back</span>
+            <span class="nav-title">All templates</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+    <script src="/exploration.js"></script>
+  </body>
+</html>

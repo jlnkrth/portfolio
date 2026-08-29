@@ -1,0 +1,44 @@
+{
+  "links": [
+    {
+      "id": "projects",
+      "label": "Projects",
+      "href": "/projects/",
+      "collection": "openSource",
+      "modalTitle": "Projects",
+      "footerLabel": "Open source",
+      "showUpdated": true
+    },
+    {
+      "id": "readings",
+      "label": "Readings",
+      "href": "/books/",
+      "collection": "books",
+      "modalTitle": "Readings",
+      "footerLabel": "Readings",
+      "showUpdated": true
+    },
+    {
+      "id": "commentblocks",
+      "label": "Commentblocks",
+      "href": "https://www.commentblocks.com/",
+      "external": true,
+      "modalTitle": "Commentblocks",
+      "meta": "www.commentblocks.com",
+      "footerLabel": "Project",
+      "showUpdated": true,
+      "previewImage": "https://cdn.prod.website-files.com/66dfec91245a4ea3393b8168/67d53109191e39fba6dca2c6_Screenshot%202025-03-15%20at%2006.44.33.png"
+    },
+    {
+      "id": "openlead",
+      "label": "Openlead",
+      "href": "https://www.openlead.ai/",
+      "external": true,
+      "modalTitle": "Openlead",
+      "meta": "www.openlead.ai",
+      "footerLabel": "Project",
+      "showUpdated": true,
+      "previewImage": "https://cdn.prod.website-files.com/66dfec91245a4ea3393b8168/6807aba1d75d829b9ae4d8bf_Screenshot%202025-04-22%20at%2016.44.57.png"
+    }
+  ]
+}

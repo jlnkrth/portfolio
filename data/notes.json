@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "title": "The Best AI Will Be Free, Chinese, and Banned in America",
+      "slug": "free-chinese-and-banned",
+      "href": "/notes/free-chinese-and-banned/",
+      "author": "Julian Kreth",
+      "date": "2026-07-17",
+      "viewTransitionName": "note-item-0"
+    },
+    {
+      "title": "Why Memory Management Is Important for Your AI Agent",
+      "slug": "why-memory-management-matters-for-your-ai-agent",
+      "href": "/notes/why-memory-management-matters-for-your-ai-agent/",
+      "author": "Julian Kreth",
+      "date": "2026-07-04",
+      "viewTransitionName": "note-item-1"
+    },
+    {
+      "title": "How We Improved Our AI Agent in Slack by Making It Dumber",
+      "slug": "how-we-improved-our-ai-agent-in-slack-by-making-it-dumber",
+      "href": "/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/",
+      "author": "Julian Kreth",
+      "date": "2026-07-03",
+      "viewTransitionName": "note-item-2"
+    }
+  ]
+}

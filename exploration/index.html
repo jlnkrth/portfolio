@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploration — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Interface studies and component patterns — a curated exploration of compact UI surfaces."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/exploration/" />
+    <meta property="og:title" content="Exploration — Julian Kreth" />
+    <meta
+      property="og:description"
+      content="Interface studies and component patterns — a curated exploration of compact UI surfaces."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kreth.work/exploration/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/components.css?v=17" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/exploration/exploration.css?v=2" />
+  </head>
+  <body class="exploration-page">
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+    <aside class="exploration-dock" aria-label="Page context">
+      <div class="exp-dock exp-small-shadow">
+        <div class="exp-dock__section">
+          <div class="exp-dock__brand">
+            <span class="exp-wordmark">Studio</span>
+            <span class="exp-path">kreth.work/exploration</span>
+          </div>
+        </div>
+        <div class="exp-dock__section">
+          <div class="exp-toggle-row">
+            <span class="exp-toggle-row__label">Dark mode</span>
+            <button
+              class="exp-toggle"
+              type="button"
+              role="switch"
+              aria-checked="false"
+              aria-label="Toggle dark mode"
+              data-exp-toggle
+            >
+              <span class="exp-toggle__thumb"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="exploration-shell">
+      <section class="exploration-section">
+        <div class="exploration-section__stack">
+          <a class="exploration-back" href="/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5" />
+              <path d="m12 19-7-7 7-7" />
+            </svg>
+            Julian Kreth
+          </a>
+          <div class="exploration-hero">
+            <h1 class="exp-wordmark">Exploration</h1>
+            <p class="exp-hero-lead">
+              Designer and engineer. Hamburg. A working notebook of interface
+              patterns — compact cards, mono labels, and motion-friendly controls.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="exploration-section">
+        <div class="exploration-section__stack">
+          <div class="exp-promo exp-small-shadow">
+            <div class="exp-promo__body">
+              <p class="exp-promo__title">Want to collaborate?</p>
+              <p class="exp-promo__copy">
+                I take on a small number of fractional design-engineering
+                engagements each quarter — usually around product polish and
+                component systems.
+              </p>
+              <div class="exp-btn-row">
+                <a class="exp-btn-compact exp-btn-compact--primary" href="mailto:julian@karmastudio.co?subject=Project%20Inquiry">Book a call</a>
+                <a class="exp-btn-compact" href="/">Back to home</a>
+              </div>
+            </div>
+            <div class="exp-grid-panel" aria-hidden="true">
+              <div class="exp-grid-panel__cells">
+                <span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span>
+                <span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span>
+                <span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span>
+                <span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span>
+                <span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span><span class="exp-grid-panel__cell"></span>
+              </div>
+              <p class="exp-grid-panel__text">Design<br />Engineering<br />Studio</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="exploration-section" id="live-demos">
+        <div class="exploration-section__stack">
+          <div class="exploration-section__stack--tight">
+            <h2 class="exp-section-head">Live demos</h2>
+            <p class="exp-section-lead">
+              Nine interactive patterns rebuilt in vanilla HTML, CSS, and JS — mapped
+              to the site&rsquo;s gray ramp and Inter type.
+            </p>
+          </div>
+
+          <div class="exploration-demos">
+            <article class="exploration-demo" id="demo-scramble-text">
+              <span class="exploration-demo__label">Scramble text</span>
+              <div class="dq-scramble" data-dq-scramble>
+                <span class="dq-scramble__text" data-dq-scramble-display>kreth.work/invite/X7K2M9P4-Q3NV</span>
+                <span class="sr-only" data-dq-scramble-live>kreth.work/invite/X7K2M9P4-Q3NV</span>
+                <button type="button" class="dq-scramble__btn" data-dq-scramble-trigger data-dq-scramble-value="kreth.work/invite/R8W1L6T0-H5JX">Regenerate code</button>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-agent-dock">
+              <span class="exploration-demo__label">Agent dock</span>
+              <div class="dq-agent-dock" data-dq-agent-dock data-idle-status="Ready when you are" data-working-status="Thinking…">
+                <form class="dq-agent-dock__form">
+                  <div class="dq-agent-dock__shell">
+                    <div class="dq-agent-dock__composer" aria-hidden="true">
+                      <div class="dq-agent-dock__composer-inner">
+                        <button type="button" class="dq-agent-dock__close" aria-label="Close composer">
+                          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                        </button>
+                        <textarea class="dq-agent-dock__textarea" placeholder="Ask anything…" aria-label="Message agent"></textarea>
+                      </div>
+                    </div>
+                    <div class="dq-agent-dock__row">
+                      <div class="dq-agent-dock__avatar" aria-hidden="true">N</div>
+                      <div class="dq-agent-dock__meta">
+                        <p class="dq-agent-dock__name">Nova</p>
+                        <p class="dq-agent-dock__status">Ready when you are</p>
+                      </div>
+                      <div class="dq-agent-dock__actions">
+                        <button type="button" class="dq-agent-dock__action">
+                          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.71V21h2v-3.29A7 7 0 0 0 19 11h-2Z"/></svg>
+                          Voice <kbd>V</kbd>
+                        </button>
+                        <button type="submit" class="dq-agent-dock__action dq-agent-dock__chat">
+                          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 3a9 9 0 0 0-9 9v7l3-3h6a9 9 0 0 0 9-9 9 9 0 0 0-9-9Z"/></svg>
+                          <span class="dq-agent-dock__chat-label">Chat</span> <kbd>C</kbd>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-scroll-fade-list">
+              <span class="exploration-demo__label">Scroll fade list</span>
+              <div class="dq-scroll-fade" data-dq-scroll-fade data-max-fade="76">
+                <div class="dq-scroll-fade__scroll">
+                  <ul class="dq-scroll-fade__list">
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">01</span>Hamburg</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">02</span>Berlin</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">03</span>Munich</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">04</span>Cologne</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">05</span>Frankfurt</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">06</span>Stuttgart</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">07</span>Düsseldorf</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">08</span>Leipzig</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">09</span>Dresden</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">10</span>Bremen</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">11</span>Hannover</li>
+                    <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">12</span>Nuremberg</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-model-selector">
+              <span class="exploration-demo__label">Model selector</span>
+              <div class="dq-model-selector" data-dq-model-selector data-open="false">
+                <form class="dq-model-selector__form">
+                  <div class="dq-model-selector__picker">
+                    <button type="button" class="dq-model-selector__trigger" aria-expanded="false">
+                      <span class="dq-model-selector__logo">N</span>
+                      <span class="dq-model-selector__name">Atlas Pro</span>
+                    </button>
+                    <div class="dq-model-selector__menu" role="listbox"></div>
+                  </div>
+                  <input class="dq-model-selector__prompt" type="text" placeholder="Describe your task…" aria-label="Prompt" />
+                  <button type="submit" class="dq-model-selector__send">Send</button>
+                </form>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-animated-banner">
+              <span class="exploration-demo__label">Animated banner</span>
+              <div class="dq-banner" data-dq-banner>
+                <div class="dq-banner__media" aria-hidden="true"></div>
+                <div class="dq-banner__overlay" aria-hidden="true"></div>
+                <div class="dq-banner__content">
+                  <p class="dq-banner__eyebrow">Summer series</p>
+                  <h3 class="dq-banner__title">Design systems sprint</h3>
+                  <p class="dq-banner__desc">Live workshops on tokens, motion, and component APIs — seats fill fast.</p>
+                  <div class="dq-banner__footer">
+                    <a class="dq-banner__cta" href="#">View schedule</a>
+                    <span class="dq-banner__countdown">03:42:00</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-animated-sparkline">
+              <span class="exploration-demo__label">Animated sparkline</span>
+              <div class="dq-sparkline" data-dq-sparkline data-trend="up">
+                <div class="dq-sparkline__head">
+                  <div>
+                    <p class="dq-sparkline__label">Revenue</p>
+                    <p class="dq-sparkline__value">$12,478</p>
+                  </div>
+                  <span class="dq-sparkline__trend" data-direction="up">42%</span>
+                </div>
+                <div class="dq-sparkline__chart">
+                  <svg class="dq-sparkline__svg" viewBox="0 0 220 72" width="220" height="72" aria-hidden="true">
+                    <path class="dq-sparkline__fill" d=""></path>
+                    <path class="dq-sparkline__path" d=""></path>
+                  </svg>
+                </div>
+                <div class="dq-sparkline__controls">
+                  <button type="button" class="dq-sparkline__pill" data-dq-sparkline-curve="smooth" data-active="true">Smooth</button>
+                  <button type="button" class="dq-sparkline__pill" data-dq-sparkline-curve="sharp">Sharp</button>
+                  <button type="button" class="dq-sparkline__replay" data-dq-sparkline-replay>Replay</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-signature">
+              <span class="exploration-demo__label">Animated signature</span>
+              <div class="dq-signature" data-dq-signature>
+                <svg class="dq-signature__svg" viewBox="0 0 900 460" role="img" aria-label="Animated signature">
+                  <path class="dq-signature__path" pathLength="1" d="M126.4 164.1 C166.4 156.1 259 148.8 283 148.8 C324.3 150 299 276.7 295.5 324.1 C289.2 368.9 262.9 382.1 233.3 337.2 C213.9 310 221.2 240 360.2 244.9 C362 288.1 349.3 387.5 344.7 458.2 C344.7 458.2 348.9 289.8 382.8 245.7 C404.5 222.9 450.3 223.3 442.3 269.4 C414.9 328.6 344.9 333.4 316.2 334.3 C340.2 334.3 547.2 320.3 571.2 320.3" />
+                </svg>
+                <button type="button" class="dq-signature__replay" data-dq-signature-replay>Replay</button>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-logo-trace-loader">
+              <span class="exploration-demo__label">Logo trace loader</span>
+              <div class="dq-trace" data-dq-trace data-phase="loading">
+                <div class="dq-trace__stage">
+                  <div class="dq-trace__logo">
+                    <svg class="dq-trace__svg" viewBox="0 0 48 48" aria-hidden="true">
+                      <path class="dq-trace__stroke" d="M8 36 L8 12 L24 12 L32 20 L32 36 L24 36 L24 24 L16 24 L16 36 Z" />
+                      <path class="dq-trace__fill" d="M8 36 L8 12 L24 12 L32 20 L32 36 L24 36 L24 24 L16 24 L16 36 Z" />
+                    </svg>
+                  </div>
+                  <p class="dq-trace__status">Loading</p>
+                </div>
+                <div class="dq-trace__panel">
+                  <h3>Welcome back</h3>
+                  <p>Enter your email and we&rsquo;ll send a one-time code to sign in.</p>
+                  <button type="button" class="dq-trace__panel-btn">Continue</button>
+                </div>
+                <button type="button" class="dq-trace__replay" data-dq-trace-replay>Replay</button>
+              </div>
+            </article>
+
+            <article class="exploration-demo" id="demo-dynamic-button">
+              <span class="exploration-demo__label">Dynamic button</span>
+              <div class="dq-dynamic" data-dq-dynamic>
+                <button type="button" class="dq-dynamic-btn" data-variant="primary">
+                  <span class="dq-dynamic-btn__icon"></span>
+                  <span class="dq-dynamic-btn__label">Save</span>
+                  <span class="dq-dynamic-btn__measure" aria-hidden="true">Save</span>
+                </button>
+                <div class="dq-dynamic__demo-row">
+                  <button type="button" class="dq-dynamic__demo-btn" data-dq-dynamic-demo>Cycle label</button>
+                  <button type="button" class="dq-dynamic__variant-btn" data-dq-dynamic-variant="primary" data-active="true">Primary</button>
+                  <button type="button" class="dq-dynamic__variant-btn" data-dq-dynamic-variant="secondary">Secondary</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="exploration-section">
+        <div class="exploration-section__stack">
+          <div class="exploration-section__stack--tight">
+            <h2 class="exp-section-head">Tools</h2>
+            <p class="exp-section-lead">
+              Selected products and side projects — each tile uses the same compact
+              card language as the pattern grid above.
+            </p>
+          </div>
+
+          <div class="exp-tile-grid">
+            <a class="exp-tile exp-small-shadow" href="#">
+              <span class="exp-tile__icon">P</span>
+              <span class="exp-tile__title">Palette</span>
+              <p class="exp-tile__desc">A tiny toolkit for building color systems on the web.</p>
+            </a>
+            <a class="exp-tile exp-small-shadow" href="#">
+              <span class="exp-tile__icon">F</span>
+              <span class="exp-tile__title">Fieldnotes</span>
+              <p class="exp-tile__desc">A calm writing surface for drafts and daily notes.</p>
+            </a>
+            <a class="exp-tile exp-small-shadow" href="#">
+              <span class="exp-tile__icon">M</span>
+              <span class="exp-tile__title">Motion Kit</span>
+              <p class="exp-tile__desc">Reusable animation primitives for React interfaces.</p>
+            </a>
+            <a class="exp-tile exp-small-shadow" href="#">
+              <span class="exp-tile__icon">O</span>
+              <span class="exp-tile__title">Openlead</span>
+              <p class="exp-tile__desc">Lightweight lead capture for small product launches.</p>
+            </a>
+            <a class="exp-tile exp-small-shadow" href="#">
+              <span class="exp-tile__icon">C</span>
+              <span class="exp-tile__title">Commentblocks</span>
+              <p class="exp-tile__desc">Structured feedback blocks for async design reviews.</p>
+            </a>
+            <a class="exp-tile exp-small-shadow" href="/">
+              <span class="exp-tile__icon">K</span>
+              <span class="exp-tile__title">Karma Studio</span>
+              <p class="exp-tile__desc">Design-led product work for founders and teams.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="exploration-section">
+        <p class="exploration-footer">
+          Inspired by <a href="https://www.dqnamo.com/experiments">dqnamo.com</a> — visual
+          behavior replicated with original placeholder content. Full specimen list on
+          <a href="/components.html">components</a> (internal).
+        </p>
+      </section>
+    </div>
+      </div>
+    </div>
+
+    <script src="/layout.js"></script>
+
+    <script src="/components.js"></script>
+    <script src="/exploration.js"></script>
+  </body>
+</html>

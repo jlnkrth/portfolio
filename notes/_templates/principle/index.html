@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>[Article title] — Julian Kreth</title>
+    <meta name="description" content="[One sentence — the thesis or promise of the piece.]" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/notes/[slug]/" />
+    <meta property="og:title" content="[Article title]" />
+    <meta property="og:description" content="[One sentence — the thesis or promise of the piece.]" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kreth.work/notes/[slug]/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              <span class="banner__template">[Template - Principle]</span>
+              <span class="banner__muted">Rules &amp; Common Components</span>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Principle</span>
+        </div>
+
+        <h1>Delete Half</h1>
+        <p class="article-dek">The best edit is almost always the one that removes something.</p>
+
+        <p>
+          When something you made feels off, your first instinct is to add. Another
+          option, another label, another sentence explaining the last one. This is
+          almost always wrong. The fix is usually to delete half and see what breaks.
+        </p>
+        <p>
+          Nothing breaks, most of the time. That is the uncomfortable part. The
+          things we add feel necessary while we add them, and invisible once they
+          pile up. Deleting is how you find out which was which.
+        </p>
+        <h2>Cut before you polish</h2>
+        <p>
+          Polishing a thing that shouldn't exist is the most expensive kind of
+          work: it looks like progress and produces nothing. So before you tune
+          the spacing on a settings panel, ask whether the panel should exist.
+          Before you rewrite a paragraph, ask whether the essay needs it. Half the
+          time the honest answer is no, and you just saved yourself an afternoon.
+        </p>
+        <p>
+          A good test: describe the thing out loud without the part you suspect.
+          If the description still makes sense, the part was decoration.
+        </p>
+
+        <h2>Make deleting cheap</h2>
+        <p>
+          People hoard because deleting feels permanent. It shouldn't be. Keep a
+          <code class="code-chip">graveyard.md</code> at the root of the project
+          and move cut ideas there instead of arguing about them. Nobody has ever
+          gone back for one, but knowing they could makes the cut painless.
+        </p>
+        <div class="code-block" data-copy="## Graveyard&#10;&#10;- Dark mode toggle in onboarding (2026-03) — nobody asked&#10;- Third pricing tier (2026-04) — split the difference, sold neither&#10;- Animated empty states (2026-05) — polish on a screen we want people to leave">
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>## Graveyard
+
+- Dark mode toggle in onboarding (2026-03) — nobody asked
+- Third pricing tier (2026-04) — split the difference, sold neither
+- Animated empty states (2026-05) — polish on a screen we want people to leave</code></pre>
+        </div>
+        <p class="element-caption">Capture cuts in one place so deleting feels reversible.</p>
+        <p>
+          The file does two jobs. It lowers the cost of cutting, and it becomes a
+          record of your taste — a list of things you were disciplined enough not
+          to ship.
+        </p>
+
+        <h2>Trust the survivors</h2>
+        <p>
+          What's left after a hard cut is denser than anything you could write or
+          design directly. Each surviving element now does more work, because it
+          has no neighbors to lean on. This is why short essays read as confident
+          and sparse interfaces feel fast: not because less is stylish, but because
+          everything that remains earned its place.
+        </p>
+
+        <p>
+          Don't ask what to add. Delete half, and let what survives tell you
+          what the thing is.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/_templates/">
+            <span class="nav-label">Back</span>
+            <span class="nav-title">All templates</span>
+          </a>
+          <a href="/notes/_templates/playbook/">
+            <span class="nav-label">Next template</span>
+            <span class="nav-title">Playbook</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+
+    <script src="/components.js"></script>
+  </body>
+</html>

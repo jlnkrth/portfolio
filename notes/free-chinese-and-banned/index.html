@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Best AI Will Be Free, Chinese, and Banned in America — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Kimi K3 just matched the frontier. If you watched who built DeepSeek, you saw this coming 18 months ago."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="canonical"
+      href="https://kreth.work/notes/free-chinese-and-banned/"
+    />
+    <meta property="og:title" content="The Best AI Will Be Free, Chinese, and Banned in America" />
+    <meta
+      property="og:description"
+      content="Kimi K3 just matched the frontier. If you watched who built DeepSeek, you saw this coming 18 months ago."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kreth.work/notes/free-chinese-and-banned/"
+    />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              Related:
+              <a href="/notes/why-memory-management-matters-for-your-ai-agent/">memory rules for AI agents</a>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Principle</span>
+        </div>
+
+        <h1>The Best AI Will Be Free, Chinese, and Banned in America</h1>
+        <p class="article-dek">
+          Kimi K3 just matched the frontier. If you watched who built DeepSeek,
+          you saw this coming 18 months ago.
+        </p>
+
+        <p>
+          So this morning Moonshot AI released Kimi K3. 2.8 trillion
+          parameters, which makes it the largest open-weight model anyone has
+          ever shipped, and the weights go public in ten days. On the
+          long-horizon benchmarks (the ones that actually resemble real work)
+          it keeps up with Claude Fable 5 and GPT-5.6 Sol. On a few of them
+          it wins.
+        </p>
+        <p>
+          And honestly, I wasn&rsquo;t surprised. Not because I&rsquo;m a
+          genius, but because this was basically announced in January 2025.
+          You just had to pay attention to <em>who</em> built DeepSeek instead
+          of what it scored. That&rsquo;s what I want to walk you through,
+          because it changed how I think about speed, efficiency, and what
+          &ldquo;survival of the fittest&rdquo; actually means.
+        </p>
+
+        <div class="bar-chart">
+          <p class="bar-chart__title">Kimi K3 vs the closed frontier (vendor-reported, max effort)</p>
+          <div class="bar-chart__group">
+            <div class="bar-chart__label">SWE Marathon · long, sustained coding sessions</div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Kimi K3</span><span class="bar-chart__track"><span class="bar-chart__bar bar-chart__bar--accent" style="width: 84%"></span></span><span class="bar-chart__value">42.0</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">GPT-5.6 Sol</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 78%"></span></span><span class="bar-chart__value">39.0</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Fable 5</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 70%"></span></span><span class="bar-chart__value">35.0</span></div>
+          </div>
+          <div class="bar-chart__group">
+            <div class="bar-chart__label">BrowseComp · long-horizon information seeking</div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Kimi K3</span><span class="bar-chart__track"><span class="bar-chart__bar bar-chart__bar--accent" style="width: 91%"></span></span><span class="bar-chart__value">91.2</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">GPT-5.6 Sol</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 90%"></span></span><span class="bar-chart__value">90.4</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Fable 5</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 88%"></span></span><span class="bar-chart__value">88.0</span></div>
+          </div>
+          <div class="bar-chart__group">
+            <div class="bar-chart__label">Program Bench</div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Kimi K3</span><span class="bar-chart__track"><span class="bar-chart__bar bar-chart__bar--accent" style="width: 78%"></span></span><span class="bar-chart__value">77.8</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">GPT-5.6 Sol</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 77.6%"></span></span><span class="bar-chart__value">77.6</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Fable 5</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 76.8%"></span></span><span class="bar-chart__value">76.8</span></div>
+          </div>
+          <div class="bar-chart__group">
+            <div class="bar-chart__label">DeepSWE · where the closed models still lead</div>
+            <div class="bar-chart__row"><span class="bar-chart__name">GPT-5.6 Sol</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 73%"></span></span><span class="bar-chart__value">73.0</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Fable 5</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 70%"></span></span><span class="bar-chart__value">70.0</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Kimi K3</span><span class="bar-chart__track"><span class="bar-chart__bar bar-chart__bar--accent" style="width: 67.5%"></span></span><span class="bar-chart__value">67.5</span></div>
+          </div>
+        </div>
+        <p class="element-caption">Not a clean sweep, but an open-weight model beating closed frontier models on several benchmarks.</p>
+
+        <h2>The tell was who built DeepSeek</h2>
+        <p>
+          Quick rewind to January 2025. DeepSeek releases R1, publishes that
+          the base model cost about $5.6 million to train, and Nvidia loses
+          something like $600 billion in market value in a single day.
+          Everyone spent that week arguing about whether the $5.6M number was
+          real. I got stuck on a completely different detail: DeepSeek
+          wasn&rsquo;t built by a tech giant. It came out of High-Flyer, a
+          quant hedge fund. The name literally means &ldquo;magic
+          square&rdquo; in Mandarin.
+        </p>
+        <p>
+          Which is genuinely weird, right? China has Alibaba, Tencent,
+          ByteDance. Armies of engineers, basically unlimited money. And the
+          lab that cracked frontier-level AI on rationed hardware was run by a
+          fund manager. Liang Wenfeng had quietly bought around 10,000 Nvidia
+          A100s <em>before</em> the export ban hit in October 2022. His own
+          business partners thought it was an eccentric side project.
+        </p>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">How a hedge fund ended up ahead of the export ban</p>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">timeline
+    2016 : High-Flyer founded, AI-driven quant trading
+    2019 : Firefly One cluster, 1,100 GPUs for trading models
+    2021 : Liang buys ~10,000 A100s, "the side project"
+    Oct 2022 : US export controls hit, top chips banned for China
+    2023 : DeepSeek spun out of High-Flyer
+    Jan 2025 : R1 released, Nvidia drops ~$600B in one day
+    Jul 2026 : Kimi K3, open weights match the frontier</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            The chips were bought before the ban. The mindset was built long before the chips.
+          </figcaption>
+        </figure>
+        <p>
+          Once you know that, R1 stops looking like a shock and starts
+          looking like a prediction. And Kimi K3 today is the same prediction
+          paying out again.
+        </p>
+
+        <h2>Why the quant background matters</h2>
+        <p>
+          Okay, so why do I care so much about the quant part? Because a
+          quant&rsquo;s whole job is making things unreasonably fast. If you
+          want to feel what that actually means, read <em>Flash Boys</em> by
+          Michael Lewis (I recommend it to anyone who touches software). It
+          opens with a company secretly drilling a fiber line in a
+          dead-straight path from Chicago to New Jersey. Through mountains.
+          Under rivers. Because a straighter cable saves about three
+          milliseconds, and traders paid fortunes for those three
+          milliseconds.
+        </p>
+        <p>
+          You don&rsquo;t win that game by writing clean Python. You win it
+          by knowing exactly what the hardware is doing: cache lines, network
+          hops, kernel bypasses. And here&rsquo;s the part people miss.
+          Quants aren&rsquo;t just low-level engineers. Every microsecond
+          they shave has to show up on a real scoreboard, the market. So you
+          get deep systems knowledge that&rsquo;s permanently connected to
+          consequences. If someone hands you rationed GPUs and says
+          &ldquo;compete,&rdquo; that&rsquo;s exactly the person you want.
+        </p>
+
+        <h2>The speed-over-efficiency doctrine</h2>
+        <p>
+          Now compare that to the American side. Silicon Valley literally has
+          its operating system written down in a book: <em>Blitzscaling</em>,
+          by Reid Hoffman. The core definition is, almost word for word,
+          <strong>prioritizing speed over efficiency</strong> in conditions
+          of uncertainty. Grow first, understand later, let the mess pile up,
+          capital will cover it.
+        </p>
+        <p>
+          I don&rsquo;t buy it, and here&rsquo;s my honest reason: look at
+          what Hoffman actually built. LinkedIn. A network that grew through
+          novelty and growth hacks (remember the &ldquo;import your entire
+          address book&rdquo; era?) and has been a mediocre product for
+          twenty years. Blitzscaling gets you distribution. It doesn&rsquo;t
+          get you craft. And in AI the same instinct turns into: the run
+          underperforms, you don&rsquo;t ask why, you buy more compute. If
+          your product is a black box to you, improvement is just more
+          compute, more data, and praying.
+        </p>
+        <p>
+          I see the mini version of this in my own agent work all the time.
+          Tokens feel free, so nobody audits the context window. Tools pile
+          up, prompts bloat, and the fix is always &ldquo;use the bigger
+          model.&rdquo; The first time I put a hard budget on one of my
+          pipelines, a third of the context turned out to be dead weight.
+          Free resources hide what you don&rsquo;t understand.
+        </p>
+
+        <h2>Chinese labs don&rsquo;t compete like American labs</h2>
+        <p>
+          Everyone knows the export restrictions capped what Chinese labs
+          could buy. The part that gets missed is the second ingredient:
+          <strong>Chinese labs don&rsquo;t compete against each other the way
+          American labs do.</strong> OpenAI, Anthropic, and Google guard
+          their weights like state secrets, so every efficiency trick gets
+          discovered three separate times behind three separate walls. The
+          Chinese labs open-source. DeepSeek at 1.6T, Xiaomi at 1.02T,
+          Alibaba, GLM, now Kimi K3 at 2.8T with weights public in ten days.
+          So when one lab figures out how to squeeze more out of a crippled
+          interconnect, all of them have it next month. The constraint set
+          the problem, and open weights let them solve it as a group.
+        </p>
+        <p>
+          And here&rsquo;s the thing you can&rsquo;t fake: you cannot be
+          super efficient without understanding the system really, really
+          well. Every trick in that shared toolbox forces you to learn how
+          the machine actually works:
+        </p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>distillation</span><span class="idx-list__status">[ forces you to know what the big model actually knows ]</span></div>
+          <div class="idx-list__row"><span>pruning</span><span class="idx-list__status">[ forces you to know which parts do nothing ]</span></div>
+          <div class="idx-list__row"><span>FP8 training</span><span class="idx-list__status">[ forces you to know where precision actually matters ]</span></div>
+          <div class="idx-list__row"><span>MoE routing</span><span class="idx-list__status">[ forces you to know which expert fires, and why ]</span></div>
+          <div class="idx-list__row"><span>GPU scheduling</span><span class="idx-list__status">[ forces you to know what the silicon does every microsecond ]</span></div>
+        </div>
+        <p class="element-caption">Each of these is a lesson US labs can skip. Most do.</p>
+        <p>
+          So one person got forced through every line of that list and now
+          holds a working model of the entire stack in their head. The other
+          person never had to bother and holds, essentially, a procurement
+          relationship. My money is on the first person every single time the
+          game changes even slightly.
+        </p>
+
+        <h2>Distillation is not copying</h2>
+        <p>
+          Speaking of distillation: most people don&rsquo;t actually know
+          what it is. The word sounds like theft, so the debate stops at
+          &ldquo;they copied GPT.&rdquo; But the real goal of distillation is
+          pushing the Pareto frontier of cost versus performance. Same
+          capability for less money, or more capability for the same money.
+        </p>
+        <p>
+          The mechanics are almost embarrassingly simple. You generate
+          outputs with your own model, generate outputs from a frontier
+          model, compare, keep the best, train on that. Best-of-n
+          distillation. In hiring terms: instead of hiring the American
+          engineer, you ask the AI model that engineer built to verify your
+          work. The frontier model becomes your unpaid senior reviewer, and
+          that&rsquo;s how you catch up way faster than figuring everything
+          out on your own. Also, this isn&rsquo;t some China-only trick.
+          Grok and OpenAI have been doing the same thing.
+        </p>
+        <p>
+          But here&rsquo;s what actually changed with Kimi K3, and why I
+          think it matters more than the benchmark table. A distilled model
+          is supposed to be smaller and cheaper than its teacher, and a
+          little less capable. That&rsquo;s the deal. K3 breaks the deal:
+          it&rsquo;s <em>bigger</em> than Fable 5 and beats it on some
+          benchmarks. And the timing doesn&rsquo;t even work for pure
+          student-teacher copying. A frontier model takes three to six months
+          to develop, and Fable 5 simply hasn&rsquo;t been out long enough to
+          supervise K3&rsquo;s full training run. They took distillation and
+          improved on it.
+        </p>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>The old distillation deal</th>
+                <th>What Kimi K3 did</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Size vs teacher</td>
+                <td>Smaller</td>
+                <td>Bigger (2.8T, largest open model ever)</td>
+              </tr>
+              <tr>
+                <td>Capability vs teacher</td>
+                <td>A step behind</td>
+                <td>Ahead on several benchmarks</td>
+              </tr>
+              <tr>
+                <td>Role of the frontier model</td>
+                <td>Teacher for the whole run</td>
+                <td>Reviewer at most; timing rules out full supervision</td>
+              </tr>
+              <tr>
+                <td>Pareto frontier</td>
+                <td>Approached from below</td>
+                <td>Pushed outward</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">The student is supposed to stay smaller and weaker than the teacher. K3 didn't.</p>
+        <p>
+          We&rsquo;ve seen this exact movie before, with cars. Chinese cars
+          used to be cheaper and worse, and everyone filed them under
+          &ldquo;imitation.&rdquo; Now they&rsquo;re cheaper and better, and
+          the incumbents are the ones lobbying for tariffs.
+          Cheaper-but-worse is a phase, not a destiny. Kimi K3 is what the
+          end of that phase looks like in AI.
+        </p>
+
+        <h2>Expect the backlash</h2>
+        <p>
+          Which brings me to the prediction in the title. I mean it
+          seriously, and the reasoning is just following the money. The
+          valuations of the closed American labs, plus a big slice of Nvidia
+          and the hyperscalers, rest on one assumption: frontier capability
+          stays scarce and stays paid. Trillions of dollars depend on that
+          assumption. A free, open-weight model that matches the frontier
+          doesn&rsquo;t just compete with those companies. It attacks the
+          premise their prices are built on.
+        </p>
+        <p>
+          And nobody defending trillions says &ldquo;please stop releasing
+          free models, it hurts our margins.&rdquo; They say
+          &ldquo;safety.&rdquo; So my bet is an anti-open-source movement in
+          the US, dressed in safety language: weight-export rules, liability
+          regimes that make hosting an open Chinese model legally
+          radioactive. Basically the car-tariff playbook, rewritten for
+          weights.
+        </p>
+        <p>
+          Then add geography. Europe has no frontier lab of its own, and
+          right now its relationship with Beijing is honestly in better shape
+          than its relationship with Washington. If the best free model is
+          Chinese and the American ones cost real money, Europe&rsquo;s
+          choice makes itself. So the end state is exactly what the title
+          says: the best AI in the world is free, Chinese, and banned in
+          America, while the rest of the world quietly builds on it.
+          I&rsquo;m half joking when I say teach your kids Chinese. Only
+          half.
+        </p>
+
+        <h2>Survival of the fittest, read correctly</h2>
+        <p>
+          One more thing, because this reframed the whole story for me.
+          People misread &ldquo;survival of the fittest.&rdquo; They picture
+          the fastest, strongest animal. That&rsquo;s not what it means.
+          Fittest means <em>best fitted to the environment</em>. When the
+          environment shifts, the traits that win shift with it, and
+          yesterday&rsquo;s speed advantage becomes today&rsquo;s dead
+          weight.
+        </p>
+        <p>
+          And the AI environment is shifting right now. Inference cost is
+          starting to matter more than training cost. Energy is becoming the
+          binding constraint even for labs that can buy any chip on earth.
+          Efficiency is quietly becoming existential for everyone. One group
+          of labs was forced to practice it for four years. The other group
+          treated it as optional. So no, Kimi K3 isn&rsquo;t an anomaly.
+          It&rsquo;s what being fitted to the environment looks like once the
+          environment actually changes.
+        </p>
+        <p>
+          If you build with AI, this question transfers directly to you.
+          Here&rsquo;s the self-test I keep coming back to in my own work:
+        </p>
+        <div
+          class="code-block"
+          data-copy="Is your product a black box to you?&#10;&#10;1. When quality drops, is your first move to investigate, or to upgrade the model?&#10;2. Can you name what every tool and token in your pipeline earns?&#10;3. If your compute budget were cut in half tomorrow, would you know where to start?&#10;4. What did you last remove, and what did removing it teach you?&#10;5. Which layer of your stack have you never looked inside?"
+        >
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>Is your product a black box to you?
+
+1. When quality drops, is your first move to investigate, or to upgrade the model?
+2. Can you name what every tool and token in your pipeline earns?
+3. If your compute budget were cut in half tomorrow, would you know where to start?
+4. What did you last remove, and what did removing it teach you?
+5. Which layer of your stack have you never looked inside?</code></pre>
+        </div>
+        <p class="element-caption">Question 5 is the uncomfortable one. It was for me.</p>
+
+        <p>
+          Speed you can rent. Fitness you have to earn, by actually
+          understanding the system you&rsquo;re betting on. The quants
+          figured that out before the rest of us. Kimi K3 is the proof.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/">
+            <span class="nav-label">Back</span>
+            <span class="nav-title">All notes</span>
+          </a>
+          <a href="/notes/why-memory-management-matters-for-your-ai-agent/">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Memory Management for AI Agents</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Host — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Self-hosted publisher for sanitized, self-contained HTML page packages — admin and content on separate origins."
+    />
+    <link rel="canonical" href="https://kreth.work/projects/html-host/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css?v=8" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <main class="project-page">
+          <div class="project-page__chrome">
+            <a class="project-page__back" href="/projects/" aria-label="Back to projects">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </a>
+            <button
+              class="project-page__share"
+              type="button"
+              aria-label="Copy link to clipboard"
+              data-copy="https://kreth.work/projects/html-host/"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l1.42-1.42a5 5 0 0 0-7.07-7.07l-.88.88" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54L5.04 11.88a5 5 0 0 0 7.07 7.07l.88-.88" />
+              </svg>
+            </button>
+          </div>
+
+          <header class="project-page__hero">
+            <h1 class="project-page__title">/ html-host</h1>
+            <p class="project-page__lede">
+              A self-hosted publisher for sanitized, self-contained HTML page
+              packages. Sign in, upload one HTML file or a folder of static assets,
+              choose a slug, and share the URL. Optional viewer passwords per page.
+            </p>
+
+            <div
+              class="install-code"
+              data-copy="git clone https://github.com/jlnkrth/html-host.git"
+            >
+              <code>git clone https://github.com/jlnkrth/html-host.git</code>
+              <button class="copy-button" aria-label="Copy command" data-copy-btn>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-page__actions">
+              <a
+                class="btn btn--block"
+                href="https://github.com/jlnkrth/html-host"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                GitHub
+              </a>
+              <a
+                class="btn btn--block"
+                href="https://github.com/jlnkrth/html-host#production-deployment"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Deploy docs
+              </a>
+            </div>
+          </header>
+
+          <article class="article project-page__body">
+            <section>
+              <h2>Features</h2>
+              <ul>
+                <li>Multi-file HTML packages (HTML entry plus local CSS, images, fonts, media)</li>
+                <li>HTML / CSS / SVG sanitization on upload — scripts and active content removed</li>
+                <li>Upload preview and recent-upload list on the admin origin</li>
+                <li>Optional password protection per page</li>
+                <li>Injected page toolbar (copy link, download HTML, print)</li>
+                <li>Admin dashboard with delete and activity timeline</li>
+                <li>Salted scrypt hashes, signed sessions, CSRF, rate limits, host-only cookies</li>
+                <li>Atomic filesystem storage — no database</li>
+                <li>Hardened Docker Compose deploy with automatic HTTPS via Caddy</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Trust model</h2>
+              <p>
+                Built for a trusted administrator or small trusted team. Uploads are
+                rewritten: scripts, event handlers, remote stylesheets, and other
+                active content are stripped. Sanitization is not a substitute for
+                access control — only give the upload password to people you trust.
+              </p>
+              <p>
+                Admin and content must use <strong>different hosts</strong>
+                (ideally different registrable domains), so administrator sessions
+                are not shared with the content host.
+              </p>
+            </section>
+
+            <section>
+              <h2>Requirements</h2>
+              <ul>
+                <li>Two DNS records pointing to the server</li>
+                <li>Docker Engine with Docker Compose</li>
+                <li>Ports 80 and 443 reachable from the internet</li>
+              </ul>
+              <p class="muted project-page__note">
+                Local development without Docker needs Node.js 24+.
+              </p>
+            </section>
+
+            <section>
+              <h2>Production deploy</h2>
+              <div class="code-block" data-copy="git clone https://github.com/jlnkrth/html-host.git&#10;cd html-host&#10;npm ci&#10;cp .env.example .env&#10;printf '%s' 'choose-a-long-administrator-password' | npm run --silent hash-password&#10;openssl rand -hex 32">
+                <button class="copy-button" aria-label="Copy code" data-copy-btn>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+                <pre class="code-block__pre"><code>git clone https://github.com/jlnkrth/html-host.git
+cd html-host
+npm ci
+cp .env.example .env
+printf '%s' 'choose-a-long-administrator-password' | npm run --silent hash-password
+openssl rand -hex 32</code></pre>
+              </div>
+              <p>
+                Put the generated hash and secret in <code>.env</code>, set
+                <code>ADMIN_HOST</code> and <code>CONTENT_HOST</code>, and keep
+                the hash single-quoted (it contains dollar signs). Then:
+              </p>
+              <div class="code-block" data-copy="docker compose --env-file .env --file deploy/compose.yml up -d --build">
+                <button class="copy-button" aria-label="Copy code" data-copy-btn>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+                <pre class="code-block__pre"><code>docker compose --env-file .env --file deploy/compose.yml up -d --build</code></pre>
+              </div>
+              <p class="muted project-page__note">
+                Caddy obtains and renews certificates after both DNS records resolve.
+                Only Caddy binds host ports — the app container stays private.
+              </p>
+            </section>
+
+            <section>
+              <h2>Local development</h2>
+              <p>
+                <code>.localhost</code> names resolve to loopback in modern browsers.
+                After <code>npm ci</code> and generating a password hash + session secret:
+              </p>
+              <div class="code-block" data-copy="ADMIN_ORIGIN=http://admin.localhost:3000 \&#10;CONTENT_ORIGIN=http://content.localhost:3000 \&#10;ADMIN_PASSWORD_HASH='scrypt$replace$replace' \&#10;SESSION_SECRET='replace-with-the-generated-secret' \&#10;STORAGE_DIR=./data \&#10;npm run dev">
+                <button class="copy-button" aria-label="Copy code" data-copy-btn>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+                <pre class="code-block__pre"><code>ADMIN_ORIGIN=http://admin.localhost:3000 \
+CONTENT_ORIGIN=http://content.localhost:3000 \
+ADMIN_PASSWORD_HASH='scrypt$replace$replace' \
+SESSION_SECRET='replace-with-the-generated-secret' \
+STORAGE_DIR=./data \
+npm run dev</code></pre>
+              </div>
+              <p>
+                Open <code>http://admin.localhost:3000</code>. Published pages appear
+                at <code>http://content.localhost:3000/&lt;slug&gt;/</code>.
+              </p>
+            </section>
+
+            <section>
+              <h2>License</h2>
+              <p>MIT — see the repository for configuration tables, backups, and ops commands.</p>
+            </section>
+          </article>
+        </main>
+      </div>
+    </div>
+    <script src="/layout.js"></script>
+  </body>
+</html>

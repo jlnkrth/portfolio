@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How We Improved Our AI Agent in Slack by Making It Dumber — Julian Kreth</title>
+    <meta
+      name="description"
+      content="We turned our Slack agent into an index: answer from memory, or route to a sub-agent. It never creates."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="canonical"
+      href="https://kreth.work/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/"
+    />
+    <meta property="og:title" content="How We Improved Our AI Agent in Slack by Making It Dumber" />
+    <meta
+      property="og:description"
+      content="We turned our Slack agent into an index: answer from memory, or route to a sub-agent. It never creates."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kreth.work/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/"
+    />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <h1>How We Improved Our AI Agent in Slack by Making It Dumber</h1>
+        <p>
+          Our Slack agent got worse every time we made it smarter. More tools,
+          longer prompts, broader memory — each addition felt like progress. In
+          the channel, it felt like a colleague who had read every wiki page and
+          still could not answer a simple question without a monologue.
+        </p>
+        <p>
+          The fix was not a better model. We made the main agent
+          <em>dumber</em> on purpose — reduced it to a simple index. Most
+          questions never leave that index. The rest get handed to a sub-agent
+          that already knows how to do one job. The main agent never creates
+          anything. It serves what exists, or it passes a packet of context to
+          something else.
+        </p>
+
+        <h2>The failure mode of a helpful agent</h2>
+        <p>
+          Helpful agents fail in a specific way. They infer intent you did not
+          state, reach for tools you did not ask for, and invent answers when
+          the right move is to look something up or stay quiet.
+        </p>
+        <p>
+          In Slack that reads as noise. A thread about a broken deploy does not
+          need a recap of your company values. It needs one of three things: an
+          answer from the runbook, a handoff to the right specialist, or
+          silence.
+        </p>
+        <p>
+          We had built the opposite — one agent that tried to be the whole
+          company. It searched, summarized, drafted, filed tickets, and
+          improvised policy on the fly. Every message became a reason to
+          <em>create</em> something new.
+        </p>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col">Symptom</th>
+                <th scope="col">Cause</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Robotic ack, then long second reply</td>
+                <td>Fast path and gateway both handled the same mention</td>
+              </tr>
+              <tr>
+                <td>No clarifying question for incomplete asks</td>
+                <td>Routing defaulted to dispatch instead of intake</td>
+              </tr>
+              <tr>
+                <td>Wrong-thread noise</td>
+                <td>Main agent improvised instead of checking ownership first</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">Before fixing architecture, name exactly how it fails in the channel.</p>
+
+        <h2>The main agent is an index</h2>
+        <p>
+          We collapsed the main agent down to a single job: hold an index of
+          what the company already knows, and know when to stop answering.
+        </p>
+        <p>
+          We seeded that index with our LLM — not as an open-ended brain, but
+          as a retrieval surface. Runbooks, policies, client notes, deploy
+          steps, who owns what. The model does not freestyle from training data.
+          It answers from the index first, the way you would answer from an
+          internal wiki you had actually read.
+        </p>
+        <p>
+          That covers most of what people ask in Slack. &ldquo;How do we
+          deploy?&rdquo; &ldquo;Who handles billing for X?&rdquo; &ldquo;What is
+          our refund window?&rdquo; — lookup, reply, done. No tools, no sub-agents,
+          no thread takeover.
+        </p>
+
+        <h2>Decision matrices for everything else</h2>
+        <p>
+          Not every question is a lookup. Some need action — file a ticket,
+          pull live data, draft a client email, run a scrape. Those do not belong
+          in the main agent.
+        </p>
+        <p>
+          The index also holds decision matrices: if the request looks like
+          <em>this</em>, spawn <em>that</em> sub-agent. Not vibes. Rows and
+          columns we can read without opening the model weights.
+        </p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>deploy_incident</span><span class="idx-list__status">[ incident-runner ]</span></div>
+          <div class="idx-list__row"><span>client_ticket</span><span class="idx-list__status">[ ticket-filer ]</span></div>
+          <div class="idx-list__row"><span>weekly_report</span><span class="idx-list__status">[ report-runner ]</span></div>
+          <div class="idx-list__row"><span>unknown</span><span class="idx-list__status idx-list__status--locked">[ lookup + owner ]</span></div>
+        </div>
+        <p class="element-caption">The matrix is a product surface, not hidden prompt lore.</p>
+        <pre><code>request_type: deploy_incident
+  signals: ["down", "500", "prod", "rollback"]
+  sub_agent: incident-runner
+  main_agent_may: [lookup_runbook, pass_thread_url, pass_env]
+
+request_type: client_ticket
+  signals: ["bug report", "customer name", "broken"]
+  sub_agent: ticket-filer
+  main_agent_may: [lookup_client_index, pass_summary]
+
+request_type: unknown
+  main_agent_may: [lookup_index, reply_with_owner]
+  sub_agent: none</code></pre>
+        <p class="element-caption">Main agent permissions stay narrow: answer from index or pass context.</p>
+        <p>
+          The main agent does not plan the work. It classifies the request,
+          checks the matrix, and either answers from the index or spawns the
+          sub-agent with exactly the context that agent expects. Creation
+          happens downstream. Upstream is read and route.
+        </p>
+
+        <h2>What we removed from the main agent</h2>
+        <p>
+          Making it an index meant stripping everything that looked like
+          intelligence but was really improvisation.
+        </p>
+        <ul>
+          <li>
+            <strong>Creation.</strong> No drafts, no tickets, no generated
+            policy. If it is not in the index and no matrix row matches, the
+            agent says so and points to a human.
+          </li>
+          <li>
+            <strong>Open-ended tool use.</strong> The main agent does not browse
+            Slack, query APIs, or chain five calls together. Sub-agents own
+            that — with narrow permissions and one output shape.
+          </li>
+          <li>
+            <strong>Multi-step plans in public.</strong> The channel sees a
+            lookup result or a single handoff line. Planning runs inside the
+            sub-agent, not in the thread.
+          </li>
+          <li>
+            <strong>Personality.</strong> We deleted the friendly preamble and
+            the performative empathy. Slack already has humans for that.
+          </li>
+        </ul>
+        <p>
+          Each removal felt like a step backward in a demo. In production it
+          was a step forward in trust — because the main agent stopped guessing.
+        </p>
+
+        <h2>Serve or send — never invent</h2>
+        <p>
+          The rule is simple enough to put on a sticky note:
+          <strong>serve what exists, or send to someone who can act.</strong>
+          The main agent is a librarian and a switchboard, not an author.
+        </p>
+        <p>
+          That constraint sounds limiting until you notice what it buys you.
+          Answers get faster because most requests never spawn anything. Failures
+          get clearer because when something breaks, you know whether the index
+          was wrong, the matrix was wrong, or the sub-agent misbehaved. You are
+          not debugging a single omniscient blob.
+        </p>
+        <p>
+          When the model drifts, we do not tune temperature. We update the
+          index, add a row to a matrix, or tighten what a sub-agent is allowed
+          to return.
+        </p>
+
+        <h2>Serve-or-send flow</h2>
+        <p>
+          This is the whole contract. Every turn follows one branch: serve from
+          index, or send a context packet to a specialist.
+        </p>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">Main agent routing contract</p>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">sequenceDiagram
+    participant User
+    participant Main as main_agent
+    participant Index as memory_index
+    participant Worker as sub_agent
+    participant Slack
+
+    User->>Slack: mention
+    Slack->>Main: normalized request
+    Main->>Index: lookup + classify
+    alt answer exists in index
+        Index-->>Main: answer + source
+        Main->>Slack: short factual reply
+    else matrix route exists
+        Main->>Worker: context packet
+        Worker->>Slack: specialist output
+    else unknown
+        Main->>Slack: owner handoff
+    end</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            Serve what exists. Send what needs work. Never invent in the middle.
+          </figcaption>
+        </figure>
+
+        <h2>What changed in the channel</h2>
+        <p>
+          Fewer wrong-thread replies. Fewer &ldquo;let me think about
+          that&hellip;&rdquo; messages that never land. More @mentions that
+          actually wanted the bot — because people learned it would either quote
+          something real or kick off a specialist, not riff.
+        </p>
+        <p>
+          The lesson generalizes. Your main agent does not need to be smart. It
+          needs a good index, honest decision matrices, and sub-agents that do
+          one thing each. Intelligence belongs at the edges — in the seeded
+          knowledge and in the workers — not in a single Slack face trying to
+          do everything at once.
+        </p>
+        <p>
+          If your agent gets worse every time you add a tool, try the opposite.
+          Reduce the main agent to an index. Seed it with what you already know.
+          Let everything else spawn a specialist. Make it dumber until the
+          channel trusts it again.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/why-memory-management-matters-for-your-ai-agent/">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">Memory Management for AI Agents</span>
+          </a>
+          <a href="/notes/">
+            <span class="nav-label">More</span>
+            <span class="nav-title">All notes</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>

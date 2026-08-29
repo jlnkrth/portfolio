@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance for the Agent Economy · Ramp (exploration)</title>
+    <meta
+      name="description"
+      content="Design exploration — HTML/CSS recreation of agents.ramp.com for study purposes."
+    />
+    <link rel="icon" href="https://agents.ramp.com/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-header__logo" href="#" aria-label="Ramp home">
+        <svg viewBox="0 0 75 20" fill="none" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M5.19 6.76c-1.79 0-2.667 1.576-2.667 3.681v5.275H0V4.585h2.478v2.888h.043c.53-1.776 1.585-3.21 3.212-3.21 1.144 0 1.627.399 1.627.399L6.22 6.955c0-.002-.363-.195-1.031-.195Zm30.496 1.528v7.427h-2.458V9.192c0-1.872-.587-2.864-2.088-2.864-1.553 0-2.305 1.254-2.305 3.66v5.726H26.4V9.192c0-1.8-.58-2.864-2.066-2.864-1.695 0-2.348 1.486-2.348 3.66v5.726h-2.478V4.584h2.478v2.521h.022c.386-1.744 1.44-2.82 3.218-2.82 1.764 0 2.913.947 3.349 2.627.415-1.617 1.52-2.628 3.218-2.628 2.37 0 3.893 1.486 3.893 4.004ZM12.318 4.262c-2.28 0-3.773 1.071-4.453 3.005l2.099.763c.382-1.166 1.18-1.83 2.398-1.83 1.37 0 2.175.603 2.175 1.528 0 .947-.64 1.145-2.088 1.379-1.61.259-5.437.344-5.437 3.573 0 1.892 1.582 3.315 3.958 3.315 1.786 0 3.003-.73 3.566-2.089h.022v1.81h2.457V8.868c0-2.995-1.508-4.607-4.697-4.607Zm2.283 6.214c0 2.334-1.155 3.833-3 3.833-1.306 0-2.088-.732-2.088-1.788 0-.99.804-1.678 2.348-1.961 1.58-.29 2.375-.648 2.74-1.507v1.423Zm29.826-6.192c-1.88 0-3.121 1.033-3.653 2.585V4.585h-2.61V20h2.588v-6.568h.022c.576 1.681 1.775 2.606 3.653 2.606 2.979 0 5.11-2.454 5.11-5.921 0-3.443-2.131-5.833-5.11-5.833Zm-.642 9.688c-2.063 0-3.207-1.497-3.207-3.822s1.28-3.822 3.207-3.822c1.926 0 3.208 1.57 3.208 3.822 0 2.253-1.28 3.822-3.208 3.822ZM75.172 15.665v.07l-10.1.003v-.073c1.457-.823 2.462-1.66 3.367-2.536h4.147l2.586 2.536ZM72.67 2.51 70.11 0h-.075s.043 4.68-4.255 8.936c-4.206 4.166-9.152 4.175-9.152 4.175v.073l2.608 2.555s4.874.048 9.18-4.175c4.29-4.21 4.254-9.053 4.254-9.053Z"
+          />
+        </svg>
+      </a>
+
+      <nav class="site-header__nav" aria-label="Primary">
+        <a class="nav-link" href="#"><span class="nav-link__prefix">[P]</span> Playbooks</a>
+        <a class="nav-link" href="#"><span class="nav-link__prefix">[C]</span> Community</a>
+        <a class="nav-link" href="#"><span class="nav-link__prefix">[E]</span> Events</a>
+        <a class="nav-link" href="#"><span class="nav-link__prefix">[D]</span> Documentation</a>
+      </nav>
+
+      <div class="site-header__actions">
+        <span class="exploration-badge">Exploration</span>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">
+          <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__letters" aria-hidden="true">
+          <img class="hero__letter hero__letter--a" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fhero-a.png&w=640&q=75" alt="" width="215" height="215" />
+          <img class="hero__letter hero__letter--g" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fhero-g.png&w=640&q=75" alt="" width="215" height="215" />
+          <img class="hero__letter hero__letter--e" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fhero-e.png&w=640&q=75" alt="" width="215" height="215" />
+          <img class="hero__letter hero__letter--n" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fhero-n.png&w=640&q=75" alt="" width="390" height="390" />
+          <img class="hero__letter hero__letter--t" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fhero-t.png&w=640&q=75" alt="" width="215" height="215" />
+          <img class="hero__letter hero__letter--s" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fhero-s.png&w=640&q=75" alt="" width="215" height="215" />
+        </div>
+
+        <h1 id="hero-title" class="sr-only">Finance for the Agent Economy</h1>
+
+        <div class="hero__toasts" aria-live="polite">
+          <article class="toast toast--claude">
+            <p class="toast__agent">Claude</p>
+            <p class="toast__status">Requesting 5 vendor quotes..</p>
+            <p class="toast__status toast__status--dim">Comparing supplier pricing..</p>
+            <p class="toast__time">just now</p>
+          </article>
+          <article class="toast toast--notion">
+            <p class="toast__agent">Notion AI</p>
+            <p class="toast__status">Scanning 38 receipts..</p>
+            <p class="toast__status toast__status--dim">Categorizing expenses..</p>
+            <p class="toast__time">1 min ago</p>
+          </article>
+        </div>
+
+        <div class="hero__content">
+          <p class="hero__lead">
+            Give your agents cards, transfers, bank accounts and more. Built-in controls govern every dollar they move.
+          </p>
+          <div class="cta-row">
+            <button class="cta-button" type="button" data-copy-prompt>
+              Setup with one prompt
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+            <div class="connector-row" aria-label="Connector guides">
+              <a class="connector-chip" href="#">Claude</a>
+              <a class="connector-chip" href="#">ChatGPT</a>
+              <a class="connector-chip" href="#">Cursor</a>
+              <a class="connector-chip" href="#">Perplexity</a>
+              <a class="connector-chip" href="#">Gemini</a>
+              <a class="connector-chip" href="#">Notion</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="section-nav" aria-label="Page sections" data-section-nav>
+        <a class="section-nav__link" href="#setup">Setup</a>
+        <a class="section-nav__link" href="#control">Control</a>
+        <a class="section-nav__link" href="#money">Money</a>
+        <a class="section-nav__link" href="#playbooks">Playbooks</a>
+      </nav>
+
+      <section class="feature-section" id="setup" data-section>
+        <div class="feature-section__inner feature-section__grid">
+          <div class="feature-section__copy">
+            <p class="feature-section__eyebrow">CLI setup</p>
+            <h2 class="feature-section__title">Up and running in 15 seconds.</h2>
+            <p class="feature-section__body">
+              Install the Ramp CLI, authenticate once, and your agent can read spend, issue credentials, and take action. All from the terminal.
+            </p>
+          </div>
+          <div class="feature-section__visual">
+            <div class="terminal-window">
+              <div class="terminal-window__chrome">
+                <img class="terminal-window__dots" src="https://agents.ramp.com/images/agents/terminal-dots.svg" alt="" width="48" height="12" />
+                <span class="terminal-window__url">ramp://agents</span>
+              </div>
+              <div class="terminal-window__body">
+                <p class="terminal-line terminal-line--prompt">$ ramp auth login</p>
+                <p class="terminal-line terminal-line--muted">Opening browser for authentication…</p>
+                <p class="terminal-line terminal-line--success">✓ Authenticated as finance-agent</p>
+                <p class="terminal-line terminal-line--prompt">$ ramp agents setup --prompt</p>
+                <p class="terminal-line">Agent credentials issued · spend controls active</p>
+              </div>
+            </div>
+            <div class="dashboard-preview" aria-hidden="true">
+              <img src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Fgoal-dashboard-light.png&w=1200&q=75" alt="" width="1200" height="800" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-section" id="control" data-section>
+        <div class="feature-section__inner feature-section__grid feature-section__grid--reverse">
+          <div class="feature-section__copy">
+            <p class="feature-section__eyebrow">Spend controls</p>
+            <h2 class="feature-section__title">Let your agents pay. You stay in control.</h2>
+            <p class="feature-section__body">
+              Give every agent a budget, identity, and spending authority. Approve exceptions, expire credentials on schedule, and attribute every dollar without giving up oversight.
+            </p>
+          </div>
+          <div class="feature-section__visual">
+            <div class="card-stack">
+              <article class="agent-card">
+                <div class="agent-card__top">
+                  <img class="agent-card__logo" src="https://agents.ramp.com/images/agents/card-ramp-logo.svg" alt="" width="24" height="24" />
+                </div>
+                <p class="agent-card__name">travel_agent**** 8921</p>
+              </article>
+              <article class="agent-card">
+                <div class="agent-card__top">
+                  <img class="agent-card__logo" src="https://agents.ramp.com/images/agents/card-ramp-logo.svg" alt="" width="24" height="24" />
+                </div>
+                <p class="agent-card__name">growth_agent**** 1456</p>
+              </article>
+            </div>
+            <div class="budget-bar">
+              <div class="budget-bar__label">
+                <span>Agent budget</span>
+                <span>$0 of $5,000</span>
+              </div>
+              <div class="budget-bar__track">
+                <div class="budget-bar__fill"></div>
+              </div>
+              <p class="budget-bar__meta">0% of agent budget</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-section" id="money" data-section>
+        <div class="feature-section__inner">
+          <div class="playbook-section__header">
+            <p class="feature-section__eyebrow">Attribution</p>
+            <h2 class="feature-section__title">Follow the money.</h2>
+            <p class="feature-section__body">
+              See which agent paid for what and how spend connects across your stack.
+            </p>
+          </div>
+
+          <div class="spend-grid">
+            <article class="spend-card">
+              <p class="spend-card__agent">Claude</p>
+              <p class="spend-card__role">Agent · Spend attribution</p>
+              <div class="spend-card__stat"><span>1 linked receipt</span></div>
+              <p class="spend-card__total"><span>Total</span><span>$54.87</span></p>
+              <span class="spend-card__badge">Ramp · Tracked</span>
+            </article>
+            <article class="spend-card">
+              <p class="spend-card__agent">ChatGPT</p>
+              <p class="spend-card__role">Agent · Spend attribution</p>
+              <div class="spend-card__stat"><span>1 linked receipt</span></div>
+              <p class="spend-card__total"><span>Total</span><span>$421.74</span></p>
+              <span class="spend-card__badge">Ramp · Tracked</span>
+            </article>
+            <article class="spend-card">
+              <p class="spend-card__agent">Office Manager</p>
+              <p class="spend-card__role">Agent · Spend attribution</p>
+              <div class="spend-card__stat"><span>1 linked receipt</span></div>
+              <p class="spend-card__total"><span>Total</span><span>$118.42</span></p>
+              <span class="spend-card__badge">Ramp · Tracked</span>
+            </article>
+          </div>
+
+          <div class="transaction-list">
+            <article class="transaction">
+              <div class="transaction__merchant">
+                <h3 class="transaction__name">Amazon.com</h3>
+                <span class="transaction__time">2h ago</span>
+              </div>
+              <p class="transaction__category">Office Supplies</p>
+              <p class="transaction__desc">5 reams copy paper · office manager agent</p>
+              <div class="transaction__line"><span>HP Copy Paper, 5 reams</span><span>$47.99</span></div>
+              <div class="transaction__line"><span>Shipping</span><span>$0.00</span></div>
+              <div class="transaction__line"><span>Sales tax</span><span>$6.88</span></div>
+              <div class="transaction__footer"><span>Total</span><span>$54.87</span></div>
+              <p class="transaction__agent">Agent · Claude</p>
+            </article>
+
+            <article class="transaction">
+              <div class="transaction__merchant">
+                <h3 class="transaction__name">United Airlines</h3>
+                <span class="transaction__time">3h ago</span>
+              </div>
+              <p class="transaction__category">Travel</p>
+              <p class="transaction__desc">SFO → NYC offsite · booked by travel agent</p>
+              <div class="transaction__line"><span>Economy (SFO–EWR)</span><span>$318.00</span></div>
+              <div class="transaction__line"><span>Seat 14C</span><span>$48.00</span></div>
+              <div class="transaction__line"><span>Taxes &amp; fees</span><span>$55.74</span></div>
+              <div class="transaction__footer"><span>Total</span><span>$421.74</span></div>
+              <p class="transaction__agent">Agent · ChatGPT</p>
+            </article>
+
+            <article class="transaction">
+              <div class="transaction__merchant">
+                <h3 class="transaction__name">DoorDash</h3>
+                <span class="transaction__time">4d ago</span>
+              </div>
+              <p class="transaction__category">Meals</p>
+              <p class="transaction__desc">Thai for 6 · team lunch to office</p>
+              <div class="transaction__line"><span>Pad thai × 4</span><span>$68.00</span></div>
+              <div class="transaction__line"><span>Green curry × 2</span><span>$36.00</span></div>
+              <div class="transaction__line"><span>Delivery + fees</span><span>$14.42</span></div>
+              <div class="transaction__footer"><span>Total</span><span>$118.42</span></div>
+              <p class="transaction__agent">Agent · Office Manager</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-section" id="playbooks" data-section>
+        <div class="feature-section__inner">
+          <div class="playbook-section__header">
+            <p class="feature-section__eyebrow">Workflows</p>
+            <h2 class="feature-section__title">Start with a playbook.</h2>
+            <p class="feature-section__body">
+              Proven ways to run Ramp with agents. Plays the Ramp team uses and recommends. Copy them or adapt your own.
+            </p>
+          </div>
+
+          <div class="playbook-grid">
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Analyze your spend</h3>
+              <p class="playbook-tile__desc">Your finance agent slices Ramp spend by vendor, time, category, person, or team.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Make any purchase, hands-off</h3>
+              <p class="playbook-tile__desc">Hand your agent a card and a task. It checks out, then closes the loop on memo, receipt, and coding.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Review your procurement queue</h3>
+              <p class="playbook-tile__desc">Open POs, pending requests, and anything aging. Your procurement work in one summary.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">What needs my attention</h3>
+              <p class="playbook-tile__desc">A morning brief from your agent. Pending approvals, missing receipts, and items waiting on you.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Check your cash position</h3>
+              <p class="playbook-tile__desc">Cash across your Ramp Treasury accounts in one pass. Balances now, trend over the window, recent transfers.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Buy on Amazon</h3>
+              <p class="playbook-tile__desc">Hand your office-manager agent an Amazon link or a shopping list. Your agent card pays and codes it.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Buy from Apple</h3>
+              <p class="playbook-tile__desc">Need hardware? Your agent configures and checks out on apple.com, pays with an agent card, and files the receipt.</p>
+            </a>
+            <a class="playbook-tile" href="#">
+              <h3 class="playbook-tile__title">Order on DoorDash</h3>
+              <p class="playbook-tile__desc">Team&rsquo;s hungry? Your office-manager agent orders to the office and codes it straight to Meals.</p>
+            </a>
+          </div>
+
+          <a class="playbook-section__more" href="#">Explore all playbooks</a>
+        </div>
+      </section>
+
+      <section class="footer-cta" aria-labelledby="footer-cta-title">
+        <h2 class="footer-cta__title" id="footer-cta-title">Get started with one prompt.</h2>
+        <div class="cta-row">
+          <button class="cta-button" type="button" data-copy-prompt>
+            Setup with one prompt
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+          </button>
+          <div class="connector-row" aria-label="Connector guides">
+            <a class="connector-chip" href="#">Claude</a>
+            <a class="connector-chip" href="#">ChatGPT</a>
+            <a class="connector-chip" href="#">Cursor</a>
+            <a class="connector-chip" href="#">Perplexity</a>
+            <a class="connector-chip" href="#">Gemini</a>
+            <a class="connector-chip" href="#">Notion</a>
+          </div>
+        </div>
+
+        <div class="footer-letters" aria-hidden="true">
+          <img class="footer-letters__char footer-letters__char--r" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Ffooter-r.png&w=384&q=75" alt="" width="180" height="180" />
+          <img class="footer-letters__char footer-letters__char--a" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Ffooter-a.png&w=384&q=75" alt="" width="180" height="180" />
+          <img class="footer-letters__char footer-letters__char--m" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Ffooter-m.png&w=384&q=75" alt="" width="180" height="180" />
+          <img class="footer-letters__char footer-letters__char--p" src="https://agents.ramp.com/_next/image?url=%2Fimages%2Fagents%2Ffooter-p.png&w=384&q=75" alt="" width="180" height="180" />
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p class="site-footer__copy">
+          &copy; 2026 Ramp Business Corporation. Design exploration only — not affiliated with Ramp.
+          Recreated for interface study using HTML &amp; CSS.
+        </p>
+        <nav class="site-footer__links" aria-label="Footer">
+          <a href="https://ramp.com/security">Security</a>
+          <a href="https://ramp.com/legal/privacy-policy">Privacy</a>
+          <a href="https://ramp.com/legal/platform-agreement">Platform Agreement</a>
+          <a href="https://ramp.com/">Ramp.com ↗</a>
+          <a href="https://agents.ramp.com/">Original site ↗</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

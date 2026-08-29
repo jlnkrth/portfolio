@@ -1,0 +1,60 @@
+---
+description: Article types and required components for portfolio notes
+globs: portfolio/notes/**/*.html
+alwaysApply: false
+---
+
+# Notes articles
+
+Read `notes/ARTICLE-GUIDE.md` before drafting or editing an article.
+
+## Pick one type
+
+- **Principle** — craft/design thesis; no shipped-system narrative
+- **Playbook** — adoptable system with protocols and filing rules
+- **Case study** — before/after, architecture, what changed
+
+## Required by type
+
+**All:** `<h1>`, lead paragraphs, ≥2 `<h2>` sections, full head meta, `article-nav`.
+
+**Principle:** thesis in first paragraph; closing lesson as a plain `<p>`; verb-led section titles.
+
+**Playbook:** `.article-dek`, problem + system + protocol (spec text in `code-block`), outcome section; prefer `.article-tldr`, `plan-table`, `idx-list`.
+
+**Case study:** `.article-dek`, failure mode, approach, `arch-diagram` or `code-block`, what changed, generalizable lesson; `plan-table`, `idx-list`, optional `dq-sparkline`.
+
+## Liveliness constraints
+
+- Keep prose density high: at least one non-prose element every 2–3 paragraphs; never 4+ consecutive plain prose paragraphs.
+- Use at least 4 distinct element types per article.
+- Order blocks as show-then-tell: intro sentence -> element -> explanation.
+- Add one-line captions with `.element-caption` under block elements unless the block already has a built-in caption.
+- Include at least one interactive block (`banner`, copyable block, `dq-sparkline`, `arch-diagram`, or live trigger button).
+- Use `code.code-chip` for file paths, commands, APIs, and properties named in prose.
+
+## Component library
+
+Use blocks from `components.html`. Preview: `/components.html`.
+
+**Only library components are allowed in articles.** No one-off markup, no inline `<style>` blocks, no article-local CSS. If a similar component exists (e.g. `plan-table`, `dq-sparkline`, `bar-chart`), use it instead of creating a new one. If nothing similar exists, add the component to `components.css` + a specimen in `components.html` first, then use it in the article.
+
+Requires `/components.css` + `/components.js` (+ Mermaid CDN for diagrams, `/exploration.js` for sparklines). See `notes/ARTICLE-GUIDE.md` component table.
+
+Key classes: `.banner`, `code.code-chip`, `.install-code`, `.idx-command`, `.code-block`, `.idx-list`, `.dq-sparkline`, `.arch-diagram`, `.plan-table`, `.bar-chart`.
+
+## Components (styles.css)
+
+- `.article-dek` — subtitle under title
+- `.article-meta` + `.article-type` — Principle | Playbook | Case study
+- `.article-tldr` — max 3 bullets at top
+
+Do not use `.article-callout*`, `.article-protocol`, or `.article-takeaway` — removed from the component library. Fold that content into prose or a `code-block`.
+
+## Do not
+
+- Blend playbook and case study in one post
+- Use inline styles on dek (use `.article-dek`)
+- Add `<h2>Introduction</h2>`
+- Publish without updating `notes/index.html`, homepage Writing, and neighbor nav
+- Remove `.banner__template` from the banner before publish

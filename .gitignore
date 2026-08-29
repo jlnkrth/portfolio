@@ -1,0 +1,8 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+spotify-server/.env
+spotify-server/node_modules/
+node_modules/

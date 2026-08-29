@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /components
+Disallow: /components.html
+Disallow: /notes/_templates/
+Disallow: /social/
+
+Sitemap: https://kreth.work/sitemap.xml

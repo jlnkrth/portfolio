@@ -1,0 +1,1667 @@
+{
+  "rabbitHole": {
+    "label": "Rabbit Hole",
+    "path": "/rabbit-hole/",
+    "count": 17,
+    "previewKind": "project",
+    "items": [
+      {
+        "title": "Fitness Video Platform -  No-Code Development",
+        "slug": "livetrained",
+        "client": "Livetrained",
+        "href": "/rabbit-hole/livetrained/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6788024087f995e5483c42d1_udxzjo31qptx5lychr1p.avif",
+        "confidential": false
+      },
+      {
+        "title": "Local News Startup -  Marketing Landingpage",
+        "slug": "newsbreak",
+        "client": "Newsbreak",
+        "href": "/rabbit-hole/newsbreak/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6788023687f995e5483c3476_wv3qm68glxnrbcm9biep.avif",
+        "confidential": false
+      },
+      {
+        "title": "Digital Desk Management - Webflow Migration",
+        "slug": "pult",
+        "client": "Pult",
+        "href": "/rabbit-hole/pult/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6788021470c80f8dc8aae0aa_qwfknkd2ysj9icofoedt.avif",
+        "confidential": false
+      },
+      {
+        "title": "Design Collaboration Tool  - Website Launch",
+        "slug": "confidential",
+        "client": "Confidential",
+        "href": "/rabbit-hole/#confidential",
+        "image": "",
+        "confidential": true
+      },
+      {
+        "title": "Hard Tech Startup - SEO Optimization",
+        "slug": "meter",
+        "client": "Meter",
+        "href": "/rabbit-hole/#meter",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Recruiting Startup - Website Relaunch",
+        "slug": "instaffo",
+        "client": "Instaffo",
+        "href": "/rabbit-hole/#instaffo",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678801ecb49b3991b319c787_srfusgmxx7u02ekmqgmh.avif",
+        "confidential": false
+      },
+      {
+        "title": "AI Startup - Blog Relaunch",
+        "slug": "weights",
+        "client": "Weights",
+        "href": "/rabbit-hole/#weights",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Ai Prospecting Platform - Website Launch",
+        "slug": "confidential",
+        "client": "Confidential",
+        "href": "/rabbit-hole/#confidential",
+        "image": "",
+        "confidential": true
+      },
+      {
+        "title": "Ai Agent Startup - Website Relaunch",
+        "slug": "lindy-ai",
+        "client": "Lindy.ai",
+        "href": "/rabbit-hole/#lindy-ai",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Saas Startup - Blog Relaunch",
+        "slug": "adalo",
+        "client": "Adalo",
+        "href": "/rabbit-hole/#adalo",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Startup Lawyer - Website Project",
+        "slug": "voy-tax",
+        "client": "Voy.Tax",
+        "href": "/rabbit-hole/#voy-tax",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678801fe6cca1442e9253b2e_dtrkd7hbawnau5t2c7bf.avif",
+        "confidential": false
+      },
+      {
+        "title": "Early Stage Sales Software -  Website Launch",
+        "slug": "notch-so",
+        "client": "Notch.so",
+        "href": "/rabbit-hole/#notch-so",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67880226a6ceca04a1129610_nyv8x8kazlsvqqxwzl2q.avif",
+        "confidential": false
+      },
+      {
+        "title": "Legal Startup -  Webflow Migration",
+        "slug": "contracthero",
+        "client": "ContractHero",
+        "href": "/rabbit-hole/#contracthero",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Unicorn Startup - Blog Relaunch",
+        "slug": "fiverr",
+        "client": "Fiverr",
+        "href": "/rabbit-hole/#fiverr",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Fintech - Website Launch",
+        "slug": "banxware",
+        "client": "Banxware",
+        "href": "/rabbit-hole/#banxware",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Enterprise Security Software - SEO Optimization",
+        "slug": "workos",
+        "client": "WorkOS",
+        "href": "/rabbit-hole/#workos",
+        "image": "",
+        "confidential": false
+      },
+      {
+        "title": "Collaboration SaaS -  Webflow Development",
+        "slug": "switchboard",
+        "client": "Switchboard",
+        "href": "/rabbit-hole/#switchboard",
+        "image": "",
+        "confidential": false
+      }
+    ]
+  },
+  "books": {
+    "label": "Books",
+    "path": "/books/",
+    "count": 217,
+    "previewKind": "book",
+    "items": [
+      {
+        "title": "Zero to One",
+        "slug": "zero-to-one",
+        "href": "/books/zero-to-one/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e2bfa165379a7d80f13_zero%20to%20one.avif"
+      },
+      {
+        "title": "The Lean Startup",
+        "slug": "the-lean-startup",
+        "href": "/books/the-lean-startup/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e4d8f4d0bfe59d33f5c_the-lean-startup.avif"
+      },
+      {
+        "title": "Essentialism",
+        "slug": "essentialism",
+        "href": "/books/essentialism/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893f433410891fccb3b1d0_essentialism.avif"
+      },
+      {
+        "title": "The Intelligent Investor",
+        "slug": "the-intelligent-investor",
+        "href": "/books/the-intelligent-investor/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893f5d3410891fccb3c2cd_the-intelligent-investor.avif"
+      },
+      {
+        "title": "Made to Stick",
+        "slug": "made-to-stick",
+        "href": "/books/made-to-stick/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893f88ffcabe1fdebb0a80_made-to-stick.avif"
+      },
+      {
+        "title": "Extreme Ownership",
+        "slug": "extreme-ownership",
+        "href": "/books/extreme-ownership/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893fb574916c6d949e34b9_extreme-ownership.avif"
+      },
+      {
+        "title": "Blitzscaling",
+        "slug": "blitzscaling",
+        "href": "/books/blitzscaling/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893fd7e3b424ad0328fd30_blitzscaling.avif"
+      },
+      {
+        "title": "The E-Myth Revisited",
+        "slug": "the-e-myth-revisited",
+        "href": "/books/the-e-myth-revisited/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893ffbf2e3d0977f4726ac_the-e-myth-revisited.avif"
+      },
+      {
+        "title": "The Obstacle Is the Way",
+        "slug": "the-obstacle-is-the-way",
+        "href": "/books/the-obstacle-is-the-way/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940161d61679d2026df47_the-obstacle-is-the-way.avif"
+      },
+      {
+        "title": "The Almanack of Naval Ravikant",
+        "slug": "the-almanack-of-naval-ravikant",
+        "href": "/books/the-almanack-of-naval-ravikant/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67894030577dd885f5f0a16a_the-alamack-of-naval-ravikant.avif"
+      },
+      {
+        "title": "Start with Why",
+        "slug": "start-with-why",
+        "href": "/books/start-with-why/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940519867fcc2f98709aa_start-with-why.avif"
+      },
+      {
+        "title": "Hooked",
+        "slug": "hooked",
+        "href": "/books/hooked/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940748f4d0bfe59d5aba7_hooked.avif"
+      },
+      {
+        "title": "Rework",
+        "slug": "rework",
+        "href": "/books/rework/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789409508f8fbdd5752c4a9_rework.avif"
+      },
+      {
+        "title": "The ONE Thing",
+        "slug": "the-one-thing",
+        "href": "/books/the-one-thing/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940b61d61679d20278f60_the-one-thing.avif"
+      },
+      {
+        "title": "Ego is the Enemy",
+        "slug": "ego-is-the-enemy",
+        "href": "/books/ego-is-the-enemy/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940d84ffc1cca95e4c1c7_ego-is-the-enemy.avif"
+      },
+      {
+        "title": "Never Split the Difference",
+        "slug": "never-split-the-difference",
+        "href": "/books/never-split-the-difference/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678941115abf17058d1e1c1e_never-split-the-difference.avif"
+      },
+      {
+        "title": "Trillion Dollar Coach",
+        "slug": "trillion-dollar-coach",
+        "href": "/books/trillion-dollar-coach/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789413074916c6d949fa10a_trillion-dollar-coach.avif"
+      },
+      {
+        "title": "Super Pumped",
+        "slug": "super-pumped",
+        "href": "/books/super-pumped/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67894152e57e088f2981a501_super-pumped.avif"
+      },
+      {
+        "title": "Remote",
+        "slug": "remote",
+        "href": "/books/remote/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789417308f8fbdd5753936f_remote.avif"
+      },
+      {
+        "title": "Chaos Monkeys",
+        "slug": "chaos-monkeys",
+        "href": "/books/chaos-monkeys/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789419558c5da7323f8ebd9_chaos-monkeys.avif"
+      },
+      {
+        "title": "The Power Law",
+        "slug": "the-power-law",
+        "href": "/books/the-power-law/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9bfdf1a21217bf8b66a9_The%20Power%20Law.avif"
+      },
+      {
+        "title": "Small Giants",
+        "slug": "small-giants",
+        "href": "/books/small-giants/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9c3086f976d7dd86c0d0_small-giants.avif"
+      },
+      {
+        "title": "How Google Works",
+        "slug": "how-google-works",
+        "href": "/books/how-google-works/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9c5f8f4f01ed7b5f3d21_how-google-works.avif"
+      },
+      {
+        "title": "The Psychology of Money",
+        "slug": "the-psychology-of-money",
+        "href": "/books/the-psychology-of-money/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9c8335b5d4f839c84355_Psychology%20of%20Money.avif"
+      },
+      {
+        "title": "The Signal and the Noise",
+        "slug": "the-signal-and-the-noise",
+        "href": "/books/the-signal-and-the-noise/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9bfdf1a21217bf8b66a9_The%20Power%20Law.avif"
+      },
+      {
+        "title": "The Tao of Charlie Munger",
+        "slug": "the-tao-of-charlie-munger",
+        "href": "/books/the-tao-of-charlie-munger/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9cd2e1e4cb980a6b678d_the-tao-of-charlie-munger.avif"
+      },
+      {
+        "title": "Charlie Munger",
+        "slug": "charlie-munger",
+        "href": "/books/charlie-munger/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d00ddee1e6232ee2241_charlie-munger.avif"
+      },
+      {
+        "title": "The Daily Stoic",
+        "slug": "the-daily-stoic",
+        "href": "/books/the-daily-stoic/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d2c0302f04059ede937_the-daily-stoic.avif"
+      },
+      {
+        "title": "Freakonomics",
+        "slug": "freakonomics",
+        "href": "/books/freakonomics/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d4e35b5d4f839c8fcdd_Freaconomics.avif"
+      },
+      {
+        "title": "The Dip",
+        "slug": "the-dip",
+        "href": "/books/the-dip/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d78f65649bea01b0b4e_the-dip.avif"
+      },
+      {
+        "title": "Titan",
+        "slug": "titan",
+        "href": "/books/titan/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9da042f1b75212ebf2db_titan.avif"
+      },
+      {
+        "title": "Leonardo da Vinci",
+        "slug": "leonardo-da-vinci",
+        "href": "/books/leonardo-da-vinci/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9dcddd6b15715a5a3620_leonardo-da-vinci.avif"
+      },
+      {
+        "title": "The War of Art",
+        "slug": "the-war-of-art",
+        "href": "/books/the-war-of-art/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e108a424a7db24ea6d5_the%20war%20of%20art.avif"
+      },
+      {
+        "title": "So Good They Can&#x27;t Ignore You",
+        "slug": "so-good-they-can-x27-t-ignore-you",
+        "href": "/books/so-good-they-can-x27-t-ignore-you/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e39cd60de009d8c008d_so-good-they-cant-ignore-you.avif"
+      },
+      {
+        "title": "The Richest Man in Babylon",
+        "slug": "the-richest-man-in-babylon",
+        "href": "/books/the-richest-man-in-babylon/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e6269106a37ee746bc4_the-richest-man-in-babylon.avif"
+      },
+      {
+        "title": "Outliers",
+        "slug": "outliers",
+        "href": "/books/outliers/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e878b740d83e953cf14_outliers.avif"
+      },
+      {
+        "title": "No Rules Rules",
+        "slug": "no-rules-rules",
+        "href": "/books/no-rules-rules/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9eab0973506d759793f5_no-rules-rules.avif"
+      },
+      {
+        "title": "Ogilvy on Advertising",
+        "slug": "ogilvy-on-advertising",
+        "href": "/books/ogilvy-on-advertising/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9ed78a461c05208ba6c1_ogilvy-on-advertising.avif"
+      },
+      {
+        "title": "Deep Work",
+        "slug": "deep-work",
+        "href": "/books/deep-work/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9efd81fc03e385e4d019_deep-work.avif"
+      },
+      {
+        "title": "Principles",
+        "slug": "principles",
+        "href": "/books/principles/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9f24125c27c78095780f_principles.avif"
+      },
+      {
+        "title": "Originals",
+        "slug": "originals",
+        "href": "/books/originals/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9f48489afaaef7e37f64_originals.avif"
+      },
+      {
+        "title": "Discipline Equals Freedom",
+        "slug": "discipline-equals-freedom",
+        "href": "/books/discipline-equals-freedom/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9f7b5c4926d2bec0d4c7_discipline-equals-freedom.avif"
+      },
+      {
+        "title": "Sapiens",
+        "slug": "sapiens",
+        "href": "/books/sapiens/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9fa8ee6a4b461d8e16ec_sapiens.avif"
+      },
+      {
+        "title": "The Art of War",
+        "slug": "the-art-of-war",
+        "href": "/books/the-art-of-war/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9fd2c14912a61b997485_the-art-of-war.avif"
+      },
+      {
+        "title": "The Black Swan",
+        "slug": "the-black-swan",
+        "href": "/books/the-black-swan/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9ffe7ef388fca112ecbf_the-black-swan.avif"
+      },
+      {
+        "title": "The Undoing Project",
+        "slug": "the-undoing-project",
+        "href": "/books/the-undoing-project/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa026ddee1e6232f17fa1_the-undoing-project.avif"
+      },
+      {
+        "title": "Flow",
+        "slug": "flow",
+        "href": "/books/flow/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa04069106a37ee7633c3_flow.avif"
+      },
+      {
+        "title": "Common Sense on Mutual Funds",
+        "slug": "common-sense-on-mutual-funds",
+        "href": "/books/common-sense-on-mutual-funds/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0858f4f01ed7b63b4e2_common-sense-on-mutual-funds.avif"
+      },
+      {
+        "title": "How Emotions Are Made",
+        "slug": "how-emotions-are-made",
+        "href": "/books/how-emotions-are-made/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0aa02aac33db3275907_how-emotions-are-made.avif"
+      },
+      {
+        "title": "Hackers &amp; Painters",
+        "slug": "hackers-amp-painters",
+        "href": "/books/hackers-amp-painters/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0d15c5c2f06609728d0_hackers--painters.avif"
+      },
+      {
+        "title": "The 4-Hour Workweek",
+        "slug": "the-4-hour-workweek",
+        "href": "/books/the-4-hour-workweek/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0f77781a604d1b792cd_the-4-hour-workweek.avif"
+      },
+      {
+        "title": "Switch",
+        "slug": "switch",
+        "href": "/books/switch/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa11a2b04d5d484b71a94_switch.avif"
+      },
+      {
+        "title": "Fooled by Randomness",
+        "slug": "fooled-by-randomness",
+        "href": "/books/fooled-by-randomness/",
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa13902aac33db327f601_fooled-by-randomness.avif"
+      },
+      {
+        "title": "Company of One",
+        "slug": "company-of-one",
+        "href": "/books/company-of-one/",
+        "image": "/assets/books/company-of-one.avif"
+      },
+      {
+        "title": "Thinking, Fast and Slow",
+        "slug": "thinking-fast-and-slow",
+        "href": "/books/thinking-fast-and-slow/",
+        "image": "/assets/books/thinking-fast-and-slow.avif"
+      },
+      {
+        "title": "Atomic Habits",
+        "slug": "atomic-habits",
+        "href": "/books/atomic-habits/",
+        "image": "/assets/books/atomic-habits.avif"
+      },
+      {
+        "title": "Meditations",
+        "slug": "meditations",
+        "href": "/books/meditations/",
+        "image": "/assets/books/meditations.avif"
+      },
+      {
+        "title": "\"Surely You're Joking, Mr. Feynman!\"",
+        "slug": "surely-youre-joking-mr-feynman",
+        "href": "/books/surely-youre-joking-mr-feynman/",
+        "image": "/assets/books/surely-youre-joking-mr-feynman.avif"
+      },
+      {
+        "title": "Homo Deus",
+        "slug": "homo-deus",
+        "href": "/books/homo-deus/",
+        "image": "/assets/books/homo-deus.avif"
+      },
+      {
+        "title": "Measure What Matters",
+        "slug": "measure-what-matters",
+        "href": "/books/measure-what-matters/",
+        "image": "/assets/books/measure-what-matters.avif"
+      },
+      {
+        "title": "21 Lessons for the 21st Century",
+        "slug": "21-lessons-for-the-21st-century",
+        "href": "/books/21-lessons-for-the-21st-century/",
+        "image": "/assets/books/21-lessons-for-the-21st-century.avif"
+      },
+      {
+        "title": "Addiction by Design",
+        "slug": "addiction-by-design",
+        "href": "/books/addiction-by-design/",
+        "image": "/assets/books/addiction-by-design.avif"
+      },
+      {
+        "title": "All Marketers are Liars",
+        "slug": "all-marketers-are-liars",
+        "href": "/books/all-marketers-are-liars/",
+        "image": "/assets/books/all-marketers-are-liars.avif"
+      },
+      {
+        "title": "Algorithms to Live By",
+        "slug": "algorithms-to-live-by",
+        "href": "/books/algorithms-to-live-by/",
+        "image": "/assets/books/algorithms-to-live-by.avif"
+      },
+      {
+        "title": "Alibaba",
+        "slug": "alibaba",
+        "href": "/books/alibaba/",
+        "image": "/assets/books/alibaba.avif"
+      },
+      {
+        "title": "Al-Qaeda",
+        "slug": "al-qaeda",
+        "href": "/books/al-qaeda/",
+        "image": "/assets/books/al-qaeda.avif"
+      },
+      {
+        "title": "American Kingpin",
+        "slug": "american-kingpin",
+        "href": "/books/american-kingpin/",
+        "image": "/assets/books/american-kingpin.avif"
+      },
+      {
+        "title": "An Outline of Psycho-Analysis",
+        "slug": "an-outline-of-psycho-analysis",
+        "href": "/books/an-outline-of-psycho-analysis/",
+        "image": "/assets/books/an-outline-of-psycho-analysis.avif"
+      },
+      {
+        "title": "Antisocial",
+        "slug": "antisocial",
+        "href": "/books/antisocial/",
+        "image": "/assets/books/antisocial.avif"
+      },
+      {
+        "title": "Antifragile",
+        "slug": "antifragile",
+        "href": "/books/antifragile/",
+        "image": "/assets/books/antifragile.avif"
+      },
+      {
+        "title": "A Random Walk Down Wall Street",
+        "slug": "a-random-walk-down-wall-street",
+        "href": "/books/a-random-walk-down-wall-street/",
+        "image": "/assets/books/a-random-walk-down-wall-street.webp"
+      },
+      {
+        "title": "Amp It Up",
+        "slug": "amp-it-up",
+        "href": "/books/amp-it-up/",
+        "image": "/assets/books/amp-it-up.avif"
+      },
+      {
+        "title": "Behave",
+        "slug": "behave",
+        "href": "/books/behave/",
+        "image": "/assets/books/behave.avif"
+      },
+      {
+        "title": "Benjamin Franklin",
+        "slug": "benjamin-franklin-walter-isaacson",
+        "href": "/books/benjamin-franklin-walter-isaacson/",
+        "image": "/assets/books/benjamin-franklin-walter-isaacson.avif"
+      },
+      {
+        "title": "Black Rednecks & White Liberals",
+        "slug": "black-rednecks-white-liberals",
+        "href": "/books/black-rednecks-white-liberals/",
+        "image": "/assets/books/black-rednecks-white-liberals.avif"
+      },
+      {
+        "title": "Blue Ocean Strategy",
+        "slug": "blue-ocean-strategy",
+        "href": "/books/blue-ocean-strategy/",
+        "image": "/assets/books/blue-ocean-strategy.avif"
+      },
+      {
+        "title": "Blueprint",
+        "slug": "blueprint",
+        "href": "/books/blueprint/",
+        "image": "/assets/books/blueprint.avif"
+      },
+      {
+        "title": "Bogle On Mutual Funds",
+        "slug": "bogle-on-mutual-funds",
+        "href": "/books/bogle-on-mutual-funds/",
+        "image": "/assets/books/bogle-on-mutual-funds.avif"
+      },
+      {
+        "title": "Brave New Work",
+        "slug": "brave-new-work",
+        "href": "/books/brave-new-work/",
+        "image": "/assets/books/brave-new-work.avif"
+      },
+      {
+        "title": "Brave New World",
+        "slug": "brave-new-world",
+        "href": "/books/brave-new-world/",
+        "image": "/assets/books/brave-new-world.avif"
+      },
+      {
+        "title": "Breath",
+        "slug": "breath",
+        "href": "/books/breath/",
+        "image": "/assets/books/breath.avif"
+      },
+      {
+        "title": "Brotopia",
+        "slug": "brotopia",
+        "href": "/books/brotopia/",
+        "image": "/assets/books/brotopia.avif"
+      },
+      {
+        "title": "Build",
+        "slug": "build",
+        "href": "/books/build/",
+        "image": "/assets/books/build.avif"
+      },
+      {
+        "title": "Built to Sell",
+        "slug": "built-to-sell",
+        "href": "/books/built-to-sell/",
+        "image": "/assets/books/built-to-sell.avif"
+      },
+      {
+        "title": "But How Do It Know?",
+        "slug": "but-how-do-it-know",
+        "href": "/books/but-how-do-it-know/",
+        "image": "/assets/books/but-how-do-it-know.avif"
+      },
+      {
+        "title": "Capital in the Twenty-First Century",
+        "slug": "capital-in-the-twenty-first-century",
+        "href": "/books/capital-in-the-twenty-first-century/",
+        "image": "/assets/books/capital-in-the-twenty-first-century.avif"
+      },
+      {
+        "title": "Character Counts",
+        "slug": "character-counts",
+        "href": "/books/character-counts/",
+        "image": "/assets/books/character-counts.avif"
+      },
+      {
+        "title": "Class Warfare",
+        "slug": "class-warfare",
+        "href": "/books/class-warfare/",
+        "image": "/assets/books/class-warfare.avif"
+      },
+      {
+        "title": "Cognitive Psychology",
+        "slug": "cognitive-psychology",
+        "href": "/books/cognitive-psychology/",
+        "image": "/assets/books/cognitive-psychology.avif"
+      },
+      {
+        "title": "Code: The Hidden Language of Computer Hardware and Software",
+        "slug": "code",
+        "href": "/books/code/",
+        "image": "/assets/books/code.avif"
+      },
+      {
+        "title": "Company Man",
+        "slug": "company-man",
+        "href": "/books/company-man/",
+        "image": "/assets/books/company-man.avif"
+      },
+      {
+        "title": "Complexity",
+        "slug": "complexity-m-mitchell-waldrop",
+        "href": "/books/complexity-m-mitchell-waldrop/",
+        "image": "/assets/books/complexity-m-mitchell-waldrop.avif"
+      },
+      {
+        "title": "Confessions of an Advertising Man",
+        "slug": "confessions-of-an-advertising-man",
+        "href": "/books/confessions-of-an-advertising-man/",
+        "image": "/assets/books/confessions-of-an-advertising-man.avif"
+      },
+      {
+        "title": "Conspiracy",
+        "slug": "conspiracy",
+        "href": "/books/conspiracy/",
+        "image": "/assets/books/conspiracy.avif"
+      },
+      {
+        "title": "Cosmos",
+        "slug": "cosmos",
+        "href": "/books/cosmos/",
+        "image": "/assets/books/cosmos.avif"
+      },
+      {
+        "title": "Creativity, Inc.",
+        "slug": "creativity-inc",
+        "href": "/books/creativity-inc/",
+        "image": "/assets/books/creativity-inc.avif"
+      },
+      {
+        "title": "Crushing It!",
+        "slug": "crush-it",
+        "href": "/books/crush-it/",
+        "image": "/assets/books/crush-it.avif"
+      },
+      {
+        "title": "Das Kapital",
+        "slug": "das-kapital",
+        "href": "/books/das-kapital/",
+        "image": "/assets/books/das-kapital.avif"
+      },
+      {
+        "title": "David and Goliath",
+        "slug": "david-and-goliath",
+        "href": "/books/david-and-goliath/",
+        "image": "/assets/books/david-and-goliath.avif"
+      },
+      {
+        "title": "Diplomacy",
+        "slug": "diplomacy",
+        "href": "/books/diplomacy/",
+        "image": "/assets/books/diplomacy.avif"
+      },
+      {
+        "title": "Don't Burn This Book",
+        "slug": "dont-burn-this-book",
+        "href": "/books/dont-burn-this-book/",
+        "image": "/assets/books/dont-burn-this-book.avif"
+      },
+      {
+        "title": "Don't Shoot the Dog!",
+        "slug": "dont-shoot-the-dog",
+        "href": "/books/dont-shoot-the-dog/",
+        "image": "/assets/books/dont-shoot-the-dog.avif"
+      },
+      {
+        "title": "Do the Work",
+        "slug": "do-the-work",
+        "href": "/books/do-the-work/",
+        "image": "/assets/books/do-the-work.avif"
+      },
+      {
+        "title": "Elon Musk",
+        "slug": "elon-musk-walter-isaacson",
+        "href": "/books/elon-musk-walter-isaacson/",
+        "image": "/assets/books/elon-musk-walter-isaacson.avif"
+      },
+      {
+        "title": "Emotional Design",
+        "slug": "emotional-design",
+        "href": "/books/emotional-design/",
+        "image": "/assets/books/emotional-design.avif"
+      },
+      {
+        "title": "Endeavor",
+        "slug": "endeavor",
+        "href": "/books/endeavor/",
+        "image": "/assets/books/endeavor.avif"
+      },
+      {
+        "title": "Enough",
+        "slug": "enough",
+        "href": "/books/enough/",
+        "image": "/assets/books/enough.avif"
+      },
+      {
+        "title": "Escape from Freedom",
+        "slug": "escape-from-freedom",
+        "href": "/books/escape-from-freedom/",
+        "image": "/assets/books/escape-from-freedom.avif"
+      },
+      {
+        "title": "Everything Is Obvious",
+        "slug": "everything-is-obvious",
+        "href": "/books/everything-is-obvious/",
+        "image": "/assets/books/everything-is-obvious.avif"
+      },
+      {
+        "title": "Fahrenheit 451",
+        "slug": "fahrenheit-451",
+        "href": "/books/fahrenheit-451/",
+        "image": "/assets/books/fahrenheit-451.avif"
+      },
+      {
+        "title": "Faraday, Maxwell, and the Electromagnetic Field",
+        "slug": "faraday-maxwell-and-the-electromagnetic-field",
+        "href": "/books/faraday-maxwell-and-the-electromagnetic-field/",
+        "image": "/assets/books/faraday-maxwell-and-the-electromagnetic-field.avif"
+      },
+      {
+        "title": "Fascism",
+        "slug": "fascism",
+        "href": "/books/fascism/",
+        "image": "/assets/books/fascism.avif"
+      },
+      {
+        "title": "Fear and Loathing in Las Vegas",
+        "slug": "fear-and-loathing-in-las-vegas",
+        "href": "/books/fear-and-loathing-in-las-vegas/",
+        "image": "/assets/books/fear-and-loathing-in-las-vegas.avif"
+      },
+      {
+        "title": "Finding Flow",
+        "slug": "finding-flow",
+        "href": "/books/finding-flow/",
+        "image": "/assets/books/finding-flow.avif"
+      },
+      {
+        "title": "Finite and Infinite Games",
+        "slug": "finite-and-infinite-games",
+        "href": "/books/finite-and-infinite-games/",
+        "image": "/assets/books/finite-and-infinite-games.avif"
+      },
+      {
+        "title": "Flash Boys",
+        "slug": "flash-boys",
+        "href": "/books/flash-boys/",
+        "image": "/assets/books/flash-boys.avif"
+      },
+      {
+        "title": "Food Lab",
+        "slug": "food-lab",
+        "href": "/books/food-lab/",
+        "image": "/assets/books/food-lab.avif"
+      },
+      {
+        "title": "Frenemies",
+        "slug": "frenemies",
+        "href": "/books/frenemies/",
+        "image": "/assets/books/frenemies.avif"
+      },
+      {
+        "title": "From Bacteria to Bach and Back",
+        "slug": "from-bacteria-to-bach-and-back",
+        "href": "/books/from-bacteria-to-bach-and-back/",
+        "image": "/assets/books/from-bacteria-to-bach-and-back.avif"
+      },
+      {
+        "title": "Genghis Khan and the Making of the Modern World",
+        "slug": "genghis-khan-and-the-making-of-the-modern-world",
+        "href": "/books/genghis-khan-and-the-making-of-the-modern-world/",
+        "image": "/assets/books/genghis-khan-and-the-making-of-the-modern-world.avif"
+      },
+      {
+        "title": "Grid Systems in Graphic Design",
+        "slug": "grid-systems-in-graphic-design",
+        "href": "/books/grid-systems-in-graphic-design/",
+        "image": "/assets/books/grid-systems-in-graphic-design.avif"
+      },
+      {
+        "title": "Growth Hacker Marketing",
+        "slug": "growth-hacker-marketing",
+        "href": "/books/growth-hacker-marketing/",
+        "image": "/assets/books/growth-hacker-marketing.avif"
+      },
+      {
+        "title": "Guerilla Marketing",
+        "slug": "guerilla-marketing",
+        "href": "/books/guerilla-marketing/",
+        "image": "/assets/books/guerilla-marketing.avif"
+      },
+      {
+        "title": "Hacking Growth",
+        "slug": "hacking-growth",
+        "href": "/books/hacking-growth/",
+        "image": "/assets/books/hacking-growth.avif"
+      },
+      {
+        "title": "Hatching Twitter",
+        "slug": "hatching-twitter",
+        "href": "/books/hatching-twitter/",
+        "image": "/assets/books/hatching-twitter.avif"
+      },
+      {
+        "title": "Hit Makers",
+        "slug": "hit-makers",
+        "href": "/books/hit-makers/",
+        "image": "/assets/books/hit-makers.avif"
+      },
+      {
+        "title": "How To",
+        "slug": "how-to",
+        "href": "/books/how-to/",
+        "image": "/assets/books/how-to.avif"
+      },
+      {
+        "title": "How to Change Your Mind",
+        "slug": "how-to-change-your-mind",
+        "href": "/books/how-to-change-your-mind/",
+        "image": "/assets/books/how-to-change-your-mind.avif"
+      },
+      {
+        "title": "How to Fail at Almost Everything and Still Win Big",
+        "slug": "how-to-fail-at-almost-everything-and-still-win-big",
+        "href": "/books/how-to-fail-at-almost-everything-and-still-win-big/",
+        "image": "/assets/books/how-to-fail-at-almost-everything-and-still-win-big.avif"
+      },
+      {
+        "title": "How To Hide An Empire",
+        "slug": "how-to-hide-an-empire",
+        "href": "/books/how-to-hide-an-empire/",
+        "image": "/assets/books/how-to-hide-an-empire.avif"
+      },
+      {
+        "title": "How To Keep Your Cool",
+        "slug": "how-to-keep-your-cool",
+        "href": "/books/how-to-keep-your-cool/",
+        "image": "/assets/books/how-to-keep-your-cool.avif"
+      },
+      {
+        "title": "How to Write a Good Advertisement",
+        "slug": "how-to-write-a-good-advertisement",
+        "href": "/books/how-to-write-a-good-advertisement/",
+        "image": "/assets/books/how-to-write-a-good-advertisement.avif"
+      },
+      {
+        "title": "Identity Designed",
+        "slug": "identity-designed",
+        "href": "/books/identity-designed/",
+        "image": "/assets/books/identity-designed.avif"
+      },
+      {
+        "title": "Ikigai",
+        "slug": "ikigai",
+        "href": "/books/ikigai/",
+        "image": "/assets/books/ikigai.avif"
+      },
+      {
+        "title": "Infinite Powers",
+        "slug": "infinite-powers",
+        "href": "/books/infinite-powers/",
+        "image": "/assets/books/infinite-powers.avif"
+      },
+      {
+        "title": "Influence",
+        "slug": "influence",
+        "href": "/books/influence/",
+        "image": "/assets/books/influence.avif"
+      },
+      {
+        "title": "Jab, Jab, Jab, Right Hook",
+        "slug": "jab-jab-jab-right-hook",
+        "href": "/books/jab-jab-jab-right-hook/",
+        "image": "/assets/books/jab-jab-jab-right-hook.avif"
+      },
+      {
+        "title": "John Bogle on Investing",
+        "slug": "john-bogle-on-investing",
+        "href": "/books/john-bogle-on-investing/",
+        "image": "/assets/books/john-bogle-on-investing.avif"
+      },
+      {
+        "title": "Kitchen Confidential",
+        "slug": "kitchen-confidential",
+        "href": "/books/kitchen-confidential/",
+        "image": "/assets/books/kitchen-confidential.avif"
+      },
+      {
+        "title": "Leaders Eat Last",
+        "slug": "leaders-eat-last",
+        "href": "/books/leaders-eat-last/",
+        "image": "/assets/books/leaders-eat-last.avif"
+      },
+      {
+        "title": "Let My People Go Surfing",
+        "slug": "let-my-people-go-surfing",
+        "href": "/books/let-my-people-go-surfing/",
+        "image": "/assets/books/let-my-people-go-surfing.avif"
+      },
+      {
+        "title": "Liar's Poker",
+        "slug": "liars-poker",
+        "href": "/books/liars-poker/",
+        "image": "/assets/books/liars-poker.avif"
+      },
+      {
+        "title": "Linchpin",
+        "slug": "linchpin",
+        "href": "/books/linchpin/",
+        "image": "/assets/books/linchpin.avif"
+      },
+      {
+        "title": "Lord of the Flies",
+        "slug": "lord-of-the-flies",
+        "href": "/books/lord-of-the-flies/",
+        "image": "/assets/books/lord-of-the-flies.avif"
+      },
+      {
+        "title": "Losing My Virginity",
+        "slug": "losing-my-virginity",
+        "href": "/books/losing-my-virginity/",
+        "image": "/assets/books/losing-my-virginity.avif"
+      },
+      {
+        "title": "Lying",
+        "slug": "lying",
+        "href": "/books/lying/",
+        "image": "/assets/books/lying.avif"
+      },
+      {
+        "title": "Made in America",
+        "slug": "made-in-america",
+        "href": "/books/made-in-america/",
+        "image": "/assets/books/made-in-america.jpeg"
+      },
+      {
+        "title": "Making Ideas Happen",
+        "slug": "making-ideas-happen",
+        "href": "/books/making-ideas-happen/",
+        "image": "/assets/books/making-ideas-happen.avif"
+      },
+      {
+        "title": "Making Sense",
+        "slug": "making-sense",
+        "href": "/books/making-sense/",
+        "image": "/assets/books/making-sense.avif"
+      },
+      {
+        "title": "Manufacturing Consent",
+        "slug": "manufacturing-consent",
+        "href": "/books/manufacturing-consent/",
+        "image": "/assets/books/manufacturing-consent.avif"
+      },
+      {
+        "title": "Master of One",
+        "slug": "master-of-one",
+        "href": "/books/master-of-one/",
+        "image": "/assets/books/master-of-one.avif"
+      },
+      {
+        "title": "Mastery",
+        "slug": "mastery-robert-greene",
+        "href": "/books/mastery-robert-greene/",
+        "image": "/assets/books/mastery-robert-greene.avif"
+      },
+      {
+        "title": "Merchants of Doubt",
+        "slug": "merchants-of-doubt",
+        "href": "/books/merchants-of-doubt/",
+        "image": "/assets/books/merchants-of-doubt.avif"
+      },
+      {
+        "title": "Misbehaving",
+        "slug": "misbehaving",
+        "href": "/books/misbehaving/",
+        "image": "/assets/books/misbehaving.avif"
+      },
+      {
+        "title": "Moneyball",
+        "slug": "moneyball",
+        "href": "/books/moneyball/",
+        "image": "/assets/books/moneyball.avif"
+      },
+      {
+        "title": "More from Less",
+        "slug": "more-from-less",
+        "href": "/books/more-from-less/",
+        "image": "/assets/books/more-from-less.avif"
+      },
+      {
+        "title": "More Money Than God",
+        "slug": "more-money-than-god",
+        "href": "/books/more-money-than-god/",
+        "image": "/assets/books/more-money-than-god.avif"
+      },
+      {
+        "title": "Nobody Wants to Read Your Sh*t",
+        "slug": "nobody-wants-to-read-your-sh-t",
+        "href": "/books/nobody-wants-to-read-your-sh-t/",
+        "image": "/assets/books/nobody-wants-to-read-your-sh-t.avif"
+      },
+      {
+        "title": "Nudge",
+        "slug": "nudge",
+        "href": "/books/nudge/",
+        "image": "/assets/books/nudge.avif"
+      },
+      {
+        "title": "On Booze",
+        "slug": "on-booze",
+        "href": "/books/on-booze/",
+        "image": "/assets/books/on-booze.avif"
+      },
+      {
+        "title": "Outlive",
+        "slug": "outlive",
+        "href": "/books/outlive/",
+        "image": "/assets/books/outlive.avif"
+      },
+      {
+        "title": "Secrets of Sand Hill Road",
+        "slug": "secrets-of-sand-hill-road",
+        "href": "/books/secrets-of-sand-hill-road/",
+        "image": "/assets/books/secrets-of-sand-hill-road.avif"
+      },
+      {
+        "title": "Setting the Table",
+        "slug": "setting-the-table",
+        "href": "/books/setting-the-table/",
+        "image": "/assets/books/setting-the-table.avif"
+      },
+      {
+        "title": "Shoe Dog",
+        "slug": "shoe-dog",
+        "href": "/books/shoe-dog/",
+        "image": "/assets/books/shoe-dog.avif"
+      },
+      {
+        "title": "Steal Like an Artist",
+        "slug": "steal-like-an-artist",
+        "href": "/books/steal-like-an-artist/",
+        "image": "/assets/books/steal-like-an-artist.avif"
+      },
+      {
+        "title": "Stillness is the Key",
+        "slug": "stillness-is-the-key",
+        "href": "/books/stillness-is-the-key/",
+        "image": "/assets/books/stillness-is-the-key.avif"
+      },
+      {
+        "title": "Superfans",
+        "slug": "superfans",
+        "href": "/books/superfans/",
+        "image": "/assets/books/superfans.avif"
+      },
+      {
+        "title": "Surrounded by Idiots",
+        "slug": "surrounded-by-idiots",
+        "href": "/books/surrounded-by-idiots/",
+        "image": "/assets/books/surrounded-by-idiots.avif"
+      },
+      {
+        "title": "That Will Never Work",
+        "slug": "that-will-never-work",
+        "href": "/books/that-will-never-work/",
+        "image": "/assets/books/that-will-never-work.avif"
+      },
+      {
+        "title": "The $100 Startup",
+        "slug": "the-100-startup",
+        "href": "/books/the-100-startup/",
+        "image": "/assets/books/the-100-startup.avif"
+      },
+      {
+        "title": "The 12 Week Year",
+        "slug": "the-12-week-year",
+        "href": "/books/the-12-week-year/",
+        "image": "/assets/books/the-12-week-year.avif"
+      },
+      {
+        "title": "The 48 Laws of Power",
+        "slug": "the-48-laws-of-power",
+        "href": "/books/the-48-laws-of-power/",
+        "image": "/assets/books/the-48-laws-of-power.avif"
+      },
+      {
+        "title": "The 4-Hour Body",
+        "slug": "the-4-hour-body",
+        "href": "/books/the-4-hour-body/",
+        "image": "/assets/books/the-4-hour-body.avif"
+      },
+      {
+        "title": "The 80/20 Principle",
+        "slug": "the-8020-principle",
+        "href": "/books/the-8020-principle/",
+        "image": "/assets/books/the-8020-principle.avif"
+      },
+      {
+        "title": "The Age of Surveillance Capitalism",
+        "slug": "the-age-of-surveillance-capitalism",
+        "href": "/books/the-age-of-surveillance-capitalism/",
+        "image": "/assets/books/the-age-of-surveillance-capitalism.avif"
+      },
+      {
+        "title": "The Arabs",
+        "slug": "the-arabs",
+        "href": "/books/the-arabs/",
+        "image": "/assets/books/the-arabs.avif"
+      },
+      {
+        "title": "The Attention Merchants",
+        "slug": "the-attention-merchants",
+        "href": "/books/the-attention-merchants/",
+        "image": "/assets/books/the-attention-merchants.avif"
+      },
+      {
+        "title": "The Box",
+        "slug": "the-box",
+        "href": "/books/the-box/",
+        "image": "/assets/books/the-box.avif"
+      },
+      {
+        "title": "The Brand Gap",
+        "slug": "the-brand-gap",
+        "href": "/books/the-brand-gap/",
+        "image": "/assets/books/the-brand-gap.avif"
+      },
+      {
+        "title": "The Brand Flip",
+        "slug": "the-brand-flip",
+        "href": "/books/the-brand-flip/",
+        "image": "/assets/books/the-brand-flip.avif"
+      },
+      {
+        "title": "The Changing World Order",
+        "slug": "the-changing-world-order",
+        "href": "/books/the-changing-world-order/",
+        "image": "/assets/books/the-changing-world-order.avif"
+      },
+      {
+        "title": "The Checklist Manifesto",
+        "slug": "the-checklist-manifesto",
+        "href": "/books/the-checklist-manifesto/",
+        "image": "/assets/books/the-checklist-manifesto.avif"
+      },
+      {
+        "title": "The Circle",
+        "slug": "the-circle",
+        "href": "/books/the-circle/",
+        "image": "/assets/books/the-circle.avif"
+      },
+      {
+        "title": "The Compound Effect",
+        "slug": "the-compound-effect",
+        "href": "/books/the-compound-effect/",
+        "image": "/assets/books/the-compound-effect.avif"
+      },
+      {
+        "title": "The Creative Act",
+        "slug": "the-creative-act",
+        "href": "/books/the-creative-act/",
+        "image": "/assets/books/the-creative-act.avif"
+      },
+      {
+        "title": "The Design of Everyday Things",
+        "slug": "the-design-of-everyday-things",
+        "href": "/books/the-design-of-everyday-things/",
+        "image": "/assets/books/the-design-of-everyday-things.avif"
+      },
+      {
+        "title": "The Effective Executive",
+        "slug": "the-effective-executive",
+        "href": "/books/the-effective-executive/",
+        "image": "/assets/books/the-effective-executive.avif"
+      },
+      {
+        "title": "The Elephant in the Brain",
+        "slug": "the-elephant-in-the-brain",
+        "href": "/books/the-elephant-in-the-brain/",
+        "image": "/assets/books/the-elephant-in-the-brain.avif"
+      },
+      {
+        "title": "The Emperor Wears No Clothes",
+        "slug": "the-emperor-wears-no-clothes",
+        "href": "/books/the-emperor-wears-no-clothes/",
+        "image": "/assets/books/the-emperor-wears-no-clothes.avif"
+      },
+      {
+        "title": "The End of Power",
+        "slug": "the-end-of-power",
+        "href": "/books/the-end-of-power/",
+        "image": "/assets/books/the-end-of-power.avif"
+      },
+      {
+        "title": "The Evolution of Everything",
+        "slug": "the-evolution-of-everything",
+        "href": "/books/the-evolution-of-everything/",
+        "image": "/assets/books/the-evolution-of-everything.avif"
+      },
+      {
+        "title": "The Fifth Risk",
+        "slug": "the-fifth-risk",
+        "href": "/books/the-fifth-risk/",
+        "image": "/assets/books/the-fifth-risk.avif"
+      },
+      {
+        "title": "The Firm",
+        "slug": "the-firm",
+        "href": "/books/the-firm/",
+        "image": "/assets/books/the-firm.avif"
+      },
+      {
+        "title": "The Fran Lebowitz Reader",
+        "slug": "the-fran-lebowitz-reader",
+        "href": "/books/the-fran-lebowitz-reader/",
+        "image": "/assets/books/the-fran-lebowitz-reader.avif"
+      },
+      {
+        "title": "The Hard Thing About Hard Things",
+        "slug": "the-hard-thing-about-hard-things",
+        "href": "/books/the-hard-thing-about-hard-things/",
+        "image": "/assets/books/the-hard-thing-about-hard-things.avif"
+      },
+      {
+        "title": "The Hitchhiker's Guide to the Galaxy",
+        "slug": "the-hitchhikers-guide-to-the-galaxy",
+        "href": "/books/the-hitchhikers-guide-to-the-galaxy/",
+        "image": "/assets/books/the-hitchhikers-guide-to-the-galaxy.avif"
+      },
+      {
+        "title": "The Inevitable",
+        "slug": "the-inevitable",
+        "href": "/books/the-inevitable/",
+        "image": "/assets/books/the-inevitable.avif"
+      },
+      {
+        "title": "The Infinite Game",
+        "slug": "the-infinite-game",
+        "href": "/books/the-infinite-game/",
+        "image": "/assets/books/the-infinite-game.avif"
+      },
+      {
+        "title": "The Inner Game of Tennis",
+        "slug": "the-inner-game-of-tennis",
+        "href": "/books/the-inner-game-of-tennis/",
+        "image": "/assets/books/the-inner-game-of-tennis.avif"
+      },
+      {
+        "title": "The Innovators",
+        "slug": "the-innovators",
+        "href": "/books/the-innovators/",
+        "image": "/assets/books/the-innovators.avif"
+      },
+      {
+        "title": "The Innovator's Dilemma",
+        "slug": "the-innovators-dilemma",
+        "href": "/books/the-innovators-dilemma/",
+        "image": "/assets/books/the-innovators-dilemma.avif"
+      },
+      {
+        "title": "The Laws of Human Nature",
+        "slug": "the-laws-of-human-nature",
+        "href": "/books/the-laws-of-human-nature/",
+        "image": "/assets/books/the-laws-of-human-nature.avif"
+      },
+      {
+        "title": "The Little Book of Common Sense Investing",
+        "slug": "the-little-book-of-common-sense-investing",
+        "href": "/books/the-little-book-of-common-sense-investing/",
+        "image": "/assets/books/the-little-book-of-common-sense-investing.avif"
+      },
+      {
+        "title": "The Machiavellians",
+        "slug": "the-machiavellians",
+        "href": "/books/the-machiavellians/",
+        "image": "/assets/books/the-machiavellians.avif"
+      },
+      {
+        "title": "The Messy Middle",
+        "slug": "the-messy-middle",
+        "href": "/books/the-messy-middle/",
+        "image": "/assets/books/the-messy-middle.avif"
+      },
+      {
+        "title": "The Misbehavior of Markets",
+        "slug": "the-misbehaviour-of-markets",
+        "href": "/books/the-misbehaviour-of-markets/",
+        "image": "/assets/books/the-misbehaviour-of-markets.avif"
+      },
+      {
+        "title": "The New New Thing",
+        "slug": "the-new-new-thing",
+        "href": "/books/the-new-new-thing/",
+        "image": "/assets/books/the-new-new-thing.avif"
+      },
+      {
+        "title": "The No Asshole Rule",
+        "slug": "the-no-asshole-rule",
+        "href": "/books/the-no-asshole-rule/",
+        "image": "/assets/books/the-no-asshole-rule.avif"
+      },
+      {
+        "title": "The PayPal Wars",
+        "slug": "the-paypal-wars",
+        "href": "/books/the-paypal-wars/",
+        "image": "/assets/books/the-paypal-wars.avif"
+      },
+      {
+        "title": "The Power of Habit",
+        "slug": "the-power-of-habit",
+        "href": "/books/the-power-of-habit/",
+        "image": "/assets/books/the-power-of-habit.avif"
+      },
+      {
+        "title": "The Rape of Nanking",
+        "slug": "the-rape-of-nanking",
+        "href": "/books/the-rape-of-nanking/",
+        "image": "/assets/books/the-rape-of-nanking.avif"
+      },
+      {
+        "title": "The Rise and Fall of the Third Reich",
+        "slug": "the-rise-and-fall-of-the-third-reich",
+        "href": "/books/the-rise-and-fall-of-the-third-reich/",
+        "image": "/assets/books/the-rise-and-fall-of-the-third-reich.avif"
+      },
+      {
+        "title": "The Search for Modern China",
+        "slug": "the-search-for-modern-china",
+        "href": "/books/the-search-for-modern-china/",
+        "image": "/assets/books/the-search-for-modern-china.avif"
+      },
+      {
+        "title": "The Smartest Guys in the Room",
+        "slug": "the-smartest-guys-in-the-room",
+        "href": "/books/the-smartest-guys-in-the-room/",
+        "image": "/assets/books/the-smartest-guys-in-the-room.avif"
+      },
+      {
+        "title": "The Subtle Art of Not Giving a F*ck",
+        "slug": "the-subtle-art-of-not-giving-a-fck",
+        "href": "/books/the-subtle-art-of-not-giving-a-fck/",
+        "image": "/assets/books/the-subtle-art-of-not-giving-a-fck.avif"
+      },
+      {
+        "title": "Unreasonable Hospitality",
+        "slug": "unreasonable-hospitality",
+        "href": "/books/unreasonable-hospitality/",
+        "image": "/assets/books/unreasonable-hospitality.jpg"
+      },
+      {
+        "title": "Coming Soon",
+        "slug": "coming-soon",
+        "href": "/books/coming-soon/",
+        "image": ""
+      }
+    ]
+  },
+  "clients": {
+    "label": "Clients",
+    "path": "/clients/",
+    "count": 20,
+    "previewKind": "client",
+    "items": [
+      {
+        "title": "Standard Bots",
+        "slug": "standard-bots",
+        "href": "https://standardbots.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a365fd02db49f800979c_StandardBots.svg"
+      },
+      {
+        "title": "HiComply",
+        "slug": "hicomply",
+        "href": "https://www.hicomply.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a556bb014213c7d212cc_HiComply.svg"
+      },
+      {
+        "title": "Switchboard",
+        "slug": "switchboard",
+        "href": "#",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a3f481c67ac0b2ab2718_Switchboard.svg"
+      },
+      {
+        "title": "Metaphysiks",
+        "slug": "metaphysiks",
+        "href": "https://www.metaphysiks.ch/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a543cbffa3f6045fb994_Metaphysiks.svg"
+      },
+      {
+        "title": "Instaffo",
+        "slug": "instaffo",
+        "href": "https://www.instaffo.com/en/talent",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4611ca6c2aa23cc02c6_Instaffo.svg"
+      },
+      {
+        "title": "Bestever",
+        "slug": "bestever",
+        "href": "https://www.bestever.ai/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a5a5328d5c36c8d34774_Bestever.svg"
+      },
+      {
+        "title": "Notch.so",
+        "slug": "notch-so",
+        "href": "https://www.notch.so/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a44abd2da9d1c96d3d17_Notch.svg"
+      },
+      {
+        "title": "Newsbreak",
+        "slug": "newsbreak",
+        "href": "https://www.newsbreak.com/about",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4380ef2cba48eff9f17_Newsbreak.svg"
+      },
+      {
+        "title": "Lantern",
+        "slug": "lantern",
+        "href": "https://www.lanterninsurance.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4c4da89b8ba35bd1518_lanterninsurance.svg"
+      },
+      {
+        "title": "Meter",
+        "slug": "meter",
+        "href": "https://www.meter.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a40dfa4ac4bfeef13f11_Meter.svg"
+      },
+      {
+        "title": "Bestow",
+        "slug": "bestow",
+        "href": "https://www.bestow.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4d2c30d63643af0d684_Bestow.svg"
+      },
+      {
+        "title": "Weights",
+        "slug": "weights",
+        "href": "http://weights.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a34a1c21711e692e5474_Weights.svg"
+      },
+      {
+        "title": "Banxware",
+        "slug": "banxware",
+        "href": "https://www.banxware.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a37bc30d63643aeff080_Banxware.svg"
+      },
+      {
+        "title": "Pult",
+        "slug": "pult",
+        "href": "https://www.pult.com/de",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a43ee1821a4c6c30db55_Pult.svg"
+      },
+      {
+        "title": "Adalo",
+        "slug": "adalo",
+        "href": "https://www.adalo.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a399aaef929d61a477c1_Adalo.svg"
+      },
+      {
+        "title": "WorkOS",
+        "slug": "workos",
+        "href": "https://workos.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a42984846dd3008d5bd1_Workos.svg"
+      },
+      {
+        "title": "ElevenLabs",
+        "slug": "elevenlabs",
+        "href": "https://elevenlabs.io/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a574b6005ccf5d4e3368_ElevenLabs.svg"
+      },
+      {
+        "title": "Fiverr",
+        "slug": "fiverr",
+        "href": "https://www.fiverr.com/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a471f2095942df87429a_Fiverr.svg"
+      },
+      {
+        "title": "Voy.Tax",
+        "slug": "voy-tax",
+        "href": "https://voy.law/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4559112ca5f6e6a91a1_Voy.svg"
+      },
+      {
+        "title": "Lindy.ai",
+        "slug": "lindy-ai",
+        "href": "https://www.lindy.ai/",
+        "external": true,
+        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a403fb677ca74a45ec07_Lindy.svg"
+      }
+    ]
+  },
+  "openSource": {
+    "label": "Projects",
+    "path": "/projects/",
+    "count": 3,
+    "previewKind": "oss",
+    "items": [
+      {
+        "title": "Skills",
+        "slug": "skills",
+        "mark": "/skills",
+        "href": "/projects/skills/",
+        "client": "Skills"
+      },
+      {
+        "title": "GSC MCP Server",
+        "slug": "gsc-mcp-server",
+        "mark": "/gsc",
+        "href": "/projects/gsc-mcp-server/",
+        "client": "GSC MCP"
+      },
+      {
+        "title": "HTML Host",
+        "slug": "html-host",
+        "mark": "/host",
+        "href": "/projects/html-host/",
+        "client": "HTML Host"
+      }
+    ]
+  },
+  "notes": {
+    "label": "Rabbit Hole",
+    "path": "/notes/",
+    "count": 3,
+    "previewKind": "project",
+    "items": [
+      {
+        "title": "The Best AI Will Be Free, Chinese, and Banned in America",
+        "slug": "free-chinese-and-banned",
+        "href": "/notes/free-chinese-and-banned/",
+        "client": "Notes"
+      },
+      {
+        "title": "Why Memory Management Is Important for Your AI Agent",
+        "slug": "why-memory-management-matters-for-your-ai-agent",
+        "href": "/notes/why-memory-management-matters-for-your-ai-agent/",
+        "client": "Notes"
+      },
+      {
+        "title": "How We Improved Our AI Agent in Slack by Making It Dumber",
+        "slug": "how-we-improved-our-ai-agent-in-slack-by-making-it-dumber",
+        "href": "/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/",
+        "client": "Notes"
+      }
+    ]
+  },
+  "about": {
+    "path": "/about/",
+    "sections": [
+      {
+        "heading": "Julian Kreth — Building websites for startups across the Globe."
+      }
+    ]
+  }
+}

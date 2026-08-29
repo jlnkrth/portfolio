@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Article templates — Julian Kreth</title>
+    <meta name="description" content="Visual templates for Principle, Playbook, and Case study notes." />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <main>
+        <span class="label label--wide">Article templates</span>
+        <p class="muted">
+          Visual starting points for each note type. Copy a folder to
+          <code>notes/&lt;slug&gt;/</code>, replace placeholder text, then
+          follow <code>notes/ARTICLE-GUIDE.md</code> in the repo.
+        </p>
+
+        <div class="list list--tight" style="margin-top: 2.5rem">
+          <a class="item" href="/components.html">
+            <span>Component library</span>
+            <span class="muted">All blocks used in articles — banner, code, Mermaid, tables, sparklines.</span>
+          </a>
+          <a class="item" href="/notes/_templates/principle/">
+            <span>Principle</span>
+            <span class="muted">Craft essay — thesis, ideas, takeaway. No “we shipped” story.</span>
+          </a>
+          <a class="item" href="/notes/_templates/playbook/">
+            <span>Playbook</span>
+            <span class="muted">System others can adopt — problem, protocol, workflow, outcome.</span>
+          </a>
+          <a class="item" href="/notes/_templates/case-study/">
+            <span>Case study</span>
+            <span class="muted">What you built — failure mode, approach, architecture, results.</span>
+          </a>
+        </div>
+
+        <p class="muted" style="margin-top: 3rem">
+          <a href="/notes/">← All notes</a>
+        </p>
+      </main>
+      </div>
+    </div>
+    <script src="/layout.js"></script>
+  </body>
+</html>

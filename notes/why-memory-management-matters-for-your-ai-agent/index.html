@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Why Memory Management Is Important for Your AI Agent — Julian Kreth</title>
+    <meta
+      name="description"
+      content="How we turned a lazy AI assistant into a Type A person — with rules for when and where memory gets written."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="canonical"
+      href="https://kreth.work/notes/why-memory-management-matters-for-your-ai-agent/"
+    />
+    <meta property="og:title" content="Why Memory Management Is Important for Your AI Agent" />
+    <meta
+      property="og:description"
+      content="How we turned a lazy AI assistant into a Type A person — with rules for when and where memory gets written."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kreth.work/notes/why-memory-management-matters-for-your-ai-agent/"
+    />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <h1>Why Memory Management Is Important for Your AI Agent</h1>
+        <p class="muted" style="margin-top: -0.5rem; margin-bottom: 1.5rem">
+          How we turned our lazy AI assistant into a Type A person.
+        </p>
+        <p>
+          Our agent used to “remember” things the way a tired
+          colleague takes notes — scribble something down, lose the notebook,
+          write the same thing again somewhere else, and confidently cite the
+          wrong version a week later.
+        </p>
+        <p>
+          Memory felt like a feature. In practice it was clutter. Every
+          conversation left fingerprints in agent files, scratch pads, and
+          half-updated context windows. The assistant was lazy about
+          <em>where</em> it stored things, which meant it was expensive about
+          <em>finding</em> them.
+        </p>
+        <p>
+          We fixed that with memory management — not more memory, but rules for
+          how memory gets written, updated, and referenced. The agent did not
+          get smarter. It got organized.
+        </p>
+
+        <h2>The lazy assistant problem</h2>
+        <p>
+          Ungoverned memory fails in predictable ways. The agent duplicates facts
+          across files. It caches preferences that changed three days ago. It
+          treats a Slack aside and a signed contract with the same urgency. It
+          updates its own scratch space because that is the path of least
+          resistance, even when the canonical answer lives somewhere the rest of
+          the team can see.
+        </p>
+        <p>
+          Lazy memory also rots quietly. Nobody notices until someone asks
+          “why does the bot think I still work on Project X?” and
+          the answer is: because it wrote that once in a file only the agent
+          reads.
+        </p>
+        <p>
+          Type A memory is the opposite. One source of truth. Explicit update
+          rules. References instead of copies. A pause before every write.
+        </p>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col">Lazy memory</th>
+                <th scope="col">Managed memory</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Facts duplicated across agent files</td>
+                <td>Facts live once in wiki, agents store references</td>
+              </tr>
+              <tr>
+                <td>Preferences drift silently</td>
+                <td><code class="code-chip">user.md</code> keyed by Slack ID stays canonical</td>
+              </tr>
+              <tr>
+                <td>Updates happen on autopilot</td>
+                <td>Every write pauses for classification and destination check</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">The goal is not more memory. The goal is less contradiction.</p>
+
+        <h2>Memory lives in the Masse Wiki</h2>
+        <p>
+          We connected agent memory to the Masse Wiki — our shared
+          knowledge base, not a private model diary. If a fact should outlive
+          a single thread, it belongs in the wiki. Agent files hold pointers,
+          not paragraphs.
+        </p>
+        <p>
+          That split matters. The wiki is where humans audit, edit, and disagree.
+          Agent memory is a index card that says where to look. When the wiki
+          changes, the agent stays correct because it was never storing the
+          essay — just the link.
+        </p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>wiki/users/U03ABC123.md</span><span class="idx-list__count">person profile</span></div>
+          <div class="idx-list__row"><span>wiki/clients/emergent.md</span><span class="idx-list__count">client truth</span></div>
+          <div class="idx-list__row"><span>wiki/ops/decision-log.md</span><span class="idx-list__count">policy history</span></div>
+          <span class="idx-list__divider" aria-hidden="true"></span>
+          <div class="idx-list__row idx-list__row--total"><span>agent-memory/*.md</span><span class="idx-list__count">refs only</span></div>
+        </div>
+        <p class="element-caption">Human-editable wiki pages hold facts; agent state files hold pointers.</p>
+
+        <h2><code>user.md</code> — one file per person, keyed by Slack ID</h2>
+        <p>
+          People are the hardest thing to remember well. Preferences shift.
+          Workstyles are subtle. Current tasks go stale by Tuesday.
+        </p>
+        <p>
+          Every teammate gets a <code>user.md</code> in the wiki, referenced by
+          Slack ID so the agent can resolve “who said this” without
+          guessing. Each file holds:
+        </p>
+        <ul>
+          <li>General info — role, timezone, how they show up in Slack</li>
+          <li>Preferences — communication style, tools, pet peeves</li>
+          <li>Workstyle — async vs. live, how they like tasks broken down</li>
+          <li>Current tasks — what they are actively carrying, with dates</li>
+          <li>Wiki references — links to deeper docs, not inline copies</li>
+        </ul>
+        <p>
+          The agent reads <code>user.md</code> to personalize. It does not
+          treat the file as a junk drawer. If something belongs in a client doc
+          or a project page, it goes there — and <code>user.md</code> gets a
+          reference line.
+        </p>
+
+        <h2>Stop, analyze, then store</h2>
+        <p>
+          The biggest behavioral change: the agent is not allowed to update
+          memory on autopilot. Every time it wants to persist something, it
+          stops and runs a short analysis first.
+        </p>
+        <ol>
+          <li>
+            <strong>What is this?</strong> Fact, preference, task, temporary
+            context, or noise?
+          </li>
+          <li>
+            <strong>How long should it live?</strong> Session-only, until a
+            date, or permanent?
+          </li>
+          <li>
+            <strong>Where does it belong?</strong> Wiki page, <code>user.md</code>,
+            project doc, or nowhere?
+          </li>
+          <li>
+            <strong>Does something already exist?</strong> Update in place —
+            do not append a second version.
+          </li>
+          <li>
+            <strong>What gets a reference only?</strong> Agent memory files,
+            sub-agent configs, session context.
+          </li>
+        </ol>
+        <p>
+          That pause is the Type A part. The lazy assistant wrote first and
+          sorted later. The disciplined one decides the filing system before
+          touching the filing cabinet.
+        </p>
+
+        <h2>Instructions the agent actually follows</h2>
+        <p>
+          These rules live in the agent spec — not as suggestions, as steps:
+        </p>
+        <div class="code-block" data-copy="BEFORE WRITING MEMORY:
+1. Quote the new information in one sentence.
+2. Name the canonical destination (wiki path or &quot;none&quot;).
+3. If a wiki page exists → update the wiki.
+4. If agent memory needs it → write ONLY a reference:
+     ref: wiki/clients/acme/billing.md#contacts
+5. Never store the same fact in two places.
+6. If uncertain → ask once, then store in wiki under /inbox/ with date." data-copy-bound="1">
+          <button class="copy-button" aria-label="Copy code" data-copy-btn="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>BEFORE WRITING MEMORY:
+1. Quote the new information in one sentence.
+2. Name the canonical destination (wiki path or "none").
+3. If a wiki page exists → update the wiki.
+4. If agent memory needs it → write ONLY a reference:
+     ref: wiki/clients/acme/billing.md#contacts
+5. Never store the same fact in two places.
+6. If uncertain → ask once, then store in wiki under /inbox/ with date.</code></pre>
+        </div>
+        <p class="element-caption">If this checklist is not copyable, people stop using it.</p>
+        <p>
+          Most updates land in the LLM wiki. Memory files, agent configs, and
+          sub-agent context get reference lines — path, anchor, last verified
+          date. The agent’s private files stay thin. The wiki stays thick.
+        </p>
+
+        <h2>References beat copies</h2>
+        <p>
+          Think of agent memory like a bibliography, not a notebook. When
+          someone says “I prefer bullet points in status updates,”
+          the workflow is:
+        </p>
+        <ul>
+          <li>Update their <code>user.md</code> preferences section in the wiki</li>
+          <li>Add or refresh a reference in the agent’s user index</li>
+          <li>Do not paste the preference into five other agent files</li>
+        </ul>
+        <p>
+          Copies feel fast. References stay true. When preferences change, you
+          edit one wiki page — not a scavenger hunt through agent state.
+        </p>
+
+        <h2>What changed in practice</h2>
+        <p>
+          Fewer contradictions. Faster lookups because the agent knows where
+          to look before it searches. Onboarding a new sub-agent got easier —
+          point it at the same wiki references instead of re-seeding facts.
+        </p>
+        <p>
+          The assistant also got quieter in a good way. It stopped announcing
+          that it “remembered” things. It just acted like someone
+          who had read the wiki — because it had, and it knew not to fork
+          the wiki into a private shadow copy.
+        </p>
+        <p>
+          Memory management is not glamorous work. It is filing. But agents
+          without filing discipline become confident liars with good recall
+          for the wrong version. Give yours a wiki, a <code>user.md</code>
+          per person, a mandatory pause before every write, and permission to
+          be boring about references.
+        </p>
+        <p>
+          Lazy assistants hoard. Type A assistants index. Your team will notice
+          the difference before your model benchmark does.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/free-chinese-and-banned/">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">Free, Chinese, and Banned</span>
+          </a>
+          <a href="/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Making Our Slack Agent Dumber</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+
+    <script src="/components.js"></script>
+  </body>
+</html>

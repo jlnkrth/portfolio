@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skills — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Agent skills by Julian Kreth — install with npx skills and run a self-serve technical SEO audit."
+    />
+    <link rel="canonical" href="https://kreth.work/projects/skills/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css?v=8" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <main class="project-page">
+          <div class="project-page__chrome">
+            <a class="project-page__back" href="/projects/" aria-label="Back to projects">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </a>
+            <button
+              class="project-page__share"
+              type="button"
+              aria-label="Copy link to clipboard"
+              data-copy="https://kreth.work/projects/skills/"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l1.42-1.42a5 5 0 0 0-7.07-7.07l-.88.88" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54L5.04 11.88a5 5 0 0 0 7.07 7.07l.88-.88" />
+              </svg>
+            </button>
+          </div>
+
+          <header class="project-page__hero">
+            <h1 class="project-page__title">/ skills</h1>
+            <p class="project-page__lede">
+              Agent skills for building and auditing websites. The public
+              <strong>seo-site-audit</strong> skill is a simplified version of the
+              technical audit we run internally — stripped of agency machinery,
+              ready to use with whatever tools you have.
+            </p>
+
+            <div class="install-code" data-copy="npx skills@latest add jlnkrth/skills">
+              <code>npx skills@latest add jlnkrth/skills</code>
+              <button class="copy-button" aria-label="Copy command" data-copy-btn>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-page__actions">
+              <a class="btn btn--block" href="https://skills.sh/" target="_blank" rel="noreferrer">
+                Skills
+              </a>
+              <a class="btn btn--block" href="https://github.com/jlnkrth/skills" target="_blank" rel="noreferrer">
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                GitHub
+              </a>
+            </div>
+          </header>
+
+          <article class="article project-page__body">
+            <section class="project-skill">
+              <h2>/ seo-site-audit</h2>
+              <p>
+                One-shot technical SEO audit of an entire website. Sitemap-driven,
+                runs a full check catalog
+                (<strong>crawlability</strong>,
+                <strong>links</strong>,
+                <strong>markup</strong>,
+                <strong>structured data</strong>,
+                <strong>performance</strong>,
+                <strong>security headers</strong>,
+                <strong>i18n</strong>,
+                <strong>mobile</strong>,
+                <strong>accessibility</strong>,
+                <strong>images</strong>, and
+                <strong>AI readiness</strong> —
+                and produces a self-contained HTML report with category scores and
+                prioritized fix batches.
+              </p>
+              <p>
+                Needs nothing but HTTP access. Uses Firecrawl, Google Search Console,
+                and PageSpeed Insights when you have them.
+              </p>
+            </section>
+
+            <section>
+              <h2>How it works</h2>
+              <ol class="project-steps">
+                <li>
+                  <strong>Onboarding.</strong> First run asks which optional tools
+                  you have and saves answers to <code>audit-config.json</code>.
+                  Nothing is required — every check falls back to plain HTTP.
+                </li>
+                <li>
+                  <strong>Inventory.</strong> Reads robots.txt and sitemaps to build
+                  the full URL list. Sites beyond ~150 pages are declined honestly
+                  rather than sampled silently.
+                </li>
+                <li>
+                  <strong>Checks.</strong> Every page gets every applicable check
+                  from the catalog. Results carry confidence labels so a proxy
+                  result is never dressed up as definitive.
+                </li>
+                <li>
+                  <strong>Report.</strong> One self-contained HTML file: summary,
+                  category scores, fix batches ordered by priority, what already
+                  works, and the full audited-pages table.
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h2>Install</h2>
+              <p>Add the skill pack to your agent environment:</p>
+              <div class="install-code" data-copy="npx skills@latest add jlnkrth/skills">
+                <code>npx skills@latest add jlnkrth/skills</code>
+                <button class="copy-button" aria-label="Copy command" data-copy-btn>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+              <p class="muted project-page__note">
+                Then ask your agent for a technical SEO audit of a site. Optional
+                rungs (Firecrawl, GSC, PageSpeed) upgrade specific checks when available.
+              </p>
+            </section>
+
+            <section>
+              <h2>License</h2>
+              <p>MIT — see the repo for details.</p>
+            </section>
+          </article>
+        </main>
+      </div>
+    </div>
+    <script src="/layout.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Components — kreth.work</title>
+    <meta name="description" content="Internal component library for kreth.work." />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="components.css?v=23" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+    <div class="guide">
+      <h1 class="guide__title">Components</h1>
+      <p class="guide__lead">
+        Internal library of every component used across the site. Not linked from
+        the public site and excluded from search engines.
+      </p>
+      <span class="guide__note">Hidden page · not for visitors</span>
+
+      <!-- COMPONENT: Announcement banner -->
+      <section class="specimen">
+        <span class="specimen__label">Announcement banner</span>
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              <a href="#">Enrollment for my animation course is open!</a>
+              <span class="banner__muted">8 hours left to sign up.</span>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Feature card (toast preview + actions) -->
+      <section class="specimen">
+        <span class="specimen__label">Feature card (toast preview + actions)</span>
+        <article class="feature-card exp-small-shadow">
+          <div class="feature-card__toasts" aria-hidden="true">
+            <div class="toast-stub"></div>
+            <div class="toast-stub"></div>
+            <div class="toast-stub"></div>
+          </div>
+          <h2 class="feature-card__title">Sonner</h2>
+          <p class="feature-card__desc">An opinionated toast component for React.</p>
+          <div class="feature-card__actions">
+            <button class="btn btn--primary" data-render-toast>Render a toast</button>
+            <a class="btn" href="#">GitHub</a>
+          </div>
+          <a class="feature-card__link" href="#">Documentation</a>
+        </article>
+      </section>
+
+      <!-- COMPONENT: Raised buttons -->
+      <section class="specimen">
+        <span class="specimen__label">Raised button — primary / secondary</span>
+        <div class="hero__buttons">
+          <button class="btn btn--primary">Primary</button>
+          <button class="btn">Secondary</button>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Inline install code -->
+      <section class="specimen">
+        <span class="specimen__label">Install code (inline, copyable)</span>
+        <div class="install-code" data-copy="npm install sonner">
+          <code>npm install sonner</code>
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Section heading + prose + inline code -->
+      <section class="specimen">
+        <span class="specimen__label">Section heading + prose + inline code</span>
+        <h2 class="section-heading">Expand</h2>
+        <p class="prose">
+          You can change the amount of toasts visible through the
+          <code>visibleToasts</code> prop.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Multi-line code block -->
+      <section class="specimen">
+        <span class="specimen__label">Code block (multi-line, copyable)</span>
+        <div class="code-block" data-copy="import { Toaster, toast } from 'sonner'&#10;&#10;function App() {&#10;  return (&#10;    &lt;div&gt;&#10;      &lt;Toaster /&gt;&#10;      &lt;button onClick={() =&gt; toast('My first toast')}&gt;&#10;        Render a toast&#10;      &lt;/button&gt;&#10;    &lt;/div&gt;&#10;  )&#10;}">
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="code-block__pre"><code><span class="tok-keyword">import</span> <span class="tok-punct">{</span> Toaster<span class="tok-punct">,</span> toast <span class="tok-punct">}</span> <span class="tok-keyword">from</span> <span class="tok-string">'sonner'</span>
+
+<span class="tok-keyword">function</span> <span class="tok-fn">App</span><span class="tok-punct">() {</span>
+  <span class="tok-keyword">return</span> <span class="tok-punct">(</span>
+    <span class="tok-punct">&lt;</span><span class="tok-fn">div</span><span class="tok-punct">&gt;</span>
+      <span class="tok-punct">&lt;</span><span class="tok-fn">Toaster</span> <span class="tok-punct">/&gt;</span>
+      <span class="tok-punct">&lt;</span><span class="tok-fn">button</span> onClick<span class="tok-punct">={() =&gt;</span> <span class="tok-fn">toast</span><span class="tok-punct">(</span><span class="tok-string">'My first toast'</span><span class="tok-punct">)}&gt;</span>
+        Render a toast
+      <span class="tok-punct">&lt;/</span><span class="tok-fn">button</span><span class="tok-punct">&gt;</span>
+    <span class="tok-punct">&lt;/</span><span class="tok-fn">div</span><span class="tok-punct">&gt;</span>
+  <span class="tok-punct">)</span>
+<span class="tok-punct">}</span></code></pre>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Faded markdown code block -->
+      <section class="specimen">
+        <span class="specimen__label">Faded markdown code block</span>
+        <figure class="md-block">
+          <pre class="md-code" tabindex="0" data-language="md"><div class="md-code__inner"><code><span class="md-line"><span class="md-h">## Typography</span></span>
+<span class="md-line"> </span>
+<span class="md-line"><span class="md-num">1.</span><span class="md-text"> Cap body text at about 65ch instead of stretching full width so line length stays comfortable to read.</span></span>
+<span class="md-line"><span class="md-num">2.</span><span class="md-text"> Apply </span><span class="md-inline">`tabular-nums`</span><span class="md-text"> to price columns so digits align and the column reads cleanly.</span></span>
+<span class="md-line"><span class="md-num">3.</span><span class="md-text"> Use the </span><span class="md-inline">`…`</span><span class="md-text"> character instead of </span><span class="md-inline">`...`</span><span class="md-text"> in markup so truncation follows the container instead of snapping at a fixed character count.</span></span>
+<span class="md-line"><span class="md-num">4.</span><span class="md-text"> Loosen letter-spacing on uppercase labels; tight uppercase reads cramped.</span></span>
+<span class="md-line"><span class="md-num">5.</span><span class="md-text"> Declare a fallback stack whose x-height and weight match the primary face so loading does not cause layout shift.</span></span>
+<span class="md-line"><span class="md-num">6.</span><span class="md-text"> Reserve underlines for links; emphasize non-link text with weight or color so underline stays a reliable affordance and people are not tempted to click inert copy.</span></span>
+<span class="md-line"><span class="md-num">7.</span><span class="md-text"> Prefer bold for interface emphasis and keep italic for citations and linguistic stress in prose — italic hierarchy reads like print editorial, not UI hierarchy.</span></span></code></div></pre>
+          <div class="md-block__fade" aria-hidden="true"></div>
+        </figure>
+      </section>
+
+      <!-- COMPONENT: Pill button group -->
+      <section class="specimen">
+        <span class="specimen__label">Pill button group</span>
+        <p class="specimen__caption">
+          One component, two interaction modes. Labels are placeholders — not semantic
+          color variants.
+        </p>
+        <p class="specimen__caption">Single-select — one active pill at a time.</p>
+        <div class="pill-group" data-pill-group>
+          <button class="pill" type="button" data-active="true">Default</button>
+          <button class="pill" type="button" data-active="false">Success</button>
+          <button class="pill" type="button" data-active="false">Warning</button>
+          <button class="pill" type="button" data-active="false">Error</button>
+        </div>
+        <p class="specimen__caption" style="margin-top: 16px">Multi-select — each pill toggles on its own.</p>
+        <div class="pill-group">
+          <button class="pill" type="button">Rich colors</button>
+          <button class="pill" type="button">Close button</button>
+          <button class="pill" type="button">Headless</button>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Rule-of-thumb note -->
+      <section class="specimen">
+        <span class="specimen__label">Rule-of-thumb note</span>
+        <p class="rule-note">
+          As a rule of thumb, UI animations should generally stay under
+          <code>300ms</code>.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Live toast -->
+      <section class="specimen">
+        <span class="specimen__label">Toast (live)</span>
+        <p class="prose">Click to render a live toast in the corner.</p>
+        <div class="hero__buttons">
+          <button class="pill" data-render-toast>Render a toast</button>
+          <button class="pill" data-render-toast="success">Success</button>
+          <button class="pill" data-render-toast="error">Error</button>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Availability status -->
+      <section class="specimen">
+        <span class="specimen__label">Availability (local time + working-hours dot)</span>
+        <span class="availability" data-availability data-tz="Europe/Berlin" data-start="7" data-end="21" data-location="Hamburg, Germany" data-lat="53.5511" data-lon="9.9937">
+          <span class="availability__location">Hamburg, Germany</span>
+          <span class="availability__dot" aria-hidden="true"></span>
+          <span class="availability__time">--:--</span>
+          <span class="availability__weather" aria-hidden="true"></span>
+        </span>
+      </section>
+
+      <!-- COMPONENT: Footer -->
+      <section class="specimen">
+        <span class="specimen__label">Footer</span>
+        <footer class="site-footer">
+          <div class="site-footer__inner">
+            <span class="site-footer__avatar" aria-hidden="true"></span>
+            <span>By <a href="/">Julian Kreth</a></span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- COMPONENT: Numbered section header (index-style eyebrow + rule) -->
+      <section class="specimen">
+        <span class="specimen__label">Numbered section header (number + rule)</span>
+        <div class="idx-head">
+          <a class="idx-head__link" href="#">
+            <span class="idx-head__num">07</span>
+            <h2 class="idx-head__title">Accessibility</h2>
+          </a>
+          <span class="idx-head__rule" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Glossary term + definition -->
+      <section class="specimen">
+        <span class="specimen__label">Glossary term + definition</span>
+        <div class="idx-terms">
+          <div class="idx-term">
+            <span class="idx-term__name">Tabular numbers</span>
+            <p class="idx-term__def">Digits share one width so figures stay aligned in columns. Apply <code>tabular-nums</code> to prices and tables.</p>
+          </div>
+          <div class="idx-term">
+            <span class="idx-term__name">Optical alignment</span>
+            <p class="idx-term__def">Nudging an element off its mathematical center so it reads as centered to the eye.</p>
+          </div>
+          <div class="idx-term">
+            <span class="idx-term__name">Skip link</span>
+            <p class="idx-term__def">A hidden link that jumps to main content, revealed only on keyboard focus.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Command snippet (copyable, with caption) -->
+      <section class="specimen">
+        <span class="specimen__label">Command snippet (copyable, with caption)</span>
+        <div class="idx-command" data-copy="npx create-index@latest">
+          <div class="idx-command__bar">
+            <code class="idx-command__code"><span class="idx-command__prompt">npx</span> create-index@latest</code>
+            <button class="copy-button" aria-label="Copy code" data-copy-btn>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="idx-command__caption">
+            <span>Works with your favourite terminal and editor.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Index list rows (monospace sitemap) -->
+      <section class="specimen">
+        <span class="specimen__label">Index list rows (monospace)</span>
+        <div class="idx-list">
+          <a class="idx-list__row" href="#"><span>typography</span><span class="idx-list__count">21</span></a>
+          <a class="idx-list__row" href="#"><span>color</span><span class="idx-list__count">13</span></a>
+          <a class="idx-list__row" href="#"><span>accessibility</span><span class="idx-list__count">11</span></a>
+          <span class="idx-list__divider" aria-hidden="true"></span>
+          <div class="idx-list__row idx-list__row--total"><span>total</span><span class="idx-list__count">188</span></div>
+          <div class="idx-list__row"><span>articulate</span><span class="idx-list__status">[ unlocked ]</span></div>
+          <div class="idx-list__row"><span>diffs</span><span class="idx-list__status idx-list__status--locked">[ locked ]</span></div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Waitlist CTA (inline email capture) -->
+      <section class="specimen">
+        <span class="specimen__label">Waitlist CTA (inline email capture)</span>
+        <div class="idx-waitlist">
+          <p class="idx-waitlist__copy">A new component library, arriving soon. Join the list for early access and behind-the-scenes notes.</p>
+          <form class="idx-waitlist__form" data-waitlist>
+            <input class="idx-waitlist__input" type="email" placeholder="you@example.com" aria-label="Email" required />
+            <button class="idx-waitlist__submit" type="submit" aria-label="Join the waitlist">
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           BATCH 1 — Article page components (from an article-style layout)
+           ==================================================================== -->
+
+      <!-- COMPONENT: Article header (back-to-home name + role) -->
+      <section class="specimen">
+        <span class="specimen__label">Article header (name link + role)</span>
+        <header class="article-head">
+          <a class="article-head__name" href="/">Julian Kreth</a>
+          <span class="article-head__role">Designer &amp; Engineer</span>
+        </header>
+      </section>
+
+      <!-- COMPONENT: Article types — meta, dek, tldr, callouts, protocol, takeaway -->
+      <section class="specimen">
+        <span class="specimen__label">Article types (Principle · Playbook · Case study)</span>
+        <article class="article" style="max-width: 692px">
+          <div class="article-meta">
+            <span class="article-type">Playbook</span>
+          </div>
+          <h1>Example title</h1>
+          <p class="article-dek">One-line hook that names the human outcome.</p>
+          <aside class="article-tldr" aria-label="Summary">
+            <span class="article-tldr__label">TL;DR</span>
+            <ul>
+              <li>Wiki is source of truth; agent files hold references only.</li>
+              <li>Pause before every memory write.</li>
+            </ul>
+          </aside>
+        </article>
+        <p class="prose" style="margin-top: 1rem">
+          See <code>notes/ARTICLE-GUIDE.md</code> for required components per type.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Article lead prose + inline link -->
+      <section class="specimen">
+        <span class="specimen__label">Article lead prose + inline link</span>
+        <p class="article-prose">
+          A short write-up about building small, deliberate interfaces. My goal
+          was a library that stays out of the way, so I documented every
+          component in one place, like
+          <a class="article-link" href="#">this catalog</a>. Every specimen maps
+          onto the same handful of tokens.
+        </p>
+        <p class="article-prose">
+          Nothing here is load-bearing prose — it exists only to show how a
+          paragraph and its links read at rest.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Section heading (h2, anchored) -->
+      <section class="specimen">
+        <span class="specimen__label">Section heading (h2, anchored)</span>
+        <h2 class="article-h2" id="the-approach">The approach</h2>
+        <p class="article-prose">
+          Section headings are set only a touch heavier than body text, so the
+          rhythm of the page stays calm.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Inline code chip -->
+      <section class="specimen">
+        <span class="specimen__label">Inline code chip</span>
+        <p class="article-prose">
+          Each lesson ships a <code class="code-chip">SKILL.md</code> file you can
+          hand to an agent, alongside a plain <code class="code-chip">config.json</code>.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Inline serif italic emphasis -->
+      <section class="specimen">
+        <span class="specimen__label">Inline serif italic emphasis</span>
+        <p class="article-prose">
+          In a world of scarcity we treasure <em class="serif-em">tools</em>. In
+          a world of abundance we treasure <em class="serif-em">taste</em>.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Text highlight (mark.hl) -->
+      <section class="specimen">
+        <span class="specimen__label">Text highlight</span>
+        <p class="article-prose">
+          A notepad-style marker for the line that matters:
+          <mark class="hl hl--yellow">the default is yellow</mark>, with
+          <mark class="hl hl--orange">orange</mark>,
+          <mark class="hl hl--rose">rose</mark>,
+          <mark class="hl hl--green">green</mark>, and
+          <mark class="hl hl--blue">blue</mark> as muted alternatives.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Pull quote (serif + attribution) -->
+      <section class="specimen">
+        <span class="specimen__label">Pull quote (serif + attribution)</span>
+        <blockquote class="pull-quote">
+          <p class="pull-quote__text">
+            <span class="pull-quote__mark pull-quote__mark--open" aria-hidden="true">&ldquo;</span>The
+            details are not the details. They make the design.<span class="pull-quote__mark" aria-hidden="true">&rdquo;</span>
+          </p>
+          <div class="pull-quote__attr">
+            <span class="pull-quote__rule" aria-hidden="true"></span>
+            <div class="pull-quote__by">
+              <span class="pull-quote__name">Charles Eames</span>
+              <span class="pull-quote__source">On design</span>
+            </div>
+          </div>
+        </blockquote>
+      </section>
+
+      <!-- COMPONENT: Figure with caption -->
+      <section class="specimen">
+        <span class="specimen__label">Figure (rounded frame + caption)</span>
+        <figure class="article-figure">
+          <div class="article-figure__frame">
+            <img src="/assets/now-playing.jpeg" alt="Example figure" />
+          </div>
+          <figcaption class="article-figure__caption">
+            A short, original caption sits close beneath the frame.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- COMPONENT: Video / media preview (rounded frame + play button) -->
+      <section class="specimen">
+        <span class="specimen__label">Video preview (rounded frame + play button)</span>
+        <div class="video-preview">
+          <div class="video-preview__frame">
+            <img src="/assets/now-playing.jpeg" alt="Video thumbnail" />
+            <button class="video-preview__play" type="button" aria-label="Play video">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.14v13.72a1 1 0 0 0 1.52.86l11.14-6.86a1 1 0 0 0 0-1.72L9.52 4.28A1 1 0 0 0 8 5.14Z" />
+              </svg>
+            </button>
+          </div>
+          <p class="article-figure__caption">Tap to play — hover reveals the control.</p>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Course CTA link (arrow icon) -->
+      <section class="specimen">
+        <span class="specimen__label">CTA link (arrow icon)</span>
+        <a class="cta-link" href="#">
+          Check out the course
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17 17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
+      </section>
+
+      <!-- ====================================================================
+           BATCH 2 — Homepage sidebar components
+           ==================================================================== -->
+
+      <!-- COMPONENT: Profile card -->
+      <section class="specimen">
+        <span class="specimen__label">Profile card</span>
+        <div class="card profile-card" style="max-width: 300px">
+          <div class="profile-card__head">
+            <img class="avatar" src="/assets/avatar.avif" alt="Julian Kreth" width="44" height="44" />
+            <div class="profile-card__id">
+              <span class="profile-card__name">Julian Kreth</span>
+              <span class="handle">@jlnkrth</span>
+            </div>
+          </div>
+          <p class="profile-card__bio">
+            Tech Lead herding an army of AI agents while maintaining the
+            company&rsquo;s Claude plugin.
+          </p>
+          <button class="email-copy" type="button" data-copy="https://twitter.com/herdingbots">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>@herdingbots</span>
+          </button>
+          <div class="profile-card__actions">
+            <a class="btn btn--block btn--primary" href="mailto:julian@karmastudio.co?subject=Project%20Inquiry">Project Inquiry</a>
+            <a class="btn btn--block" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Handle pill -->
+      <section class="specimen">
+        <span class="specimen__label">Handle pill</span>
+        <span class="handle">@jlnkrth</span>
+      </section>
+
+      <!-- COMPONENT: Raised action buttons (primary / secondary) -->
+      <section class="specimen">
+        <span class="specimen__label">Raised action buttons (sidebar, .btn--block)</span>
+        <div class="profile-card__actions" style="max-width: 300px">
+          <a class="btn btn--block btn--primary" href="#">Project Inquiry</a>
+          <a class="btn btn--block" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Collections list card -->
+      <section class="specimen">
+        <span class="specimen__label">Collections list card</span>
+        <nav class="collections collections--standalone" aria-label="Collections" style="max-width: 300px">
+          <span class="label">Collections</span>
+          <ul class="collections__list">
+            <li>
+              <span class="collections__item is-disabled">
+                Projects <span class="collections__meta">(coming soon)</span>
+              </span>
+            </li>
+            <li><a class="collections__item" href="#">Readings</a></li>
+            <li><a class="collections__item" href="#">Commentblocks</a></li>
+            <li><a class="collections__item" href="#">Openlead</a></li>
+          </ul>
+        </nav>
+      </section>
+
+      <!-- COMPONENT: Now-playing vinyl player -->
+      <section class="specimen">
+        <span class="specimen__label">Now-playing vinyl player</span>
+        <div class="nowplaying" style="max-width: 300px">
+          <div class="nowplaying__widget">
+            <div class="nowplaying__inner">
+              <div class="nowplaying__vinyl-wrapper">
+                <img class="nowplaying__vinyl" src="/assets/vinyl.svg" alt="" />
+                <div class="nowplaying__cover-wrapper">
+                  <img
+                    class="nowplaying__cover"
+                    src="/assets/now-playing.jpeg"
+                    alt="Scott Street by Phoebe Bridgers album art"
+                  />
+                </div>
+              </div>
+              <div class="nowplaying__info">
+                <div class="nowplaying__song">Scott Street</div>
+                <div class="nowplaying__artist">Phoebe Bridgers</div>
+              </div>
+            </div>
+            <div class="nowplaying__status">
+              <div class="nowplaying__status-dot-wrap">
+                <div class="nowplaying__status-dot" aria-hidden="true"></div>
+              </div>
+              <div class="nowplaying__status-label">Listening now</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           BATCH — dqnamo.com
+           ==================================================================== -->
+
+      <!-- COMPONENT: Mono path label -->
+      <section class="specimen">
+        <span class="specimen__label">Mono path label</span>
+        <p class="exp-path">kreth.work/exploration</p>
+      </section>
+
+      <!-- COMPONENT: Hero lead (balanced intro) -->
+      <section class="specimen">
+        <span class="specimen__label">Hero lead (balanced intro)</span>
+        <p class="exp-hero-lead">
+          Designer and engineer. Hamburg. Exploring interface patterns, compact
+          components, and calm product surfaces.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Section heading + lead (compact) -->
+      <section class="specimen">
+        <span class="specimen__label">Section heading + lead (compact)</span>
+        <h2 class="exp-section-head">Patterns</h2>
+        <p class="exp-section-lead" style="margin-top: 8px">
+          Small interface studies, motion sketches, and component specimens.
+        </p>
+      </section>
+
+      <!-- COMPONENT: Toggle switch -->
+      <section class="specimen">
+        <span class="specimen__label">Toggle switch</span>
+        <div class="exp-toggle-row" style="max-width: 240px">
+          <span class="exp-toggle-row__label">Dark mode</span>
+          <button
+            class="exp-toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            aria-label="Toggle dark mode"
+            data-exp-toggle
+          >
+            <span class="exp-toggle__thumb"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Floating context dock -->
+      <section class="specimen">
+        <span class="specimen__label">Floating context dock</span>
+        <div class="exp-dock exp-small-shadow" style="max-width: 240px">
+          <div class="exp-dock__section">
+            <div class="exp-dock__brand">
+              <span class="exp-wordmark">Studio</span>
+              <span class="exp-path">kreth.work/exploration</span>
+            </div>
+          </div>
+          <div class="exp-dock__section">
+            <div class="exp-toggle-row">
+              <span class="exp-toggle-row__label">Dark mode</span>
+              <button
+                class="exp-toggle"
+                type="button"
+                role="switch"
+                aria-checked="false"
+                aria-label="Toggle dark mode"
+                data-exp-toggle
+              >
+                <span class="exp-toggle__thumb"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Compact CTA pair -->
+      <section class="specimen">
+        <span class="specimen__label">Compact CTA pair (primary / secondary)</span>
+        <div class="exp-btn-row">
+          <a class="exp-btn-compact exp-btn-compact--primary" href="#">Start a project</a>
+          <a class="exp-btn-compact" href="#">Learn more</a>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Experiment card -->
+      <section class="specimen">
+        <span class="specimen__label">Experiment card (preview + meta)</span>
+        <div class="exp-card exp-small-shadow" style="max-width: 360px">
+          <div class="exp-card__preview">
+            <button class="exp-dyn-btn" type="button" data-exp-dyn-btn>
+              <span class="exp-dyn-btn__inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                <span class="exp-dyn-btn__label">Save</span>
+              </span>
+            </button>
+          </div>
+          <div class="exp-card__meta">
+            <div>
+              <h3 class="exp-card__title">Resizing control</h3>
+              <p class="exp-card__desc">A button that smoothly resizes as its label animates.</p>
+            </div>
+            <span class="exp-card__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Experiment title block -->
+      <section class="specimen">
+        <span class="specimen__label">Experiment title block</span>
+        <div class="exp-title" style="padding: 0 8px">
+          <h2 class="exp-title__heading">Dynamic Button</h2>
+          <p class="exp-title__lead">
+            A button that resizes to fit its label and crossfades the text and
+            icon when the action or state changes.
+          </p>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Experiment stage (canvas + controls) -->
+      <section class="specimen">
+        <span class="specimen__label">Experiment stage — canvas + control rows</span>
+        <div class="exp-stage" style="max-width: 640px">
+          <div class="exp-stage__panel">
+            <div class="exp-stage__canvas" style="min-height: 180px">
+              <button class="exp-dyn-btn">
+                <span class="exp-dyn-btn__inner">Save</span>
+              </button>
+            </div>
+            <div class="exp-stage__controls">
+              <div class="exp-control">
+                <span class="exp-control__label">Demo</span>
+                <div class="exp-seg">
+                  <button class="exp-seg__btn" data-active="true">Save</button>
+                  <button class="exp-seg__btn">Copy</button>
+                  <button class="exp-seg__btn">Invite teammates</button>
+                  <button class="exp-seg__btn">Processing</button>
+                </div>
+              </div>
+              <div class="exp-control">
+                <span class="exp-control__label">Variant</span>
+                <div class="exp-seg">
+                  <button class="exp-seg__btn" data-active="true">Primary</button>
+                  <button class="exp-seg__btn">Secondary</button>
+                </div>
+              </div>
+              <div class="exp-control">
+                <span class="exp-control__label">Status (static, colored)</span>
+                <div class="exp-seg exp-seg--static">
+                  <span class="exp-seg__btn" data-active="true" data-tone="green">Finished</span>
+                  <span class="exp-seg__btn" data-tone="orange">Re-reading</span>
+                  <span class="exp-seg__btn" data-tone="grey">On the shelf</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: File-tab code panel -->
+      <section class="specimen">
+        <span class="specimen__label">File-tab code panel (inside stage tray)</span>
+        <div class="exp-stage" style="max-width: 640px">
+          <div class="exp-stage__panel">
+            <div class="exp-code">
+              <div class="exp-code__bar">
+                <div class="exp-code__tabs">
+                  <button class="exp-code__tab" data-active="true">Notes.md</button>
+                  <button class="exp-code__tab">Highlights.md</button>
+                </div>
+                <button class="exp-btn-compact" data-copy-btn>Copy</button>
+              </div>
+              <pre class="exp-code__body">## Notes
+
+Competition is for losers — find a secret and build a
+monopoly around it. The best startups ask: what valuable
+company is nobody building?</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           BATCH — dqnamo experiments
+           ==================================================================== -->
+
+      <!-- COMPONENT: Scroll fade list -->
+      <section class="specimen">
+        <span class="specimen__label">Scroll fade list</span>
+        <div class="dq-scroll-fade" data-dq-scroll-fade data-max-fade="76">
+          <div class="dq-scroll-fade__scroll">
+            <ul class="dq-scroll-fade__list">
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">01</span>Hamburg</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">02</span>Berlin</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">03</span>Munich</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">04</span>Cologne</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">05</span>Frankfurt</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">06</span>Stuttgart</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">07</span>Düsseldorf</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">08</span>Leipzig</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">09</span>Dresden</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">10</span>Bremen</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">11</span>Hannover</li>
+              <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">12</span>Nuremberg</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Animated banner -->
+      <section class="specimen">
+        <span class="specimen__label">Animated banner</span>
+        <div class="dq-banner" data-dq-banner>
+          <div class="dq-banner__media" aria-hidden="true"></div>
+          <div class="dq-banner__overlay" aria-hidden="true"></div>
+          <div class="dq-banner__content">
+            <p class="dq-banner__eyebrow">Summer series</p>
+            <h3 class="dq-banner__title">Design systems sprint</h3>
+            <p class="dq-banner__desc">Live workshops on tokens, motion, and component APIs — seats fill fast.</p>
+            <div class="dq-banner__footer">
+              <a class="dq-banner__cta" href="#">View schedule</a>
+              <span class="dq-banner__countdown">03:42:00</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Animated sparkline -->
+      <section class="specimen">
+        <span class="specimen__label">Animated sparkline</span>
+        <div class="dq-sparkline" data-dq-sparkline data-trend="up">
+          <div class="dq-sparkline__head">
+            <div>
+              <p class="dq-sparkline__label">Revenue</p>
+              <p class="dq-sparkline__value">$12,478</p>
+            </div>
+            <span class="dq-sparkline__trend" data-direction="up">42%</span>
+          </div>
+          <div class="dq-sparkline__chart">
+            <svg class="dq-sparkline__svg" viewBox="0 0 220 72" width="220" height="72" aria-hidden="true">
+              <path class="dq-sparkline__fill" d=""></path>
+              <path class="dq-sparkline__path" d=""></path>
+            </svg>
+          </div>
+          <div class="dq-sparkline__controls">
+            <button type="button" class="dq-sparkline__pill" data-dq-sparkline-curve="smooth" data-active="true">Smooth</button>
+            <button type="button" class="dq-sparkline__pill" data-dq-sparkline-curve="sharp">Sharp</button>
+            <button type="button" class="dq-sparkline__replay" data-dq-sparkline-replay>Replay</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Bar chart (grouped horizontal comparison) -->
+      <section class="specimen">
+        <span class="specimen__label">Bar chart — grouped horizontal comparison</span>
+        <div class="bar-chart">
+          <p class="bar-chart__title">Response time by variant (ms, lower is better)</p>
+          <div class="bar-chart__group">
+            <div class="bar-chart__label">Cold start</div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Variant A</span><span class="bar-chart__track"><span class="bar-chart__bar bar-chart__bar--accent" style="width: 42%"></span></span><span class="bar-chart__value">420</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Variant B</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 71%"></span></span><span class="bar-chart__value">710</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Baseline</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 100%"></span></span><span class="bar-chart__value">998</span></div>
+          </div>
+          <div class="bar-chart__group">
+            <div class="bar-chart__label">Warm cache</div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Variant A</span><span class="bar-chart__track"><span class="bar-chart__bar bar-chart__bar--accent" style="width: 18%"></span></span><span class="bar-chart__value">180</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Variant B</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 26%"></span></span><span class="bar-chart__value">260</span></div>
+            <div class="bar-chart__row"><span class="bar-chart__name">Baseline</span><span class="bar-chart__track"><span class="bar-chart__bar" style="width: 34%"></span></span><span class="bar-chart__value">340</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Dynamic button -->
+      <section class="specimen">
+        <span class="specimen__label">Dynamic button</span>
+        <div class="dq-dynamic" data-dq-dynamic>
+          <button type="button" class="dq-dynamic-btn" data-variant="primary">
+            <span class="dq-dynamic-btn__icon"></span>
+            <span class="dq-dynamic-btn__label">Save</span>
+            <span class="dq-dynamic-btn__measure" aria-hidden="true">Save</span>
+          </button>
+          <div class="dq-dynamic__demo-row">
+            <button type="button" class="dq-dynamic__demo-btn" data-dq-dynamic-demo>Cycle label</button>
+            <button type="button" class="dq-dynamic__variant-btn" data-dq-dynamic-variant="primary" data-active="true">Primary</button>
+            <button type="button" class="dq-dynamic__variant-btn" data-dq-dynamic-variant="secondary">Secondary</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- BATCH — nav fan-out -->
+      <section class="specimen">
+        <span class="specimen__label">Top nav item — fan-out preview (3 cards)</span>
+        <div class="top-nav-demo">
+          <div class="top-nav__inner">
+          <div class="top-nav__track">
+            <div class="top-nav__item-wrap top-nav__item-wrap--demo">
+              <a class="top-nav__item" href="/books/">
+                <span class="top-nav__label">Books</span>
+                <span class="top-nav__meta-wrap">
+                  <span class="top-nav__meta">54 items</span>
+                </span>
+              </a>
+              <div class="top-nav__fan top-nav__fan--book" aria-hidden="true">
+                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e2bfa165379a7d80f13_zero%20to%20one.avif" alt="" /></a>
+                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e4d8f4d0bfe59d33f5c_the-lean-startup.avif" alt="" /></a>
+                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e893f433410891fccb3b1d0_essentialism.avif" alt="" /></a>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Architecture diagram (Mermaid) -->
+      <section class="specimen">
+        <span class="specimen__label">Architecture diagram (Mermaid sequence)</span>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">Claudia Poke intake index — full flow</p>
+          <details class="arch-diagram__source">
+            <summary>Show Mermaid source</summary>
+            <div
+              class="arch-diagram__source-block"
+              data-copy="sequenceDiagram&#10;    participant User&#10;    participant Bridge as slack_ingress_bridge&#10;    participant FastPath as slack_ingress_fast_path&#10;    participant Slack&#10;    participant Gateway as OpenClaw_gateway&#10;    participant Main as Claudia_main&#10;    participant Assistant as claudia_assistant&#10;&#10;    User->>Slack: @Claudia run weekly report for Emergent&#10;    Slack->>Bridge: dispatchPreparedSlackMessage&#10;    Bridge->>FastPath: processIngressEvent (parallel)&#10;    FastPath->>FastPath: classify + prefetch missingFields&#10;    alt missingFields empty&#10;        FastPath->>Slack: LLM human ack&#10;        FastPath->>Assistant: spawn work (async)&#10;    else missingFields or confirm needed&#10;        FastPath->>Slack: bubble 1 — LLM arc&#10;        FastPath->>Slack: bubble 2 — index link or question&#10;    end&#10;    FastPath->>Slack: emoji signal on user message&#10;    par gateway path&#10;        Slack->>Gateway: same mention&#10;        Gateway->>Slack: assistant status / is typing&#10;        Gateway->>Main: full agent turn&#10;    end&#10;    Main->>Slack: read reactions on trigger&#10;    alt signal emoji present&#10;        Main->>Main: NO_REPLY&#10;    else no signal yet&#10;        Main->>Slack: long reply (dedupe fallback)&#10;    end&#10;    Note over User,Assistant: User confirms → Main dispatches Assistant"
+            >
+              <button class="copy-button" aria-label="Copy Mermaid source" data-copy-btn>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+              <pre class="arch-diagram__source-pre"><code>sequenceDiagram
+    participant User
+    participant Bridge as slack_ingress_bridge
+    participant FastPath as slack_ingress_fast_path
+    participant Slack
+    participant Gateway as OpenClaw_gateway
+    participant Main as Claudia_main
+    participant Assistant as claudia_assistant
+
+    User->>Slack: @Claudia run weekly report for Emergent
+    Slack->>Bridge: dispatchPreparedSlackMessage
+    Bridge->>FastPath: processIngressEvent (parallel)
+    FastPath->>FastPath: classify + prefetch missingFields
+    alt missingFields empty
+        FastPath->>Slack: LLM human ack
+        FastPath->>Assistant: spawn work (async)
+    else missingFields or confirm needed
+        FastPath->>Slack: bubble 1 — LLM arc
+        FastPath->>Slack: bubble 2 — index link or question
+    end
+    FastPath->>Slack: emoji signal on user message
+    par gateway path
+        Slack->>Gateway: same mention
+        Gateway->>Slack: assistant status / is typing
+        Gateway->>Main: full agent turn
+    end
+    Main->>Slack: read reactions on trigger
+    alt signal emoji present
+        Main->>Main: NO_REPLY
+    else no signal yet
+        Main->>Slack: long reply (dedupe fallback)
+    end
+    Note over User,Assistant: User confirms → Main dispatches Assistant</code></pre>
+            </div>
+          </details>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">sequenceDiagram
+    participant User
+    participant Bridge as slack_ingress_bridge
+    participant FastPath as slack_ingress_fast_path
+    participant Slack
+    participant Gateway as OpenClaw_gateway
+    participant Main as Claudia_main
+    participant Assistant as claudia_assistant
+
+    User->>Slack: @Claudia run weekly report for Emergent
+    Slack->>Bridge: dispatchPreparedSlackMessage
+    Bridge->>FastPath: processIngressEvent (parallel)
+    FastPath->>FastPath: classify + prefetch missingFields
+    alt missingFields empty
+        FastPath->>Slack: LLM human ack
+        FastPath->>Assistant: spawn work (async)
+    else missingFields or confirm needed
+        FastPath->>Slack: bubble 1 — LLM arc
+        FastPath->>Slack: bubble 2 — index link or question
+    end
+    FastPath->>Slack: emoji signal on user message
+    par gateway path
+        Slack->>Gateway: same mention
+        Gateway->>Slack: assistant status / is typing
+        Gateway->>Main: full agent turn
+    end
+    Main->>Slack: read reactions on trigger
+    alt signal emoji present
+        Main->>Main: NO_REPLY
+    else no signal yet
+        Main->>Slack: long reply (dedupe fallback)
+    end
+    Note over User,Assistant: User confirms → Main dispatches Assistant</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            Single reference diagram: ingress lanes, intake index, emoji dedupe, and assistant handoff.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ====================================================================
+           BATCH — About page cards (from kreth.webflow.io/about)
+           ==================================================================== -->
+
+      <!-- COMPONENT: X post card -->
+      <section class="specimen">
+        <span class="specimen__label">X post card (avatar + tweet + follow CTA)</span>
+        <div class="x-card" style="max-width: 300px">
+          <div class="x-card__head">
+            <img class="x-card__avatar" src="/assets/x-avatar.jpg" alt="Julian Kreth" width="40" height="40" />
+            <div class="x-card__id">
+              <span class="x-card__name">Julian Kreth</span>
+              <span class="x-card__handle">@herdingbots</span>
+            </div>
+          </div>
+          <p class="x-card__text">
+            Yesterday I got mad at my
+            <a class="x-card__mention" href="https://x.com/ouraring" target="_blank" rel="noreferrer">@oura</a>
+            ring because it kept telling me to reduce my stress.
+          </p>
+          <a class="x-card__cta" href="https://x.com/herdingbots" target="_blank" rel="noreferrer">Follow me on X</a>
+          <svg class="x-card__logo" viewBox="0 0 300 271" fill="currentColor" aria-hidden="true">
+            <path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Photo gallery -->
+      <section class="specimen">
+        <span class="specimen__label">Photo gallery (vertical slider + segment dots)</span>
+        <div class="photo-gallery" data-photo-gallery style="max-width: 230px">
+          <div class="photo-gallery__viewport">
+            <img class="photo-gallery__slide" src="/assets/about-photo.avif" alt="Street view in New York" data-active="true" />
+            <img class="photo-gallery__slide" src="/assets/gallery-02.avif" alt="" hidden />
+            <img class="photo-gallery__slide" src="/assets/gallery-03.avif" alt="" hidden />
+          </div>
+          <div class="photo-gallery__dots" role="tablist" aria-label="Photo gallery">
+            <button type="button" class="photo-gallery__dot" role="tab" aria-label="Slide 1" aria-selected="true" data-active="true"></button>
+            <button type="button" class="photo-gallery__dot" role="tab" aria-label="Slide 2" aria-selected="false"></button>
+            <button type="button" class="photo-gallery__dot" role="tab" aria-label="Slide 3" aria-selected="false"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT: Currently-reading card -->
+      <section class="specimen">
+        <span class="specimen__label">Currently-reading card (label + book cover)</span>
+        <div class="reading-card" style="max-width: 300px">
+          <span class="reading-card__label">Currently Reading</span>
+          <a class="reading-card__cover" href="/books/unreasonable-hospitality/">
+            <img src="/assets/books/unreasonable-hospitality.jpg" alt="Unreasonable Hospitality by Will Guidara" />
+          </a>
+        </div>
+      </section>
+
+      <section class="specimen">
+        <span class="specimen__label">Plan symptom table (architecture notes)</span>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col">Symptom</th>
+                <th scope="col">Cause</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Generic robotic ack, too fast</td>
+                <td><code class="code-chip">slack-dispatch-ack.mjs</code> is template-only, zero LLM</td>
+              </tr>
+              <tr>
+                <td>No clarifying question</td>
+                <td>Classifier routes <code class="code-chip">weekly-report</code> + <code class="code-chip">autoStart</code> → fast_ack</td>
+              </tr>
+              <tr>
+                <td>Long reply after ack</td>
+                <td>Bridge + gateway both run; main still executes full Lane C turn</td>
+              </tr>
+              <tr>
+                <td>&ldquo;Searching&hellip;&rdquo; indicator</td>
+                <td><code class="code-chip">typingMode: "instant"</code> → OpenClaw sets assistant thread status</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+
+    <script src="/layout.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="components.js"></script>
+    <script src="photo-gallery.js"></script>
+    <script src="exploration.js"></script>
+  </body>
+</html>

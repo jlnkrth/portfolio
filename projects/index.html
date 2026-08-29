@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Open-source projects by Julian Kreth — agent skills, GSC MCP server, and HTML Host."
+    />
+    <link rel="canonical" href="https://kreth.work/projects/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css?v=8" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <main>
+          <span class="label label--wide">Projects</span>
+          <p class="muted">
+            Open-source tools I build and maintain. Each one has a dedicated page
+            with install steps and details.
+          </p>
+          <div data-projects-grid></div>
+        </main>
+      </div>
+    </div>
+    <script src="/layout.js"></script>
+    <script src="/projects.js"></script>
+  </body>
+</html>

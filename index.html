@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julian Kreth</title>
+    <meta
+      name="description"
+      content="Julian Kreth — designer and engineer. I build lightweight, thoughtful things for the web."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/" />
+    <meta property="og:title" content="Julian Kreth" />
+    <meta
+      property="og:description"
+      content="Julian Kreth — designer and engineer. I build lightweight, thoughtful things for the web."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kreth.work/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="top-nav" aria-label="Primary">
+      <div class="top-nav__inner">
+        <div class="top-nav__track">
+          <div class="top-nav__item-wrap" data-nav-preview="notes">
+            <a class="top-nav__item" href="/notes/">
+              <span class="top-nav__label">Rabbit Hole</span>
+              <span class="top-nav__meta-wrap">
+                <span class="top-nav__meta" data-nav-count="notes">3 items</span>
+              </span>
+            </a>
+            <div class="top-nav__fan top-nav__fan--project" aria-hidden="true"></div>
+          </div>
+          <div class="top-nav__item-wrap" data-nav-preview="books">
+            <a class="top-nav__item" href="/books/">
+              <span class="top-nav__label">Books</span>
+              <span class="top-nav__meta-wrap">
+                <span class="top-nav__meta" data-nav-count="books">217 items</span>
+              </span>
+            </a>
+            <div class="top-nav__fan top-nav__fan--book" aria-hidden="true"></div>
+          </div>
+          <div class="top-nav__item-wrap" data-nav-preview="clients">
+            <a class="top-nav__item" href="/clients/">
+              <span class="top-nav__label">Clients</span>
+              <span class="top-nav__meta-wrap">
+                <span class="top-nav__meta" data-nav-count="clients">20 items</span>
+              </span>
+            </a>
+            <div class="top-nav__fan top-nav__fan--client" aria-hidden="true"></div>
+          </div>
+          <a class="top-nav__item" href="/about/">
+            <span class="top-nav__label">About</span>
+          </a>
+        </div>
+      </div>
+      <span
+        class="availability availability--nav"
+        data-availability
+        data-tz="Europe/Berlin"
+        data-start="7"
+        data-end="21"
+        data-location="Hamburg, Germany"
+        data-lat="53.5511"
+        data-lon="9.9937"
+      >
+        <span class="availability__location">Hamburg, Germany</span>
+        <span class="availability__dot" aria-hidden="true"></span>
+        <span class="availability__time">--:--</span>
+        <span class="availability__weather" aria-hidden="true"></span>
+      </span>
+    </nav>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="card profile-card">
+          <div class="profile-card__head">
+            <img class="avatar" src="/assets/avatar.avif" alt="Julian Kreth" width="44" height="44" />
+            <div class="profile-card__id">
+              <span class="profile-card__name">Julian Kreth</span>
+              <span class="handle">@herdingbots</span>
+            </div>
+          </div>
+          <p class="profile-card__bio">
+            Tech Lead herding an army of AI agents while maintaining the
+            company&rsquo;s Claude plugin.
+          </p>
+          <div class="profile-card__actions">
+            <a class="btn btn--block btn--primary" href="mailto:julian@karmastudio.co?subject=Project%20Inquiry">Project Inquiry</a>
+            <a class="btn btn--block" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <nav class="collections" aria-label="Collections" data-sidebar-nav>
+          <span class="label">Collections</span>
+          <ul class="collections__list" data-sidebar-list></ul>
+        </nav>
+
+        <div class="nowplaying" data-now-playing>
+          <div class="nowplaying__widget">
+            <div class="nowplaying__inner">
+              <div class="nowplaying__vinyl-wrapper">
+                <img class="nowplaying__vinyl" src="/assets/vinyl.svg" alt="" />
+                <div class="nowplaying__cover-wrapper">
+                  <img
+                    class="nowplaying__cover"
+                    src="/assets/now-playing.jpeg"
+                    alt="Scott Street by Phoebe Bridgers album art"
+                  />
+                </div>
+              </div>
+              <div class="nowplaying__info">
+                <div class="nowplaying__song">Scott Street</div>
+                <div class="nowplaying__artist">Phoebe Bridgers</div>
+              </div>
+            </div>
+            <div class="nowplaying__status">
+              <div class="nowplaying__status-dot-wrap">
+                <div class="nowplaying__status-dot" aria-hidden="true"></div>
+              </div>
+              <div class="nowplaying__status-label">Listening now</div>
+            </div>
+          </div>
+        <nav class="sidebar__meta-links" aria-label="Internal resources">
+          <a href="/components.html">Components</a>
+          <a href="/notes/_templates/">Article templates</a>
+        </nav>
+      </div>
+      </aside>
+
+      <div class="root">
+        <header class="header">
+          <a class="name" href="/">Julian Kreth</a>
+          <span class="role">Designer &amp; Engineer</span>
+        </header>
+
+        <main>
+        <span class="label label--wide" id="about">Today</span>
+        <p class="muted">
+          I run Karma Studio, where I design and build products for founders and
+          teams. I care about how an interface looks, feels, and behaves down to
+          the smallest detail.
+        </p>
+        <p class="muted mt-4">
+          Previously, I led design and engineering across a handful of early-stage
+          startups.
+        </p>
+
+        <section class="section" id="projects">
+          <span class="label">Projects</span>
+          <div data-projects-grid></div>
+        </section>
+
+        <section class="section">
+          <span class="label">Writing</span>
+          <div class="list list--tight">
+            <a class="item" href="/notes/free-chinese-and-banned/">
+              <span>The Best AI Will Be Free, Chinese, and Banned in America</span>
+              <span class="muted">Kimi K3 just matched the frontier. The quants saw it coming; the backlash comes next.</span>
+            </a>
+            <a class="item" href="/notes/why-memory-management-matters-for-your-ai-agent/">
+              <span>Why Memory Management Is Important for Your AI Agent</span>
+              <span class="muted">How we turned a lazy assistant into a Type A person — wiki first, references only.</span>
+            </a>
+            <a class="item" href="/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/">
+              <span>How We Improved Our AI Agent in Slack by Making It Dumber</span>
+              <span class="muted">An index that answers from memory or spawns a sub-agent — never creates.</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section section--newsletter">
+          <span class="label label--wide">Newsletter</span>
+          <span class="muted block">
+            Exclusive, newsletter-only content once a month. No spam, no nonsense.
+          </span>
+          <form class="newsletter" action="#" method="post">
+            <label for="email" class="sr-only">Email</label>
+            <input
+              id="email"
+              class="newsletter__input"
+              type="email"
+              required
+              placeholder="Enter your email"
+            />
+            <button type="submit" class="newsletter__button">Subscribe</button>
+          </form>
+        </section>
+
+        <section class="section">
+          <span class="label label--wide">More</span>
+          <span class="muted">
+            You can see more of my work on
+            <a href="https://twitter.com/herdingbots" target="_blank" rel="noreferrer">Twitter</a>
+            and more of my code on
+            <a href="https://github.com/jlnkrth" target="_blank" rel="noreferrer">GitHub</a>.
+          </span>
+        </section>
+        </main>
+      </div>
+    </div>
+    <script>
+      // Homepage doesn't load layout.js, so clear notes-index mode here too.
+      try {
+        sessionStorage.removeItem("kreth-notes-index");
+        sessionStorage.removeItem("kreth-notes-index-html");
+        // Drop stale sidebar list cache (old "Projects coming soon" rows).
+        sessionStorage.removeItem("kreth-sidebar-list-html");
+        sessionStorage.removeItem("kreth-sidebar-list-version");
+        sessionStorage.removeItem("kreth-sidebar-html");
+      } catch (_) {}
+    </script>
+    <script src="/availability.js?v=6"></script>
+    <script src="/now-playing.js?v=6"></script>
+    <script src="/nav-preview.js?v=7"></script>
+    <script src="/sidebar-preview.js?v=7"></script>
+    <script src="/projects.js?v=6"></script>
+    <script>
+      document.querySelectorAll("[data-copy]").forEach((el) => {
+        el.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(el.getAttribute("data-copy"));
+            const label = el.querySelector("span:last-child") || el;
+            const original = label.textContent;
+            label.textContent = "Copied";
+            setTimeout(() => (label.textContent = original), 1200);
+          } catch {}
+        });
+      });
+    </script>
+  </body>
+</html>
