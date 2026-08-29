@@ -1148,7 +1148,7 @@ a.collections__item:hover {
   margin-right: 4px;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .collections__modal {
     display: none;
   }
@@ -1492,14 +1492,8 @@ a.collections__item:hover {
   }
 }
 
-@media (max-width: 1180px) {
-  .availability--nav .availability__location {
-    display: none;
-  }
-}
-
-/* Mobile / tablet: Menu + compact availability (no horizontal scroll strip) */
-@media (max-width: 1023px) {
+/* Phone: Menu + compact availability (no horizontal scroll strip) */
+@media (max-width: 767px) {
   .top-nav__fan {
     display: none !important;
   }
@@ -1536,8 +1530,8 @@ a.collections__item:hover {
   }
 }
 
-/* Desktop: sidebar is pinned flush to the left edge of the screen */
-@media (min-width: 1024px) {
+/* Tablet and desktop: keep the full navigation and profile sidebar visible */
+@media (min-width: 768px) {
   .top-nav {
     display: flex;
     align-items: center;
@@ -1594,6 +1588,153 @@ a.collections__item:hover {
 
   .top-nav__track {
     overflow: visible;
+  }
+}
+
+/* Tablet: preserve the desktop chrome, scaled to fit the narrower viewport */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Linear values meet the desktop sizes at 1024px, avoiding a breakpoint jump. */
+  .top-nav {
+    top: calc(5.46875vw - 26px);
+    left: calc(39.0625vw - 40px);
+    right: calc(5.46875vw - 26px);
+    gap: calc(0.78125vw - 2px);
+  }
+
+  .top-nav__inner {
+    padding: calc(0.390625vw + 2px);
+  }
+
+  .top-nav__track {
+    gap: calc(0.78125vw - 2px);
+  }
+
+  .top-nav__item {
+    gap: 3px;
+    padding: 6px calc(2.34375vw - 14px);
+    font-size: calc(0.1953125vw + 10.5px);
+  }
+
+  .layout {
+    padding-left: calc(39.0625vw - 40px);
+    padding-right: calc(5.46875vw - 26px);
+  }
+
+  .layout > .root {
+    padding-top: calc(12.5vw + 16px);
+    padding-right: calc(3.125vw - 8px);
+  }
+
+  .sidebar {
+    left: calc(5.46875vw - 26px);
+    top: calc(5.46875vw - 26px);
+    bottom: calc(5.46875vw - 26px);
+    width: calc(28.125vw + 12px);
+    gap: calc(3.125vw - 8px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar .card {
+    padding: calc(2.34375vw - 4px);
+    border-radius: 1.5625vw;
+  }
+
+  .profile-card__head {
+    gap: calc(1.5625vw - 4px);
+    margin-bottom: 1.5625vw;
+  }
+
+  .sidebar .avatar {
+    width: calc(3.125vw + 12px);
+    height: calc(3.125vw + 12px);
+    border-radius: calc(0.78125vw + 4px);
+  }
+
+  .profile-card__id {
+    gap: calc(0.78125vw - 4px);
+  }
+
+  .profile-card__name {
+    font-size: calc(0.78125vw + 8px);
+  }
+
+  .sidebar .handle {
+    padding: calc(0.390625vw - 2px) calc(0.78125vw);
+    font-size: calc(0.78125vw + 6px);
+  }
+
+  .profile-card__bio {
+    margin-bottom: 1.5625vw;
+    font-size: calc(0.78125vw + 8px);
+  }
+
+  .profile-card__actions {
+    gap: calc(0.78125vw);
+  }
+
+  .profile-card .btn {
+    gap: calc(0.78125vw - 2px);
+    padding-inline: calc(2.34375vw - 12px);
+    font-size: calc(0.78125vw + 5px);
+  }
+
+  .profile-card .btn__icon {
+    width: calc(0.78125vw + 8px);
+    height: calc(0.78125vw + 8px);
+  }
+
+  .collections {
+    margin-top: -3.90625vw;
+    padding: calc(3.125vw + 4px) calc(2.34375vw - 4px)
+      calc(3.125vw - 12px);
+    border-radius: 0 0 1.5625vw 1.5625vw;
+  }
+
+  .collections .label {
+    margin-bottom: calc(1.5625vw - 4px);
+    font-size: calc(0.78125vw + 5px);
+  }
+
+  .collections__list {
+    gap: calc(0.78125vw - 4px);
+  }
+
+  .collections__link {
+    padding: calc(0.78125vw) calc(1.5625vw - 4px);
+    font-size: calc(0.78125vw + 8px);
+  }
+
+  .nowplaying__inner {
+    height: calc(10.15625vw + 6px);
+    padding-left: 11.71875vw;
+  }
+
+  .nowplaying__vinyl {
+    height: calc(10.15625vw + 6px);
+  }
+
+  .nowplaying__cover-wrapper {
+    width: calc(5.46875vw + 8px);
+    height: calc(5.46875vw + 8px);
+  }
+
+  .nowplaying__song {
+    font-size: calc(1.5625vw + 2px);
+  }
+
+  .nowplaying__artist,
+  .nowplaying__status-label {
+    font-size: calc(1.171875vw + 4px);
+  }
+
+  .sidebar__meta-links {
+    gap: calc(3.125vw - 16px);
+    font-size: calc(0.78125vw + 4px);
   }
 }
 

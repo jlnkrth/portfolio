@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "8";
+  var CHROME_CACHE_VERSION = "9";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
 
   var topSlot = document.getElementById("chrome-top");
@@ -802,7 +802,7 @@
         loadScript("/availability.js"),
         loadScript("/now-playing.js"),
         loadScript("/nav-preview.js?v=8"),
-        loadScript("/nav-mobile.js?v=8"),
+        loadScript("/nav-mobile.js?v=9"),
         loadScript("/sidebar-preview.js?v=8"),
       ]);
     })

@@ -53,9 +53,9 @@
       }
     });
 
-    // If the viewport grows into desktop, force-close the sheet.
+    // If the viewport grows into tablet/desktop chrome, force-close the sheet.
     window.addEventListener("resize", function () {
-      if (window.matchMedia("(min-width: 1024px)").matches && isOpen()) {
+      if (window.matchMedia("(min-width: 768px)").matches && isOpen()) {
         closeSheet();
       }
     });
