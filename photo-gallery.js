@@ -52,7 +52,13 @@
       function applySlideState() {
         slides.forEach(function (slide, i) {
           var active = i === current;
-          slide.removeAttribute("hidden");
+          if (active) {
+            slide.removeAttribute("hidden");
+            slide.removeAttribute("aria-hidden");
+          } else {
+            slide.setAttribute("hidden", "");
+            slide.setAttribute("aria-hidden", "true");
+          }
           slide.setAttribute("data-active", active ? "true" : "false");
         });
 
@@ -60,6 +66,7 @@
           var active = i === current;
           dot.setAttribute("data-active", active ? "true" : "false");
           dot.setAttribute("aria-selected", active ? "true" : "false");
+          dot.tabIndex = active ? 0 : -1;
         });
       }
 
@@ -82,24 +89,14 @@
       }
 
       function pauseAutoplay() {
-        if (slides.length < 2) return;
+        if (slides.length < 2 || reducedMotion) return;
         gallery.dataset.paused = "true";
         clearIntervalAutoplay();
       }
 
       function resumeAutoplay() {
-        if (slides.length < 2) return;
+        if (slides.length < 2 || reducedMotion) return;
         delete gallery.dataset.paused;
-
-        if (reducedMotion) {
-          if (!intervalId) {
-            intervalId = setInterval(function () {
-              goTo(current + 1);
-            }, SLIDE_MS);
-          }
-          return;
-        }
-
         if (!fillListener) restartFillAnimation();
       }
 
@@ -108,15 +105,7 @@
         clearFillListener();
         delete gallery.dataset.paused;
 
-        if (slides.length < 2) return;
-
-        if (reducedMotion) {
-          intervalId = setInterval(function () {
-            goTo(current + 1);
-          }, SLIDE_MS);
-          return;
-        }
-
+        if (slides.length < 2 || reducedMotion) return;
         restartFillAnimation();
       }
 
@@ -129,6 +118,24 @@
       dots.forEach(function (dot, i) {
         dot.addEventListener("click", function () {
           goTo(i);
+        });
+
+        dot.addEventListener("keydown", function (event) {
+          var next = current;
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+            next = current + 1;
+          } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+            next = current - 1;
+          } else if (event.key === "Home") {
+            next = 0;
+          } else if (event.key === "End") {
+            next = slides.length - 1;
+          } else {
+            return;
+          }
+          event.preventDefault();
+          goTo(next);
+          if (dots[current]) dots[current].focus();
         });
       });
 
