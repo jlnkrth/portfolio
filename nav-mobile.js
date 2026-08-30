@@ -5,8 +5,10 @@
     var toggle = root.querySelector("[data-nav-menu-toggle]");
     var sheet = root.querySelector("[data-nav-sheet]");
     if (!toggle || !sheet) return;
-    if (toggle.dataset.navMobileBound === "1") return;
-    toggle.dataset.navMobileBound = "1";
+    // Use a JS property (not a data-* attribute) so sessionStorage chrome
+    // cache cannot mark the button as bound and skip rebinding on later pages.
+    if (toggle._navMobileBound) return;
+    toggle._navMobileBound = true;
 
     function isOpen() {
       return !sheet.hasAttribute("hidden");
