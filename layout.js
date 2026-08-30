@@ -2,11 +2,20 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "12";
+  var CHROME_CACHE_VERSION = "13";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
+  // Runtime markers written by init scripts. Persisting them in sessionStorage
+  // makes the next page skip rebinding (e.g. mobile Menu stops working).
+  var RUNTIME_ATTR_RE =
+    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
 
   var topSlot = document.getElementById("chrome-top");
   var sidebarSlot = document.getElementById("chrome-sidebar");
+
+  function sanitizeChromeHtml(html) {
+    if (!html) return html;
+    return html.replace(RUNTIME_ATTR_RE, "");
+  }
 
   // Persistent notes index: when the user arrives from /notes/, keep a
   // compact titles-only index pinned left of the article. Runs synchronously
@@ -589,7 +598,7 @@
         invalidateChromeCaches();
         return null;
       }
-      return sessionStorage.getItem(SIDEBAR_CACHE_KEY);
+      return sanitizeChromeHtml(sessionStorage.getItem(SIDEBAR_CACHE_KEY));
     } catch (_) {
       return null;
     }
@@ -601,7 +610,7 @@
         invalidateChromeCaches();
         return null;
       }
-      return sessionStorage.getItem(TOP_CACHE_KEY);
+      return sanitizeChromeHtml(sessionStorage.getItem(TOP_CACHE_KEY));
     } catch (_) {
       return null;
     }
@@ -635,11 +644,14 @@
       sessionStorage.setItem(CHROME_CACHE_VERSION_KEY, CHROME_CACHE_VERSION);
       var top = document.getElementById("chrome-top");
       if (top && top.innerHTML) {
-        sessionStorage.setItem(TOP_CACHE_KEY, top.innerHTML);
+        sessionStorage.setItem(TOP_CACHE_KEY, sanitizeChromeHtml(top.innerHTML));
       }
       var sidebar = document.querySelector(".sidebar");
       if (sidebar) {
-        sessionStorage.setItem(SIDEBAR_CACHE_KEY, sidebar.outerHTML);
+        sessionStorage.setItem(
+          SIDEBAR_CACHE_KEY,
+          sanitizeChromeHtml(sidebar.outerHTML)
+        );
       }
     } catch (_) {}
   };
@@ -742,6 +754,7 @@
 
   function injectTopChrome(html) {
     if (!topSlot || !html) return;
+    html = sanitizeChromeHtml(html);
     if (html === readTopCache() && topSlot.innerHTML) return;
     topSlot.innerHTML = html;
     try {
@@ -753,6 +766,7 @@
 
   function injectSidebar(html) {
     if (!html) return;
+    html = sanitizeChromeHtml(html);
     var slot = sidebarSlot || document.querySelector(".sidebar");
     if (!slot) return;
     if (html === readSidebarCache() && slot.classList.contains("sidebar")) return;
@@ -802,7 +816,7 @@
         loadScript("/availability.js"),
         loadScript("/now-playing.js"),
         loadScript("/nav-preview.js?v=8"),
-        loadScript("/nav-mobile.js?v=10"),
+        loadScript("/nav-mobile.js?v=11"),
         loadScript("/sidebar-preview.js?v=8"),
       ]);
     })
@@ -811,6 +825,10 @@
       if (window.initNowPlaying) window.initNowPlaying();
       if (window.initNavPreview) window.initNavPreview();
       if (window.initNavCurrent) window.initNavCurrent();
+      // Clear any stale bind markers from older cached HTML before attaching.
+      document.querySelectorAll("[data-nav-mobile-bound]").forEach(function (el) {
+        delete el.dataset.navMobileBound;
+      });
       if (window.initNavMobile) window.initNavMobile();
       if (window.initSidebarPreview) window.initSidebarPreview();
       window.persistChromeCache();
