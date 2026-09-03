@@ -1468,7 +1468,7 @@ a.collections__item:hover {
   width: 8px;
   height: 8px;
   border-radius: 9999px;
-  background: #e5484d;
+  background: var(--nowplaying-dot, var(--color-gray-800));
 }
 
 .guide .nowplaying__status-label {

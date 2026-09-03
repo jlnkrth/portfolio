@@ -198,29 +198,25 @@
           <ul class="collections__list" data-sidebar-list></ul>
         </nav>
 
-        <div class="nowplaying" data-now-playing>
+        <div class="nowplaying" data-now-playing data-status="offline">
           <div class="nowplaying__widget">
             <div class="nowplaying__inner">
               <div class="nowplaying__vinyl-wrapper">
                 <img class="nowplaying__vinyl" src="/assets/vinyl.svg" alt="" />
                 <div class="nowplaying__cover-wrapper">
-                  <img
-                    class="nowplaying__cover"
-                    src="/assets/now-playing.jpeg"
-                    alt="Scott Street by Phoebe Bridgers album art"
-                  />
+                  <img class="nowplaying__cover" alt="" />
                 </div>
               </div>
               <div class="nowplaying__info">
-                <div class="nowplaying__song">Scott Street</div>
-                <div class="nowplaying__artist">Phoebe Bridgers</div>
+                <div class="nowplaying__song"></div>
+                <div class="nowplaying__artist"></div>
               </div>
             </div>
             <div class="nowplaying__status">
               <div class="nowplaying__status-dot-wrap">
                 <div class="nowplaying__status-dot" aria-hidden="true"></div>
               </div>
-              <div class="nowplaying__status-label">Listening now</div>
+              <div class="nowplaying__status-label">Offline</div>
             </div>
           </div>
         <nav class="sidebar__meta-links" aria-label="Internal resources">
@@ -448,7 +444,7 @@
       } catch (_) {}
     </script>
     <script src="/availability.js?v=8"></script>
-    <script src="/now-playing.js?v=9"></script>
+    <script src="/now-playing.js?v=11"></script>
     <script src="/nav-preview.js?v=8"></script>
     <script src="/nav-mobile.js?v=12"></script>
     <script src="/sidebar-preview.js?v=8"></script>

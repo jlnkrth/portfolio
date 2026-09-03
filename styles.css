@@ -178,8 +178,13 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .availability__dot::after {
+  .availability__dot::after,
+  .nowplaying[data-status="listening"] .nowplaying__status-dot::after {
     display: none;
+    animation: none;
+  }
+
+  .nowplaying[data-status="listening"] .nowplaying__cover {
     animation: none;
   }
 }
@@ -1176,6 +1181,15 @@ a.collections__item:hover {
   margin-top: auto;
 }
 
+[data-now-playing]:not([data-hydrated]) .nowplaying__widget {
+  display: none;
+}
+
+.nowplaying__cover:not([src]),
+.nowplaying__cover[src=""] {
+  visibility: hidden;
+}
+
 .nowplaying__widget {
   display: flex;
   flex-direction: column;
@@ -1264,11 +1278,44 @@ a.collections__item:hover {
   flex-shrink: 0;
 }
 
+.nowplaying[data-status="listening"] {
+  --nowplaying-dot: #30a46c;
+}
+
+.nowplaying[data-status="offline"] {
+  --nowplaying-dot: var(--color-gray-800);
+}
+
+.nowplaying[data-status="disconnected"] {
+  --nowplaying-dot: #e5484d;
+}
+
 .nowplaying__status-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 9999px;
-  background: red;
+  background: var(--nowplaying-dot, var(--color-gray-800));
+}
+
+.nowplaying[data-status="listening"] .nowplaying__status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--nowplaying-dot);
+  opacity: 0.75;
+  animation: availability-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes nowplaying-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nowplaying[data-status="listening"] .nowplaying__cover {
+  animation: nowplaying-spin 8s linear infinite;
 }
 
 .nowplaying__status-label {
