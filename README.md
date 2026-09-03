@@ -27,7 +27,7 @@ from Google Fonts. Everything else is static.
 ## Edit
 
 Open `index.html` and change the text in the header, `Today`, `Projects`,
-`Writing`, `Newsletter`, and `More` sections. Update the links (`href="#"`) to
+and `Writing` sections. Update the links (`href="#"`) to
 your real URLs.
 
 ## Run locally

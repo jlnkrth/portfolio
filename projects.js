@@ -12,7 +12,10 @@
       grids.forEach(function (grid) {
         grid.classList.add("project-grid");
         grid.innerHTML = "";
-        projects.forEach(function (project) {
+        var limit = parseInt(grid.getAttribute("data-projects-limit"), 10);
+        var list =
+          limit > 0 ? projects.slice(0, limit) : projects;
+        list.forEach(function (project) {
           grid.appendChild(buildCard(project));
         });
       });
@@ -44,15 +47,10 @@
     var body = document.createElement("div");
     body.className = "project-card__body";
 
-    var title = document.createElement("span");
-    title.className = "project-card__title";
-    title.textContent = project.title;
-
     var desc = document.createElement("span");
     desc.className = "project-card__desc muted";
     desc.textContent = project.description;
 
-    body.appendChild(title);
     body.appendChild(desc);
 
     card.appendChild(preview);
