@@ -24,11 +24,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:opsz,wght@14..32,100..900&display=swap"
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=23" />
   </head>
   <body>
     <nav class="top-nav" aria-label="Primary">
@@ -226,209 +226,66 @@
       </div>
       </aside>
 
-      <div class="root">
+      <div class="root root--full">
         <header class="header">
           <a class="name" href="/">Julian Kreth</a>
           <span class="role">Designer &amp; Engineer</span>
         </header>
 
         <main>
-        <span class="label label--wide" id="about">Now</span>
-        <p class="home-lead">
-          I&rsquo;m a Tech Lead at
-          <a href="https://masse.marketing" target="_blank" rel="noreferrer">Masse</a>,
-          a global SEO agency with 50+ people, where I build the systems behind
-          modern search and growth.
-        </p>
-        <p class="home-support mt-4">
-          I also run Karma Studio, a startup consulting studio focused on
-          marketing tech, SaaS growth, and a small group of
-          <a
-            class="inline-preview-trigger"
-            href="/clients/"
-            data-inline-preview="clients"
-            aria-describedby="inline-preview-clients"
-            >clients</a
-          >.
-        </p>
-        <p class="home-support mt-4">
-          I live between Laguna Beach and Hamburg &mdash; reading, tinkering, and
-          getting
-          <a
-            class="inline-preview-trigger"
-            href="/about/#outdoors"
-            data-inline-preview="outdoors"
-            aria-describedby="inline-preview-outdoors"
-            >outdoors</a
-          >
-          when I can. More
-          <a
-            class="inline-preview-trigger"
-            href="/about/"
-            data-inline-preview="about"
-            aria-describedby="inline-preview-about"
-            >about me</a
-          >.
-        </p>
-
-        <div
-          id="inline-preview-clients"
-          class="inline-preview"
-          data-inline-preview-panel="clients"
-          hidden
-        >
-          <div class="inline-preview__panel">
-            <span class="label inline-preview__label">Clients</span>
-            <div class="inline-preview__fan" data-inline-clients-fan aria-hidden="true"></div>
-            <p class="inline-preview__caption">
-              ElevenLabs, WorkOS, Standard Bots, and more.
-            </p>
-          </div>
+        <div class="home-intro" id="about">
+          <p>
+            Hello, I&rsquo;m <span class="home-em">Julian</span> 👋 Welcome to
+            my <span class="home-em">Website</span>. I like building
+            <span class="home-em">AI Agents</span> instead of
+            <span class="home-em">things</span>, and I&rsquo;m currently herding
+            bots for
+            <a
+              class="home-em"
+              href="https://masse.marketing"
+              target="_blank"
+              rel="noreferrer"
+              >masse.marketing</a
+            >.
+          </p>
+          <p>
+            In my free time, I enjoy getting lost in
+            <span class="home-em">rabbit holes</span>, travel to places with
+            <span class="home-em">more animals than humans</span>, or look at
+            <span class="home-em">pretty things</span> other humans created.
+          </p>
+          <p>
+            I do some <span class="home-em">running</span> and
+            <span class="home-em">working out</span> as well, but not as
+            consistently, but I&rsquo;m working on reaching a
+            <span class="home-em">decent 10k</span>.
+          </p>
         </div>
 
-        <div
-          id="inline-preview-about"
-          class="inline-preview"
-          data-inline-preview-panel="about"
-          hidden
-        >
-          <div class="inline-preview__panel inline-preview__panel--about">
-            <div class="inline-preview__about-head">
-              <img
-                class="inline-preview__avatar"
-                src="/assets/avatar.avif"
-                alt=""
-                width="40"
-                height="40"
-              />
-              <div>
-                <span class="inline-preview__name">Julian Kreth</span>
-                <span class="inline-preview__role">Tech Lead &amp; founder</span>
-              </div>
-            </div>
-            <dl class="inline-preview__facts">
-              <div class="inline-preview__fact">
-                <dt>Position</dt>
-                <dd>Tech Lead</dd>
-              </div>
-              <div class="inline-preview__fact">
-                <dt>Company</dt>
-                <dd>Masse</dd>
-              </div>
-              <div class="inline-preview__fact">
-                <dt>Studio</dt>
-                <dd>Karma Studio</dd>
-              </div>
-              <div class="inline-preview__fact">
-                <dt>Focus</dt>
-                <dd>Marketing tech &amp; SaaS growth</dd>
-              </div>
-              <div class="inline-preview__fact">
-                <dt>Location</dt>
-                <dd>Laguna Beach &amp; Hamburg</dd>
-              </div>
-              <div class="inline-preview__fact">
-                <dt>Elsewhere</dt>
-                <dd>Hiking, reading, tinkering</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-
-        <div
-          id="inline-preview-outdoors"
-          class="inline-preview"
-          data-inline-preview-panel="outdoors"
-          hidden
-        >
-          <div class="inline-preview__panel inline-preview__panel--outdoors">
-            <span class="label inline-preview__label">Outdoors</span>
-            <div class="inline-preview__mosaic" aria-hidden="true">
-              <img
-                src="/assets/gallery-03.avif"
-                alt="Turquoise lakes and waterfalls in dense forest"
-                width="230"
-                height="416"
-                loading="lazy"
-              />
-              <img
-                src="/assets/gallery-06.avif"
-                alt="Granite dome and waterfall above pine forest"
-                width="230"
-                height="416"
-                loading="lazy"
-              />
-              <img
-                src="/assets/gallery-04.avif"
-                alt="Golden-hour light over trees and hills"
-                width="230"
-                height="416"
-                loading="lazy"
-              />
-              <img
-                src="/assets/x-avatar.jpg"
-                alt="Portrait of Julian outdoors"
-                width="230"
-                height="230"
-                loading="lazy"
-              />
-            </div>
-            <p class="inline-preview__caption">
-              Hiking, trails, and time outside when work allows.
-            </p>
-          </div>
-        </div>
-
+        <div class="home-split">
         <section class="section" id="projects">
           <span class="label">Projects</span>
-          <div data-projects-grid></div>
+          <div data-projects-grid data-projects-limit="2"></div>
         </section>
 
         <section class="section">
           <span class="label">Writing</span>
-          <div class="list list--tight">
-            <a class="item" href="/notes/free-chinese-and-banned/">
-              <span>The Best AI Will Be Free, Chinese, and Banned in America</span>
-              <span class="muted">Kimi K3 just matched the frontier. The quants saw it coming; the backlash comes next.</span>
+          <div class="writing-list">
+            <a class="writing-list__item" href="/notes/free-chinese-and-banned/">
+              <span class="writing-list__meta">July 17, 2026</span>
+              <span class="writing-list__title">The Best AI Will Be Free, Chinese, and Banned in America</span>
             </a>
-            <a class="item" href="/notes/why-memory-management-matters-for-your-ai-agent/">
-              <span>Why Memory Management Is Important for Your AI Agent</span>
-              <span class="muted">How we turned a lazy assistant into a Type A person — wiki first, references only.</span>
+            <a class="writing-list__item" href="/notes/why-memory-management-matters-for-your-ai-agent/">
+              <span class="writing-list__meta">July 4, 2026</span>
+              <span class="writing-list__title">Why Memory Management Is Important for Your AI Agent</span>
             </a>
-            <a class="item" href="/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/">
-              <span>How We Improved Our AI Agent in Slack by Making It Dumber</span>
-              <span class="muted">An index that answers from memory or spawns a sub-agent — never creates.</span>
+            <a class="writing-list__item" href="/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/">
+              <span class="writing-list__meta">July 3, 2026</span>
+              <span class="writing-list__title">How We Improved Our AI Agent in Slack by Making It Dumber</span>
             </a>
           </div>
         </section>
-
-        <section class="section section--newsletter">
-          <span class="label label--wide">Newsletter</span>
-          <span class="muted block">
-            Exclusive, newsletter-only content once a month. No spam, no nonsense.
-          </span>
-          <form class="newsletter" action="#" method="post">
-            <label for="email" class="sr-only">Email</label>
-            <input
-              id="email"
-              class="newsletter__input"
-              type="email"
-              required
-              placeholder="Enter your email"
-            />
-            <button type="submit" class="newsletter__button">Subscribe</button>
-          </form>
-        </section>
-
-        <section class="section">
-          <span class="label label--wide">More</span>
-          <span class="muted">
-            You can see more of my work on
-            <a href="https://twitter.com/herdingbots" target="_blank" rel="noreferrer">Twitter</a>
-            and more of my code on
-            <a href="https://github.com/jlnkrth" target="_blank" rel="noreferrer">GitHub</a>.
-          </span>
-        </section>
+        </div>
         </main>
       </div>
     </div>
@@ -448,8 +305,7 @@
     <script src="/nav-preview.js?v=8"></script>
     <script src="/nav-mobile.js?v=12"></script>
     <script src="/sidebar-preview.js?v=8"></script>
-    <script src="/projects.js?v=8"></script>
-    <script src="/inline-previews.js?v=2"></script>
+    <script src="/projects.js?v=10"></script>
     <script>
       document.querySelectorAll("[data-copy]").forEach((el) => {
         el.addEventListener("click", async () => {
