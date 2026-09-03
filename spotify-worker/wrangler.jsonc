@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "kreth-now-playing",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-03",
+  "account_id": "5a09c6d597d56e334e3df02846869180",
+  "workers_dev": true,
+  "kv_namespaces": [
+    {
+      "binding": "SPOTIFY",
+      "id": "caacd9f8048545428f1d47df3b4359b3"
+    }
+  ]
+}

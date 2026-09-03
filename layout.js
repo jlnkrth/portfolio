@@ -814,7 +814,7 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js"),
+        loadScript("/now-playing.js?v=9"),
         loadScript("/nav-preview.js?v=8"),
         loadScript("/nav-mobile.js?v=12"),
         loadScript("/sidebar-preview.js?v=8"),

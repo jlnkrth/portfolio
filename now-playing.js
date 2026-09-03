@@ -1,13 +1,11 @@
-// Polls a local Spotify proxy for the current track. Fails silently in production
-// or when the API is unavailable — static HTML remains as fallback.
+// Polls the Cloudflare now-playing Worker. Fails silently when the API is
+// unavailable — static HTML remains as fallback.
 (function () {
-  var API_URL = "http://localhost:8888/api/now-playing";
+  var API_URL = "https://kreth-now-playing.juliankreth-a09.workers.dev/api/now-playing";
   var POLL_MS = 30 * 1000;
-  var LOCAL_HOSTS = ["localhost", "127.0.0.1"];
   var pollTimer = null;
 
   window.initNowPlaying = function () {
-    if (!LOCAL_HOSTS.includes(window.location.hostname)) return;
 
     var root = document.querySelector("[data-now-playing]");
     if (!root || root.dataset.nowPlayingReady) return;

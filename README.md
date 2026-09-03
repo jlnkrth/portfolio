@@ -37,6 +37,8 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
+The live now-playing widget needs the Cloudflare Worker in `spotify-worker/`. GitHub Pages cannot run that proxy.
+
 ## Edit articles in the browser
 
 ```bash
