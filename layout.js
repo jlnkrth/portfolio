@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "15";
+  var CHROME_CACHE_VERSION = "21";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -818,6 +818,7 @@
         loadScript("/nav-preview.js?v=8"),
         loadScript("/nav-mobile.js?v=12"),
         loadScript("/sidebar-preview.js?v=8"),
+        loadScript("/avatar.js?v=1"),
       ]);
     })
     .then(function () {
@@ -827,6 +828,7 @@
       if (window.initNavCurrent) window.initNavCurrent();
       if (window.initNavMobile) window.initNavMobile();
       if (window.initSidebarPreview) window.initSidebarPreview();
+      if (window.initAvatars) window.initAvatars();
       window.persistChromeCache();
     })
     .catch(function () {});

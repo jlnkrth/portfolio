@@ -725,6 +725,18 @@ a {
   margin-bottom: 16px;
 }
 
+.avatar-link {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+  border-radius: 12px;
+}
+
+.avatar-link:focus-visible {
+  outline: 2px solid var(--color-gray-1200);
+  outline-offset: 2px;
+}
+
 .avatar {
   width: 44px;
   height: 44px;
@@ -763,6 +775,12 @@ a {
   border-radius: 9999px;
   padding: 2px 8px;
   line-height: 1.3;
+  text-decoration: none;
+}
+
+a.handle:hover {
+  color: var(--color-gray-1200);
+  border-color: var(--color-gray-500);
 }
 
 .profile-card__bio {
@@ -2877,6 +2895,11 @@ body.nav-sheet-open {
   width: 100%;
 }
 
+.about-page__aside .photo-gallery,
+.about-page__aside .reading-card {
+  max-height: 380px;
+}
+
 /* Below desktop side-by-side: full-width aside, cards left, gallery right */
 @media (max-width: 1439px) {
   .about-page__body {
@@ -2904,10 +2927,11 @@ body.nav-sheet-open {
   .about-page__aside .photo-gallery {
     grid-column: 2;
     grid-row: 1 / -1;
-    align-self: stretch;
-    aspect-ratio: unset;
-    min-height: 280px;
-    height: 100%;
+    align-self: start;
+    aspect-ratio: 230 / 416;
+    min-height: 0;
+    height: auto;
+    max-height: 380px;
   }
 }
 
@@ -2957,9 +2981,10 @@ body.nav-sheet-open {
   }
 
   .about-page__aside .photo-gallery {
-    flex: 1 1 0;
+    flex: 0 1 auto;
     min-height: 0;
-    aspect-ratio: unset;
+    aspect-ratio: 230 / 416;
+    max-height: 380px;
   }
 }
 
@@ -2968,7 +2993,7 @@ body.nav-sheet-open {
   .about-page__aside {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
   }
 
   .about-page__aside .x-card {
@@ -2980,14 +3005,16 @@ body.nav-sheet-open {
     grid-row: 2;
     grid-column: 1;
     flex: unset;
-    height: 100%;
+    height: auto;
+    max-height: 380px;
   }
 
   .about-page__aside .reading-card {
     grid-row: 2;
     grid-column: 2;
-    align-self: stretch;
-    height: 100%;
+    align-self: start;
+    height: auto;
+    max-height: 380px;
   }
 }
 
@@ -3041,9 +3068,15 @@ body.nav-sheet-open {
   display: flex;
   flex-direction: column;
   color: inherit;
-  border-radius: 16px;
-  padding: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.project-card:focus-visible .project-card__preview {
+  outline: 2px solid var(--color-gray-1200);
+  outline-offset: 2px;
 }
 
 .project-card__preview {
