@@ -1,0 +1,14 @@
+{
+  "name": "kreth-work",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-dist.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler versions upload"
+  },
+  "devDependencies": {
+    "wrangler": "^4.129.0"
+  }
+}

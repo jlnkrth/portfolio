@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "kreth-work",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-09",
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "run_worker_first": true
+  },
+  "services": [
+    {
+      "binding": "NOW_PLAYING",
+      "service": "kreth-now-playing"
+    }
+  ],
+  "vars": {
+    "PUBLIC_HOST": "kreth.work",
+    "ADMIN_HOST": "admin.kreth.work"
+  }
+}

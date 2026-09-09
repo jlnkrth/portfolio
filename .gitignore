@@ -8,3 +8,6 @@ spotify-server/node_modules/
 spotify-worker/.dev.vars
 spotify-worker/.wrangler/
 node_modules/
+dist/
+.wrangler/
+.dev.vars

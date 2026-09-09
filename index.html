@@ -221,9 +221,13 @@
               <div class="nowplaying__status-label">Offline</div>
             </div>
           </div>
+        <div class="nowplaying__admin-links">
+          <a class="nowplaying__login" href="/admin/" data-admin-login>Admin Area</a>
+          <span class="nowplaying__admin-sep" aria-hidden="true"></span>
+          <a class="nowplaying__admin-link" href="https://admin.kreth.work/">Component Library</a>
+        </div>
         <nav class="sidebar__meta-links" aria-label="Internal resources">
-          <a href="/components.html" data-admin-only>Components</a>
-          <a href="/notes/_templates/" data-admin-only>Article templates</a>
+          <a href="https://admin.kreth.work/notes/_templates/" data-admin-only>Article templates</a>
         </nav>
       </div>
       </aside>
@@ -272,6 +276,10 @@
         <section class="section">
           <span class="label">Writing</span>
           <div class="writing-list">
+            <a class="writing-list__item" href="/notes/argentic-engineering/">
+              <span class="writing-list__meta">September 9, 2026</span>
+              <span class="writing-list__title">Argentic Engineering</span>
+            </a>
             <a class="writing-list__item" href="/notes/free-chinese-and-banned/">
               <span class="writing-list__meta">July 17, 2026</span>
               <span class="writing-list__title">The Best AI Will Be Free, Chinese, and Banned in America</span>
@@ -279,10 +287,6 @@
             <a class="writing-list__item" href="/notes/why-memory-management-matters-for-your-ai-agent/">
               <span class="writing-list__meta">July 4, 2026</span>
               <span class="writing-list__title">Why Memory Management Is Important for Your AI Agent</span>
-            </a>
-            <a class="writing-list__item" href="/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/">
-              <span class="writing-list__meta">July 3, 2026</span>
-              <span class="writing-list__title">How We Improved Our AI Agent in Slack by Making It Dumber</span>
             </a>
           </div>
         </section>
@@ -303,6 +307,7 @@
     </script>
     <script src="/availability.js?v=8"></script>
     <script src="/now-playing.js?v=11"></script>
+    <script src="/admin-auth.js?v=12"></script>
     <script src="/nav-preview.js?v=8"></script>
     <script src="/nav-mobile.js?v=12"></script>
     <script src="/sidebar-preview.js?v=8"></script>

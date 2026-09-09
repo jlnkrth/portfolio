@@ -2,12 +2,12 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "21";
+  var CHROME_CACHE_VERSION = "26";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
-    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
+    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
 
   var topSlot = document.getElementById("chrome-top");
   var sidebarSlot = document.getElementById("chrome-sidebar");
@@ -815,6 +815,7 @@
       return Promise.all([
         loadScript("/availability.js"),
         loadScript("/now-playing.js?v=11"),
+        loadScript("/admin-auth.js?v=12"),
         loadScript("/nav-preview.js?v=8"),
         loadScript("/nav-mobile.js?v=12"),
         loadScript("/sidebar-preview.js?v=8"),
@@ -824,6 +825,7 @@
     .then(function () {
       if (window.initAvailabilityWidgets) window.initAvailabilityWidgets();
       if (window.initNowPlaying) window.initNowPlaying();
+      if (window.initAdminAuth) window.initAdminAuth();
       if (window.initNavPreview) window.initNavPreview();
       if (window.initNavCurrent) window.initNavCurrent();
       if (window.initNavMobile) window.initNavMobile();

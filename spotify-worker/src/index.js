@@ -1,12 +1,15 @@
 const ALLOWED_ORIGINS = new Set([
   "https://kreth.work",
   "https://www.kreth.work",
+  "https://admin.kreth.work",
   "http://localhost:8000",
   "http://localhost:8001",
   "http://localhost:3030",
+  "http://localhost:8787",
   "http://127.0.0.1:8000",
   "http://127.0.0.1:8001",
   "http://127.0.0.1:3030",
+  "http://127.0.0.1:8787",
 ]);
 
 const SCOPES = "user-read-currently-playing user-read-recently-played";

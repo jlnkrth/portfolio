@@ -1,8 +1,9 @@
 # Now-playing Worker
 
-Cloudflare Worker that powers the sidebar Spotify widget on [kreth.work](https://kreth.work/). GitHub Pages is static, so this API lives here instead.
+Cloudflare Worker that powers the sidebar Spotify widget on [kreth.work](https://kreth.work/).
 
-The widget on the site polls `/api/now-playing`. Secrets stay in the Worker, not in the static repo.
+The portfolio Worker proxies same-origin `/api/now-playing` to this service via a
+service binding. Secrets stay here, not in the static asset build.
 
 ## First-time setup
 
