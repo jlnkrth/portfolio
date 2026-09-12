@@ -1,7 +1,10 @@
 // Polls the Cloudflare now-playing Worker. Status stays visible: listening,
 // offline, or disconnected. Last-known track remains as fallback.
 (function () {
-  var API_URL = "/api/now-playing";
+  // Absolute Worker URL until kreth.work is served by the portfolio Worker
+  // (which can proxy same-origin /api/now-playing). GitHub Pages has no /api.
+  var API_URL =
+    "https://kreth-now-playing.juliankreth-a09.workers.dev/api/now-playing";
   var POLL_MS = 30 * 1000;
   var STATUS_LABELS = {
     listening: "Listening now",
