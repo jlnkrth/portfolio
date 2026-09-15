@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "33";
+  var CHROME_CACHE_VERSION = "34";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -36,6 +36,12 @@
       if (!indexHtml || layoutEl.querySelector(".notes-index")) return;
 
       layoutEl.classList.add("layout--notes-index");
+      try {
+        if (sessionStorage.getItem("kreth-notes-index-expanded") === "1") {
+          layoutEl.classList.add("layout--notes-index-expanded");
+          layoutEl.style.setProperty("--notes-expand", "1");
+        }
+      } catch (_) {}
 
       rootEl.insertAdjacentHTML("beforebegin", indexHtml);
       var indexEl = layoutEl.querySelector(".notes-index");
@@ -224,6 +230,8 @@
     toggle.addEventListener("click", function () {
       var isExpanded = !layoutEl.classList.contains("layout--notes-index-expanded");
       layoutEl._notesAutoMaximizeDismissed = !isExpanded;
+      layoutEl._notesHasScrolledExpanded =
+        isExpanded && scroller.scrollTop > 1;
       setNotesIndexExpanded(layoutEl, isExpanded);
     });
 
@@ -255,6 +263,13 @@
     window.setTimeout(function () {
       updateNotesArchiveOverflow(layoutEl.querySelector(".notes-index"));
     }, 450);
+    try {
+      if (isExpanded) {
+        sessionStorage.setItem("kreth-notes-index-expanded", "1");
+      } else {
+        sessionStorage.removeItem("kreth-notes-index-expanded");
+      }
+    } catch (_) {}
   }
 
   function bindNotesAutoMaximize(layoutEl, scroller, article) {
@@ -262,6 +277,8 @@
       return;
     }
     layoutEl._notesAutoMaximizeBound = true;
+    layoutEl._notesHasScrolledExpanded = false;
+    var lastScrollTop = scroller.scrollTop;
 
     function lineHeight() {
       var sample = article.querySelector("p") || article;
@@ -273,17 +290,42 @@
       "scroll",
       function () {
         var oneLine = lineHeight();
-        if (scroller.scrollTop < oneLine) {
+        var currentScrollTop = scroller.scrollTop;
+        var isExpanded = layoutEl.classList.contains(
+          "layout--notes-index-expanded"
+        );
+
+        if (isExpanded) {
+          if (currentScrollTop > 1) {
+            layoutEl._notesHasScrolledExpanded = true;
+          }
+          if (
+            layoutEl._notesHasScrolledExpanded &&
+            currentScrollTop <= 1 &&
+            currentScrollTop < lastScrollTop
+          ) {
+            layoutEl._notesHasScrolledExpanded = false;
+            layoutEl._notesAutoMaximizeDismissed = false;
+            setNotesIndexExpanded(layoutEl, false);
+          }
+          lastScrollTop = currentScrollTop;
+          return;
+        }
+
+        if (currentScrollTop < oneLine) {
           layoutEl._notesAutoMaximizeDismissed = false;
+          lastScrollTop = currentScrollTop;
           return;
         }
         if (
-          scroller.scrollTop >= oneLine * 3 &&
+          currentScrollTop >= oneLine * 3 &&
           !layoutEl._notesAutoMaximizeDismissed &&
-          !layoutEl.classList.contains("layout--notes-index-expanded")
+          !isExpanded
         ) {
+          layoutEl._notesHasScrolledExpanded = true;
           setNotesIndexExpanded(layoutEl, true);
         }
+        lastScrollTop = currentScrollTop;
       },
       { passive: true }
     );
