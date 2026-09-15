@@ -1275,7 +1275,21 @@ a.collections__item:hover {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  width: 100%;
+  min-width: 0;
   height: 100%;
+  padding-right: 8px;
+  overflow: hidden;
+}
+
+.nowplaying__song,
+.nowplaying__artist {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .nowplaying__song {
@@ -2392,16 +2406,17 @@ body.nav-sheet-open {
   }
 
   .layout--notes-index {
-    /* Narrow article rail kept beside the expanded reading surface. */
-    --notes-index-rail: 12rem;
-    /* Breathing room between the article rail and the reading surface. */
+    /* One-third Archive, two-thirds article, with a fixed gutter. */
+    --notes-archive-column: calc(33.333333vw - 143.333333px);
     --notes-index-rail-gap: 2.5rem;
-    /* Set by the maximize button: 0 = reading view, 1 = maximized. */
     padding-left: calc(
-      812px +
-        (360px - 812px) * var(--notes-expand, 0)
+      360px + var(--notes-archive-column) + var(--notes-index-rail-gap)
     );
     transition: padding-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .layout--notes-index-expanded {
+    padding-left: 360px;
   }
 
   .layout--notes-index-expanded > .root:has(.article) {
@@ -2453,7 +2468,7 @@ body.nav-sheet-open {
     left: 350px;
     padding-left: 10px;
     top: 9rem;
-    width: calc(430px + (var(--notes-index-rail) - 420px) * var(--notes-expand, 0));
+    width: calc(var(--notes-archive-column) + 10px);
     transition:
       top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
       left 0.35s cubic-bezier(0.4, 0, 0.2, 1),

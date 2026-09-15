@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "32";
+  var CHROME_CACHE_VERSION = "33";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -36,10 +36,6 @@
       if (!indexHtml || layoutEl.querySelector(".notes-index")) return;
 
       layoutEl.classList.add("layout--notes-index");
-      if (sessionStorage.getItem("kreth-notes-index-expanded") === "1") {
-        layoutEl.classList.add("layout--notes-index-expanded");
-        layoutEl.style.setProperty("--notes-expand", "1");
-      }
 
       rootEl.insertAdjacentHTML("beforebegin", indexHtml);
       var indexEl = layoutEl.querySelector(".notes-index");
@@ -227,6 +223,7 @@
 
     toggle.addEventListener("click", function () {
       var isExpanded = !layoutEl.classList.contains("layout--notes-index-expanded");
+      layoutEl._notesAutoMaximizeDismissed = !isExpanded;
       setNotesIndexExpanded(layoutEl, isExpanded);
     });
 
@@ -237,6 +234,8 @@
     window.addEventListener("load", function () {
       window.scrollTo(0, 0);
     });
+
+    bindNotesAutoMaximize(layoutEl, scroller, article);
   }
 
   function setNotesIndexExpanded(layoutEl, isExpanded) {
@@ -256,13 +255,38 @@
     window.setTimeout(function () {
       updateNotesArchiveOverflow(layoutEl.querySelector(".notes-index"));
     }, 450);
-    try {
-      if (isExpanded) {
-        sessionStorage.setItem("kreth-notes-index-expanded", "1");
-      } else {
-        sessionStorage.removeItem("kreth-notes-index-expanded");
-      }
-    } catch (_) {}
+  }
+
+  function bindNotesAutoMaximize(layoutEl, scroller, article) {
+    if (!layoutEl || !scroller || !article || layoutEl._notesAutoMaximizeBound) {
+      return;
+    }
+    layoutEl._notesAutoMaximizeBound = true;
+
+    function lineHeight() {
+      var sample = article.querySelector("p") || article;
+      var value = parseFloat(getComputedStyle(sample).lineHeight);
+      return Number.isFinite(value) ? value : 26;
+    }
+
+    scroller.addEventListener(
+      "scroll",
+      function () {
+        var oneLine = lineHeight();
+        if (scroller.scrollTop < oneLine) {
+          layoutEl._notesAutoMaximizeDismissed = false;
+          return;
+        }
+        if (
+          scroller.scrollTop >= oneLine * 3 &&
+          !layoutEl._notesAutoMaximizeDismissed &&
+          !layoutEl.classList.contains("layout--notes-index-expanded")
+        ) {
+          setNotesIndexExpanded(layoutEl, true);
+        }
+      },
+      { passive: true }
+    );
   }
 
   // Keeps line lengths matched to the *visible* text width so the text→lines
@@ -774,7 +798,7 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js?v=13"),
+        loadScript("/now-playing.js?v=14"),
         loadScript("/admin-auth.js?v=13"),
         loadScript("/nav-preview.js?v=8"),
         loadScript("/nav-mobile.js?v=12"),

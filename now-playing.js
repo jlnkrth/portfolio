@@ -39,8 +39,14 @@
     function applyTrack(data) {
       if (!data || !data.title) return;
 
-      if (songEl) songEl.textContent = data.title;
-      if (artistEl) artistEl.textContent = data.artist || "";
+      if (songEl) {
+        songEl.textContent = data.title;
+        songEl.title = data.title;
+      }
+      if (artistEl) {
+        artistEl.textContent = data.artist || "";
+        artistEl.title = data.artist || "";
+      }
 
       if (coverEl && data.albumArt) {
         coverEl.src = data.albumArt;
