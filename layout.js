@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "31";
+  var CHROME_CACHE_VERSION = "32";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -39,7 +39,6 @@
       if (sessionStorage.getItem("kreth-notes-index-expanded") === "1") {
         layoutEl.classList.add("layout--notes-index-expanded");
         layoutEl.style.setProperty("--notes-expand", "1");
-        layoutEl._notesManualExpand = true;
       }
 
       rootEl.insertAdjacentHTML("beforebegin", indexHtml);
@@ -50,6 +49,14 @@
       if (current) {
         current.setAttribute("aria-current", "page");
         current.setAttribute("title", "Currently reading");
+      }
+
+      updateNotesArchiveOverflow(indexEl);
+      if (typeof ResizeObserver !== "undefined") {
+        layoutEl._notesArchiveResize = new ResizeObserver(function () {
+          updateNotesArchiveOverflow(indexEl);
+        });
+        layoutEl._notesArchiveResize.observe(indexEl);
       }
 
       initNotesIndexArticleShell(layoutEl, rootEl);
@@ -106,8 +113,9 @@
           '"' +
           transitionName +
           '><span class="notes-archive__row-title">' +
+          '<span class="notes-archive__row-title-inner">' +
           escapeHtml(item.title) +
-          "</span></a>"
+          "</span></span></a>"
         );
       })
       .join("");
@@ -115,11 +123,7 @@
     return (
       '<nav class="notes-index" aria-label="Article archive">' +
       '<div class="notes-index__head">' +
-      '<a class="label notes-index__head-link" href="/notes/" aria-label="Back to the Archive">' +
-      '<span class="notes-index__back-prefix" aria-hidden="true">' +
-      '<svg class="icon icon-tabler notes-index__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<path d="M5 12h14"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/>' +
-      '</svg><span class="notes-index__back-text">Back to</span></span>' +
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open the Archive">' +
       '<span class="notes-index__title">Archive</span></a>' +
       "</div>" +
       '<div class="notes-index__list-wrap"><div class="notes-archive notes-archive--index" data-notes-list>' +
@@ -133,26 +137,41 @@
     var head = index.querySelector(".notes-index__head");
     if (!head) return;
 
-    if (!index.querySelector(".notes-index__head-link")) {
-      head.innerHTML =
-        '<a class="label notes-index__head-link" href="/notes/" aria-label="Back to the Archive">' +
-        '<span class="notes-index__back-prefix" aria-hidden="true">' +
-        '<svg class="icon icon-tabler notes-index__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-        '<path d="M5 12h14"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/>' +
-        "</svg><span class=\"notes-index__back-text\">Back to</span></span>" +
-        '<span class="notes-index__title">Archive</span></a>';
-    } else {
-      var headLink = index.querySelector(".notes-index__head-link");
-      var backText = index.querySelector(".notes-index__back-text");
-      var title = index.querySelector(".notes-index__title");
-      if (headLink) headLink.setAttribute("aria-label", "Back to the Archive");
-      if (backText) backText.textContent = "Back to";
-      if (title) title.textContent = "Archive";
-    }
+    head.innerHTML =
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open the Archive">' +
+      '<span class="notes-index__title">Archive</span></a>';
+
+    index.querySelectorAll(".notes-archive__row-title").forEach(function (title) {
+      if (title.querySelector(".notes-archive__row-title-inner")) return;
+      var inner = document.createElement("span");
+      inner.className = "notes-archive__row-title-inner";
+      inner.textContent = title.textContent;
+      title.textContent = "";
+      title.appendChild(inner);
+    });
 
     try {
       sessionStorage.setItem("kreth-notes-index-html", index.outerHTML);
     } catch (_) {}
+  }
+
+  function updateNotesArchiveOverflow(index) {
+    if (!index) return;
+    requestAnimationFrame(function () {
+      index.querySelectorAll(".notes-archive__row").forEach(function (row) {
+        var title = row.querySelector(".notes-archive__row-title");
+        var inner = row.querySelector(".notes-archive__row-title-inner");
+        if (!title || !inner || title.clientWidth <= 0) return;
+
+        var distance = Math.max(0, inner.scrollWidth - title.clientWidth);
+        row.classList.toggle("is-overflowing", distance > 1);
+        row.style.setProperty("--marquee-distance", distance.toFixed(0) + "px");
+        row.style.setProperty(
+          "--marquee-duration",
+          Math.max(2.5, distance / 28 + 1.5).toFixed(2) + "s"
+        );
+      });
+    });
   }
 
   function initNotesIndexNavigation(layoutEl) {
@@ -189,7 +208,8 @@
     toggle.className = "article-shell__toggle";
     var expanded = layoutEl.classList.contains("layout--notes-index-expanded");
     toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
-    toggle.setAttribute("aria-label", expanded ? "Minimize article" : "Expand article");
+    toggle.setAttribute("aria-label", expanded ? "Restore article" : "Maximize article");
+    toggle.setAttribute("title", expanded ? "Restore article" : "Maximize article");
     toggle.innerHTML =
       '<svg class="article-shell__toggle-icon article-shell__toggle-icon--expand" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       '<polyline points="15 3 21 3 21 9"></polyline>' +
@@ -208,13 +228,6 @@
     toggle.addEventListener("click", function () {
       var isExpanded = !layoutEl.classList.contains("layout--notes-index-expanded");
       setNotesIndexExpanded(layoutEl, isExpanded);
-      layoutEl._notesManualExpand = isExpanded;
-      if (!isExpanded && scroller.scrollTop > 0) {
-        // Don't let the next wheel instantly re-expand; the content keeps
-        // scrolling natively until the user is back at the top.
-        layoutEl._notesScrubSuspended = true;
-      }
-      if (layoutEl._notesUpdateScrollLock) layoutEl._notesUpdateScrollLock();
     });
 
     // The page itself never scrolls in this layout; undo any restored offset
@@ -224,8 +237,6 @@
     window.addEventListener("load", function () {
       window.scrollTo(0, 0);
     });
-
-    bindNotesIndexScrollExpand(layoutEl);
   }
 
   function setNotesIndexExpanded(layoutEl, isExpanded) {
@@ -238,11 +249,13 @@
     layoutEl.style.setProperty("--notes-expand", isExpanded ? "1" : "0");
     if (toggle) {
       toggle.setAttribute("aria-expanded", isExpanded ? "true" : "false");
-      toggle.setAttribute("aria-label", isExpanded ? "Minimize article" : "Expand article");
+      toggle.setAttribute("aria-label", isExpanded ? "Restore article" : "Maximize article");
+      toggle.setAttribute("title", isExpanded ? "Restore article" : "Maximize article");
     }
-    if (isExpanded) {
-      measureNotesToc(layoutEl);
-    }
+    measureNotesToc(layoutEl);
+    window.setTimeout(function () {
+      updateNotesArchiveOverflow(layoutEl.querySelector(".notes-index"));
+    }, 450);
     try {
       if (isExpanded) {
         sessionStorage.setItem("kreth-notes-index-expanded", "1");
@@ -250,105 +263,6 @@
         sessionStorage.removeItem("kreth-notes-index-expanded");
       }
     } catch (_) {}
-  }
-
-  // Preview ↔ expanded, two-stage: the first scroll gesture only plays the
-  // expand transition (TOC reveals, article widens) while the content stays
-  // pinned — the scroller is overflow-locked in preview. Once expanded, the
-  // next gesture scrolls the content normally and the TOC collapses to lines
-  // (observer in initNotesIndexToc). Scrolling up at the very top plays the
-  // collapse transition back to preview.
-  function bindNotesIndexScrollExpand(layoutEl) {
-    if (!layoutEl || !layoutEl.classList.contains("layout--notes-index")) return;
-    if (layoutEl._notesIndexScrub) return;
-
-    var scroller = layoutEl.querySelector(".article-shell__scroll");
-    if (!scroller) return;
-
-    // Slightly past the 0.35s layout transition so a continued gesture can't
-    // scroll the content before the expand settles.
-    var TRANSITION_LOCK_MS = 450;
-
-    function updateLock() {
-      var expanded = layoutEl.classList.contains("layout--notes-index-expanded");
-      var locked =
-        layoutEl._notesExpandSnapping ||
-        (!expanded && !layoutEl._notesScrubSuspended);
-      scroller.classList.toggle("is-scroll-locked", locked);
-    }
-    layoutEl._notesUpdateScrollLock = updateLock;
-
-    function playTransition(toExpanded) {
-      layoutEl._notesExpandSnapping = true;
-      layoutEl._notesManualExpand = false;
-      setNotesIndexExpanded(layoutEl, toExpanded);
-      updateLock();
-      window.setTimeout(function () {
-        layoutEl._notesExpandSnapping = false;
-        updateLock();
-      }, TRANSITION_LOCK_MS);
-    }
-
-    function onWheel(event) {
-      if (window.innerWidth < 1280) return;
-      if (layoutEl._notesExpandSnapping) return;
-
-      var expanded = layoutEl.classList.contains("layout--notes-index-expanded");
-
-      if (!expanded) {
-        // Suspended after a manual minimize mid-article: content scrolls
-        // natively until the user returns to the top (see onScroll).
-        if (layoutEl._notesScrubSuspended) return;
-        if (event.deltaY > 0) playTransition(true);
-        return;
-      }
-
-      // Expanded, content back at the top, scrolling up: back to preview.
-      if (
-        event.deltaY < 0 &&
-        scroller.scrollTop <= 0 &&
-        !layoutEl._notesManualExpand
-      ) {
-        playTransition(false);
-      }
-    }
-
-    function onScroll() {
-      if (layoutEl._notesScrubSuspended && scroller.scrollTop <= 0) {
-        layoutEl._notesScrubSuspended = false;
-        updateLock();
-      }
-    }
-
-    // Touchpad/mouse wheel anywhere on the page drives the state change —
-    // the page itself never scrolls in this layout.
-    window.addEventListener("wheel", onWheel, { passive: true });
-
-    // Basic touch fallback for wheel-less devices at desktop widths.
-    var touchStartY = null;
-    window.addEventListener(
-      "touchstart",
-      function (event) {
-        touchStartY = event.touches[0].clientY;
-      },
-      { passive: true }
-    );
-    window.addEventListener(
-      "touchmove",
-      function (event) {
-        if (touchStartY == null) return;
-        var deltaY = touchStartY - event.touches[0].clientY;
-        if (Math.abs(deltaY) > 12) {
-          touchStartY = null;
-          onWheel({ deltaY: deltaY });
-        }
-      },
-      { passive: true }
-    );
-
-    layoutEl._notesIndexScrub = onWheel;
-    scroller.addEventListener("scroll", onScroll, { passive: true });
-    updateLock();
   }
 
   // Keeps line lengths matched to the *visible* text width so the text→lines

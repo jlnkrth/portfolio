@@ -38,8 +38,9 @@
         name +
         current +
         '><span class="notes-archive__row-title">' +
+        '<span class="notes-archive__row-title-inner">' +
         item.title +
-        "</span></a>"
+        "</span></span></a>"
       );
     }
 
@@ -67,11 +68,7 @@
     return (
       '<nav class="notes-index" aria-label="Article archive">' +
       '<div class="notes-index__head">' +
-      '<a class="label notes-index__head-link" href="/notes/" aria-label="Back to the Archive">' +
-      '<span class="notes-index__back-prefix" aria-hidden="true">' +
-      '<svg class="icon icon-tabler notes-index__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<path d="M5 12h14"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/>' +
-      "</svg><span class=\"notes-index__back-text\">Back to</span></span>" +
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open the Archive">' +
       '<span class="notes-index__title">Archive</span></a>' +
       "</div>" +
       '<div class="notes-index__list-wrap"><div class="notes-archive notes-archive--index" data-notes-list>' +

@@ -2323,10 +2323,10 @@ body.nav-sheet-open {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   padding: 0;
   margin: 0;
   border: 1px solid var(--color-gray-600);
@@ -2343,7 +2343,8 @@ body.nav-sheet-open {
     background 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 
 .layout--notes-index .article-shell__toggle:hover {
@@ -2351,6 +2352,10 @@ body.nav-sheet-open {
   border-color: var(--color-gray-700);
   color: var(--color-gray-1200);
   box-shadow: 0 1px 3px rgba(33, 32, 28, 0.08);
+}
+
+.layout--notes-index .article-shell__toggle:active {
+  transform: scale(0.96);
 }
 
 .layout--notes-index .article-shell__toggle:focus-visible {
@@ -2391,12 +2396,10 @@ body.nav-sheet-open {
     --notes-index-rail: 12rem;
     /* Breathing room between the article rail and the reading surface. */
     --notes-index-rail-gap: 2.5rem;
-    /* Scrubbed by layout.js: 0 = preview, 1 = expanded. The transition
-       chases the scrolled value, giving the magnetic catch-up feel. */
+    /* Set by the maximize button: 0 = reading view, 1 = maximized. */
     padding-left: calc(
       812px +
-        (360px + var(--notes-index-rail) + var(--notes-index-rail-gap) - 812px) *
-        var(--notes-expand, 0)
+        (360px - 812px) * var(--notes-expand, 0)
     );
     transition: padding-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -2434,12 +2437,6 @@ body.nav-sheet-open {
     scrollbar-color: var(--color-gray-500) transparent;
   }
 
-  /* Preview + during the expand/collapse transition: the content is pinned,
-     the scroll gesture drives the layout state instead (layout.js). */
-  .layout--notes-index .article-shell__scroll.is-scroll-locked {
-    overflow-y: hidden;
-  }
-
   .layout--notes-index .article-shell .article h1 {
     padding-right: 3rem;
   }
@@ -2457,16 +2454,20 @@ body.nav-sheet-open {
     padding-left: 10px;
     top: 9rem;
     width: calc(430px + (var(--notes-index-rail) - 420px) * var(--notes-expand, 0));
-    /* Slightly slower than the TOC text→lines morph (0.35s) so the clipping
-       border trails the shrinking content instead of cutting it off. */
-    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Clips the fixed-width list while the rail narrows during the scrub */
+    transition:
+      top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     view-transition-name: notes-index-panel;
   }
 
   .layout--notes-index-expanded .notes-index {
-    z-index: 2;
+    left: 30px;
+    top: 288px;
+    z-index: 501;
+    width: 300px;
+    max-height: calc(100vh - 515px);
   }
 
   .notes-index__head {
@@ -2493,41 +2494,8 @@ body.nav-sheet-open {
     color: var(--color-gray-1200);
   }
 
-  .notes-index__back-prefix {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    max-width: calc(9rem * var(--notes-expand, 0));
-    opacity: var(--notes-expand, 0);
-    overflow: hidden;
-    flex-shrink: 0;
-    transition:
-      max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Flex layout collapses trailing space, so the gap before "Notes" is explicit. */
-  .notes-index__back-text {
-    margin-right: 0.35em;
-  }
-
   .notes-index__title {
     flex-shrink: 0;
-  }
-
-  .notes-index__back-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
-
-  .layout--notes-index-expanded .notes-index__head-link {
-    pointer-events: auto;
-  }
-
-  .layout--notes-index-expanded .notes-index__back-prefix {
-    max-width: 9rem;
-    opacity: 1;
   }
 
   .notes-index__list-wrap {
@@ -2535,6 +2503,12 @@ body.nav-sheet-open {
     width: 100%;
     min-width: 0;
     container-type: inline-size;
+  }
+
+  .layout--notes-index-expanded .notes-index__list-wrap {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-500) transparent;
   }
 
   /* Table of contents — collapsed rail inside the article shell. */
@@ -2551,13 +2525,13 @@ body.nav-sheet-open {
 
   .layout--notes-index .article-shell__toc {
     position: absolute;
-    top: 24px;
+    top: 72px;
     left: 24px;
     z-index: 3;
     display: block;
     width: 192px;
     max-width: calc(100% - 96px);
-    max-height: calc(100% - 48px);
+    max-height: min(360px, calc(100% - 96px));
     margin: 0;
     overflow: visible;
     opacity: 1;
@@ -2574,6 +2548,13 @@ body.nav-sheet-open {
       transform var(--toc-transition-duration) var(--toc-easing),
       background-color 0.2s ease,
       box-shadow 0.2s ease;
+  }
+
+  .article-shell__toc .notes-toc-inner {
+    max-height: min(360px, calc(100vh - 280px));
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-500) transparent;
   }
 
   .notes-toc-inner.is-ready {
@@ -2789,6 +2770,10 @@ body.nav-sheet-open {
     color: var(--color-gray-1200);
   }
 
+  .article-shell__toc .toc-a:hover {
+    transform: translateX(-4px);
+  }
+
   .notes-toc-inner.transitioning .toc-a {
     cursor: default;
   }
@@ -2831,9 +2816,60 @@ body.nav-sheet-open {
 
   .notes-index .notes-archive__row-title {
     display: block;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.35;
+  }
+
+  .notes-index .notes-archive__row-title-inner {
+    display: block;
+    width: max-content;
+    white-space: nowrap;
+    transform: translateX(0);
+  }
+
+  .notes-index .notes-archive__row.is-overflowing .notes-archive__row-title {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 calc(100% - 1.25rem),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 calc(100% - 1.25rem),
+      transparent 100%
+    );
+  }
+
+  .notes-index
+    .notes-archive__row.is-overflowing:hover
+    .notes-archive__row-title {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 0.75rem,
+      #000 calc(100% - 1.25rem),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 0.75rem,
+      #000 calc(100% - 1.25rem),
+      transparent 100%
+    );
+  }
+
+  .notes-index
+    .notes-archive__row.is-overflowing:hover
+    .notes-archive__row-title-inner {
+    animation: notes-archive-marquee var(--marquee-duration, 3s) 0.25s linear
+      infinite alternate;
   }
 
   .notes-index .notes-archive__row-meta {
@@ -2896,6 +2932,20 @@ body.nav-sheet-open {
   .notes-index .item[aria-current="page"] {
     background: var(--hover);
     color: var(--color-gray-1200);
+  }
+}
+
+@keyframes notes-archive-marquee {
+  to {
+    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notes-index
+    .notes-archive__row.is-overflowing:hover
+    .notes-archive__row-title-inner {
+    animation: none;
   }
 }
 
