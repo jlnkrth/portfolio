@@ -389,6 +389,15 @@ a {
   }
 }
 
+@media (min-width: 768px) {
+  /* Match the Archive's right edge to the availability control in the nav. */
+  .layout > .root:has(.notes-page) {
+    width: 100%;
+    max-width: none;
+    padding-right: 0;
+  }
+}
+
 /* Inline links in prose get a subtle underline like the reference */
 .muted a {
   text-decoration: underline;
@@ -2297,7 +2306,7 @@ body.nav-sheet-open {
 }
 
 /* ==========================================================================
-   Persistent notes index (injected by layout.js when arriving from /notes/)
+   Persistent article archive (injected by layout.js on note pages)
    ========================================================================== */
 .notes-index {
   display: none;
@@ -2378,9 +2387,9 @@ body.nav-sheet-open {
   }
 
   .layout--notes-index {
-    /* Narrow rail kept beside the expanded article for "Show all Notes" */
+    /* Narrow article rail kept beside the expanded reading surface. */
     --notes-index-rail: 12rem;
-    /* Breathing room between the TOC rail and the expanded article */
+    /* Breathing room between the article rail and the reading surface. */
     --notes-index-rail-gap: 2.5rem;
     /* Scrubbed by layout.js: 0 = preview, 1 = expanded. The transition
        chases the scrolled value, giving the magnetic catch-up feel. */
@@ -2420,7 +2429,7 @@ body.nav-sheet-open {
     height: 100%;
     overflow-y: auto;
     overscroll-behavior: contain;
-    padding: 24px;
+    padding: 24px 24px 24px 72px;
     scrollbar-width: thin;
     scrollbar-color: var(--color-gray-500) transparent;
   }
@@ -2476,7 +2485,7 @@ body.nav-sheet-open {
     color: inherit;
     text-decoration: none;
     white-space: nowrap;
-    pointer-events: none;
+    pointer-events: auto;
     transition: color 0.15s ease;
   }
 
@@ -2523,40 +2532,13 @@ body.nav-sheet-open {
 
   .notes-index__list-wrap {
     flex-shrink: 0;
-    /* Fixed at the preview width so text never re-wraps while the rail
-       resizes — fade and padding compress it before the nav clip shows. */
-    width: 420px;
+    width: 100%;
+    min-width: 0;
     container-type: inline-size;
-    opacity: clamp(0, calc(1 - var(--notes-expand, 0) * 2.5), 1);
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 0,
-      #000 max(0px, calc(100% - 10rem * var(--notes-expand, 0))),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 0,
-      #000 max(0px, calc(100% - 10rem * var(--notes-expand, 0))),
-      transparent 100%
-    );
-    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .layout--notes-index-expanded .notes-index__list-wrap {
-    position: absolute;
-    top: 2.75rem;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  /* Table of contents — WorkOS-style rail (expanded article view only) */
+  /* Table of contents — collapsed rail inside the article shell. */
   .notes-toc-wrap {
-    /* Matches the layout padding-left transition so the preview→expanded
-       switch and the TOC line collapse animate as one motion. */
     --toc-transition-duration: 0.35s;
     --toc-easing: cubic-bezier(0.4, 0, 0.2, 1);
     --toc-line-width: 18;
@@ -2564,33 +2546,45 @@ body.nav-sheet-open {
     --toc-line-height: 2px;
     --toc-line-color: var(--color-gray-500);
     --toc-line-color-active: var(--color-gray-1200);
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    opacity: var(--notes-expand, 0);
-    max-height: calc(var(--notes-expand, 0) * 80vh);
-    margin-top: calc(0.75rem * var(--notes-expand, 0));
-    overflow: hidden;
-    pointer-events: none;
-    transition:
-      opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      margin-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      transform var(--toc-transition-duration) var(--toc-easing);
+    display: none;
   }
 
-  .layout--notes-index-expanded .notes-toc-wrap {
+  .layout--notes-index .article-shell__toc {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 3;
+    display: block;
+    width: 192px;
+    max-width: calc(100% - 96px);
+    max-height: calc(100% - 48px);
+    margin: 0;
+    overflow: visible;
+    opacity: 1;
     pointer-events: auto;
   }
 
   .notes-toc-inner {
     opacity: 0;
     width: 100%;
-    transition: transform var(--toc-transition-duration) var(--toc-easing);
+    padding: 10px;
+    margin: -10px;
+    border-radius: 10px;
+    transition:
+      transform var(--toc-transition-duration) var(--toc-easing),
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .notes-toc-inner.is-ready {
     opacity: 1;
+  }
+
+  .article-shell__toc .notes-toc-inner.toc-collapsed:hover {
+    background: var(--color-gray-100);
+    box-shadow:
+      0 1px 2px rgba(33, 32, 28, 0.06),
+      0 10px 28px rgba(33, 32, 28, 0.1);
   }
 
   .toc-label {
@@ -2809,33 +2803,36 @@ body.nav-sheet-open {
   }
 
   .notes-index .notes-archive {
-    border-top: 1px solid var(--color-gray-500);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 0;
     margin-bottom: 0;
     min-width: 0;
   }
 
   .notes-index .notes-archive__row {
+    position: relative;
+    display: block;
     margin-inline: 0;
     min-width: 0;
     max-width: 100%;
-    padding-block: 0.75rem;
-    padding-left: 0.75rem;
-    padding-right: calc(0.75rem * (1 - var(--notes-expand, 0)));
+    padding: 0 0 0 0.75rem;
+    border-bottom: 0;
     gap: 0;
-    transition:
-      background-color 0.15s ease,
-      padding-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--color-gray-1100);
+    transition: color 0.15s ease;
   }
 
   .notes-index .notes-archive__row:hover {
-    background: var(--hover);
+    background: transparent;
     color: var(--color-gray-1200);
   }
 
   .notes-index .notes-archive__row-title {
     display: block;
-    font-size: clamp(11px, 3.1cqi, 13px);
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     line-height: 1.35;
   }
 
@@ -2844,8 +2841,19 @@ body.nav-sheet-open {
   }
 
   .notes-index .notes-archive__row[aria-current="page"] {
-    background: var(--hover);
+    background: transparent;
     color: var(--color-gray-1200);
+  }
+
+  .notes-index .notes-archive__row[aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    top: 0.45em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #30a46c;
   }
 
   .notes-index .list {

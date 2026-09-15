@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "30";
+  var CHROME_CACHE_VERSION = "31";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -17,40 +17,71 @@
     return html.replace(RUNTIME_ATTR_RE, "");
   }
 
-  // Persistent notes index: when the user arrives from /notes/, keep a
-  // compact titles-only index pinned left of the article. Runs synchronously
-  // so the cross-document view transition can morph list items into it.
+  // Keep the article archive pinned beside every note. When the user arrives
+  // from /notes/, the cached markup is inserted synchronously so the
+  // cross-document view transition can morph list items into the rail.
   (function () {
     var path = location.pathname.replace(/index\.html$/, "");
     var isArticlePage = /^\/notes\/(?!_)[^/]+\/$/.test(path);
+    if (!isArticlePage) {
+      clearNotesIndexMode();
+      return;
+    }
+
+    var layoutEl = document.querySelector(".layout");
+    var rootEl = layoutEl && layoutEl.querySelector(".root");
+    if (!layoutEl || !rootEl) return;
+
+    function activateNotesLayout(indexHtml) {
+      if (!indexHtml || layoutEl.querySelector(".notes-index")) return;
+
+      layoutEl.classList.add("layout--notes-index");
+      if (sessionStorage.getItem("kreth-notes-index-expanded") === "1") {
+        layoutEl.classList.add("layout--notes-index-expanded");
+        layoutEl.style.setProperty("--notes-expand", "1");
+        layoutEl._notesManualExpand = true;
+      }
+
+      rootEl.insertAdjacentHTML("beforebegin", indexHtml);
+      var indexEl = layoutEl.querySelector(".notes-index");
+      upgradeNotesIndexHead(indexEl);
+
+      var current = layoutEl.querySelector('.notes-index a[href="' + path + '"]');
+      if (current) {
+        current.setAttribute("aria-current", "page");
+        current.setAttribute("title", "Currently reading");
+      }
+
+      initNotesIndexArticleShell(layoutEl, rootEl);
+      initNotesIndexNavigation(layoutEl);
+      initNotesIndexToc(layoutEl, rootEl.querySelector(".article"));
+    }
+
     try {
-      if (isArticlePage && sessionStorage.getItem("kreth-notes-index") === "1") {
-        var layoutEl = document.querySelector(".layout");
-        var rootEl = layoutEl && layoutEl.querySelector(".root");
-        var indexHtml = sessionStorage.getItem("kreth-notes-index-html");
-        if (layoutEl && rootEl && indexHtml) {
-          layoutEl.classList.add("layout--notes-index");
-          if (sessionStorage.getItem("kreth-notes-index-expanded") === "1") {
-            layoutEl.classList.add("layout--notes-index-expanded");
-            layoutEl.style.setProperty("--notes-expand", "1");
-            layoutEl._notesManualExpand = true;
-          }
-          rootEl.insertAdjacentHTML("beforebegin", indexHtml);
-          var indexEl = layoutEl.querySelector(".notes-index");
-          upgradeNotesIndexHead(indexEl);
-          var current = layoutEl.querySelector('.notes-index a[href="' + path + '"]');
-          if (current) {
-            current.setAttribute("aria-current", "page");
-            current.setAttribute("title", "Back to all notes");
-          }
-          initNotesIndexArticleShell(layoutEl, rootEl);
-          initNotesIndexNavigation(layoutEl);
-          initNotesIndexToc(layoutEl, rootEl.querySelector(".article"));
-        }
-      } else if (!isArticlePage) {
-        clearNotesIndexMode();
+      var indexHtml = sessionStorage.getItem("kreth-notes-index-html");
+      if (indexHtml) {
+        activateNotesLayout(indexHtml);
+        return;
       }
     } catch (_) {}
+
+    fetch("/data/notes.json")
+      .then(function (response) {
+        if (!response.ok) throw new Error("Could not load the article archive");
+        return response.json();
+      })
+      .then(function (data) {
+        var items = (data.items || []).slice().sort(function (a, b) {
+          return (b.date || "").localeCompare(a.date || "");
+        });
+        var indexHtml = buildNotesIndexHtml(items);
+        try {
+          sessionStorage.setItem("kreth-notes-index-html", indexHtml);
+          sessionStorage.setItem("kreth-notes-index", "1");
+        } catch (_) {}
+        activateNotesLayout(indexHtml);
+      })
+      .catch(function () {});
   })();
 
   function clearNotesIndexMode() {
@@ -61,6 +92,42 @@
     } catch (_) {}
   }
 
+  function buildNotesIndexHtml(items) {
+    var rows = items
+      .map(function (item) {
+        var transitionName = /^[a-zA-Z0-9_-]+$/.test(
+          item.viewTransitionName || ""
+        )
+          ? ' style="view-transition-name: ' + item.viewTransitionName + '"'
+          : "";
+        return (
+          '<a class="notes-archive__row notes-archive__row--compact" href="' +
+          escapeHtml(item.href) +
+          '"' +
+          transitionName +
+          '><span class="notes-archive__row-title">' +
+          escapeHtml(item.title) +
+          "</span></a>"
+        );
+      })
+      .join("");
+
+    return (
+      '<nav class="notes-index" aria-label="Article archive">' +
+      '<div class="notes-index__head">' +
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Back to the Archive">' +
+      '<span class="notes-index__back-prefix" aria-hidden="true">' +
+      '<svg class="icon icon-tabler notes-index__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M5 12h14"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/>' +
+      '</svg><span class="notes-index__back-text">Back to</span></span>' +
+      '<span class="notes-index__title">Archive</span></a>' +
+      "</div>" +
+      '<div class="notes-index__list-wrap"><div class="notes-archive notes-archive--index" data-notes-list>' +
+      rows +
+      "</div></div></nav>"
+    );
+  }
+
   function upgradeNotesIndexHead(index) {
     if (!index) return;
     var head = index.querySelector(".notes-index__head");
@@ -68,19 +135,19 @@
 
     if (!index.querySelector(".notes-index__head-link")) {
       head.innerHTML =
-        '<a class="label notes-index__head-link" href="/notes/" aria-label="Back to all Notes">' +
+        '<a class="label notes-index__head-link" href="/notes/" aria-label="Back to the Archive">' +
         '<span class="notes-index__back-prefix" aria-hidden="true">' +
         '<svg class="icon icon-tabler notes-index__back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
         '<path d="M5 12h14"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/>' +
-        "</svg><span class=\"notes-index__back-text\">Back to all</span></span>" +
-        '<span class="notes-index__title">Notes</span></a>';
+        "</svg><span class=\"notes-index__back-text\">Back to</span></span>" +
+        '<span class="notes-index__title">Archive</span></a>';
     } else {
       var headLink = index.querySelector(".notes-index__head-link");
       var backText = index.querySelector(".notes-index__back-text");
-      if (headLink) headLink.setAttribute("aria-label", "Back to all Notes");
-      if (backText && backText.textContent.trim() === "Show all") {
-        backText.textContent = "Back to all";
-      }
+      var title = index.querySelector(".notes-index__title");
+      if (headLink) headLink.setAttribute("aria-label", "Back to the Archive");
+      if (backText) backText.textContent = "Back to";
+      if (title) title.textContent = "Archive";
     }
 
     try {
@@ -364,8 +431,9 @@
 
   function initNotesIndexToc(layoutEl, article) {
     if (!article) return;
-    var index = layoutEl.querySelector(".notes-index");
-    if (!index || index.querySelector(".notes-toc-wrap")) return;
+    var shell = layoutEl.querySelector(".article-shell");
+    var scroller = shell && shell.querySelector(".article-shell__scroll");
+    if (!shell || !scroller || shell.querySelector(".article-shell__toc")) return;
 
     var headings = article.querySelectorAll("h2");
     if (headings.length < 2) return;
@@ -442,7 +510,7 @@
     });
 
     var html =
-      '<div class="notes-toc-wrap"><div class="notes-toc-inner">' +
+      '<aside class="notes-toc-wrap article-shell__toc" aria-label="In this article"><div class="notes-toc-inner toc-collapsed">' +
       '<div class="toc-label">In this article</div><ul class="toc-list">';
     tocSections.forEach(function (section, i) {
       html +=
@@ -456,16 +524,13 @@
         escapeHtml(section.text) +
         "</span></div></a></li>";
     });
-    html += "</ul></div></div>";
+    html += "</ul></div></aside>";
 
-    var head = index.querySelector(".notes-index__head");
-    if (!head) return;
-    head.insertAdjacentHTML("afterend", html);
+    scroller.insertAdjacentHTML("beforebegin", html);
 
-    var tocWrap = index.querySelector(".notes-toc-wrap");
+    var tocWrap = shell.querySelector(".article-shell__toc");
     var tocInner = tocWrap.querySelector(".notes-toc-inner");
     var activeLink = tocWrap.querySelector(".toc-a");
-    var scroller = layoutEl.querySelector(".article-shell__scroll");
     var isScrolling = false;
     var scrollTimer;
 
@@ -554,26 +619,7 @@
       observer.observe(section.el);
     });
 
-    var title = article.querySelector("h1");
-    if (title) {
-      // The expand transition happens with the content pinned, so the reader
-      // sees the written-out chapter list on its own. Once they start
-      // scrolling the content (title exits, plus a small margin), the TOC
-      // eases into lines.
-      new IntersectionObserver(
-        function (entries) {
-          var shouldCollapse = !entries[0].isIntersecting;
-          if (shouldCollapse) {
-            measureNotesTocHeights(tocInner);
-          }
-          tocInner.classList.toggle("toc-collapsed", shouldCollapse);
-        },
-        { root: scroller, threshold: 0, rootMargin: "100px 0px 0px 0px" }
-      ).observe(title);
-    }
-
     tocInner.addEventListener("mouseenter", function () {
-      if (!tocInner.classList.contains("toc-collapsed")) return;
       tocInner.classList.add("transitioning");
       setTimeout(function () {
         tocInner.classList.remove("transitioning");
