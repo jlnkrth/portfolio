@@ -1,24 +1,26 @@
-// Admin entry helpers for Cloudflare Access.
-// Public /admin/ sends you to admin.kreth.work (Access + Google).
-// Local edit-server still uses sessionStorage for UI-only admin mode.
+// Google admin login. Sitewide: Admin Area link + session.
+// On /admin/: Google OAuth token client (popup) → session → components.
 (function () {
   "use strict";
 
+  var GOOGLE_CLIENT_ID =
+    "949249017997-fsvb8661uadi3fq11acrmofnuud79gsg.apps.googleusercontent.com";
+  var ALLOWED_EMAIL = "julian@karmastudio.co";
+  var ALLOWED_HD = "karmastudio.co";
   var ADMIN_KEY = "kreth-admin-access";
+  var GSI_SRC = "https://accounts.google.com/gsi/client";
   var LOGIN_PATH = "/admin/";
-  var ADMIN_HOST = "https://admin.kreth.work";
-  var ADMIN_LIBRARY = ADMIN_HOST + "/";
+  var AFTER_LOGIN_PATH = "/components.html";
+
+  var gsiReady = null;
+  var tokenClient = null;
+  var pageEls = null;
 
   function isLoginPage() {
     return /\/admin\/?$/.test(location.pathname.replace(/index\.html$/, ""));
   }
 
-  function isProtectedAdminHost() {
-    return location.hostname === "admin.kreth.work";
-  }
-
   function isAdmin() {
-    if (isProtectedAdminHost()) return true;
     try {
       return sessionStorage.getItem(ADMIN_KEY) === "1";
     } catch (_) {
@@ -35,6 +37,7 @@
     var nav = document.querySelector(".sidebar__meta-links");
     if (nav) nav.classList.toggle("sidebar__meta-links--admin", on);
     syncLoginButtons();
+    rewriteAdminLinks();
     try {
       window.dispatchEvent(
         new CustomEvent("kreth-admin-change", { detail: { admin: on } })
@@ -55,32 +58,171 @@
     });
   }
 
-  function openProtectedAdmin() {
-    location.href = ADMIN_LIBRARY;
+  function rewriteAdminLinks() {
+    var libraryHref = isAdmin() ? AFTER_LOGIN_PATH : LOGIN_PATH;
+    document.querySelectorAll(".nowplaying__admin-link").forEach(function (a) {
+      a.setAttribute("href", libraryHref);
+    });
+    document
+      .querySelectorAll('[data-admin-only][href*="admin.kreth.work"]')
+      .forEach(function (a) {
+        a.setAttribute("href", "/notes/_templates/");
+      });
   }
 
-  function bindLoginPage() {
-    var googleBtn = document.querySelector("[data-admin-auth-google-btn]");
-    if (!googleBtn) return;
+  function setError(msg) {
+    if (!pageEls || !pageEls.error) return;
+    pageEls.error.textContent = msg || "";
+  }
 
-    if (isProtectedAdminHost()) {
-      location.replace("/");
+  function loadGsi() {
+    if (gsiReady) return gsiReady;
+    gsiReady = new Promise(function (resolve, reject) {
+      if (
+        window.google &&
+        window.google.accounts &&
+        window.google.accounts.oauth2
+      ) {
+        resolve();
+        return;
+      }
+      var existing = document.querySelector('script[src="' + GSI_SRC + '"]');
+      if (existing) {
+        existing.addEventListener("load", function () {
+          resolve();
+        });
+        existing.addEventListener("error", function () {
+          reject(new Error("Failed to load Google Identity Services"));
+        });
+        return;
+      }
+      var s = document.createElement("script");
+      s.src = GSI_SRC;
+      s.async = true;
+      s.onload = function () {
+        resolve();
+      };
+      s.onerror = function () {
+        reject(new Error("Failed to load Google Identity Services"));
+      };
+      document.head.appendChild(s);
+    });
+    return gsiReady;
+  }
+
+  function acceptProfile(profile) {
+    var email = String((profile && profile.email) || "").toLowerCase();
+    var hd = String((profile && profile.hd) || "").toLowerCase();
+    var verified =
+      profile &&
+      (profile.email_verified === true || profile.email_verified === "true");
+
+    if (!verified) {
+      setError("That Google account email is not verified.");
+      return;
+    }
+    if (email !== ALLOWED_EMAIL || (hd && hd !== ALLOWED_HD)) {
+      setError("This Google account isn't authorized.");
       return;
     }
 
-    googleBtn.addEventListener("click", function () {
-      openProtectedAdmin();
+    setAdmin(true);
+    if (isLoginPage()) {
+      location.href = AFTER_LOGIN_PATH;
+    }
+  }
+
+  function onTokenResponse(tokenResponse) {
+    if (!tokenResponse || tokenResponse.error) {
+      if (tokenResponse && tokenResponse.error === "popup_closed_by_user") return;
+      setError(
+        (tokenResponse &&
+          (tokenResponse.error_description || tokenResponse.error)) ||
+          "Google sign-in failed."
+      );
+      return;
+    }
+
+    fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: { Authorization: "Bearer " + tokenResponse.access_token },
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("Could not verify Google account.");
+        return res.json();
+      })
+      .then(acceptProfile)
+      .catch(function (err) {
+        setError(err.message || "Google sign-in failed.");
+      });
+  }
+
+  function getTokenClient() {
+    if (!GOOGLE_CLIENT_ID) {
+      return Promise.reject(new Error("Google login is not configured yet."));
+    }
+    return loadGsi().then(function () {
+      if (tokenClient) return tokenClient;
+      tokenClient = window.google.accounts.oauth2.initTokenClient({
+        client_id: GOOGLE_CLIENT_ID,
+        scope: "openid email profile",
+        hd: ALLOWED_HD,
+        callback: onTokenResponse,
+        error_callback: function (err) {
+          if (
+            err &&
+            (err.type === "popup_closed" || err.type === "popup_failed_to_open")
+          ) {
+            if (err.type === "popup_failed_to_open") {
+              setError("Allow popups for this site, then try again.");
+            }
+            return;
+          }
+          setError((err && err.message) || "Google sign-in was cancelled.");
+        },
+      });
+      return tokenClient;
     });
+  }
+
+  function startGoogleSignIn() {
+    setError("");
+    if (!GOOGLE_CLIENT_ID) {
+      setError("Google login is not configured yet.");
+      return;
+    }
+
+    getTokenClient()
+      .then(function (client) {
+        client.requestAccessToken({ prompt: "select_account" });
+      })
+      .catch(function (err) {
+        setError(err.message || "Google sign-in failed to load.");
+      });
+  }
+
+  function bindLoginPage() {
+    pageEls = {
+      googleBtn: document.querySelector("[data-admin-auth-google-btn]"),
+      error: document.querySelector("[data-admin-auth-error]"),
+    };
+
+    if (!pageEls.googleBtn) return;
+
+    if (isAdmin()) {
+      location.replace(AFTER_LOGIN_PATH);
+      return;
+    }
+
+    pageEls.googleBtn.addEventListener("click", function () {
+      startGoogleSignIn();
+    });
+
+    getTokenClient().catch(function () {});
   }
 
   function onAdminLinkClick(e) {
     if (isAdmin()) {
       e.preventDefault();
-      // On Access host, "logout" just leaves the protected hostname.
-      if (isProtectedAdminHost()) {
-        location.href = "https://kreth.work/";
-        return;
-      }
       setAdmin(false);
       return;
     }
@@ -99,21 +241,8 @@
     });
   }
 
-  function rewriteAdminLinks() {
-    document.querySelectorAll(".nowplaying__admin-link").forEach(function (a) {
-      a.setAttribute("href", ADMIN_LIBRARY);
-    });
-    document.querySelectorAll('[href="/notes/_templates/"]').forEach(function (a) {
-      if (a.hasAttribute("data-admin-only")) {
-        a.setAttribute("href", ADMIN_HOST + "/notes/_templates/");
-      }
-    });
-  }
-
   window.initAdminAuth = function () {
-    if (isProtectedAdminHost()) {
-      setAdmin(true);
-    } else if (isAdmin()) {
+    if (isAdmin()) {
       document.body.classList.add("ed-book-admin");
       var nav = document.querySelector(".sidebar__meta-links");
       if (nav) nav.classList.add("sidebar__meta-links--admin");
@@ -127,8 +256,7 @@
   window.krethAdminAuth = {
     isAdmin: isAdmin,
     setAdmin: setAdmin,
-    adminHost: ADMIN_HOST,
-    googleConfigured: true,
+    googleConfigured: Boolean(GOOGLE_CLIENT_ID),
   };
 
   if (document.readyState === "loading") {
