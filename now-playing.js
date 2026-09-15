@@ -65,8 +65,13 @@
           return;
         }
         var data = await res.json();
+        if (data && data.error) {
+          setStatus("disconnected");
+          markHydrated();
+          return;
+        }
         applyTrack(data);
-        setStatus(data.playing ? "listening" : "offline");
+        setStatus(data && data.playing ? "listening" : "offline");
         markHydrated();
       } catch {
         setStatus("disconnected");

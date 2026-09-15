@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "29";
+  var CHROME_CACHE_VERSION = "30";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -814,7 +814,7 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js?v=12"),
+        loadScript("/now-playing.js?v=13"),
         loadScript("/admin-auth.js?v=13"),
         loadScript("/nav-preview.js?v=8"),
         loadScript("/nav-mobile.js?v=12"),

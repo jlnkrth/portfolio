@@ -230,10 +230,47 @@ function trackPayload(item, playing) {
   };
 }
 
+function episodePayload(item, playing) {
+  const show = item.show?.name || "Podcast";
+  return {
+    playing,
+    title: item.name,
+    artist: show,
+    albumArt: item.images?.[0]?.url || item.show?.images?.[0]?.url || null,
+    url: item.external_urls?.spotify || null,
+  };
+}
+
+function mediaPayload(item, playing) {
+  if (!item) return null;
+  if (item.type === "episode" || item.show) {
+    return episodePayload(item, playing);
+  }
+  if (!item.artists || !item.album) return null;
+  return trackPayload(item, playing);
+}
+
 async function spotifyGet(path, accessToken) {
   return fetch(`https://api.spotify.com/v1${path}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
+}
+
+async function recentTrackPayload(accessToken, origin) {
+  const recentRes = await spotifyGet("/me/player/recently-played?limit=1", accessToken);
+  if (!recentRes.ok) {
+    return json({ error: await recentRes.text() }, recentRes.status, origin);
+  }
+  const recent = await recentRes.json();
+  const item = recent.items?.[0]?.track;
+  if (!item) {
+    return json(
+      { playing: false, title: null, artist: null, albumArt: null, url: null },
+      200,
+      origin
+    );
+  }
+  return json(trackPayload(item, false), 200, origin);
 }
 
 async function handleNowPlaying(env, origin) {
@@ -248,17 +285,9 @@ async function handleNowPlaying(env, origin) {
   const accessToken = await refreshAccessToken(env);
   const currentRes = await spotifyGet("/me/player/currently-playing", accessToken);
 
+  // Nothing active (or Spotify returns 200 with a null item for paused podcasts).
   if (currentRes.status === 204) {
-    const recentRes = await spotifyGet("/me/player/recently-played?limit=1", accessToken);
-    if (!recentRes.ok) {
-      return json({ error: await recentRes.text() }, recentRes.status, origin);
-    }
-    const recent = await recentRes.json();
-    const item = recent.items?.[0]?.track;
-    if (!item) {
-      return json({ playing: false, title: null, artist: null, albumArt: null, url: null }, 200, origin);
-    }
-    return json(trackPayload(item, false), 200, origin);
+    return recentTrackPayload(accessToken, origin);
   }
 
   if (!currentRes.ok) {
@@ -266,11 +295,12 @@ async function handleNowPlaying(env, origin) {
   }
 
   const data = await currentRes.json();
-  if (!data?.item) {
-    return json({ playing: false, title: null, artist: null, albumArt: null, url: null }, 200, origin);
+  const payload = mediaPayload(data?.item, data.is_playing !== false);
+  if (!payload) {
+    return recentTrackPayload(accessToken, origin);
   }
 
-  return json(trackPayload(data.item, data.is_playing !== false), 200, origin);
+  return json(payload, 200, origin);
 }
 
 function escapeHtml(value) {
