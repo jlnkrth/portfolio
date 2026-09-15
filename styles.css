@@ -2479,7 +2479,9 @@ body.nav-sheet-open {
 
   .layout--notes-index-expanded .notes-index {
     left: 30px;
-    top: 288px;
+    top: auto;
+    /* Sidebar bottom + Spotify card + the standard sidebar gap. */
+    bottom: calc(30px + 173px + 24px);
     z-index: 501;
     width: 300px;
     max-height: calc(100vh - 515px);
