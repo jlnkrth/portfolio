@@ -51,25 +51,43 @@
   // ---------------------------------------------------------------------
   let adminLink = null;
 
+  function syncAdminLink() {
+    if (!adminLink) return;
+    adminLink.textContent = isAdmin() ? "Exit Admin" : "Admin Access";
+  }
+
   function ensureAdminLink() {
     const nav = document.querySelector(".sidebar__meta-links");
     if (!nav) return false;
     nav.classList.add("sidebar__meta-links--admin");
-    if (nav.querySelector("[data-ed-admin]")) return true;
+    // Live site uses Google login when configured; keep Admin Access for local edit server.
+    if (window.krethAdminAuth && window.krethAdminAuth.googleConfigured) return true;
+    if (nav.querySelector("[data-ed-admin]")) {
+      adminLink = nav.querySelector("[data-ed-admin]");
+      syncAdminLink();
+      return true;
+    }
     adminLink = document.createElement("a");
     adminLink.href = "#";
     adminLink.setAttribute("data-ed-admin", "");
-    adminLink.textContent = isAdmin() ? "Exit Admin" : "Admin Access";
+    syncAdminLink();
     adminLink.addEventListener("click", (e) => {
       e.preventDefault();
       const on = !isAdmin();
       setAdmin(on);
-      adminLink.textContent = on ? "Exit Admin" : "Admin Access";
+      document.body.classList.toggle("ed-book-admin", on);
+      syncAdminLink();
       if (main) setEditing(on);
     });
     nav.appendChild(adminLink);
     return true;
   }
+
+  window.addEventListener("kreth-admin-change", (e) => {
+    const on = !!(e.detail && e.detail.admin);
+    syncAdminLink();
+    if (main) setEditing(on);
+  });
 
   const linkPoll = setInterval(() => {
     if (ensureAdminLink()) clearInterval(linkPoll);

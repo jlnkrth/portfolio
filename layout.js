@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "34";
+  var CHROME_CACHE_VERSION = "35";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -74,7 +74,7 @@
       }
     } catch (_) {}
 
-    fetch("/data/notes.json")
+    fetch("/data/notes.json?v=2")
       .then(function (response) {
         if (!response.ok) throw new Error("Could not load the article archive");
         return response.json();
@@ -842,7 +842,7 @@
         loadScript("/availability.js"),
         loadScript("/now-playing.js?v=14"),
         loadScript("/admin-auth.js?v=13"),
-        loadScript("/nav-preview.js?v=8"),
+        loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
         loadScript("/sidebar-preview.js?v=8"),
         loadScript("/avatar.js?v=1"),

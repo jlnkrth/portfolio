@@ -898,19 +898,27 @@ code {
 .idx-list {
   display: flex;
   flex-direction: column;
-  max-width: 280px;
+  width: 100%;
+  max-width: 36rem;
   font-family: var(--font-mono);
   font-size: 12px;
+  line-height: 1.4;
 }
 
 .idx-list__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
+  column-gap: 1rem;
+  align-items: baseline;
+  min-height: 1.5rem;
+  padding: 0.2rem 0;
   color: var(--gray9);
   text-decoration: none;
   transition: color 0.15s ease;
+}
+
+.idx-list__row > :first-child {
+  min-width: 0;
 }
 
 a.idx-list__row:hover {
@@ -920,6 +928,9 @@ a.idx-list__row:hover {
 .idx-list__count,
 .idx-list__status {
   color: var(--gray8);
+  text-align: right;
+  justify-self: end;
+  overflow-wrap: anywhere;
 }
 
 .idx-list__row--total {

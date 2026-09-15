@@ -1631,11 +1631,17 @@
     ]
   },
   "notes": {
-    "label": "Rabbit Hole",
+    "label": "Archive",
     "path": "/notes/",
-    "count": 3,
+    "count": 4,
     "previewKind": "project",
     "items": [
+      {
+        "title": "Agentic Engineering",
+        "slug": "agentic-engineering",
+        "href": "/notes/agentic-engineering/",
+        "client": "Notes"
+      },
       {
         "title": "The Best AI Will Be Free, Chinese, and Banned in America",
         "slug": "free-chinese-and-banned",

@@ -77,7 +77,7 @@
     );
   }
 
-  fetch("/data/notes.json")
+  fetch("/data/notes.json?v=2")
     .then(function (r) {
       return r.json();
     })

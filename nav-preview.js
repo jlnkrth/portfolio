@@ -18,7 +18,7 @@ window.initNavCurrent = function initNavCurrent(root) {
 };
 
 window.initNavPreview = function initNavPreview() {
-  fetch("/data/collections.json?v=7")
+  fetch("/data/collections.json?v=8")
     .then(function (r) {
       return r.json();
     })

@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "title": "Agentic Engineering",
+      "slug": "agentic-engineering",
+      "href": "/notes/agentic-engineering/",
+      "author": "Julian Kreth",
+      "date": "2026-09-09",
+      "viewTransitionName": "note-item-3"
+    },
+    {
       "title": "The Best AI Will Be Free, Chinese, and Banned in America",
       "slug": "free-chinese-and-banned",
       "href": "/notes/free-chinese-and-banned/",

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic Engineering — Julian Kreth</title>
+    <meta
+      name="description"
+      content="The agentic stack that survives contact with reality: open skills near APIs, scrapers that explore, visual plans, screenshot QA, and ugly files for quirks and goals."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="canonical"
+      href="https://kreth.work/notes/agentic-engineering/"
+    />
+    <meta property="og:title" content="Agentic Engineering" />
+    <meta
+      property="og:description"
+      content="Open skills near APIs, scrapers that explore, visual plans, screenshot QA, and ugly files for quirks and goals."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kreth.work/notes/agentic-engineering/"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css?v=2" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <article class="article">
+          <div class="banner">
+            <div class="banner__inner">
+              <p style="margin: 0">
+                Related:
+                <a href="/notes/why-memory-management-matters-for-your-ai-agent/"
+                  >Why Memory Management Matters for Your AI Agent</a
+                >
+                &mdash; wiki first, references only.
+              </p>
+              <button class="banner__close" aria-label="Close" data-banner-close>
+                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="article-meta">
+            <span class="article-type">Playbook</span>
+          </div>
+
+          <h1>Agentic Engineering</h1>
+          <p class="article-dek">
+            Open skills near APIs, scrapers that explore, visual plans, screenshot
+            QA, and ugly files that remember what the model forgets.
+          </p>
+
+          <aside class="article-tldr" aria-label="Summary">
+            <span class="article-tldr__label">TL;DR</span>
+            <ul>
+              <li>
+                Agents need <mark class="hl hl--yellow">open skills</mark> shaped
+                like the APIs they call &mdash; not closed frameworks with magic
+                middlewares.
+              </li>
+              <li>
+                Pair those skills with reference files: quirks, templates,
+                findings, and goals the agent can read every run.
+              </li>
+              <li>
+                The stack that works: scrape &rarr; explore &rarr; gather &rarr;
+                visual plan &rarr; screenshot for QA &rarr; write it down.
+              </li>
+            </ul>
+          </aside>
+          <p class="element-caption">
+            If someone only reads one block, this should still be enough to start
+            building.
+          </p>
+
+          <p>
+            I&rsquo;ve watched a lot of teams buy an &ldquo;agent framework,&rdquo;
+            paste a giant system prompt, and wonder why the bot still invents
+            endpoints that don&rsquo;t exist. The failure mode isn&rsquo;t the model.
+            It&rsquo;s that the agent never got tools that look like the real world,
+            or files that remember last week&rsquo;s pain.
+          </p>
+          <p>
+            Inside Masse we started calling the opposite approach
+            <em class="serif-em">Agentic Engineering</em> &mdash; engineering
+            shaped around agents, not around frameworks. Resourceful. Slightly
+            chaotic. Obsessed with what actually ships. No cathedral. Just open
+            skills, scrapers, visual plans, screenshots, and a handful of markdown
+            files that tell the truth.
+          </p>
+
+          <h2>The symptoms look like a tooling problem</h2>
+          <p>
+            When an agent fails, people upgrade the model. Half the time they
+            should have upgraded the surroundings.
+          </p>
+
+          <div class="plan-table-wrap">
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <th scope="col">Symptom</th>
+                  <th scope="col">Cause</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Agent invents endpoints and field names</td>
+                  <td>No skill that mirrors the real API shape</td>
+                </tr>
+                <tr>
+                  <td>Same bug explained every Monday</td>
+                  <td>Quirks lived in Slack, never in a file the agent reads</td>
+                </tr>
+                <tr>
+                  <td>&ldquo;It said it fixed it&rdquo; with no proof</td>
+                  <td>No screenshot or visual plan skill for QA</td>
+                </tr>
+                <tr>
+                  <td>Scrape jobs hallucinate page structure</td>
+                  <td>Gathering without an explore step first</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="element-caption">
+            Treat the agent like a junior hire: when it guesses, you starved it of
+            tools and notes.
+          </p>
+
+          <h2>Skills should feel like APIs</h2>
+          <p>
+            Here&rsquo;s the rule I keep repeating:
+            <mark class="hl hl--blue">open skills beat closed frameworks</mark>
+            when those skills sit close to the APIs and CLIs the work already uses.
+            If Google Search Console has a query shape, the skill should expose that
+            shape. If Firecrawl returns markdown and links, the skill should return
+            markdown and links &mdash; not a proprietary &ldquo;DocumentObject.&rdquo;
+          </p>
+          <p>
+            Closed stacks feel productive for a week. Then you need one weird
+            header, one auth quirk, one pagination edge case, and you&rsquo;re
+            fighting the framework instead of teaching the agent. Open skills you
+            can fork. You can paste the failing request into the skill file. You
+            can version them next to the repo the agent works in.
+          </p>
+          <p class="rule-note">
+            If a skill can&rsquo;t be explained as &ldquo;thin wrapper around X,&rdquo;
+            it&rsquo;s already too clever.
+          </p>
+
+          <h2>The stack that survives contact</h2>
+          <p>
+            The perfect agentic engineering stack is boring on purpose. Five
+            layers, each one a skill or a file the agent can touch.
+          </p>
+
+          <div class="idx-list">
+            <div class="idx-list__row">
+              <span>1. Scrape / browse</span>
+              <span class="idx-list__count">Firecrawl or similar</span>
+            </div>
+            <div class="idx-list__row">
+              <span>2. Explore surroundings</span>
+              <span class="idx-list__count">map what exists</span>
+            </div>
+            <div class="idx-list__row">
+              <span>3. Gather for the task</span>
+              <span class="idx-list__count">narrow the evidence</span>
+            </div>
+            <div class="idx-list__row">
+              <span>4. Visual plan</span>
+              <span class="idx-list__count">show the approach</span>
+            </div>
+            <div class="idx-list__row">
+              <span>5. Screenshot QA</span>
+              <span class="idx-list__count">prove the change</span>
+            </div>
+            <span class="idx-list__divider" aria-hidden="true"></span>
+            <div class="idx-list__row idx-list__row--total">
+              <span>Always-on: quirks, templates, findings, goals</span>
+              <span class="idx-list__count">files, not vibes</span>
+            </div>
+          </div>
+          <p class="element-caption">
+            Scrape without explore is guessing. Explore without gather is tourism.
+            Plans without screenshots are fan fiction.
+          </p>
+
+          <figure class="arch-diagram">
+            <div class="arch-diagram__eyebrow">Run loop</div>
+            <div class="arch-diagram__frame">
+              <pre class="mermaid">
+flowchart LR
+  A[Scrape] --> B[Explore]
+  B --> C[Gather]
+  C --> D[Visual plan]
+  D --> E[Screenshot QA]
+  E --> F[Update findings]
+  F --> A
+  G[Quirks + templates + goals] -.-> C
+  G -.-> D
+              </pre>
+            </div>
+          </figure>
+          <p class="element-caption">
+            The loop matters more than any single tool. Findings feed the next
+            scrape.
+          </p>
+
+          <h2>Scrape, then explore, then gather</h2>
+          <p>
+            Firecrawl (or anything in that family) is the doorway. You need raw
+            pages, maps of URLs, structured extracts when the schema is clear.
+            But scraping alone is how agents invent a site map from three lucky
+            hits.
+          </p>
+          <p>
+            So you split the work into two skills on purpose:
+          </p>
+          <ol>
+            <li>
+              <strong>Explore</strong> &mdash; what exists around the target?
+              Routes, folders, sibling pages, related APIs.
+            </li>
+            <li>
+              <strong>Gather</strong> &mdash; given a specific task, pull only the
+              evidence that moves that task forward.
+            </li>
+          </ol>
+          <p>
+            Explore answers &ldquo;what neighborhood am I in?&rdquo; Gather answers
+            &ldquo;what do I need for this ticket?&rdquo; Mix them and the agent
+            either over-fetches or under-reads. Keep them separate and you can
+            reuse explore output across three gather passes without paying for the
+            tour again.
+          </p>
+
+          <div class="bar-chart" aria-label="Context quality by stack">
+            <p class="bar-chart__title">Where agents get useful context</p>
+            <div class="bar-chart__group">
+              <div class="bar-chart__label">Prompt-only</div>
+              <div class="bar-chart__row">
+                <span class="bar-chart__name">Useful signal</span>
+                <span class="bar-chart__track"
+                  ><span class="bar-chart__bar" style="width: 18%"></span
+                ></span>
+                <span class="bar-chart__value">18%</span>
+              </div>
+            </div>
+            <div class="bar-chart__group">
+              <div class="bar-chart__label">Scrape only</div>
+              <div class="bar-chart__row">
+                <span class="bar-chart__name">Useful signal</span>
+                <span class="bar-chart__track"
+                  ><span class="bar-chart__bar" style="width: 42%"></span
+                ></span>
+                <span class="bar-chart__value">42%</span>
+              </div>
+            </div>
+            <div class="bar-chart__group">
+              <div class="bar-chart__label">Explore + gather + files</div>
+              <div class="bar-chart__row">
+                <span class="bar-chart__name">Useful signal</span>
+                <span class="bar-chart__track"
+                  ><span
+                    class="bar-chart__bar bar-chart__bar--accent"
+                    style="width: 86%"
+                  ></span
+                ></span>
+                <span class="bar-chart__value">86%</span>
+              </div>
+            </div>
+          </div>
+          <p class="element-caption">
+            Illustrative, not a lab study &mdash; but it matches what we see when
+            the same model gets better surroundings.
+          </p>
+
+          <h2>Documentation skills: plans and screenshots</h2>
+          <p>
+            Agents that can&rsquo;t show their work will lie politely. Two skills
+            fix most of that:
+          </p>
+          <p>
+            A <strong>visual plan</strong> skill forces the agent to draw the
+            approach before it edits &mdash; layout, sequence, risks, what
+            &ldquo;done&rdquo; looks like. You review the plan the same way you
+            review a PR description, except it&rsquo;s visual enough that gaps jump
+            out.
+          </p>
+          <p>
+            A <strong>screenshot</strong> skill is for QA and reporting. Before
+            and after. Broken state and fixed state. The agent attaches proof
+            instead of narrating confidence. This is also how you keep humans in
+            the loop without making them re-run the whole session.
+          </p>
+          <p>
+            Together they are the documentation layer of Agentic Engineering:
+            not a Confluence page nobody opens, but artifacts produced in the same
+            run as the work.
+          </p>
+
+          <h2>The files that keep the agent honest</h2>
+          <p>
+            Tools move tokens. Files hold judgment. The minimum set we keep next
+            to agent work:
+          </p>
+
+          <div class="idx-terms">
+            <div class="idx-term">
+              <span class="idx-term__name"><code class="code-chip">quirks.md</code></span>
+              <p class="idx-term__def">
+                Weird edges that already bit us &mdash; auth dances, null fields,
+                pagination surprises.
+              </p>
+            </div>
+            <div class="idx-term">
+              <span class="idx-term__name"><code class="code-chip">templates/</code></span>
+              <p class="idx-term__def">
+                Known-good shapes for tickets, reports, and PRs so the agent
+                starts from something that already works.
+              </p>
+            </div>
+            <div class="idx-term">
+              <span class="idx-term__name"><code class="code-chip">findings.md</code></span>
+              <p class="idx-term__def">
+                Running notes from this week so the next session doesn&rsquo;t
+                rediscover the same dead end.
+              </p>
+            </div>
+            <div class="idx-term">
+              <span class="idx-term__name"><code class="code-chip">goals.md</code></span>
+              <p class="idx-term__def">
+                What &ldquo;done&rdquo; looks like &mdash; specific enough that a
+                screenshot can falsify it.
+              </p>
+            </div>
+          </div>
+          <p class="element-caption">
+            Name them whatever you want. Keep the jobs. Instructions without these
+            files are just hope.
+          </p>
+
+          <p>
+            Quirks are the API oddities, the auth dance, the field that&rsquo;s
+            sometimes null on Tuesdays. Templates are the known-good shapes for
+            tickets, reports, PRs. Findings are running notes so the next agent
+            session doesn&rsquo;t rediscover the same dead end. Goals are the
+            scoreboard &mdash; specific enough that a screenshot can falsify them.
+          </p>
+
+          <div
+            class="code-block"
+            data-copy="BEFORE YOU TOUCH CODE:&#10;1. Read goals.md — what does done look like?&#10;2. Skim quirks.md for the surface you are about to call.&#10;3. Explore, then gather. Do not scrape blind.&#10;4. Draft a visual plan. Wait for a human if risk is high.&#10;5. Ship, then screenshot. Append findings.md.&#10;6. Never invent an API field. Open the skill or the docs."
+          >
+            <button class="copy-button" aria-label="Copy code" data-copy-btn>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+            </button>
+            <pre class="code-block__pre"><code>BEFORE YOU TOUCH CODE:
+1. Read goals.md — what does done look like?
+2. Skim quirks.md for the surface you are about to call.
+3. Explore, then gather. Do not scrape blind.
+4. Draft a visual plan. Wait for a human if risk is high.
+5. Ship, then screenshot. Append findings.md.
+6. Never invent an API field. Open the skill or the docs.</code></pre>
+          </div>
+          <p class="element-caption">
+            Paste this into the agent brief. Short enough to survive a context
+            trim.
+          </p>
+
+          <h2>Extra tip: docs, sheets, and the company wiki</h2>
+          <p>
+            Agents waste hours regenerating tables that should have been a sheet
+            edit. Use a Workspace CLI when you need fast sheet and doc generation
+            or surgical edits &mdash; in our setup that&rsquo;s
+            <code class="code-chip">gws</code>. The agent should call it the way a
+            human would: create a tab, append a row, fix one cell, move on.
+          </p>
+
+          <div
+            class="idx-command"
+            data-copy="gws sheets append --spreadsheet $SHEET_ID --range 'Findings!A:D' --values '[[\"2026-09-09\",\"auth quirk\",\"token refresh needs 2s sleep\",\"quirks.md\"]]'"
+          >
+            <div class="idx-command__bar">
+              <code class="idx-command__code"
+                ><span class="idx-command__prompt">gws</span> sheets append
+                &hellip; Findings!A:D</code
+              >
+              <button class="copy-button" aria-label="Copy code" data-copy-btn>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path
+                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="idx-command__caption">
+              <span
+                >Prefer appends and patches over rewriting a whole workbook from
+                chat.</span
+              >
+            </div>
+          </div>
+          <p class="element-caption">
+            Same idea for docs: edit the section, don&rsquo;t regenerate the
+            manuscript.
+          </p>
+
+          <p>
+            And wire in your
+            <mark class="hl hl--green">company wiki</mark> as a first-class
+            source. Agents that only see the ticket will invent policy. Agents that
+            can search the wiki for how your team already solved auth, naming, or
+            QA will sound like they work here. Point the gather skill at the wiki
+            the same way you point it at the codebase.
+          </p>
+
+          <h2>What this looks like on a real ticket</h2>
+          <p>
+            Say the ticket is &ldquo;fix the client report that loses three rows
+            on export.&rdquo; Agentic Engineering doesn&rsquo;t start with a
+            40-line prompt. It starts with explore on the report route and the
+            export handler, gather on the failing fixture, a skim of
+            <code class="code-chip">quirks.md</code> for known CSV edges, a visual
+            plan of the fix, the code change, then a screenshot of the export
+            preview with the three rows present. Findings get a line. Goals get
+            checked off. Next week&rsquo;s agent inherits the lesson.
+          </p>
+          <p>
+            That&rsquo;s the whole pitch. Frameworks age. Open skills and ugly
+            files compound.
+          </p>
+
+          <p>
+            If you only do one thing after reading this: pick a single API your
+            agents already abuse, wrap it in an open skill that matches the real
+            request shape, and create an empty
+            <code class="code-chip">quirks.md</code> next to it. The rest of the
+            stack gets easier once those two exist.
+          </p>
+
+          <p>
+            <a class="cta-link" href="/notes/why-memory-management-matters-for-your-ai-agent/"
+              >Next: keep that memory in a wiki the agent can actually update</a
+            >
+          </p>
+
+          <nav class="article-nav">
+            <a href="/notes/">
+              <span class="nav-label">Back</span>
+              <span class="nav-title">All notes</span>
+            </a>
+            <a href="/notes/free-chinese-and-banned/">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Free, Chinese, and Banned</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js?v=35"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>
