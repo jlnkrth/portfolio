@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- DRAFT: remove noindex + list on notes/index.html (data/notes.json), homepage Writing, and neighbor nav before publish -->
+    <!--
+      DRAFT NOTES — verify before publish (repo has no record of the workbench internals):
+      - Command names (/masse:brief, /masse:audit, /masse:handoff) are placeholders. Swap in the real ones.
+      - Marketplace repo (masse/claude-plugins) and plugin version in the plugin.json example are placeholders.
+      - The bundled MCP list assumes Asana + gsc-mcp-server + wiki. Confirm.
+      - "What changed" claims are qualitative on purpose; add real numbers if we have them (onboarding time, PR count on the plugin repo, etc.).
+    -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>We Packed Our Whole Agency Into a Claude Code Plugin — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Fifty people, one install command. What Claude Code plugins actually are, and a tour of the Masse Workbench."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/notes/masse-workbench-claude-code-plugin/" />
+    <meta property="og:title" content="We Packed Our Whole Agency Into a Claude Code Plugin" />
+    <meta
+      property="og:description"
+      content="Fifty people, one install command. What Claude Code plugins actually are, and a tour of the Masse Workbench."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kreth.work/notes/masse-workbench-claude-code-plugin/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              Related:
+              <a href="/notes/learn-to-code-unstoppable/">why experts should learn the basics of code</a>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Case study</span>
+        </div>
+
+        <h1>We Packed Our Whole Agency Into a Claude Code Plugin</h1>
+        <p class="article-dek">
+          Fifty people, one install command. What Claude Code plugins actually
+          are, and a tour of the Masse Workbench.
+        </p>
+
+        <p>
+          For most of last year, &ldquo;setting up Claude Code&rdquo; at Masse
+          meant a Slack DM to me. I&rsquo;d send someone a zip of prompt
+          files, a JSON snippet for the MCP servers, and a fifteen-minute
+          Loom. Two weeks later their setup had drifted from everyone
+          else&rsquo;s, and the agent that worked great on my machine gave
+          them mediocre output. With 50+ people across the world, I was the
+          bottleneck and the bug.
+        </p>
+        <p>
+          The fix was to stop distributing our setup as advice and start
+          distributing it as software. Everything we know about running
+          agents at Masse now lives in one Claude Code plugin, the
+          <strong>Masse Workbench</strong>, and installing it takes one
+          command. This piece explains what a plugin actually is, what we put
+          in ours, and what changed when &ldquo;how we work&rdquo; became a
+          versioned artifact instead of tribal knowledge.
+        </p>
+
+        <h2>Failure mode</h2>
+        <p>
+          The hand-rolled era failed quietly, the way config drift always
+          does. Nothing crashed. Output just got inconsistent, and nobody
+          could say why, because no two machines were running the same
+          instructions.
+        </p>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col">Symptom</th>
+                <th scope="col">Cause</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Same task, wildly different agent output per person</td>
+                <td>Everyone&rsquo;s <code class="code-chip">CLAUDE.md</code> was a personal fork of a fork</td>
+              </tr>
+              <tr>
+                <td>&ldquo;The agent can&rsquo;t see Asana&rdquo; tickets every week</td>
+                <td>MCP config pasted by hand, keys and paths wrong in new ways each time</td>
+              </tr>
+              <tr>
+                <td>Prompt improvements never reached the team</td>
+                <td>Fixes lived on the fixer&rsquo;s machine; there was no update channel</td>
+              </tr>
+              <tr>
+                <td>Onboarding a new hire took a call with me</td>
+                <td>The setup existed as a person, not as a package</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">Config drift never pages you. It just quietly makes everyone slightly worse.</p>
+
+        <h2>What a plugin actually is</h2>
+        <p>
+          Claude Code plugins solve exactly this. A plugin is a folder in a
+          git repo with a manifest at
+          <code class="code-chip">.claude-plugin/plugin.json</code>, and it
+          can carry five kinds of cargo: slash commands, subagents, skills,
+          hooks, and MCP server configs. Whatever the plugin ships shows up
+          in every installer&rsquo;s Claude Code as if they&rsquo;d written
+          it themselves.
+        </p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>.claude-plugin/plugin.json</span><span class="idx-list__status">[ name, version, author ]</span></div>
+          <div class="idx-list__row"><span>commands/</span><span class="idx-list__status">[ slash commands, one .md each ]</span></div>
+          <div class="idx-list__row"><span>agents/</span><span class="idx-list__status">[ subagents with their own prompts ]</span></div>
+          <div class="idx-list__row"><span>skills/</span><span class="idx-list__status">[ SOPs the agent loads on demand ]</span></div>
+          <div class="idx-list__row"><span>hooks/</span><span class="idx-list__status">[ scripts that run on agent events ]</span></div>
+          <div class="idx-list__row"><span>.mcp.json</span><span class="idx-list__status">[ MCP servers, preconfigured ]</span></div>
+        </div>
+        <p class="element-caption">The whole format is folders of markdown and JSON. If you can write an SOP, you can write a plugin.</p>
+        <p>
+          Distribution runs through marketplaces, which sounds grander than
+          it is: a marketplace is just another git repo with a
+          <code class="code-chip">.claude-plugin/marketplace.json</code>
+          listing plugins. Ours is private. A new teammate adds it once, then
+          installs:
+        </p>
+        <div class="install-code" data-copy="/plugin marketplace add masse/claude-plugins&#10;/plugin install masse-workbench@masse">
+          <code>/plugin install masse-workbench@masse</code>
+          <button class="copy-button" aria-label="Copy command" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+        <p class="element-caption">Copy includes the marketplace add. That command replaced my fifteen-minute Loom.</p>
+        <p>
+          The manifest is small enough to read in full. This is the entire
+          contract between the plugin and Claude Code:
+        </p>
+        <div
+          class="code-block"
+          data-copy="{&#10;  &quot;name&quot;: &quot;masse-workbench&quot;,&#10;  &quot;description&quot;: &quot;Masse's commands, skills, and MCP servers for Claude Code&quot;,&#10;  &quot;version&quot;: &quot;1.4.0&quot;,&#10;  &quot;author&quot;: { &quot;name&quot;: &quot;Masse&quot; }&#10;}"
+        >
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>{
+  "name": "masse-workbench",
+  "description": "Masse's commands, skills, and MCP servers for Claude Code",
+  "version": "1.4.0",
+  "author": { "name": "Masse" }
+}</code></pre>
+        </div>
+        <p class="element-caption">Everything else is convention: Claude Code discovers the folders next to the manifest.</p>
+
+        <h2>Inside the workbench</h2>
+        <p>
+          The workbench carries three layers, and each one replaced something
+          we used to distribute by hand.
+        </p>
+        <p>
+          <strong>Commands</strong> are the entry points. They&rsquo;re
+          namespaced by plugin, so the team gets
+          <code class="code-chip">/masse:brief</code> to turn a client page
+          from the wiki into a working brief,
+          <code class="code-chip">/masse:audit</code> to run a search
+          performance pass, and <code class="code-chip">/masse:handoff</code>
+          to package a thread&rsquo;s state for the next person. Each command
+          is a markdown file. When someone improves a prompt, that&rsquo;s a
+          pull request, and the whole team gets it in the next version.
+        </p>
+        <p>
+          <strong>Skills</strong> are where the SOPs went. The checklists our
+          senior people carried in their heads are now files the agent loads
+          when the task calls for them, written in the same
+          stop-and-classify style as our
+          <a href="/notes/why-memory-management-matters-for-your-ai-agent/">memory rules</a>.
+          This is the layer that took real work, because writing down what an
+          expert actually does is harder than any of the plumbing.
+        </p>
+        <p>
+          <strong>MCP servers</strong> are the hands. The plugin ships
+          preconfigured connections to Asana, to our wiki, and to Search
+          Console through
+          <a href="/projects/gsc-mcp-server/"><code class="code-chip">gsc-mcp-server</code></a>,
+          so nobody pastes JSON configs anymore. Install the plugin and the
+          agent can already see the tools it needs.
+        </p>
+        <p>Here&rsquo;s what one command run looks like with all three layers working:</p>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">One run of /masse:audit</p>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">sequenceDiagram
+    participant User
+    participant CC as claude_code
+    participant Skill as audit_skill
+    participant GSC as gsc_mcp_server
+    participant Asana
+
+    User->>CC: /masse:audit client-site.com
+    CC->>Skill: load audit SOP from plugin
+    CC->>GSC: gsc_search_analytics (clicks, position, CTR)
+    GSC-->>CC: last 90 days of search data
+    CC->>CC: run the checklist against the data
+    CC->>Asana: create tasks for each finding
+    CC-->>User: summary + links to the tasks</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            The command supplies the trigger, the skill supplies the judgment, MCP supplies the hands.
+          </figcaption>
+        </figure>
+
+        <h2>What changed</h2>
+        <p>
+          Setup stopped being a conversation. A new hire runs two commands
+          and has the same working environment as the person who&rsquo;s been
+          here three years, which killed the &ldquo;works on my
+          machine&rdquo; class of prompt bugs outright.
+        </p>
+        <p>
+          Improvements started compounding instead of scattering. Before, a
+          better prompt died on the machine of whoever wrote it. Now every
+          fix is a commit, every release is a version bump, and
+          <code class="code-chip">/plugin update</code> ships it to everyone.
+          We review prompt changes the way we review code, because they
+          finally live where code lives.
+        </p>
+        <p>
+          And the plugin became our onboarding document without meaning to.
+          When someone asks how we run an audit, the honest answer is
+          &ldquo;read the skill file.&rdquo; The workbench is the current,
+          executable version of how Masse works, and it can never drift from
+          practice, because it <em>is</em> the practice.
+        </p>
+
+        <p>
+          The lesson generalizes past Claude Code. Any knowledge your team
+          distributes as advice will drift; knowledge distributed as a
+          versioned package stays true. If your best practices live in
+          people&rsquo;s heads and Looms, put them in a plugin. It&rsquo;s
+          folders of markdown. You already know how to write those.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/learn-to-code-unstoppable/">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">You Should Learn How to Code</span>
+          </a>
+          <a href="/notes/">
+            <span class="nav-label">Back</span>
+            <span class="nav-title">All notes</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>
