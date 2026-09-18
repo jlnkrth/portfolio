@@ -102,6 +102,38 @@ for (const dir of ROOT_DIRS) {
   copied += 1;
 }
 
+// Emit draft index from noindex notes so preview hosts can list them.
+{
+  const { execFileSync } = await import("node:child_process");
+  const { writeFileSync } = await import("node:fs");
+  try {
+    const out = execFileSync(
+      process.execPath,
+      [join(ROOT, "scripts/list-draft-notes.mjs"), "--json"],
+      { encoding: "utf8" }
+    );
+    const drafts = JSON.parse(out);
+    const payload = {
+      items: drafts.map((d, i) => ({
+        title: d.title,
+        slug: d.slug,
+        href: d.path,
+        author: "Julian Kreth",
+        date: null,
+        draft: true,
+        viewTransitionName: "note-draft-" + i,
+      })),
+    };
+    writeFileSync(
+      join(DIST, "data", "drafts.json"),
+      JSON.stringify(payload, null, 2) + "\n"
+    );
+    console.log(`Draft notes indexed: ${payload.items.length}`);
+  } catch (err) {
+    console.warn("skip drafts.json:", err.message);
+  }
+}
+
 function countFiles(dir) {
   let n = 0;
   for (const entry of readdirSync(dir)) {

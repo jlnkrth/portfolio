@@ -376,6 +376,15 @@ a {
   white-space: nowrap;
 }
 
+.notes-archive__drafts-label {
+  margin: 1.75rem 0 0.35rem;
+  padding-top: 0.5rem;
+}
+
+.notes-archive__row--draft .notes-archive__row-title {
+  font-style: italic;
+}
+
 @media (max-width: 639px) {
   .notes-archive__row {
     flex-direction: column;
