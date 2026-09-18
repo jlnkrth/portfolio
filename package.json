@@ -6,7 +6,9 @@
     "build": "node scripts/build-dist.mjs",
     "dev": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
-    "preview": "npm run build && wrangler versions upload"
+    "preview": "npm run build && wrangler versions upload",
+    "preview:alias": "npm run build && wrangler versions upload --preview-alias",
+    "drafts": "node scripts/list-draft-notes.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.129.0"
