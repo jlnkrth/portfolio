@@ -1,4 +1,4 @@
-// Renders the notes archive list from data/notes.json
+// Renders the notes archive list from data/notes.json (+ drafts.json when present)
 (function () {
   "use strict";
 
@@ -25,14 +25,22 @@
       opts && opts.currentPath && item.href === opts.currentPath
         ? ' aria-current="page"'
         : "";
-    var meta =
-      item.author && item.date
+    var meta = item.draft
+      ? "Draft"
+      : item.author && item.date
         ? item.author + " · " + formatDate(item.date)
         : item.author || formatDate(item.date);
 
+    var rowClass =
+      "notes-archive__row" +
+      (compact ? " notes-archive__row--compact" : "") +
+      (item.draft ? " notes-archive__row--draft" : "");
+
     if (compact) {
       return (
-        '<a class="notes-archive__row notes-archive__row--compact" href="' +
+        '<a class="' +
+        rowClass +
+        '" href="' +
         item.href +
         '"' +
         name +
@@ -45,7 +53,9 @@
     }
 
     return (
-      '<a class="notes-archive__row" href="' +
+      '<a class="' +
+      rowClass +
+      '" href="' +
       item.href +
       '"' +
       name +
@@ -77,30 +87,59 @@
     );
   }
 
-  fetch("/data/notes.json?v=2")
-    .then(function (r) {
+  function render(published, drafts) {
+    var items = (published || []).slice().sort(function (a, b) {
+      return (b.date || "").localeCompare(a.date || "");
+    });
+    var draftItems = (drafts || []).slice();
+
+    listEl.className = "notes-archive";
+    var html = items
+      .map(function (item) {
+        return archiveRow(item);
+      })
+      .join("");
+
+    if (draftItems.length) {
+      html +=
+        '<p class="notes-archive__drafts-label label">Drafts on this build</p>' +
+        draftItems
+          .map(function (item) {
+            return archiveRow(item);
+          })
+          .join("");
+    }
+
+    listEl.innerHTML = html;
+
+    var allForIndex = items.concat(draftItems);
+    listEl.addEventListener("click", function (event) {
+      var clicked = event.target.closest("a.notes-archive__row");
+      if (!clicked) return;
+      try {
+        sessionStorage.setItem(
+          "kreth-notes-index-html",
+          buildIndexHtml(allForIndex)
+        );
+        sessionStorage.setItem("kreth-notes-index", "1");
+      } catch (_) {}
+    });
+  }
+
+  Promise.all([
+    fetch("/data/notes.json?v=3").then(function (r) {
       return r.json();
-    })
-    .then(function (data) {
-      var items = (data.items || []).slice().sort(function (a, b) {
-        return (b.date || "").localeCompare(a.date || "");
-      });
-
-      listEl.className = "notes-archive";
-      listEl.innerHTML = items
-        .map(function (item) {
-          return archiveRow(item);
-        })
-        .join("");
-
-      listEl.addEventListener("click", function (event) {
-        var clicked = event.target.closest("a.notes-archive__row");
-        if (!clicked) return;
-        try {
-          sessionStorage.setItem("kreth-notes-index-html", buildIndexHtml(items));
-          sessionStorage.setItem("kreth-notes-index", "1");
-        } catch (_) {}
-      });
+    }),
+    fetch("/data/drafts.json?v=1")
+      .then(function (r) {
+        return r.ok ? r.json() : { items: [] };
+      })
+      .catch(function () {
+        return { items: [] };
+      }),
+  ])
+    .then(function (pair) {
+      render(pair[0].items || [], pair[1].items || []);
     })
     .catch(function () {
       listEl.innerHTML = '<p class="muted">Could not load notes.</p>';
