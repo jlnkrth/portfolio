@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- DRAFT: remove noindex + list in data/notes.json, homepage Writing, and neighbor nav before publish -->
+    <!--
+      DRAFT NOTES — verify before publish:
+      - Confirm Codex is still in the weekly rotation (vs. occasional second opinion).
+      - Confirm Cursor Cloud Agents are a first-class path in the routing table, not a footnote.
+      - Claude Code = Masse Workbench default for the team — align wording with the plugin case study draft.
+      - Swap any job examples that don't match how you actually start a Monday.
+    -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Cursor, Codex, Claude Code: What I Use for Which — Julian Kreth</title>
+    <meta
+      name="description"
+      content="I don't rank coding agents. I route jobs: Cursor for the screen, Claude Code for the team, Codex when I want a long run I can leave alone."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="canonical"
+      href="https://kreth.work/notes/cursor-codex-claude-code-what-i-use-for-which/"
+    />
+    <meta
+      property="og:title"
+      content="Cursor, Codex, Claude Code: What I Use for Which"
+    />
+    <meta
+      property="og:description"
+      content="I don't rank coding agents. I route jobs: Cursor for the screen, Claude Code for the team, Codex when I want a long run I can leave alone."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kreth.work/notes/cursor-codex-claude-code-what-i-use-for-which/"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <article class="article">
+          <div class="banner">
+            <div class="banner__inner">
+              <p style="margin: 0">
+                <span class="banner__template">[Draft]</span>
+                Related:
+                <a href="/notes/agentic-engineering/">Agentic Engineering</a>
+                &mdash; skills and files beat frameworks.
+              </p>
+              <button class="banner__close" aria-label="Close" data-banner-close>
+                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="article-meta">
+            <span class="article-type">Playbook</span>
+          </div>
+
+          <h1>Cursor, Codex, Claude Code: What I Use for Which</h1>
+          <p class="article-dek">
+            I don&rsquo;t rank coding agents. I route jobs: Cursor for the
+            screen, Claude Code for the team, Codex when I want a long run I can
+            leave alone.
+          </p>
+
+          <aside class="article-tldr" aria-label="Summary">
+            <span class="article-tldr__label">TL;DR</span>
+            <ul>
+              <li>
+                <mark class="hl hl--yellow">Cursor</mark> when the work is
+                visual, local, or needs an editor I can steer mid-flight.
+              </li>
+              <li>
+                <mark class="hl hl--blue">Claude Code</mark> when the job should
+                match how Masse already works &mdash; plugins, skills, MCP, the
+                team&rsquo;s SOPs.
+              </li>
+              <li>
+                <mark class="hl hl--green">Codex</mark> when I want a second
+                model, a long unattended run, or a check that Claude isn&rsquo;t
+                just agreeing with itself.
+              </li>
+            </ul>
+          </aside>
+          <p class="element-caption">
+            If you only steal one thing: pick the tool from the failure mode you
+            can&rsquo;t afford, not from the model leaderboard.
+          </p>
+
+          <h2>The problem</h2>
+          <p>
+            People ask me which coding agent is &ldquo;best.&rdquo; That question
+            is broken. Best at what? Best for who? Best on Monday when you&rsquo;re
+            rewriting a landing page, or best on Thursday when fifty teammates
+            need the same Asana skill to behave the same way?
+          </p>
+          <p>
+            I keep three tools open on purpose: Cursor, Claude Code, and Codex.
+            Not because I enjoy collecting subscriptions. Because each one fails
+            differently, and the job usually tells you which failure you can live
+            with.
+          </p>
+
+          <div class="plan-table-wrap">
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <th scope="col">Symptom</th>
+                  <th scope="col">Cause</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Pretty UI, broken spacing, &ldquo;looks fine in the diff&rdquo;</td>
+                  <td>You used a terminal agent for work that needed eyes on the screen</td>
+                </tr>
+                <tr>
+                  <td>Great personal prompt, useless for the rest of the team</td>
+                  <td>You optimized for your IDE, not for a shared plugin / skill pack</td>
+                </tr>
+                <tr>
+                  <td>Agent agrees with itself for three hours and ships a confident wrong fix</td>
+                  <td>One model, one session, no second opinion</td>
+                </tr>
+                <tr>
+                  <td>You babysit a long refactor that should have been a background job</td>
+                  <td>You picked the interactive editor when you needed an unattended run</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="element-caption">
+            Most &ldquo;the model is dumb&rdquo; complaints are actually &ldquo;I
+            picked the wrong surface for the job.&rdquo;
+          </p>
+
+          <h2>The system</h2>
+          <p>
+            I route by surface, not by brand loyalty. The question isn&rsquo;t
+            which company I like this month. It&rsquo;s where the work wants to
+            live: in an editor I can poke, in the team&rsquo;s Claude Code
+            install, or in a long job I walk away from.
+          </p>
+
+          <div class="idx-list">
+            <div class="idx-list__row">
+              <span>Cursor</span>
+              <span class="idx-list__status">[ screen + steer ]</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Claude Code</span>
+              <span class="idx-list__status">[ team + SOPs ]</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Codex</span>
+              <span class="idx-list__status">[ long run + second opinion ]</span>
+            </div>
+            <span class="idx-list__divider" aria-hidden="true"></span>
+            <div class="idx-list__row idx-list__row--total">
+              <span>Leaderboard screenshots</span>
+              <span class="idx-list__count">never the router</span>
+            </div>
+          </div>
+          <p class="element-caption">
+            Three slots. If a fourth tool wants in, it has to steal a slot by
+            winning a real job, not a demo.
+          </p>
+
+          <h2>Cursor &mdash; when the screen is the product</h2>
+          <p>
+            Cursor is where I go when I need to see the thing. Portfolio pages.
+            Component spacing. A form that looks correct in HTML and wrong in the
+            browser. Anything where &ldquo;the tests passed&rdquo; is not the same
+            as &ldquo;a human will trust this.&rdquo;
+          </p>
+          <p>
+            It&rsquo;s also where I stay when I want to steer mid-flight: select
+            a block, nudge the agent, re-run, keep the editor as the cockpit.
+            Cloud Agents fit here too &mdash; async PRs against a real repo when
+            I&rsquo;m away from the keyboard but still want Cursor&rsquo;s project
+            context, not a random chat window.
+          </p>
+          <p>
+            If the job is &ldquo;make this page feel like my site,&rdquo; I open
+            Cursor. If I try to do that from a pure terminal agent, I spend the
+            savings on screenshot ping-pong.
+          </p>
+
+          <h2>Claude Code &mdash; when the team has to match</h2>
+          <p>
+            Claude Code is the Masse default for a boring reason: we already
+            packaged how we work into a plugin. Commands, skills, MCP servers,
+            hooks. One install, fifty people, same behavior. That&rsquo;s not a
+            model preference. That&rsquo;s distribution.
+          </p>
+          <p>
+            So when the job is an agency workflow &mdash; brief a client page,
+            pull Search Console, write findings back to Asana, follow the wiki
+            SOP &mdash; I start in Claude Code. Not because Anthropic won a
+            vibe check. Because the Workbench already knows our judgment, and
+            rewriting that judgment inside Cursor for one person is how config
+            drift starts.
+          </p>
+          <p>
+            Personal coding can live anywhere. Shared practice needs a package
+            the whole team updates through git.
+          </p>
+
+          <h2>Codex &mdash; when I want distance</h2>
+          <p>
+            Codex is what I reach for when I want a long job I can leave alone,
+            or when Claude Code just gave me an answer that felt a little too
+            smooth. Same prompt, different model family, different failure
+            shape. If both land in the same place, I trust it more. If they
+            diverge, I&rsquo;ve found the part that needs a human.
+          </p>
+          <p>
+            I also use it when the work is mostly mechanical and long: migrate
+            a pile of files, grind through a checklist, keep going while I&rsquo;m
+            in a meeting. Interactive editing is the wrong tax for that. An
+            unattended run with a clear done condition is cheaper.
+          </p>
+          <p>
+            One caveat I keep writing on sticky notes: both Codex and Claude
+            Code will politely route you into their own cloud when you ask for
+            boring infrastructure. Ask for an Asana-triggered worker and watch
+            them recommend themselves. That&rsquo;s capture, not advice. Route
+            around it.
+          </p>
+
+          <h2>Rules</h2>
+          <p>
+            The routing table fits on a card. If I can&rsquo;t decide in under
+            ten seconds, I&rsquo;m overthinking and should just pick Cursor and
+            start.
+          </p>
+          <div
+            class="code-block"
+            data-copy="ROUTING&#10;&#10;1. Is the output judged by eyes / layout / brand?&#10;   -> Cursor (editor + preview + Cloud Agents).&#10;&#10;2. Does the team need the same SOP, skills, MCP?&#10;   -> Claude Code (Workbench plugin).&#10;&#10;3. Is it a long unattended job or a second opinion?&#10;   -> Codex.&#10;&#10;4. If two tools claim the same job, pick the one&#10;   whose failure mode you can see fastest.&#10;&#10;NEVER:&#10;- Pick from a leaderboard screenshot.&#10;- Let the agent pick its own cloud as &quot;infrastructure.&quot;&#10;- Duplicate team SOPs into a personal IDE setup."
+          >
+            <button class="copy-button" aria-label="Copy code" data-copy-btn>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+            </button>
+            <pre class="code-block__pre"><code>ROUTING
+
+1. Is the output judged by eyes / layout / brand?
+   -> Cursor (editor + preview + Cloud Agents).
+
+2. Does the team need the same SOP, skills, MCP?
+   -> Claude Code (Workbench plugin).
+
+3. Is it a long unattended job or a second opinion?
+   -> Codex.
+
+4. If two tools claim the same job, pick the one
+   whose failure mode you can see fastest.
+
+NEVER:
+- Pick from a leaderboard screenshot.
+- Let the agent pick its own cloud as "infrastructure."
+- Duplicate team SOPs into a personal IDE setup.</code></pre>
+          </div>
+          <p class="element-caption">
+            Copy this into a note next to your dock. The point is speed, not
+            purity.
+          </p>
+
+          <h2>A week in practice</h2>
+          <p>
+            Here&rsquo;s what the router looks like when it&rsquo;s working,
+            instead of when I&rsquo;m arguing about models on the internet.
+          </p>
+          <div class="idx-list">
+            <div class="idx-list__row">
+              <span>Portfolio / UI polish</span>
+              <span class="idx-list__count">Cursor</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Client audit via Workbench</span>
+              <span class="idx-list__count">Claude Code</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Overnight file migration</span>
+              <span class="idx-list__count">Codex</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Same bug, two answers disagree</span>
+              <span class="idx-list__count">Claude + Codex</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Async PR while I&rsquo;m offline</span>
+              <span class="idx-list__count">Cursor Cloud</span>
+            </div>
+          </div>
+          <p class="element-caption">
+            The labels are boring on purpose. Boring means you can teach it.
+          </p>
+
+          <ol>
+            <li>Name the job in one sentence, including how you&rsquo;ll know it&rsquo;s done.</li>
+            <li>Run the routing card. Don&rsquo;t negotiate with yourself.</li>
+            <li>If the first tool stalls twice on the same mistake, switch tools before you rewrite the prompt again.</li>
+            <li>Write one line in <code class="code-chip">findings.md</code> if the wrong tool taught you something.</li>
+          </ol>
+
+          <h2>What changed in practice</h2>
+          <p>
+            I stopped having a favorite. That sounds small. It saved me from
+            the expensive habit of forcing every job through whichever agent I
+            was emotionally loyal to that month.
+          </p>
+          <p>
+            UI work got faster because I stopped asking a terminal agent to
+            invent taste. Team work got more consistent because Claude Code
+            stayed the package everyone installs, not my personal Cursor
+            profile with secret sauce. Long jobs stopped eating my afternoon
+            because Codex (or a Cloud Agent) could grind while I did something
+            else.
+          </p>
+          <p>
+            And when two agents disagree, I finally have a useful signal
+            instead of vibes. Disagreement is the bug report. Agreement across
+            model families is the closest thing I get to confidence without a
+            test suite.
+          </p>
+          <p>
+            If you only change one habit: write your own three-line router, tape
+            it next to the dock, and refuse to open a fourth tool until it beats
+            one of the three on a real ticket. The model race will keep moving.
+            Your failure modes won&rsquo;t.
+          </p>
+
+          <nav class="article-nav">
+            <a href="/notes/">
+              <span class="nav-label">Back</span>
+              <span class="nav-title">All notes</span>
+            </a>
+            <a href="/notes/agentic-engineering/">
+              <span class="nav-label">Related</span>
+              <span class="nav-title">Agentic Engineering</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>
