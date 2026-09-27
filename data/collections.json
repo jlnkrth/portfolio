@@ -146,7 +146,7 @@
   "books": {
     "label": "Books",
     "path": "/books/",
-    "count": 217,
+    "count": 218,
     "previewKind": "book",
     "items": [
       {
@@ -1444,6 +1444,12 @@
         "slug": "unreasonable-hospitality",
         "href": "/books/unreasonable-hospitality/",
         "image": "/assets/books/unreasonable-hospitality.jpg"
+      },
+      {
+        "title": "The Alchemist",
+        "slug": "the-alchemist",
+        "href": "/books/the-alchemist/",
+        "image": "/assets/books/the-alchemist.avif"
       },
       {
         "title": "Coming Soon",
