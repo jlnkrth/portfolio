@@ -2,8 +2,13 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "35";
+  var CHROME_CACHE_VERSION = "36";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
+  var NOTES_DESKTOP_MQ = "(min-width: 1280px)";
+
+  function isNotesDesktopLayout() {
+    return window.matchMedia(NOTES_DESKTOP_MQ).matches;
+  }
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
@@ -64,6 +69,7 @@
       initNotesIndexArticleShell(layoutEl, rootEl);
       initNotesIndexNavigation(layoutEl);
       initNotesIndexToc(layoutEl, rootEl.querySelector(".article"));
+      initArticleMobileBar(layoutEl, rootEl.querySelector(".article"));
     }
 
     try {
@@ -235,15 +241,15 @@
       setNotesIndexExpanded(layoutEl, isExpanded);
     });
 
-    // The page itself never scrolls in this layout; undo any restored offset
-    // so the pinned card sits exactly where the CSS expects it. Scroll
-    // restoration runs after load, so reset again then.
-    window.scrollTo(0, 0);
-    window.addEventListener("load", function () {
+    // Desktop card layout owns scrolling. On smaller viewports the page
+    // scrolls normally (aihero-style mobile reading).
+    if (isNotesDesktopLayout()) {
       window.scrollTo(0, 0);
-    });
-
-    bindNotesAutoMaximize(layoutEl, scroller, article);
+      window.addEventListener("load", function () {
+        window.scrollTo(0, 0);
+      });
+      bindNotesAutoMaximize(layoutEl, scroller, article);
+    }
   }
 
   function setNotesIndexExpanded(layoutEl, isExpanded) {
@@ -489,27 +495,77 @@
       });
     });
 
-    var html =
-      '<aside class="notes-toc-wrap article-shell__toc" aria-label="In this article"><div class="notes-toc-inner toc-collapsed">' +
-      '<div class="toc-label">In this article</div><ul class="toc-list">';
+    var railItems = "";
+    var mobileItems = "";
     tocSections.forEach(function (section, i) {
-      html +=
+      var active = i === 0 ? " active" : "";
+      var title = escapeHtml(section.text);
+      railItems +=
         '<li class="toc-item' +
-        (i === 0 ? " active" : "") +
+        active +
         '"><a href="#' +
         section.id +
         '" class="toc-a" title="' +
-        escapeHtml(section.text) +
+        title +
         '"><div class="toc-line"></div><div class="toc-text"><span class="toc-text-inner">' +
-        escapeHtml(section.text) +
+        title +
         "</span></div></a></li>";
+      mobileItems +=
+        '<li class="notes-toc-mobile__item' +
+        active +
+        '"><a href="#' +
+        section.id +
+        '" class="notes-toc-mobile__link toc-a" title="' +
+        title +
+        '">' +
+        title +
+        "</a></li>";
     });
-    html += "</ul></div></aside>";
 
-    scroller.insertAdjacentHTML("beforebegin", html);
+    var html =
+      '<aside class="notes-toc-wrap article-shell__toc" aria-label="In this article">' +
+      '<div class="notes-toc-inner toc-collapsed notes-toc-inner--rail">' +
+      '<div class="toc-label">In this article</div><ul class="toc-list">' +
+      railItems +
+      "</ul></div>" +
+      '<details class="notes-toc-mobile">' +
+      '<summary class="notes-toc-mobile__summary">' +
+      '<svg class="notes-toc-mobile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<line x1="4" x2="20" y1="6" y2="6"></line>' +
+      '<line x1="4" x2="20" y1="12" y2="12"></line>' +
+      '<line x1="4" x2="20" y1="18" y2="18"></line>' +
+      "</svg>" +
+      '<span class="notes-toc-mobile__label">On this page</span>' +
+      '<svg class="notes-toc-mobile__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<polyline points="6 9 12 15 18 9"></polyline>' +
+      "</svg>" +
+      "</summary>" +
+      '<ul class="notes-toc-mobile__list">' +
+      mobileItems +
+      "</ul></details></aside>";
 
-    var tocWrap = shell.querySelector(".article-shell__toc");
-    var tocInner = tocWrap.querySelector(".notes-toc-inner");
+    // Mobile: TOC sits in document flow under the title block (aihero).
+    // Desktop: keep it as a sibling of the scroller for the absolute rail.
+    if (isNotesDesktopLayout()) {
+      scroller.insertAdjacentHTML("beforebegin", html);
+    } else {
+      // Title → dek → On this page → TL;DR / body (matches aihero order).
+      var mountAfter =
+        article.querySelector(".article-dek") ||
+        article.querySelector("h1") ||
+        article.querySelector(".article-meta");
+      if (mountAfter) {
+        mountAfter.insertAdjacentHTML("afterend", html);
+      } else {
+        article.insertAdjacentHTML("afterbegin", html);
+      }
+    }
+
+    var tocWrap =
+      shell.querySelector(".article-shell__toc") ||
+      article.querySelector(".article-shell__toc");
+    var tocInner = tocWrap.querySelector(".notes-toc-inner--rail");
+    var mobileToc = tocWrap.querySelector(".notes-toc-mobile");
     var activeLink = tocWrap.querySelector(".toc-a");
     var isScrolling = false;
     var scrollTimer;
@@ -525,19 +581,20 @@
 
     function setActiveSection(sectionEl) {
       if (!sectionEl) return;
-      var link = tocWrap.querySelector('a[href="#' + sectionEl.id + '"]');
-      if (link === activeLink) return;
+      var links = tocWrap.querySelectorAll('a[href="#' + sectionEl.id + '"]');
+      if (!links.length) return;
+      var primary = links[0];
+      if (primary === activeLink) return;
       requestAnimationFrame(function () {
-        if (activeLink) {
-          var prevItem = activeLink.closest(".toc-item");
-          if (prevItem) prevItem.classList.remove("active");
-        }
+        tocWrap.querySelectorAll(".toc-item.active, .notes-toc-mobile__item.active").forEach(function (item) {
+          item.classList.remove("active");
+        });
         requestAnimationFrame(function () {
-          if (link) {
-            var nextItem = link.closest(".toc-item");
-            if (nextItem) nextItem.classList.add("active");
-            activeLink = link;
-          }
+          links.forEach(function (link) {
+            var item = link.closest(".toc-item, .notes-toc-mobile__item");
+            if (item) item.classList.add("active");
+          });
+          activeLink = primary;
         });
       });
     }
@@ -548,12 +605,13 @@
       if (!link || !link.hash) return;
       event.preventDefault();
       if (link.hash === "#" + introId && hasIntro) {
-        if (scroller) {
+        if (isNotesDesktopLayout() && scroller) {
           scroller.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
         setActiveSection(introSection);
+        if (mobileToc) mobileToc.open = false;
         return;
       }
       var target = document.querySelector(link.hash);
@@ -565,8 +623,10 @@
       }, 2000);
       target.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveSection(target);
+      if (mobileToc) mobileToc.open = false;
     });
 
+    var observerRoot = isNotesDesktopLayout() ? scroller : null;
     var observer = new IntersectionObserver(
       function (entries) {
         if (isScrolling) return;
@@ -592,18 +652,70 @@
           }
         }
       },
-      { root: scroller, threshold: [0], rootMargin: "0% 0% -50% 0%" }
+      { root: observerRoot, threshold: [0], rootMargin: "0% 0% -50% 0%" }
     );
 
     tocSections.forEach(function (section) {
       observer.observe(section.el);
     });
 
-    tocInner.addEventListener("mouseenter", function () {
-      tocInner.classList.add("transitioning");
-      setTimeout(function () {
-        tocInner.classList.remove("transitioning");
-      }, 350);
+    if (tocInner) {
+      tocInner.addEventListener("mouseenter", function () {
+        tocInner.classList.add("transitioning");
+        setTimeout(function () {
+          tocInner.classList.remove("transitioning");
+        }, 350);
+      });
+    }
+  }
+
+  function initArticleMobileBar(layoutEl, article) {
+    if (!layoutEl || !article || document.querySelector(".article-mobile-bar")) return;
+    if (isNotesDesktopLayout()) return;
+
+    var titleEl = article.querySelector("h1");
+    var title = titleEl ? titleEl.textContent.replace(/\s+/g, " ").trim() : "Article";
+    var typeEl = article.querySelector(".article-type");
+    var eyebrow = typeEl
+      ? typeEl.textContent.replace(/\s+/g, " ").trim()
+      : "Archive";
+
+    var bar = document.createElement("nav");
+    bar.className = "article-mobile-bar";
+    bar.setAttribute("aria-label", "Article");
+    bar.innerHTML =
+      '<a class="article-mobile-bar__menu" href="/notes/" aria-label="Open the Archive">' +
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<line x1="4" x2="20" y1="6" y2="6"></line>' +
+      '<line x1="4" x2="20" y1="12" y2="12"></line>' +
+      '<line x1="4" x2="20" y1="18" y2="18"></line>' +
+      "</svg></a>" +
+      '<button type="button" class="article-mobile-bar__main" aria-label="Show table of contents">' +
+      '<span class="article-mobile-bar__eyebrow">' +
+      escapeHtml(eyebrow) +
+      "</span>" +
+      '<span class="article-mobile-bar__title">' +
+      escapeHtml(title) +
+      "</span></button>" +
+      '<button type="button" class="article-mobile-bar__top" aria-label="Back to top">' +
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<polyline points="18 15 12 9 6 15"></polyline>' +
+      "</svg></button>";
+
+    document.body.appendChild(bar);
+
+    bar.querySelector(".article-mobile-bar__top").addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    bar.querySelector(".article-mobile-bar__main").addEventListener("click", function () {
+      var details = layoutEl.querySelector(".notes-toc-mobile");
+      if (!details) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      details.open = true;
+      details.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
 
