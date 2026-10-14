@@ -409,11 +409,29 @@
     return slug;
   }
 
+  function initArticleByline(article) {
+    if (!article || article.querySelector(".article-byline")) return;
+    var host =
+      article.querySelector(".article-dek") || article.querySelector("h1");
+    if (!host) return;
+    host.insertAdjacentHTML(
+      "afterend",
+      '<div class="article-byline">' +
+        '<a class="article-byline__author" href="/about/">' +
+        '<img class="article-byline__avatar" src="/assets/avatar.avif" alt="" width="32" height="32" data-avatar />' +
+        "<span>Julian Kreth</span>" +
+        "</a>" +
+        "</div>"
+    );
+  }
+
   function initNotesIndexToc(layoutEl, article) {
     if (!article) return;
     var shell = layoutEl.querySelector(".article-shell");
     var scroller = shell && shell.querySelector(".article-shell__scroll");
     if (!shell || !scroller || shell.querySelector(".article-shell__toc")) return;
+
+    initArticleByline(article);
 
     var headings = article.querySelectorAll("h2");
     if (headings.length < 2) return;
@@ -489,34 +507,92 @@
       });
     });
 
-    var html =
-      '<aside class="notes-toc-wrap article-shell__toc" aria-label="In this article"><div class="notes-toc-inner toc-collapsed">' +
-      '<div class="toc-label">In this article</div><ul class="toc-list">';
-    tocSections.forEach(function (section, i) {
-      html +=
-        '<li class="toc-item' +
-        (i === 0 ? " active" : "") +
-        '"><a href="#' +
-        section.id +
-        '" class="toc-a" title="' +
-        escapeHtml(section.text) +
-        '"><div class="toc-line"></div><div class="toc-text"><span class="toc-text-inner">' +
-        escapeHtml(section.text) +
-        "</span></div></a></li>";
-    });
-    html += "</ul></div></aside>";
+    function buildTocItems(variant) {
+      var items = "";
+      tocSections.forEach(function (section, i) {
+        if (variant === "mobile") {
+          items +=
+            '<li class="article-toc__item' +
+            (i === 0 ? " active" : "") +
+            '"><a href="#' +
+            section.id +
+            '" class="article-toc__link toc-a" title="' +
+            escapeHtml(section.text) +
+            '">' +
+            escapeHtml(section.text) +
+            "</a></li>";
+          return;
+        }
+        items +=
+          '<li class="toc-item' +
+          (i === 0 ? " active" : "") +
+          '"><a href="#' +
+          section.id +
+          '" class="toc-a" title="' +
+          escapeHtml(section.text) +
+          '"><div class="toc-line"></div><div class="toc-text"><span class="toc-text-inner">' +
+          escapeHtml(section.text) +
+          "</span></div></a></li>";
+      });
+      return items;
+    }
 
-    scroller.insertAdjacentHTML("beforebegin", html);
+    var railHtml =
+      '<aside class="notes-toc-wrap article-shell__toc article-shell__toc--rail" aria-label="In this article"><div class="notes-toc-inner toc-collapsed">' +
+      '<div class="toc-label">In this article</div><ul class="toc-list">' +
+      buildTocItems("rail") +
+      "</ul></div></aside>";
 
-    var tocWrap = shell.querySelector(".article-shell__toc");
-    var tocInner = tocWrap.querySelector(".notes-toc-inner");
-    var activeLink = tocWrap.querySelector(".toc-a");
+    var mobileHtml =
+      '<details class="article-toc article-toc--mobile">' +
+      '<summary class="article-toc__summary">' +
+      '<svg class="article-toc__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<line x1="21" x2="3" y1="6" y2="6"></line>' +
+      '<line x1="15" x2="3" y1="12" y2="12"></line>' +
+      '<line x1="17" x2="3" y1="18" y2="18"></line>' +
+      "</svg>" +
+      '<span class="article-toc__summary-label">On this page</span>' +
+      '<svg class="article-toc__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="m9 18 6-6-6-6"></path>' +
+      "</svg>" +
+      "</summary>" +
+      '<nav class="article-toc__nav" aria-label="On this page"><ul class="article-toc__list">' +
+      buildTocItems("mobile") +
+      "</ul></nav></details>";
+
+    scroller.insertAdjacentHTML("beforebegin", railHtml);
+
+    // Place the mobile TOC under the hero chrome (dek / byline / TL;DR),
+    // before the first body paragraphs — matching the reference layout.
+    var mobileAnchor =
+      article.querySelector(".article-tldr") ||
+      article.querySelector(".article-byline") ||
+      article.querySelector(".article-dek") ||
+      article.querySelector("h1");
+    if (mobileAnchor) {
+      mobileAnchor.insertAdjacentHTML("afterend", mobileHtml);
+    } else if (hasIntro && introSection) {
+      introSection.insertAdjacentHTML("afterbegin", mobileHtml);
+    } else {
+      article.insertAdjacentHTML("afterbegin", mobileHtml);
+    }
+
+    var tocWrap = shell.querySelector(".article-shell__toc--rail");
+    var tocInner = tocWrap && tocWrap.querySelector(".notes-toc-inner");
+    var mobileToc = article.querySelector(".article-toc--mobile");
+    var activeLink = tocWrap
+      ? tocWrap.querySelector(".toc-a")
+      : mobileToc && mobileToc.querySelector(".toc-a");
     var isScrolling = false;
     var scrollTimer;
 
     measureNotesToc(layoutEl);
 
-    if (typeof ResizeObserver !== "undefined" && !layoutEl._notesTocResize) {
+    if (
+      typeof ResizeObserver !== "undefined" &&
+      !layoutEl._notesTocResize &&
+      tocWrap
+    ) {
       layoutEl._notesTocResize = new ResizeObserver(function () {
         updateTocTruncation(layoutEl);
       });
@@ -525,35 +601,48 @@
 
     function setActiveSection(sectionEl) {
       if (!sectionEl) return;
-      var link = tocWrap.querySelector('a[href="#' + sectionEl.id + '"]');
+      var href = "#" + sectionEl.id;
+      var railLink = tocWrap && tocWrap.querySelector('a[href="' + href + '"]');
+      var mobileLink =
+        mobileToc && mobileToc.querySelector('a[href="' + href + '"]');
+      var link = railLink || mobileLink;
       if (link === activeLink) return;
-      requestAnimationFrame(function () {
-        if (activeLink) {
-          var prevItem = activeLink.closest(".toc-item");
-          if (prevItem) prevItem.classList.remove("active");
-        }
-        requestAnimationFrame(function () {
-          if (link) {
-            var nextItem = link.closest(".toc-item");
-            if (nextItem) nextItem.classList.add("active");
-            activeLink = link;
-          }
+
+      function markActive(root, selector) {
+        if (!root) return;
+        root.querySelectorAll(selector).forEach(function (item) {
+          item.classList.remove("active");
         });
+        var nextLink = root.querySelector('a[href="' + href + '"]');
+        var nextItem =
+          nextLink &&
+          (nextLink.closest(".toc-item") ||
+            nextLink.closest(".article-toc__item"));
+        if (nextItem) nextItem.classList.add("active");
+      }
+
+      requestAnimationFrame(function () {
+        markActive(tocWrap, ".toc-item.active");
+        markActive(mobileToc, ".article-toc__item.active");
+        activeLink = link;
       });
     }
 
-    tocWrap.addEventListener("click", function (event) {
-      event.stopPropagation();
+    function onTocClick(event) {
       var link = event.target.closest("a.toc-a");
       if (!link || !link.hash) return;
       event.preventDefault();
+      event.stopPropagation();
       if (link.hash === "#" + introId && hasIntro) {
-        if (scroller) {
+        if (window.matchMedia("(max-width: 767px)").matches) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else if (scroller) {
           scroller.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
         setActiveSection(introSection);
+        if (mobileToc) mobileToc.open = false;
         return;
       }
       var target = document.querySelector(link.hash);
@@ -565,7 +654,15 @@
       }, 2000);
       target.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveSection(target);
-    });
+      if (mobileToc) mobileToc.open = false;
+    }
+
+    if (tocWrap) tocWrap.addEventListener("click", onTocClick);
+    if (mobileToc) mobileToc.addEventListener("click", onTocClick);
+
+    function observeRoot() {
+      return window.matchMedia("(max-width: 767px)").matches ? null : scroller;
+    }
 
     var observer = new IntersectionObserver(
       function (entries) {
@@ -592,19 +689,21 @@
           }
         }
       },
-      { root: scroller, threshold: [0], rootMargin: "0% 0% -50% 0%" }
+      { root: observeRoot(), threshold: [0], rootMargin: "0% 0% -50% 0%" }
     );
 
     tocSections.forEach(function (section) {
       observer.observe(section.el);
     });
 
-    tocInner.addEventListener("mouseenter", function () {
-      tocInner.classList.add("transitioning");
-      setTimeout(function () {
-        tocInner.classList.remove("transitioning");
-      }, 350);
-    });
+    if (tocInner) {
+      tocInner.addEventListener("mouseenter", function () {
+        tocInner.classList.add("transitioning");
+        setTimeout(function () {
+          tocInner.classList.remove("transitioning");
+        }, 350);
+      });
+    }
   }
 
   if (!topSlot && !sidebarSlot) return;
