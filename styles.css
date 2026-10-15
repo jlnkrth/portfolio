@@ -4000,9 +4000,10 @@ body.nav-sheet-open {
 
   .article-toc--mobile {
     display: block;
-    margin: 0;
+    margin: 1.75rem 0;
     border-top: 1px solid rgba(33, 32, 28, 0.1);
     border-bottom: 1px solid rgba(33, 32, 28, 0.1);
+    border-radius: 0;
     background: #ffffff;
   }
 
@@ -4070,7 +4071,6 @@ body.nav-sheet-open {
   }
 
   /* Hero + prose sizing aligned to the reference mobile article. */
-  .article > .banner,
   .article > .article-meta,
   .article > h1,
   .article > .article-dek,
@@ -4082,13 +4082,17 @@ body.nav-sheet-open {
     padding-right: 18px;
   }
 
+  /* Let the TOC breathe and span the reading column edge-to-edge. */
+  .article .article-content-section > .article-toc--mobile,
+  .article > .article-toc--mobile {
+    margin-left: -18px;
+    margin-right: -18px;
+  }
+
+  /* Related / promo banners are not part of the reading layout. */
   .article > .banner,
-  .article .article-content-section .banner {
-    margin: 0 -18px;
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
+  .article .article-content-section > .banner:first-child {
+    display: none !important;
   }
 
   .article .article-byline__author {
@@ -4150,8 +4154,9 @@ body.nav-sheet-open {
   }
 
   .article-tldr {
-    margin-top: 1.5rem;
+    margin-top: 0;
     margin-bottom: 0;
+    border-radius: 6px;
   }
 
   .article p,
@@ -4212,10 +4217,11 @@ body.nav-sheet-open {
     margin-top: 0;
   }
 
-  .article > .article-dek + .article-byline + .article-tldr,
   .article > .article-byline + p,
-  .article > .article-dek + p {
-    margin-top: 1.5rem;
+  .article > .article-dek + p,
+  .article > .article-toc--mobile + .article-tldr,
+  .article .article-content-section > .article-toc--mobile + .article-tldr {
+    margin-top: 0;
   }
 }
 

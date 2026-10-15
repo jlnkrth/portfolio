@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "35";
+  var CHROME_CACHE_VERSION = "37";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -562,10 +562,8 @@
 
     scroller.insertAdjacentHTML("beforebegin", railHtml);
 
-    // Place the mobile TOC under the hero chrome (dek / byline / TL;DR),
-    // before the first body paragraphs — matching the reference layout.
+    // Place the mobile TOC under the hero chrome and above the TL;DR.
     var mobileAnchor =
-      article.querySelector(".article-tldr") ||
       article.querySelector(".article-byline") ||
       article.querySelector(".article-dek") ||
       article.querySelector("h1");
