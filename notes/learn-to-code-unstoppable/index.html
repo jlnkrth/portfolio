@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- DRAFT: remove noindex + list on notes/index.html (data/notes.json), homepage Writing, and neighbor nav before publish -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>You Should Learn How to Code. It Will Make You Unstoppable — Julian Kreth</title>
+    <meta
+      name="description"
+      content="Not to become a software engineer. To become the expert who does the automating instead of getting automated."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/notes/learn-to-code-unstoppable/" />
+    <meta property="og:title" content="You Should Learn How to Code. It Will Make You Unstoppable" />
+    <meta
+      property="og:description"
+      content="Not to become a software engineer. To become the expert who does the automating instead of getting automated."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kreth.work/notes/learn-to-code-unstoppable/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              Related:
+              <a href="/notes/masse-workbench-claude-code-plugin/">how we packed our agency into a Claude Code plugin</a>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Principle</span>
+        </div>
+
+        <h1>You Should Learn How to Code. It Will Make You Unstoppable</h1>
+        <p class="article-dek">
+          Not to become a software engineer. To become the expert who does the
+          automating instead of getting automated.
+        </p>
+
+        <p>
+          Last month I watched a task in Asana finish itself. Someone moved a
+          card to a &ldquo;ready&rdquo; status, a webhook fired, an agent picked
+          the task up, pulled the client&rsquo;s context from our wiki, did the
+          work, and posted the result back on the card. Twenty minutes,
+          no editor open, nobody typing.
+        </p>
+        <p>
+          Here&rsquo;s the part that matters if you&rsquo;re not an engineer:
+          the code behind that flow is short and none of it is clever. The
+          valuable part is the checklist inside it &mdash; the one a person on
+          our team carries in their head after doing that task five hundred
+          times. The code just holds the checklist still so a machine can run
+          it. Which brings me to the claim in the title: if you&rsquo;re
+          already an expert at something, learning the basics of code (one
+          free course, a handful of YouTube tutorials) makes you close to
+          unstoppable. And I want to walk you through why, because the
+          reasoning is more concrete than the usual &ldquo;learn to
+          code&rdquo; pep talk.
+        </p>
+
+        <h2>The job description changed</h2>
+        <p>
+          The software engineer of the last decade built apps. Screens and
+          databases. That job still exists, but a new one has
+          appeared next to it, and it pays better relative to the effort: the
+          person who builds AI agents and workflows. The one who can turn an
+          Asana status change into finished work. The one who knows their way
+          around Claude Code plugins, MCP servers, and webhooks, and can wire
+          them into something a whole team runs on.
+        </p>
+        <p>
+          I do this all day at Masse, and the surprising thing is how little
+          of it is traditional engineering. Most of my time goes into
+          deciding what the agent should know, when it should stop and ask,
+          and where its output should land. That&rsquo;s judgment work. The
+          code is mostly glue.
+        </p>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Software engineer, last decade</th>
+                <th scope="col">Software engineer, next decade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ships</td>
+                <td>Apps and features</td>
+                <td>Agents and workflows</td>
+              </tr>
+              <tr>
+                <td>Core skill</td>
+                <td>Writing a lot of correct code</td>
+                <td>Encoding expert judgment into little code</td>
+              </tr>
+              <tr>
+                <td>Typical unit of work</td>
+                <td>A feature behind a ticket</td>
+                <td>An Asana status change that finishes the work itself</td>
+              </tr>
+              <tr>
+                <td>Tooling</td>
+                <td>Frameworks, CI, cloud consoles</td>
+                <td>Claude Code plugins, MCP servers, webhooks, skills</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">Same title, different job. The second column is where the leverage moved.</p>
+
+        <h2>Your expertise is the scarce part</h2>
+        <p>
+          Everyone has the same models now. You and your competitor both talk
+          to the same Claude, the same GPT. So the model can&rsquo;t be the
+          edge.           The edge is what you feed it: the SOPs, the taste, the pricing
+          instincts, the &ldquo;we tried that in 2023 and it burned us&rdquo;
+          scar tissue that only exists in the heads of people who&rsquo;ve
+          done the work for years.
+        </p>
+        <p>
+          An agent without that knowledge produces generic output at
+          incredible speed, which is worse than useless. An agent <em>with</em>
+          it produces your best person&rsquo;s first draft, on demand, for
+          every teammate. The whole game is getting the knowledge out of the
+          head and into files the agent reads. In practice, expert knowledge
+          maps onto agent infrastructure like this:
+        </p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>your SOPs and checklists</span><span class="idx-list__status">[ become skills the agent runs ]</span></div>
+          <div class="idx-list__row"><span>your taste and thresholds</span><span class="idx-list__status">[ become rules in a prompt or config ]</span></div>
+          <div class="idx-list__row"><span>your client and domain context</span><span class="idx-list__status">[ becomes wiki pages the agent reads ]</span></div>
+          <div class="idx-list__row"><span>your &ldquo;stop and ask a human&rdquo; instincts</span><span class="idx-list__status">[ become hooks and escalation rules ]</span></div>
+        </div>
+        <p class="element-caption">Nothing on the left requires an engineering degree. Everything on the right requires knowing basic code.</p>
+        <p>
+          And here&rsquo;s the catch that makes coding basics non-optional:
+          the person doing this translation has to be able to read what the
+          AI writes. Models will happily generate the glue code for you. But
+          if you can&rsquo;t read it, you can&rsquo;t tell whether the agent
+          checks the threshold you meant or a threshold it invented. I wrote
+          about this in the
+          <a href="/notes/why-memory-management-matters-for-your-ai-agent/">memory management piece</a>:
+          the rules are simple, but someone has to be able to verify the
+          agent actually follows them.
+        </p>
+
+        <h2>Learn less than you think</h2>
+        <p>
+          Now the good news. The bar is much lower than &ldquo;become a
+          programmer.&rdquo; You need enough code that code stops being
+          scary. That&rsquo;s roughly Harvard&rsquo;s
+          <a href="https://cs50.harvard.edu/x/" target="_blank" rel="noreferrer">CS50</a>,
+          which is free, plus a few evenings of YouTube on the specific
+          plumbing agents run on. You can skip almost everything a
+          professional engineer had to learn, the frameworks and the leetcode
+          puzzles. None of that shows up in agent work.
+        </p>
+        <p>
+          Here&rsquo;s the actual syllabus I&rsquo;d hand a smart non-engineer
+          on our team. Copy it, it&rsquo;s the whole plan:
+        </p>
+        <div
+          class="code-block"
+          data-copy="The expert's coding syllabus&#10;&#10;1. CS50x (free, self-paced) — do weeks 0–7 properly, skim the rest.&#10;   You want: variables, functions, loops, and enough Python to read a script.&#10;2. One YouTube tutorial on APIs and JSON — what a request is, what a response is.&#10;3. One YouTube tutorial on webhooks — how an Asana status change becomes an event.&#10;4. One YouTube tutorial on git — clone, commit, push, pull request. Nothing more.&#10;5. Install Claude Code and let it write everything. Your job is reading, not writing.&#10;&#10;Stop when you can read a 100-line script and say what it does. That's the bar."
+        >
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>The expert's coding syllabus
+
+1. CS50x (free, self-paced) — do weeks 0–7 properly, skim the rest.
+   You want: variables, functions, loops, and enough Python to read a script.
+2. One YouTube tutorial on APIs and JSON — what a request is, what a response is.
+3. One YouTube tutorial on webhooks — how an Asana status change becomes an event.
+4. One YouTube tutorial on git — clone, commit, push, pull request. Nothing more.
+5. Install Claude Code and let it write everything. Your job is reading, not writing.
+
+Stop when you can read a 100-line script and say what it does. That's the bar.</code></pre>
+        </div>
+        <p class="element-caption">The bar is reading fluency, not writing fluency. AI handles the writing.</p>
+        <p>
+          Honest caveat: this will not make you employable as a software
+          engineer. Hiring interviews and million-line codebases are a
+          different world, and pretending otherwise is how &ldquo;learn to
+          code&rdquo; advice got a bad name. But you&rsquo;re not trying to
+          compete with engineers. You&rsquo;re trying to combine: your ten
+          years of domain expertise plus their entry-level plumbing skills.
+          An engineer can&rsquo;t copy your ten years. You can copy their
+          first three months.
+        </p>
+
+        <h2>Wire one workflow end to end</h2>
+        <p>
+          Everything clicks the first time you connect a real trigger to a
+          real result. My standard recommendation: take the task you&rsquo;ve
+          done so often you could do it asleep, and wire this exact flow
+          around it.
+        </p>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">From status change to finished work</p>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">sequenceDiagram
+    participant Asana
+    participant Webhook as webhook_endpoint
+    participant Agent
+    participant Wiki as knowledge_base
+    participant Task as asana_task
+
+    Asana->>Webhook: card moved to "Ready"
+    Webhook->>Agent: start run with task id
+    Agent->>Wiki: read client context + your SOP
+    Wiki-->>Agent: the checklist you encoded
+    Agent->>Agent: do the work, step by step
+    alt output passes your thresholds
+        Agent->>Task: post result + move to "Review"
+    else something is off
+        Agent->>Task: comment with what it needs, tag a human
+    end</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            The agent runs your checklist. The status change is the start button.
+          </figcaption>
+        </figure>
+        <p>
+          Look at what&rsquo;s actually in that diagram. One webhook. One
+          agent run. A wiki page holding your SOP. An if-statement holding
+          your quality bar. That&rsquo;s CS50-week-one material plus two
+          YouTube tutorials, and it&rsquo;s the same shape as the flows we
+          run in production at Masse. All the sophistication lives in the
+          checklist, and you already own the checklist.
+        </p>
+        <p>
+          Once one flow works, the rest is repetition. Package your prompts
+          and commands so teammates get them too (that&rsquo;s what
+          <a href="/notes/masse-workbench-claude-code-plugin/">Claude Code plugins</a>
+          are for). Add a second trigger. Encode another SOP. Every workflow
+          you ship compounds, because the wiki pages and skills you wrote for
+          the first one feed all the others.
+        </p>
+
+        <p>
+          So no, don&rsquo;t learn to code to change careers. Learn to code
+          because you&rsquo;re already an expert, and a few weeks of basics
+          is all that separates your expertise from an agent that works while
+          you sleep. The expert who can code doesn&rsquo;t get automated.
+          They do the automating.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/">
+            <span class="nav-label">Back</span>
+            <span class="nav-title">All notes</span>
+          </a>
+          <a href="/notes/masse-workbench-claude-code-plugin/">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">The Masse Workbench Plugin</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>
