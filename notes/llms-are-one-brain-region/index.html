@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- DRAFT: remove noindex + list in data/notes.json, homepage Writing, and neighbor nav before publish -->
+    <!--
+      DRAFT NOTES — verify before publish:
+      - Brain-as-chip / region metaphor is intentional, not a neuro paper. Keep that framing explicit.
+      - Confirm whether you want "training set" vs "weights + context window" as the LLM limit wording.
+      - Optional: link Agentic Engineering as the systems answer (skills, tools, memory files = other "regions").
+      - Soften any region names (visual cortex, hippocampus, etc.) if you want less textbook flavor.
+    -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>An LLM Is One Brain Region Pretending to Be a Whole Brain — Julian Kreth</title>
+    <meta
+      name="description"
+      content="We've been comparing chatbots to brains. Wrong metaphor. A brain is more like a chip: many systems lighting up together. An LLM is closer to one of those regions."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="canonical"
+      href="https://kreth.work/notes/llms-are-one-brain-region/"
+    />
+    <meta
+      property="og:title"
+      content="An LLM Is One Brain Region Pretending to Be a Whole Brain"
+    />
+    <meta
+      property="og:description"
+      content="We've been comparing chatbots to brains. Wrong metaphor. A brain is more like a chip: many systems lighting up together. An LLM is closer to one of those regions."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kreth.work/notes/llms-are-one-brain-region/"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <article class="article">
+          <div class="banner">
+            <div class="banner__inner">
+              <p style="margin: 0">
+                <span class="banner__template">[Draft]</span>
+                Related:
+                <a href="/notes/agentic-engineering/">Agentic Engineering</a>
+                &mdash; other &ldquo;regions&rdquo; as skills and files.
+              </p>
+              <button class="banner__close" aria-label="Close" data-banner-close>
+                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="article-meta">
+            <span class="article-type">Principle</span>
+          </div>
+
+          <h1>An LLM Is One Brain Region Pretending to Be a Whole Brain</h1>
+          <p class="article-dek">
+            We&rsquo;ve been comparing chatbots to brains. Wrong metaphor. A
+            brain is more like a chip: many systems lighting up together. An LLM
+            is closer to one of those regions.
+          </p>
+
+          <p>
+            Every few months someone posts a take that LLMs &ldquo;think like
+            us now.&rdquo; They point at a clever answer, a chain of reasoning, a
+            model that passes a hard exam. And sure &mdash; the text can look
+            like thought. But if you stare at how an actual brain works for five
+            minutes, the comparison falls apart in a useful way.
+          </p>
+          <p>
+            A brain isn&rsquo;t one big language engine with a personality. It
+            behaves more like a chip. Different areas activate for different
+            jobs. Vision, motor control, memory, threat detection, language,
+            planning. They talk to each other. They inhibit each other. They
+            hand work off. What we call &ldquo;thinking&rdquo; is usually several
+            systems running at once, not one model completing a prompt.
+          </p>
+          <p>
+            Current LLMs are closer to
+            <mark class="hl hl--yellow">one of those layers</mark>. A strong
+            one. A useful one. Still one layer: they reason and answer from what
+            got pressed into the weights during training, plus whatever you stuff
+            into the context window. That&rsquo;s powerful. It is not a brain.
+          </p>
+
+          <h2>Stop comparing chatbots to people</h2>
+          <p>
+            The brain-as-person metaphor sells demos. The brain-as-chip metaphor
+            explains failures. When you treat the model like a whole mind, every
+            miss feels like stupidity. When you treat it like one specialized
+            region, the misses make sense: you asked the language area to also be
+            eyes, hands, long-term memory, and a sense of what just happened in
+            the room.
+          </p>
+
+          <div class="plan-table-wrap">
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <th scope="col">If you believe&hellip;</th>
+                  <th scope="col">You expect&hellip;</th>
+                  <th scope="col">What you actually get</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>LLM &asymp; whole brain</td>
+                  <td>One box that sees, remembers, acts, judges</td>
+                  <td>Fluent text that invents missing senses</td>
+                </tr>
+                <tr>
+                  <td>LLM &asymp; one region</td>
+                  <td>Great language / pattern completion</td>
+                  <td>Same, but you stop asking it to be everything else</td>
+                </tr>
+                <tr>
+                  <td>Brain &asymp; chip with many areas</td>
+                  <td>Specialized systems coordinated in time</td>
+                  <td>A design brief for agents, tools, and memory</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="element-caption">
+            The metaphor isn&rsquo;t a neuroscience paper. It&rsquo;s a
+            routing rule for what you ask the model to own alone.
+          </p>
+
+          <h2>Brains light up in patches</h2>
+          <p>
+            You don&rsquo;t &ldquo;run consciousness&rdquo; as a single forward
+            pass. You look at a face and visual circuits fire. You reach for a
+            cup and motor plans wake up. You smell smoke and older alarm systems
+            jump the queue. Language regions narrate some of that, after or
+            beside it &mdash; they don&rsquo;t replace it.
+          </p>
+          <p>
+            Even inside one task, the chip is plural. Reading this sentence
+            uses vision, language, working memory, and whatever mood your body
+            brought into the room. The experience feels unified. The machinery
+            is not.
+          </p>
+
+          <div class="idx-list">
+            <div class="idx-list__row">
+              <span>Perception</span>
+              <span class="idx-list__status">[ eyes, ears, body ]</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Memory systems</span>
+              <span class="idx-list__status">[ short, long, procedural ]</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Action</span>
+              <span class="idx-list__status">[ hands, voice, movement ]</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Language / reasoning</span>
+              <span class="idx-list__status">[ the LLM-shaped part ]</span>
+            </div>
+            <div class="idx-list__row">
+              <span>Regulation</span>
+              <span class="idx-list__status">[ stop, fear, reward, timing ]</span>
+            </div>
+            <span class="idx-list__divider" aria-hidden="true"></span>
+            <div class="idx-list__row idx-list__row--total">
+              <span>What a chat LLM ships alone</span>
+              <span class="idx-list__count">mostly the language row</span>
+            </div>
+          </div>
+          <p class="element-caption">
+            Crude map on purpose. The point is plurality, not a Brodmann atlas.
+          </p>
+
+          <h2>What an LLM actually is</h2>
+          <p>
+            Strip the product marketing and you&rsquo;re left with a system that
+            predicts useful next tokens given a context. Training compressed a
+            huge pile of text into weights. At runtime it reactivates patterns
+            from that pile, steered by your prompt. It can look like reasoning
+            because language itself carries reasoning shapes. It can look like
+            memory because the training set and the context window hold traces.
+          </p>
+          <p>
+            What it cannot do, by itself, is what other brain systems do
+            constantly: take a fresh sensory reading of the world, update a body
+            state, practice a motor skill overnight, or decide that this meeting
+            is unsafe and you should leave. Those aren&rsquo;t &ldquo;prompt
+            engineering&rdquo; problems. They&rsquo;re different substrates.
+          </p>
+          <p>
+            So when people say the model &ldquo;knows&rdquo; something, they
+            usually mean: the pattern was common enough in training, or you put
+            it in the window. That&rsquo;s one kind of knowing. Your hippocampus
+            doing its weird overnight job is another. Mixing the words makes the
+            product sound smarter than the architecture.
+          </p>
+
+          <div
+            class="code-block"
+            data-copy="LLM ALONE&#10;- pattern completion from weights&#10;- short working context you provide&#10;- text in, text out&#10;&#10;NOT INCLUDED&#10;- live perception loop&#10;- durable episodic memory&#10;- motor / tool body (unless you attach one)&#10;- multi-system arbitration under time pressure"
+          >
+            <button class="copy-button" aria-label="Copy code" data-copy-btn>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+            </button>
+            <pre class="code-block__pre"><code>LLM ALONE
+- pattern completion from weights
+- short working context you provide
+- text in, text out
+
+NOT INCLUDED
+- live perception loop
+- durable episodic memory
+- motor / tool body (unless you attach one)
+- multi-system arbitration under time pressure</code></pre>
+          </div>
+          <p class="element-caption">
+            Tape this next to any &ldquo;AGI by Christmas&rdquo; thread. Keeps
+            the claim honest.
+          </p>
+
+          <h2>The part we keep ignoring</h2>
+          <p>
+            Here&rsquo;s the actual miss. Brains don&rsquo;t win because one
+            region is magic. They win because
+            <mark class="hl hl--blue">different systems run together</mark>.
+            Perception constrains language. Memory constrains planning. Motor
+            feedback corrects the story you were about to tell yourself. Affect
+            changes which plan gets airtime. The intelligence is in the
+            coordination as much as in any single area.
+          </p>
+          <p>
+            An LLM product that only chats pretends coordination is optional. You
+            type, it answers, you trust the paragraph. There&rsquo;s no second
+            system that saw the screen, no third system that checked last
+            week&rsquo;s notes, no fourth system that refused the action because
+            the stakes were wrong. Unless you build those on purpose, you&rsquo;re
+            running a language region with the volume turned up and calling it a
+            mind.
+          </p>
+
+          <figure class="arch-diagram">
+            <div class="arch-diagram__eyebrow">Two architectures</div>
+            <div class="arch-diagram__frame">
+              <pre class="mermaid">
+flowchart TB
+  subgraph brain [Brain as chip]
+    V[Perception]
+    M[Memory]
+    L[Language]
+    A[Action]
+    R[Regulation]
+    V --> L
+    M --> L
+    L --> A
+    R --> L
+    R --> A
+    A --> V
+  end
+
+  subgraph llm [Chat LLM alone]
+    T[Training weights]
+    C[Context window]
+    O[Text out]
+    T --> O
+    C --> O
+  end
+              </pre>
+            </div>
+          </figure>
+          <p class="element-caption">
+            Left side is loops. Right side is a completion. Different machines.
+          </p>
+
+          <h2>What to do with that</h2>
+          <p>
+            If you&rsquo;re building with these models, stop asking one region to
+            fake a nervous system. Give it the other systems as tools and files:
+            scrapers and browsers for perception, wikis and
+            <code class="code-chip">findings.md</code> for memory, APIs and CLIs
+            for action, evals and human review for regulation. That&rsquo;s not
+            &ldquo;bolting features on.&rdquo; That&rsquo;s admitting the
+            architecture.
+          </p>
+          <p>
+            And if you&rsquo;re evaluating the tech, judge it as a strong
+            language-and-pattern region &mdash; sometimes shockingly strong &mdash;
+            not as a person in a box. The hype shrinks. The usefulness gets
+            clearer. You stop being disappointed that the chip can&rsquo;t see,
+            and you start wiring eyes.
+          </p>
+          <p>
+            The next wave of useful AI won&rsquo;t be &ldquo;a bigger region.&rdquo;
+            It&rsquo;ll be better chips: specialized pieces that activate for
+            different jobs and actually talk to each other. Brains already had
+            that design. We just kept benchmarking the language area and calling
+            it the whole animal.
+          </p>
+
+          <nav class="article-nav">
+            <a href="/notes/">
+              <span class="nav-label">Back</span>
+              <span class="nav-title">All notes</span>
+            </a>
+            <a href="/notes/agentic-engineering/">
+              <span class="nav-label">Related</span>
+              <span class="nav-title">Agentic Engineering</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>
