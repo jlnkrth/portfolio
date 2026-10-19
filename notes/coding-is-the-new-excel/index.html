@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- DRAFT: remove noindex + list on notes/index.html (data/notes.json), homepage Writing, and neighbor nav before publish -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Coding Is the New Excel — Julian Kreth</title>
+    <meta
+      name="description"
+      content="My head of content opened a pull request this morning. Coding isn't hard anymore — and it's becoming part of the job, the way spreadsheets did."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://kreth.work/notes/coding-is-the-new-excel/" />
+    <meta property="og:title" content="Coding Is the New Excel" />
+    <meta
+      property="og:description"
+      content="My head of content opened a pull request this morning. Coding isn't hard anymore — and it's becoming part of the job, the way spreadsheets did."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kreth.work/notes/coding-is-the-new-excel/" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css" />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+
+      <article class="article">
+        <div class="banner">
+          <div class="banner__inner">
+            <p style="margin: 0">
+              Related:
+              <a href="/notes/masse-workbench-claude-code-plugin/">how we packed our agency into a Claude Code plugin</a>
+            </p>
+            <button class="banner__close" aria-label="Close" data-banner-close>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11612 4.11612C4.60427 3.62796 5.39573 3.62796 5.88388 4.11612L12 10.2322L18.1161 4.11612C18.6043 3.62796 19.3957 3.62796 19.8839 4.11612C20.372 4.60427 20.372 5.39573 19.8839 5.88388L13.7678 12L19.8839 18.1161C20.372 18.6043 20.372 19.3957 19.8839 19.8839C19.3957 20.372 18.6043 20.372 18.1161 19.8839L12 13.7678L5.88388 19.8839C5.39573 20.372 4.60427 20.372 4.11612 19.8839C3.62796 19.3957 3.62796 18.6043 4.11612 18.1161L10.2322 12L4.11612 5.88388C3.62796 5.39573 3.62796 4.60427 4.11612 4.11612Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="article-meta">
+          <span class="article-type">Principle</span>
+        </div>
+
+        <h1>Coding Is the New Excel</h1>
+        <p class="article-dek">
+          My head of content opened a pull request this morning. Coding
+          isn&rsquo;t hard anymore &mdash; and it&rsquo;s becoming part of the
+          job, the way spreadsheets did.
+        </p>
+
+        <p>
+          This morning my head of content Slack&rsquo;d me: please make sure I
+          merge the PR she opened, so the latest update to our content pipeline
+          goes live. She didn&rsquo;t ask me to write the change. She wrote it.
+          She opened the pull request. My job was the merge button.
+        </p>
+        <p>
+          A few years ago that message would have been weird. Content people
+          didn&rsquo;t open PRs. They filed tickets and waited for an engineer.
+          Today it felt normal, and that&rsquo;s the whole point of this piece.
+          Coding isn&rsquo;t hard the way it used to be. And for a growing
+          share of jobs, working with AI (creating skills, sharing them,
+          maintaining them) is becoming a requirement the way Excel became a
+          requirement: you don&rsquo;t need to know how the spreadsheet
+          engine works. You need to know how to use it.
+        </p>
+
+        <h2>The message that shouldn&rsquo;t be strange</h2>
+        <p>
+          What she actually shipped wasn&rsquo;t a React rewrite. It was an
+          update to how our content pipeline behaves: the prompts, the
+          checks, the handoff rules. In our world that lives next to the code,
+          in pull requests, because the agent that runs the pipeline reads the
+          same files the team edits. So when the pipeline needs a change, the
+          person who owns the content opens the PR.
+        </p>
+        <p>
+          I used to be the person who translated her &ldquo;can we make it do
+          X?&rdquo; into a commit. That translation step was the expensive
+          part, and it was also the slow part. Now she goes straight to the
+          file. Claude Code helps write the diff. She reviews whether it
+          matches the judgment she already has. I review whether it&rsquo;s
+          safe to ship. The loop got shorter because the domain expert stopped
+          needing a translator.
+        </p>
+        <div class="plan-table-wrap">
+          <table class="plan-table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Old loop</th>
+                <th scope="col">Today</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Who notices the gap</td>
+                <td>Content lead, in Slack</td>
+                <td>Content lead, in Slack</td>
+              </tr>
+              <tr>
+                <td>Who writes the change</td>
+                <td>Engineer, after a ticket</td>
+                <td>Content lead, with Claude Code</td>
+              </tr>
+              <tr>
+                <td>Who opens the PR</td>
+                <td>Engineer</td>
+                <td>Content lead</td>
+              </tr>
+              <tr>
+                <td>Who merges</td>
+                <td>Engineer</td>
+                <td>Engineer (still, for now)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="element-caption">The domain expert moved one column left. That&rsquo;s the whole shift.</p>
+
+        <h2>You never needed to know how Excel works</h2>
+        <p>
+          Think about what &ldquo;knowing Excel&rdquo; meant at work for the
+          last twenty years. Almost nobody on a marketing or ops team could
+          explain VLOOKUP&rsquo;s internal evaluation order. Almost everybody
+          could open a sheet, build a model, share it, and keep it honest when
+          the numbers drifted. The people who couldn&rsquo;t use Excel got
+          stuck waiting on the people who could.
+        </p>
+        <p>
+          Nobody called that &ldquo;becoming a software engineer.&rdquo; It
+          was just literacy for knowledge work. Spreadsheets became the place
+          where judgment got stored in a form other people could run. That is
+          exactly what skills are becoming for AI agents. A skill is a
+          checklist the machine can follow. Sharing a skill is sharing the
+          spreadsheet. Maintaining a skill is fixing the formula when the
+          world changes.
+        </p>
+        <div class="idx-list">
+          <div class="idx-list__row"><span>build a sheet</span><span class="idx-list__status">[ create a skill ]</span></div>
+          <div class="idx-list__row"><span>send the file to a teammate</span><span class="idx-list__status">[ ship it in a plugin or PR ]</span></div>
+          <div class="idx-list__row"><span>fix the formula next quarter</span><span class="idx-list__status">[ maintain the skill when output drifts ]</span></div>
+          <div class="idx-list__row"><span>don&rsquo;t recompile Excel</span><span class="idx-list__status">[ don&rsquo;t become a systems engineer ]</span></div>
+        </div>
+        <p class="element-caption">Same literacy, new surface. The hard part was never the tool.</p>
+        <p>
+          So when I say coding is becoming a job requirement, I don&rsquo;t
+          mean CS degrees and leetcode. I mean: can you sit with an AI, turn
+          how you do the work into something reusable, get it into the shared
+          toolkit, and keep it true over time? That&rsquo;s the Excel bar. My
+          head of content cleared it this morning.
+        </p>
+
+        <h2>Skills are where the job lives now</h2>
+        <p>
+          Working with AI, at the useful level, is mostly a loop that looks
+          boring on paper: create skills that capture how a job should be
+          done, share them so the rest of the team (and the agents) run the
+          same version, and maintain them when reality changes, which it
+          always does.
+        </p>
+        <p>
+          Create is the writing-down part. The SOP that used to live in
+          someone&rsquo;s head becomes a skill file the agent loads. Share is
+          the distribution part: a pull request, a
+          <a href="/notes/masse-workbench-claude-code-plugin/">Claude Code plugin</a>,
+          a folder the whole company installs. Maintain is the part people
+          skip, and it&rsquo;s the part that decides whether the machine stays
+          useful. A skill you never revisit becomes a spreadsheet with a
+          broken exchange rate still hard-coded from 2019.
+        </p>
+        <div
+          class="code-block"
+          data-copy="When a skill needs an update&#10;&#10;1. Notice the drift (bad output, new edge case, new client rule).&#10;2. Edit the skill yourself — don't file a ticket for a prompt change.&#10;3. Open a PR so the change is reviewable and versioned.&#10;4. Merge, then watch the next few runs.&#10;5. If it still drifts, the skill is wrong, not the model."
+        >
+          <button class="copy-button" aria-label="Copy code" data-copy-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <pre class="code-block__pre"><code>When a skill needs an update
+
+1. Notice the drift (bad output, new edge case, new client rule).
+2. Edit the skill yourself — don't file a ticket for a prompt change.
+3. Open a PR so the change is reviewable and versioned.
+4. Merge, then watch the next few runs.
+5. If it still drifts, the skill is wrong, not the model.</code></pre>
+        </div>
+        <p class="element-caption">This is the loop my head of content ran. The Slack ping was step 4.</p>
+        <p>
+          Honest limit: some changes still need an engineer. Auth, billing,
+          anything that can delete production data. The content pipeline
+          update this morning wasn&rsquo;t that. Most of the work that used
+          to wait in the engineering queue also isn&rsquo;t that. The queue
+          was full of judgment that only the domain expert had, waiting for
+          someone who could type it into a file.
+        </p>
+
+        <h2>Teach the machine, then manage it</h2>
+        <p>
+          Here&rsquo;s the sentence I keep coming back to. If you can teach a
+          machine how to do a job, your job becomes managing the machine.
+          Teaching is encoding your judgment into skills and workflows.
+          Managing is watching the runs, catching drift, deciding when to
+          escalate to a human, and shipping the next patch to the skill.
+        </p>
+        <figure class="arch-diagram">
+          <p class="arch-diagram__eyebrow">What the job looks like after you teach it</p>
+          <div class="arch-diagram__frame">
+            <pre class="mermaid">sequenceDiagram
+    participant Expert
+    participant Skill as skill_file
+    participant Agent
+    participant Work as the_job
+
+    Expert->>Skill: teach (write / update the skill)
+    Expert->>Agent: point it at the skill
+    Agent->>Work: do the work
+    Work-->>Expert: output + traces
+    alt output matches judgment
+        Expert->>Expert: merge the next improvement later
+    else output drifted
+        Expert->>Skill: patch the skill (open a PR)
+    end</pre>
+          </div>
+          <figcaption class="arch-diagram__caption">
+            You stop doing every unit of the work. You start owning the system that does it.
+          </figcaption>
+        </figure>
+        <p>
+          That sounds like a demotion if you picture management as meetings.
+          It isn&rsquo;t. Managing the machine is closer to editing: you&rsquo;re
+          still the taste. You&rsquo;re just applying taste to the process
+          instead of to every single draft. The people who refuse to teach the
+          machine keep doing every unit by hand. The people who teach it get
+          their time back, and then their scarce skill is keeping the machine
+          honest.
+        </p>
+        <p>
+          Which is why the Slack message matters as a signal, not as a cute
+          anecdote. The content lead didn&rsquo;t ask for permission to have
+          an opinion about the pipeline. She updated the pipeline. Coding got
+          easy enough that the opinion and the change could be the same
+          person. That&rsquo;s the new requirement for the job.
+        </p>
+
+        <p>
+          You don&rsquo;t need to know how Excel works. You need to open the
+          sheet, keep the formulas true, and share the file. Same deal now,
+          with skills and agents. Teach the machine how you do the work. Then
+          your job is managing the machine.
+        </p>
+
+        <nav class="article-nav">
+          <a href="/notes/">
+            <span class="nav-label">Back</span>
+            <span class="nav-title">All notes</span>
+          </a>
+          <a href="/notes/masse-workbench-claude-code-plugin/">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">The Masse Workbench Plugin</span>
+          </a>
+        </nav>
+      </article>
+      </div>
+    </div>
+
+    <div class="toaster" id="toaster"></div>
+    <script src="/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="/components.js"></script>
+  </body>
+</html>
