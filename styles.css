@@ -3229,18 +3229,28 @@ body.nav-sheet-open {
   line-height: 1.35;
 }
 
-/* About page */
+/* About page — prose matches homepage .home-intro; aside stays carded */
 .about-page__body {
   display: grid;
-  gap: 24px;
+  gap: 2rem;
   align-items: start;
+  width: 100%;
+}
+
+.about-page__main {
+  min-width: 0;
+}
+
+.about-page__intro.home-intro {
+  max-width: none;
+  width: 100%;
 }
 
 .about-page__aside {
   display: grid;
   gap: 16px;
   align-items: start;
-  margin-top: 2rem;
+  margin-top: 0;
   grid-template-columns: 1fr;
 }
 
@@ -3254,12 +3264,26 @@ body.nav-sheet-open {
   max-height: 380px;
 }
 
-/* Below desktop side-by-side: full-width aside, cards left, gallery right */
-@media (max-width: 1439px) {
+/* Phone: single-column stack, same intro scale as homepage */
+@media (max-width: 767px) {
   .about-page__body {
-    width: 100%;
+    gap: 2.5rem;
   }
 
+  .about-page__aside {
+    grid-template-columns: 1fr;
+  }
+
+  .about-page__aside .photo-gallery {
+    max-width: 280px;
+    width: 100%;
+    aspect-ratio: 230 / 416;
+    max-height: none;
+  }
+}
+
+/* Tablet / laptop: intro full width, aside as cards + gallery */
+@media (min-width: 768px) and (max-width: 1439px) {
   .about-page__aside {
     width: 100%;
     max-width: none;
@@ -3289,36 +3313,19 @@ body.nav-sheet-open {
   }
 }
 
-@media (max-width: 479px) {
-  .about-page__aside {
-    grid-template-columns: minmax(0, 1fr) minmax(130px, 38%);
-  }
-
-  .about-page__aside .photo-gallery {
-    min-height: 220px;
+/* Desktop: intro beside aside, type scale matches homepage hero */
+@media (min-width: 1024px) {
+  .about-page__intro.home-intro p {
+    font-size: clamp(1.65rem, 3.4vh, 2.25rem);
   }
 }
 
-/* Side-by-side: aside fills remaining width and matches main card height */
+/* Wide: side-by-side body — no inner scroll; page scrolls like homepage */
 @media (min-width: 1440px) {
-  /* 55px = sidebar bottom inset (30px) + meta links under the player (~25px) */
   .about-page__body {
-    width: 100%;
-    height: calc(100vh - 7.5rem - 55px);
-    max-height: calc(100vh - 7.5rem - 55px);
-    grid-template-columns: minmax(0, 692px) minmax(230px, 1fr);
-    align-items: stretch;
-  }
-
-  .about-page__main {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .about-page__card {
-    flex: 1;
-    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+    gap: 2.5rem;
+    align-items: start;
   }
 
   .about-page__aside {
@@ -3326,7 +3333,8 @@ body.nav-sheet-open {
     flex-direction: column;
     gap: 16px;
     margin-top: 0;
-    min-height: 0;
+    position: sticky;
+    top: 7.5rem;
   }
 
   .about-page__aside .x-card,
@@ -3370,35 +3378,6 @@ body.nav-sheet-open {
     height: auto;
     max-height: 380px;
   }
-}
-
-.about-page__card {
-  padding: 16px 24px;
-}
-
-.about-page__card .label--wide {
-  margin-bottom: 0.625rem;
-}
-
-.about-page__card .article h1 {
-  margin-bottom: 0.75rem;
-}
-
-.about-page__card .article h2 {
-  margin: 1rem 0 0.25rem;
-}
-
-.about-page__card .article h2:first-of-type {
-  margin-top: 0.75rem;
-}
-
-.about-page__card .article p {
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-
-.about-page__card .article > p:last-child {
-  margin-bottom: 0;
 }
 
 /* ==========================================================================
