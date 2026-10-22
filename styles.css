@@ -3523,7 +3523,7 @@ body.nav-sheet-open {
   --about-fade-height: clamp(3rem, 8vh, 5rem);
   padding: 16px var(--page-pad-x);
   min-width: 0;
-  max-height: min(32rem, calc(100dvh - 13.5rem));
+  max-height: min(32rem, calc(100dvh - 23rem));
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: auto;
@@ -3534,13 +3534,15 @@ body.nav-sheet-open {
 
 .about-page__fade {
   position: sticky;
-  bottom: -16px;
+  bottom: 0;
   z-index: 1;
+  flex-shrink: 0;
   height: var(--about-fade-height);
   margin-top: calc(-1 * var(--about-fade-height));
   margin-right: calc(-1 * var(--page-pad-x));
   margin-left: calc(-1 * var(--page-pad-x));
   pointer-events: none;
+  border-radius: 0 0 16px 16px;
   background: linear-gradient(
     to bottom,
     rgb(255 255 255 / 0),
