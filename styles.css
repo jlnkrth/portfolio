@@ -4414,18 +4414,14 @@ body.nav-sheet-open {
    ========================================================================== */
 @media (max-width: 767px) {
   .note-page {
-    --note-journal-bg: #eef0f3;
-    --note-journal-ink: #1a1a1c;
-    --note-journal-muted: #8b8c91;
-    --note-journal-line: #d0d1d6;
+    --note-journal-muted: var(--color-gray-1100);
+    --note-journal-line: var(--color-gray-500);
     --note-journal-card: #ffffff;
     --note-journal-radius: 22px;
     --note-line-x: 20px;
     --note-body-inset: 44px;
     --note-fade-height: clamp(3rem, 8vh, 5rem);
-    --font-journal-display: "Pixelify Sans", var(--font-mono), ui-monospace,
-      monospace;
-    background: var(--note-journal-bg);
+    background: var(--bg);
   }
 
   .note-page .top-nav {
@@ -4441,7 +4437,7 @@ body.nav-sheet-open {
     background: transparent;
     border: 0;
     box-shadow: none;
-    color: var(--note-journal-ink);
+    color: var(--color-gray-1200);
     font-size: 0;
     line-height: 0;
   }
@@ -4482,6 +4478,7 @@ body.nav-sheet-open {
     align-items: center;
     gap: 6px;
     margin: 0 0 6px;
+    font-family: inherit;
     font-size: 13px;
     font-weight: 500;
     line-height: 1.2;
@@ -4499,12 +4496,12 @@ body.nav-sheet-open {
   .note-page .note-journal__title,
   .note-journal__title {
     margin: 0;
-    font-family: var(--font-journal-display);
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 1.12;
+    font-family: inherit;
+    font-size: var(--text-title-size);
+    font-weight: 600;
+    line-height: var(--text-title-lh);
     letter-spacing: -0.02em;
-    color: var(--note-journal-ink);
+    color: var(--color-gray-1200);
     overflow-wrap: break-word;
     hyphens: auto;
     text-wrap: balance;
@@ -4603,6 +4600,12 @@ body.nav-sheet-open {
     padding-right: 0;
   }
 
+  .note-page .article > .article-content-section,
+  .note-page .article .article-content-section {
+    min-width: 0;
+    overflow: visible;
+  }
+
   .note-page .article > .article-content-section:first-child,
   .note-page .article > .article-meta,
   .note-page .article > .article-content-section:first-child .article-meta {
@@ -4641,7 +4644,7 @@ body.nav-sheet-open {
     font-size: 15px;
     font-weight: 400;
     line-height: 1.5;
-    color: var(--note-journal-ink);
+    color: var(--color-gray-1200);
     opacity: 1;
     text-wrap: pretty;
     overflow-wrap: break-word;
@@ -4662,27 +4665,43 @@ body.nav-sheet-open {
     margin-bottom: 1.5rem;
     padding: 0.85rem 0.95rem;
     border-radius: 12px;
-    background: var(--note-journal-bg);
+    background: var(--bg);
     border-color: var(--note-journal-line);
   }
 
   .note-page .article h2 {
-    display: inline-flex;
+    display: inline-block;
+    box-sizing: border-box;
     position: relative;
     z-index: 1;
-    max-width: calc(100% - 24px);
-    margin: 1.85rem 16px 0.9rem 8px;
-    padding: 4px 10px;
-    font-size: 11px;
+    width: fit-content;
+    max-width: calc(100% - 28px);
+    margin: 1.85rem 12px 0.9rem 8px;
+    padding: 5px 12px;
+    font-family: inherit;
+    font-size: 12px;
     font-weight: 500;
-    line-height: 1.3;
+    line-height: 1.35;
     letter-spacing: 0.01em;
     color: var(--note-journal-muted);
     background: var(--note-journal-card);
     border: 1px dashed var(--note-journal-line);
-    border-radius: 999px;
-    overflow-wrap: break-word;
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     hyphens: auto;
+    white-space: normal;
+    vertical-align: top;
+  }
+
+  .note-page .article h2 code {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    padding: 0 3px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .note-page .article h2:first-of-type {
@@ -4769,7 +4788,7 @@ body.nav-sheet-open {
   body.note-page.note-page--journal:has(.layout--notes-index) {
     height: 100dvh;
     overflow: hidden;
-    background: var(--note-journal-bg, #eef0f3);
+    background: var(--bg);
 
     .top-nav {
       padding: 10px 10px 4px;
@@ -4823,6 +4842,51 @@ body.nav-sheet-open {
     .article-toc--mobile,
     .article-byline {
       display: none !important;
+    }
+
+    .note-journal__title,
+    .article h1.note-journal__title {
+      font-family: inherit;
+      font-size: var(--text-title-size);
+      font-weight: 600;
+      line-height: var(--text-title-lh);
+    }
+
+    .article h2 {
+      display: inline-block;
+      box-sizing: border-box;
+      width: fit-content;
+      max-width: calc(100% - 28px);
+      margin: 1.85rem 12px 0.9rem 8px;
+      padding: 5px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+      white-space: normal;
+      border-radius: 12px;
+    }
+
+    .article h2 code {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      padding: 0 3px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .article p,
+    .article li {
+      font-family: inherit;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--color-gray-1200);
     }
   }
 }

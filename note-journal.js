@@ -33,16 +33,6 @@
     return month + " " + Number(parts[3]);
   }
 
-  function loadFont() {
-    if (document.getElementById("note-journal-font")) return;
-    var link = document.createElement("link");
-    link.id = "note-journal-font";
-    link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&display=swap";
-    document.head.appendChild(link);
-  }
-
   function resolveDate(article, done) {
     var time = article.querySelector("time[datetime]");
     if (time && time.getAttribute("datetime")) {
@@ -170,7 +160,6 @@
 
   if (!isNoteArticle()) return;
 
-  loadFont();
   sync();
 
   var root = document.querySelector(".layout > .root");
