@@ -28,6 +28,9 @@ const ROOT_FILES = [
   "inline-previews.js",
   "exploration.js",
   "admin-auth.js",
+  "note-journal.js",
+  "hidden-footer.js",
+  "about-card.js",
   "robots.txt",
   ".nojekyll",
 ];
