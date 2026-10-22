@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles.css?v=25" />
+    <link rel="stylesheet" href="/styles.css?v=41" />
     <link rel="stylesheet" href="/components.css" />
   </head>
   <body>
@@ -24,7 +24,12 @@
         <main class="about-page">
           <div class="about-page__body">
             <div class="about-page__main">
-              <div class="card about-page__card">
+              <div
+                class="card about-page__card"
+                tabindex="0"
+                role="region"
+                aria-label="About"
+              >
                 <article class="article">
                   <span class="label label--wide">About</span>
                   <h1>Julian Kreth — Head of Strategy Engineering at Masse, founder of Karma Studio.</h1>
@@ -69,6 +74,7 @@
                     <a href="mailto:julian@karmastudio.co?subject=Project%20Inquiry">say hello</a>.
                   </p>
                 </article>
+                <div class="about-page__fade" aria-hidden="true"></div>
               </div>
             </div>
 
@@ -124,5 +130,6 @@
     </div>
     <script src="/layout.js"></script>
     <script src="/photo-gallery.js?v=3"></script>
+    <script src="/about-card.js"></script>
   </body>
 </html>
