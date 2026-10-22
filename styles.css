@@ -43,10 +43,26 @@
   --space-section: 2.75rem;
   --page-pad-x: 1.25rem;
   --page-pad-y: 2.5rem;
-  --text-display-size: 1.5rem;
-  --text-display-lh: 1.32;
-  --text-title-size: clamp(1.375rem, 6.2vw, 1.75rem);
-  --text-title-lh: 1.2;
+  /* Type scale matched to emmanuelhong.com: flat 15px, no clamp steps. */
+  --text-display-size: 15px;
+  --text-display-lh: 0.9;
+  --text-display-tracking: -0.00563rem;
+  --text-display-weight: 450;
+  --text-title-size: 15px;
+  --text-title-lh: 0.9;
+  --text-title-tracking: -0.00563rem;
+  --text-title-weight: 450;
+  --text-body-size: 15px;
+  --text-body-lh: 1.6;
+  --text-body-weight: 400;
+  --text-meta-size: 15px;
+  --text-meta-lh: 1.2;
+  --text-meta-tracking: -0.00563rem;
+  --text-meta-weight: 400;
+  --text-meta-color: rgb(0 0 0 / 0.45);
+  --text-small-size: 14px;
+  --text-small-lh: 1.2;
+  --text-link-hover: #2891df;
 }
 
 @media (min-width: 375px) {
@@ -59,8 +75,6 @@
   :root {
     --space-section: 8rem;
     --page-pad-y: 4rem;
-    --text-display-size: 2.25rem;
-    --text-display-lh: 1.3;
   }
 }
 
@@ -85,7 +99,9 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--color-gray-1200);
-  font-size: 16px;
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-lh);
+  font-weight: var(--text-body-weight);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -137,13 +153,18 @@ article,
 
 .name {
   display: inline-block;
-  font-weight: 500;
+  font-size: var(--text-display-size);
+  font-weight: var(--text-display-weight);
+  line-height: var(--text-display-lh);
+  letter-spacing: var(--text-display-tracking);
 }
 
 .role {
-  font-weight: 500;
-  line-height: 1;
-  color: var(--color-gray-1100);
+  font-size: var(--text-meta-size);
+  font-weight: var(--text-meta-weight);
+  line-height: var(--text-meta-lh);
+  letter-spacing: var(--text-meta-tracking);
+  color: var(--text-meta-color);
 }
 
 /* Availability status (local time + working-hours dot) */
@@ -481,9 +502,10 @@ article,
    Article (a single note at /notes/<slug>/)
    ========================================================================== */
 .article h1 {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: var(--text-title-size);
+  font-weight: var(--text-title-weight);
+  line-height: var(--text-title-lh);
+  letter-spacing: var(--text-title-tracking);
   margin: 0 0 2rem;
   color: var(--color-gray-1200);
   overflow-wrap: break-word;
@@ -584,17 +606,19 @@ article,
 }
 
 .article p {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
   margin: 0 0 26px;
-  opacity: 0.9;
+  opacity: 1;
   color: var(--color-gray-1200);
 }
 
 .article h2 {
-  font-size: 16px;
-  font-weight: 550;
-  line-height: 1.5;
+  font-size: var(--text-title-size);
+  font-weight: var(--text-title-weight);
+  line-height: var(--text-title-lh);
+  letter-spacing: var(--text-title-tracking);
   margin: 3rem 0 20px;
   color: var(--color-gray-1200);
   overflow-wrap: break-word;
@@ -615,20 +639,22 @@ article,
 }
 
 .article li {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-lh);
   margin-bottom: 0.25rem;
 }
 
 /* Inline code */
 .article code {
   font-family: var(--font-mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
-  font-size: 0.857em;
-  background: var(--color-gray-200);
-  border: 1px solid var(--color-gray-400);
+  font-size: 0.94em;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: rgb(0 0 0 / 0.055);
+  border: 0;
   border-radius: 6px;
-  padding: 2px 3.6px;
-  color: var(--color-gray-1200);
+  padding: 0.125rem 0.375rem;
+  color: #000;
 }
 
 /* Serif italic emphasis (matches the reference's inline serif) */
@@ -2134,7 +2160,9 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   }
 
   .root--full .home-intro p {
-    font-size: clamp(1.65rem, 3.4vh, 2.25rem);
+    font-size: var(--text-body-size);
+    line-height: var(--text-body-lh);
+    letter-spacing: 0;
   }
 
   .root--full .home-split {
@@ -3852,11 +3880,11 @@ body.nav-sheet-open {
   margin: 0;
   font-family: LabilVariable, "Labil Grotesk", "Inter", "Inter Fallback", Arial,
     sans-serif;
-  font-size: var(--text-display-size);
-  font-weight: 400;
-  line-height: var(--text-display-lh);
-  letter-spacing: -0.02em;
-  color: rgb(163 163 163);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  letter-spacing: 0;
+  color: var(--color-gray-1200);
   font-variation-settings: "STAB" 0;
   font-feature-settings: "ss01" 1, "calt" 1;
   text-wrap: pretty;
@@ -4409,559 +4437,615 @@ body.nav-sheet-open {
   }
 }
 
+
 /* ==========================================================================
-   Mobile note journal (Today-style). Desktop rules above stay untouched.
+   Note essay (Tree-style). Replaces the mobile journal card.
    ========================================================================== */
-@media (max-width: 767px) {
-  .note-page {
-    --note-journal-muted: var(--color-gray-1100);
-    --note-journal-line: var(--color-gray-500);
-    --note-journal-card: #ffffff;
-    --note-journal-radius: 22px;
-    --note-line-x: 12px;
-    --note-body-inset: 10px;
-    --note-edge: 12px;
-    --note-fade-height: clamp(3rem, 8vh, 5rem);
-    background: var(--bg);
+body.note-page.note-page--essay {
+  background: #fff;
+}
+
+body.note-page.note-page--essay .top-nav,
+body.note-page.note-page--essay .sidebar,
+body.note-page.note-page--essay .notes-index,
+body.note-page.note-page--essay .article-shell__toggle,
+body.note-page.note-page--essay .article-shell__toc,
+body.note-page.note-page--essay .article-byline,
+body.note-page.note-page--essay .article-toc--mobile,
+body.note-page.note-page--essay .article-meta,
+body.note-page.note-page--essay .article-dek,
+body.note-page.note-page--essay .article > .banner,
+body.note-page.note-page--essay .note-journal__head,
+body.note-page.note-page--essay .note-journal__fade {
+  display: none !important;
+}
+
+body.note-page.note-page--essay .layout,
+body.note-page.note-page--essay .layout--notes-index,
+body.note-page.note-page--essay .layout > .root,
+body.note-page.note-page--essay .article-shell.card,
+body.note-page.note-page--essay .article-shell__scroll {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.note-page.note-page--essay .layout > .root > .article,
+body.note-page.note-page--essay .article-shell .article,
+body.note-page.note-page--essay .article {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 120px 20px 128px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 640px) {
+  body.note-page.note-page--essay .layout,
+  body.note-page.note-page--essay .layout > .root,
+  body.note-page.note-page--essay .article-shell.card,
+  body.note-page.note-page--essay .article-shell__scroll {
+    padding: 0 !important;
   }
 
-  .note-page .top-nav {
-    padding: 8px 6px 4px;
-    background: transparent;
-  }
-
-  .note-page .top-nav__menu-btn {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    margin-left: auto;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    color: var(--color-gray-1200);
-    font-size: 0;
-    line-height: 0;
-  }
-
-  .note-page .top-nav__menu-btn:hover,
-  .note-page .top-nav__menu-btn[aria-expanded="true"] {
-    background: transparent;
-  }
-
-  .note-page .top-nav__menu-btn::before {
-    content: "";
-    display: block;
-    width: 18px;
-    height: 1.5px;
-    margin: 0 auto;
-    background: currentColor;
-    border-radius: 1px;
-    box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
-  }
-
-  .note-page .layout > .root {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: none;
-    min-height: calc(100dvh - 4.25rem);
-    margin: 0;
-    padding: 6px;
-  }
-
-  .note-journal__head {
-    position: relative;
-    z-index: 3;
-    flex-shrink: 0;
-    margin: 0;
-    padding: 16px var(--note-edge) 12px;
-    background: var(--note-journal-card);
-  }
-
-  .note-page .article-shell.card > .note-journal__head {
-    border-radius: var(--note-journal-radius) var(--note-journal-radius) 0 0;
-  }
-
-  .note-page .note-journal__head,
-  .note-page .note-journal__head p,
-  .note-page .note-journal__title {
-    margin-left: 0;
-    margin-right: 0;
-    max-width: none;
-  }
-
-  .note-journal__date {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0 0 6px;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: 0.01em;
-    color: var(--note-journal-muted);
-  }
-
-  .note-journal__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #f04a2a;
-  }
-
-  .note-page .note-journal__title,
-  .note-journal__title {
-    margin: 0;
-    font-family: inherit;
-    font-size: var(--text-title-size);
-    font-weight: 600;
-    line-height: var(--text-title-lh);
-    letter-spacing: -0.02em;
-    color: var(--color-gray-1200);
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-wrap: balance;
-  }
-
-  .note-page .layout > .root > .article,
-  .note-page .article-shell.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: var(--note-journal-card);
-    border: 0;
-    border-radius: var(--note-journal-radius);
-    box-shadow: 0 10px 28px rgb(15 23 42 / 0.06);
-  }
-
-  .note-page .article-shell__scroll {
-    height: auto;
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 0;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-gray-500) transparent;
-  }
-
-  .note-page .layout > .root > .article {
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-gray-500) transparent;
-  }
-
-  .note-page .article-shell .article {
-    flex: none;
-    min-height: 0;
-    overflow: visible;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 10px 0 28px;
-  }
-
-  .note-page .layout > .root > .article {
-    padding: 0 0 28px;
-  }
-
-  .note-page .article {
-    --note-body-pad: calc(var(--note-line-x) + var(--note-body-inset));
-    position: relative;
-  }
-
-  .note-page .article::before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    bottom: 28px;
-    left: var(--note-line-x);
-    z-index: 0;
-    border-left: 1px dashed var(--note-journal-line);
-    pointer-events: none;
-  }
-
-  .note-page .article > .article-meta,
-  .note-page .article-byline,
-  .note-page .article-toc--mobile,
-  .note-page .article > .banner,
-  .note-page .article .article-content-section > .banner:first-child {
-    display: none !important;
-  }
-
-  .note-page:has(.note-journal__head) .article > h1:not(.note-journal__title),
-  .note-page:has(.note-journal__head)
-    .article
-    .article-content-section
-    h1:not(.note-journal__title) {
-    display: none;
-  }
-
-  .note-page .article > .article-meta,
-  .note-page .article > h1,
-  .note-page .article > .article-dek,
-  .note-page .article > .article-tldr,
-  .note-page .article > .element-caption,
-  .note-page .article > .article-content-section,
-  .note-page .article .article-content-section h1 {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .note-page .article > .article-content-section,
-  .note-page .article .article-content-section {
-    min-width: 0;
-    overflow: visible;
-  }
-
-  .note-page .article > .article-content-section:first-child,
-  .note-page .article > .article-meta,
-  .note-page .article > .article-content-section:first-child .article-meta {
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .note-page .article p:not(.note-journal__date),
-  .note-page .article .article-dek,
-  .note-page .article .article-tldr,
-  .note-page .article .element-caption,
-  .note-page .article pre,
-  .note-page .article figure,
-  .note-page .article .banner,
-  .note-page .article .install-code,
-  .note-page .article .code-block,
-  .note-page .article .idx-command,
-  .note-page .article .idx-list,
-  .note-page .article .idx-terms,
-  .note-page .article .dq-sparkline,
-  .note-page .article .arch-diagram,
-  .note-page .article .plan-table-wrap,
-  .note-page .article .bar-chart {
-    position: relative;
-    z-index: 1;
-    max-width: 100%;
-    margin-left: var(--note-body-pad);
-    margin-right: var(--note-edge);
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .note-page .article p,
-  .note-page .article li {
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--color-gray-1200);
-    opacity: 1;
-    text-wrap: pretty;
-    overflow-wrap: break-word;
-  }
-
-  .note-page .article p {
-    margin-bottom: 1.15rem;
-  }
-
-  .note-page .article .article-dek {
-    margin: 0 var(--note-edge) 1.25rem var(--note-body-pad);
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--note-journal-muted);
-  }
-
-  .note-page .article .article-tldr {
-    margin-bottom: 1.5rem;
-    padding: 0.85rem 0.95rem;
-    border-radius: 12px;
-    background: var(--bg);
-    border-color: var(--note-journal-line);
-  }
-
-  .note-page .article h2 {
-    display: inline-block;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 1;
-    width: fit-content;
-    max-width: calc(100% - var(--note-edge) - 6px);
-    margin: 1.85rem var(--note-edge) 0.9rem 6px;
-    padding: 5px 12px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: 0.01em;
-    color: var(--note-journal-muted);
-    background: var(--note-journal-card);
-    border: 1px dashed var(--note-journal-line);
-    border-radius: 12px;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    hyphens: auto;
-    white-space: normal;
-    vertical-align: top;
-  }
-
-  .note-page .article h2 code {
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    padding: 0 3px;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .note-page .article h2:first-of-type {
-    margin-top: 0.15rem;
-  }
-
-  .note-page .article ul,
-  .note-page .article ol {
-    position: relative;
-    z-index: 1;
-    list-style: none;
-    margin: 0 var(--note-edge) 1.5rem var(--note-body-pad);
-    padding: 0;
-    opacity: 1;
-  }
-
-  .note-page .article li {
-    position: relative;
-    margin: 0;
-    padding: 14px 0 14px 28px;
-    border-bottom: 1px solid rgb(26 26 28 / 0.08);
-  }
-
-  .note-page .article li:last-child {
-    border-bottom: 0;
-  }
-
-  .note-page .article ul > li::before {
-    content: "";
-    position: absolute;
-    top: 1.15em;
-    left: 0;
-    width: 15px;
-    height: 15px;
-    background: #fff;
-    border: 1.5px solid #c5c6cb;
-    border-radius: 4px;
-    transform: translateY(-50%);
-  }
-
-  .note-page .article-nav {
-    position: relative;
-    z-index: 1;
-    margin: 1.75rem var(--note-edge) 0 var(--note-body-pad);
-    padding: 0;
-  }
-
-  .note-journal__fade {
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
-    flex-shrink: 0;
-    height: var(--note-fade-height);
-    margin-top: calc(-1 * var(--note-fade-height));
-    pointer-events: none;
-    border-radius: 0 0 var(--note-journal-radius) var(--note-journal-radius);
-    background: linear-gradient(
-      to bottom,
-      rgb(255 255 255 / 0),
-      var(--note-journal-card)
-    );
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .note-page .article.is-scrollable:not(.is-scrolled-end) .note-journal__fade,
-  .note-page
-    .article-shell__scroll.is-scrollable:not(.is-scrolled-end)
-    .note-journal__fade {
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .note-journal__fade {
-      transition: none;
-    }
+  body.note-page.note-page--essay .layout > .root > .article,
+  body.note-page.note-page--essay .article-shell .article,
+  body.note-page.note-page--essay .article {
+    padding: 120px 0 128px;
   }
 }
 
+.essay-crumb {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: calc(100vw - 40px);
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--text-small-size);
+  line-height: var(--text-small-lh);
+  color: var(--text-meta-color);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.essay-crumb__here {
+  overflow: hidden;
+  min-width: 0;
+  color: #000;
+  text-overflow: ellipsis;
+}
+
+.essay-crumb.is-ready {
+  opacity: 1;
+}
+
+.essay-crumb a {
+  color: var(--text-meta-color);
+  transition: color 150ms ease;
+}
+
+.essay-crumb a:hover {
+  color: var(--text-link-hover);
+}
+
+.essay-crumb__chevron {
+  width: 14px;
+  height: 14px;
+  color: rgb(0 0 0 / 0.3);
+}
+
+
+body.note-page.note-page--essay .article > h1,
+body.note-page.note-page--essay .article .article-content-section h1,
+body.note-page.note-page--essay .essay-title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-title-size);
+  font-weight: var(--text-title-weight);
+  line-height: var(--text-title-lh);
+  letter-spacing: var(--text-title-tracking);
+  color: #000;
+}
+
+.essay-date,
+body.note-page.note-page--essay .article p.essay-date {
+  margin: 2px 0 0;
+  padding: 0;
+  font-size: var(--text-meta-size);
+  font-weight: var(--text-meta-weight);
+  line-height: var(--text-meta-lh);
+  letter-spacing: var(--text-meta-tracking);
+  color: var(--text-meta-color);
+}
+
+.essay-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 13 / 9;
+  margin: 24px 0 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.06);
+  border-radius: 12px;
+}
+
+.essay-mark {
+  position: relative;
+  display: block;
+  width: 72px;
+  height: 80px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+
+.essay-mark:focus-visible {
+  outline: 2px solid var(--text-link-hover);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.essay-mark__body {
+  display: block;
+  width: 72px;
+  height: 80px;
+  transform-origin: bottom center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.essay-mark.is-pressed .essay-mark__body {
+  transition: transform 0.1s ease-out;
+  transform: scale(1.01, 0.96);
+}
+
+.essay-mark.is-bounce .essay-mark__body {
+  animation: essay-mark-bounce 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.essay-mark.is-shake .essay-mark__body {
+  animation: essay-mark-shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes essay-mark-bounce {
+  0% {
+    transform: scale(1, calc(1 - 0.02 * var(--bounce-intensity, 1)));
+  }
+  25% {
+    transform: scale(
+      calc(1 - 0.005 * var(--bounce-intensity, 1)),
+      calc(1 + 0.02 * var(--bounce-intensity, 1))
+    );
+  }
+  50% {
+    transform: scale(
+      calc(1 + 0.002 * var(--bounce-intensity, 1)),
+      calc(1 - 0.01 * var(--bounce-intensity, 1))
+    );
+  }
+  75% {
+    transform: scale(
+      calc(1 - 0.001 * var(--bounce-intensity, 1)),
+      calc(1 + 0.005 * var(--bounce-intensity, 1))
+    );
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes essay-mark-shake {
+  0% { transform: rotate(0); }
+  15% { transform: rotate(1.2deg); }
+  30% { transform: rotate(-1deg); }
+  45% { transform: rotate(0.8deg); }
+  60% { transform: rotate(-0.5deg); }
+  75% { transform: rotate(0.3deg); }
+  90% { transform: rotate(-0.1deg); }
+  100% { transform: rotate(0); }
+}
+
+.essay-mark__bits {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.essay-bit {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bit-color, #c45b2d);
+  left: var(--x);
+  top: var(--y);
+  animation: essay-bit-fall var(--dur, 1.1s) ease-in forwards;
+}
+
+.essay-bit--hover {
+  animation-name: essay-bit-hover;
+  animation-duration: 1.3s;
+}
+
+@keyframes essay-bit-fall {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(calc(var(--drift-x) * 0.4), var(--pop-y)) rotate(180deg);
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift-x), var(--fall-y)) rotate(360deg);
+  }
+}
+
+@keyframes essay-bit-hover {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift-x), var(--fall-y)) rotate(var(--spin));
+  }
+}
+
+body.note-page.note-page--essay .article > .article-content-section,
+body.note-page.note-page--essay .article .article-content-section,
+body.note-page.note-page--essay .article > .article-content-section:first-child {
+  margin: 0;
+  padding: 0;
+}
+
+body.note-page.note-page--essay .article > .article-content-section:first-of-type,
+body.note-page.note-page--essay .essay-body {
+  margin-top: 24px;
+}
+
+body.note-page.note-page--essay .article p,
+body.note-page.note-page--essay .article li {
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  color: #111827;
+  opacity: 1;
+}
+
+body.note-page.note-page--essay .article p + p {
+  margin-top: 10px;
+}
+
+body.note-page.note-page--essay .article h2 {
+  display: block;
+  width: auto;
+  max-width: none;
+  margin: 28px 0 10px;
+  padding: 0;
+  font-size: var(--text-title-size);
+  font-weight: var(--text-title-weight);
+  line-height: var(--text-title-lh);
+  letter-spacing: var(--text-title-tracking);
+  color: #000;
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
+
+body.note-page.note-page--essay .article ul,
+body.note-page.note-page--essay .article ol {
+  margin: 10px 0 0;
+  padding-left: 1.15rem;
+}
+
+body.note-page.note-page--essay .article li {
+  padding: 0;
+  border: 0;
+}
+
+body.note-page.note-page--essay .article ul > li::before {
+  content: none;
+}
+
+body.note-page.note-page--essay .article a {
+  color: inherit;
+  transition: color 150ms ease;
+}
+
+body.note-page.note-page--essay .article a:hover {
+  color: var(--text-link-hover);
+}
+
+body.note-page.note-page--essay .article-nav {
+  margin: 40px 0 0;
+  padding: 0;
+}
+
 @media (max-width: 767px) {
-  body.note-page.note-page--journal:has(.layout > .root > .article):not(
+  body.note-page.note-page--essay,
+  body.note-page.note-page--essay:has(.layout > .root > .article):not(
       :has(.about-page, .project-page)
     ),
-  body.note-page.note-page--journal:has(.layout--notes-index) {
-    height: 100dvh;
-    overflow: hidden;
-    background: var(--bg);
+  body.note-page.note-page--essay:has(.layout--notes-index) {
+    height: auto;
+    overflow: visible;
+    background: #fff !important;
 
-    .top-nav {
-      padding: 8px 6px 4px;
-      background: transparent;
-    }
-
-    .layout {
-      height: calc(100dvh - 3.75rem);
-      max-height: calc(100dvh - 3.75rem);
-      overflow: hidden;
-    }
-
-    .layout > .root {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: none;
-      height: 100%;
-      max-height: 100%;
-      min-height: 0;
-      margin: 0;
-      padding: 6px;
-      overflow: hidden;
-    }
-
+    .layout,
+    .layout > .root,
     .article-shell.card,
-    .layout > .root > .article {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 auto;
-      min-height: 0;
-      overflow: hidden;
-      background: #fff;
-      border: 0;
-      border-radius: 22px;
-      box-shadow: 0 10px 28px rgb(15 23 42 / 0.06);
-    }
-
-    .article-shell.card > .note-journal__head {
-      flex-shrink: 0;
-      z-index: 3;
-      border-radius: 22px 22px 0 0;
-    }
-
     .article-shell__scroll {
-      height: auto;
-      flex: 1 1 auto;
-      min-height: 0;
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding: 0;
-      -webkit-overflow-scrolling: touch;
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      background: #fff !important;
     }
 
-    .article-shell__toggle,
-    .article-shell__toc--rail,
-    .article-toc--mobile,
-    .article-byline {
-      display: none !important;
+    .article,
+    .layout > .root > .article,
+    .article-shell .article {
+      max-width: 520px !important;
+      margin: 0 auto !important;
+      padding: 120px 20px 128px !important;
+      background: transparent !important;
     }
 
     .article > .article-content-section,
     .article .article-content-section,
     .article > .article-content-section:first-child {
-      padding: 0;
+      margin: 0 !important;
+      padding: 0 !important;
     }
 
-    .article > h1:not(.note-journal__title),
-    .article .article-content-section h1:not(.note-journal__title) {
-      display: none;
+    .article > h1,
+    .article .article-content-section h1,
+    .article h1,
+    .essay-title {
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: 15px !important;
+      font-weight: 450 !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.00563rem !important;
+      color: #000 !important;
     }
 
-    .article p:not(.note-journal__date),
-    .article .article-dek,
-    .article .article-tldr,
-    .article .element-caption,
-    .article pre,
-    .article figure,
-    .article ul,
-    .article ol,
-    .article-nav,
-    .article .plan-table-wrap,
-    .article .idx-list,
-    .article .arch-diagram,
-    .article .code-block,
-    .article .install-code,
-    .article .idx-command,
-    .article .idx-terms,
-    .article .dq-sparkline,
-    .article .bar-chart,
-    .article .banner {
-      margin-left: var(--note-body-pad, 22px);
-      margin-right: var(--note-edge, 12px);
-      padding-left: 0;
-      padding-right: 0;
+    .essay-date {
+      margin: 2px 0 0 !important;
+      padding: 0 !important;
+      font-size: 15px !important;
+      font-weight: 400 !important;
+      line-height: 1.2 !important;
+      letter-spacing: -0.00563rem !important;
+      color: rgb(0 0 0 / 0.45) !important;
     }
 
-    .note-journal__title,
-    .article h1.note-journal__title {
-      font-family: inherit;
-      font-size: var(--text-title-size);
-      font-weight: 600;
-      line-height: var(--text-title-lh);
+    .article p:not(.essay-date),
+    .article li {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 0 !important;
+      font-size: 15px !important;
+      font-weight: 400 !important;
+      line-height: 1.6 !important;
+      color: #111827 !important;
     }
 
-    .note-journal__head {
-      padding: 16px var(--note-edge, 12px) 12px;
-    }
-
-    .note-journal__head,
-    .note-journal__head p,
-    .note-journal__title {
-      margin-left: 0;
-      margin-right: 0;
-      max-width: none;
+    .article p + p {
+      margin-top: 10px !important;
     }
 
     .article h2 {
-      display: inline-block;
-      box-sizing: border-box;
-      width: fit-content;
-      max-width: calc(100% - var(--note-edge, 12px) - 6px);
-      margin: 1.85rem var(--note-edge, 12px) 0.9rem 6px;
-      padding: 5px 12px;
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.35;
-      letter-spacing: 0.01em;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      hyphens: auto;
-      white-space: normal;
-      border-radius: 12px;
+      display: block !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: 28px 0 10px !important;
+      padding: 0 !important;
+      font-size: 15px !important;
+      font-weight: 450 !important;
+      line-height: 0.9 !important;
+      background: none !important;
+      border: 0 !important;
     }
+  }
 
-    .article h2 code {
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-      padding: 0 3px;
-      white-space: normal;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
+  body.note-page.note-page--essay .layout,
+  body.note-page.note-page--essay .layout > .root,
+  body.note-page.note-page--essay .article-shell.card,
+  body.note-page.note-page--essay .article-shell__scroll,
+  body.note-page.note-page--essay .layout > .root > .article {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    background: #fff;
+  }
 
-    .article p,
-    .article li {
-      font-family: inherit;
-      font-size: 15px;
-      line-height: 1.5;
-      color: var(--color-gray-1200);
-    }
+  body.note-page.note-page--essay .article > h1,
+  body.note-page.note-page--essay .article .article-content-section h1,
+  body.note-page.note-page--essay .article h1 {
+    font-size: var(--text-title-size);
+    font-weight: var(--text-title-weight);
+    line-height: var(--text-title-lh);
+    letter-spacing: var(--text-title-tracking);
+  }
+
+  body.note-page.note-page--essay .article p,
+  body.note-page.note-page--essay .article li {
+    font-size: var(--text-body-size);
+    line-height: var(--text-body-lh);
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .essay-crumb,
+  .essay-mark.is-pressed .essay-mark__body,
+  .essay-mark.is-bounce .essay-mark__body,
+  .essay-mark.is-shake .essay-mark__body,
+  .essay-bit {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Hidden footer Easter egg (scroll-up / overscroll at top)
+   ========================================================================== */
+html {
+  background: #000;
+}
+
+.hidden-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+  opacity: 0;
+}
+
+.hidden-footer.is-open {
+  pointer-events: auto;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.hidden-footer__sheet {
+  height: 18px;
+  background: var(--bg, #fcfcfc);
+  border-radius: 0 0 24px 24px;
+}
+
+@media (min-width: 640px) {
+  .hidden-footer__sheet {
+    border-radius: 0 0 36px 36px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hidden-footer__sheet {
+    border-radius: 0 0 48px 48px;
+  }
+}
+
+.hidden-footer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 58px;
+  padding: 16px 20px 20px;
+  background: #000;
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .hidden-footer__bar {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.hidden-footer__now,
+.hidden-footer__meta {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  font-size: var(--text-meta-size);
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.15px;
+}
+
+.hidden-footer__now {
+  gap: 6px;
+  flex: 1;
+}
+
+.hidden-footer__eq {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.hidden-footer__track {
+  overflow: hidden;
+  min-width: 0;
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hidden-footer__track[data-offline="true"] {
+  color: rgb(255 255 255 / 0.7);
+}
+
+.hidden-footer__meta {
+  flex-shrink: 0;
+  color: rgb(255 255 255 / 0.5);
+}
+
+.hidden-footer__meta strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+body.footer-revealed {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hidden-footer {
+    transition: none;
+  }
+}

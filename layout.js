@@ -943,6 +943,7 @@
         loadScript("/nav-mobile.js?v=12"),
         loadScript("/sidebar-preview.js?v=8"),
         loadScript("/avatar.js?v=1"),
+        loadScript("/hidden-footer.js?v=1"),
       ]);
     })
     .then(function () {
