@@ -3707,6 +3707,14 @@ body.nav-sheet-open {
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--color-gray-400);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 374px) {
+  .project-table th,
+  .project-table td {
+    padding: 8px;
+  }
 }
 
 .project-table th {
