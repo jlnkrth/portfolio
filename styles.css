@@ -1741,6 +1741,26 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   view-transition-name: site-top-nav;
 }
 
+.top-nav__logo {
+  display: none;
+  flex-shrink: 0;
+  line-height: 0;
+  border-radius: 8px;
+}
+
+.top-nav__logo:focus-visible {
+  outline: 2px solid var(--color-gray-1200);
+  outline-offset: 2px;
+}
+
+.top-nav__logo-img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .top-nav__menu-btn {
   display: none;
   align-items: center;
@@ -1969,6 +1989,27 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     flex-shrink: 0;
   }
 
+  .note-page .top-nav__logo,
+  body:has(.layout--notes-index) .top-nav__logo,
+  body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
+    .top-nav__logo {
+    display: block;
+  }
+
+  .note-page .top-nav__menu-btn,
+  body:has(.layout--notes-index) .top-nav__menu-btn,
+  body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
+    .top-nav__menu-btn {
+    margin-left: auto;
+  }
+
+  .note-page .availability--nav,
+  body:has(.layout--notes-index) .availability--nav,
+  body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
+    .availability--nav {
+    display: none;
+  }
+
   .top-nav__inner {
     display: none;
   }
@@ -2043,6 +2084,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     overflow: visible;
   }
 
+  .top-nav__logo,
   .top-nav__menu-btn,
   .nav-sheet {
     display: none !important;
@@ -3413,6 +3455,9 @@ body.nav-sheet-open {
   .about-page__card {
     flex: 1;
     min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .about-page__aside {
@@ -3466,9 +3511,36 @@ body.nav-sheet-open {
   }
 }
 
+.about-page__main {
+  min-width: 0;
+  min-height: 0;
+}
+
 .about-page__card {
   padding: 16px var(--page-pad-x);
   min-width: 0;
+  max-height: min(32rem, calc(100dvh - 13.5rem));
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-500) transparent;
+}
+
+.about-page__card:focus {
+  outline: none;
+}
+
+.about-page__card:focus-visible {
+  outline: 2px solid var(--color-gray-600);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .about-page__card {
+    max-height: min(40rem, calc(100dvh - 11rem));
+  }
 }
 
 .about-page__card .label--wide {
@@ -4077,29 +4149,7 @@ body.nav-sheet-open {
     }
 
     .article-byline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 1.75rem;
-    }
-
-    .article-byline__author {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-gray-1200);
-      text-decoration: none;
-    }
-
-    .article-byline__avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      object-fit: cover;
-      display: block;
+      display: none;
     }
 
     .article-toc--mobile {
@@ -4177,7 +4227,6 @@ body.nav-sheet-open {
     .article > .article-meta,
     .article > h1,
     .article > .article-dek,
-    .article > .article-byline,
     .article > .article-tldr,
     .article > .element-caption,
     .article > .article-content-section {
@@ -4194,15 +4243,6 @@ body.nav-sheet-open {
     .article > .banner,
     .article .article-content-section > .banner:first-child {
       display: none !important;
-    }
-
-    .article .article-byline__author {
-      text-decoration: none;
-    }
-
-    .article .article-byline__author:hover {
-      text-decoration: underline;
-      text-decoration-color: rgba(33, 32, 28, 0.35);
     }
 
     .article > .article-meta,
@@ -4327,7 +4367,6 @@ body.nav-sheet-open {
       margin-top: 0;
     }
 
-    .article > .article-byline + p,
     .article > .article-dek + p,
     .article > .article-toc--mobile + .article-tldr,
     .article .article-content-section > .article-toc--mobile + .article-tldr {
