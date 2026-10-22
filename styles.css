@@ -4586,10 +4586,27 @@ body.note-page.note-page--essay .article p.essay-date {
   width: 100%;
   aspect-ratio: 13 / 9;
   margin: 24px 0 0;
+  padding: 0;
   overflow: hidden;
   background: #fff;
   border: 1px solid rgb(0 0 0 / 0.06);
   border-radius: 12px;
+}
+
+body.note-page.note-page--essay .essay-stage,
+body.note-page.note-page--essay .essay-stage img,
+body.note-page.note-page--essay .essay-stage svg,
+body.note-page.note-page--essay .article figure,
+body.note-page.note-page--essay .article img {
+  margin-bottom: 0;
+}
+
+/* Reference Tree: section.mt-6 = 24px between hero and first body line. */
+body.note-page.note-page--essay .essay-stage + p,
+body.note-page.note-page--essay .article .essay-stage + p:not(.essay-date),
+body.note-page.note-page--essay .essay-stage + .article-content-section,
+body.note-page.note-page--essay .essay-stage + .article-content-section > p:first-of-type {
+  margin-top: 24px;
 }
 
 .essay-mark {
@@ -4737,7 +4754,7 @@ body.note-page.note-page--essay .article > .article-content-section:first-child 
 
 body.note-page.note-page--essay .article > .article-content-section:first-of-type,
 body.note-page.note-page--essay .essay-body {
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 body.note-page.note-page--essay .article p,
@@ -4875,6 +4892,11 @@ body.note-page.note-page--essay .article-nav {
       color: #111827 !important;
     }
 
+    .essay-stage + p:not(.essay-date),
+    .essay-stage + .article-content-section > p:first-of-type {
+      margin-top: 24px !important;
+    }
+
     .article p + p {
       margin-top: 10px !important;
     }
@@ -4994,20 +5016,21 @@ html {
   }
 }
 
-.hidden-footer__now,
-.hidden-footer__meta {
+.hidden-footer__now {
   display: flex;
   align-items: center;
+  gap: 6px;
   min-width: 0;
+  flex: 1;
   font-size: var(--text-meta-size);
   font-weight: 500;
   line-height: 18px;
   letter-spacing: -0.15px;
 }
 
-.hidden-footer__now {
-  gap: 6px;
-  flex: 1;
+.hidden-footer__label {
+  flex-shrink: 0;
+  color: rgb(255 255 255 / 0.5);
 }
 
 .hidden-footer__eq {
@@ -5026,22 +5049,18 @@ html {
   text-overflow: ellipsis;
 }
 
-.hidden-footer__track[data-offline="true"] {
-  color: rgb(255 255 255 / 0.7);
-}
-
-.hidden-footer__meta {
-  flex-shrink: 0;
-  color: rgb(255 255 255 / 0.5);
-}
-
-.hidden-footer__meta strong {
+.hidden-footer__track[data-state="last"] {
   color: #fff;
-  font-weight: 500;
 }
 
 body.footer-revealed {
   overflow: hidden;
+}
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .hidden-footer {
+    display: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
