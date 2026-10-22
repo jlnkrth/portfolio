@@ -1738,6 +1738,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
    ========================================================================== */
 .top-nav {
   display: none;
+  background: transparent;
   view-transition-name: site-top-nav;
 }
 
@@ -1981,7 +1982,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     z-index: 300;
     padding: 12px max(var(--page-pad-x), env(safe-area-inset-right, 0px))
       12px max(var(--page-pad-x), env(safe-area-inset-left, 0px));
-    background: linear-gradient(to bottom, var(--bg) 70%, transparent);
+    background: transparent;
   }
 
   .top-nav__menu-btn {
@@ -2082,6 +2083,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     right: 30px;
     z-index: 300;
     overflow: visible;
+    background: transparent;
   }
 
   .top-nav__logo,
@@ -3517,6 +3519,8 @@ body.nav-sheet-open {
 }
 
 .about-page__card {
+  --about-card-bg: #ffffff;
+  --about-fade-height: clamp(3rem, 8vh, 5rem);
   padding: 16px var(--page-pad-x);
   min-width: 0;
   max-height: min(32rem, calc(100dvh - 13.5rem));
@@ -3526,6 +3530,34 @@ body.nav-sheet-open {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--color-gray-500) transparent;
+}
+
+.about-page__fade {
+  position: sticky;
+  bottom: -16px;
+  z-index: 1;
+  height: var(--about-fade-height);
+  margin-top: calc(-1 * var(--about-fade-height));
+  margin-right: calc(-1 * var(--page-pad-x));
+  margin-left: calc(-1 * var(--page-pad-x));
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0),
+    var(--about-card-bg)
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.about-page__card.is-scrollable:not(.is-scrolled-end) .about-page__fade {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page__fade {
+    transition: none;
+  }
 }
 
 .about-page__card:focus {
@@ -4115,7 +4147,7 @@ body.nav-sheet-open {
     background: #f1f2f5;
 
     .top-nav {
-      background: linear-gradient(to bottom, #f1f2f5 70%, transparent);
+      background: transparent;
     }
 
     .layout > .sidebar {
