@@ -4409,3 +4409,421 @@ body.nav-sheet-open {
   }
 }
 
+/* ==========================================================================
+   Mobile note journal (Today-style). Desktop rules above stay untouched.
+   ========================================================================== */
+@media (max-width: 767px) {
+  .note-page {
+    --note-journal-bg: #eef0f3;
+    --note-journal-ink: #1a1a1c;
+    --note-journal-muted: #8b8c91;
+    --note-journal-line: #d0d1d6;
+    --note-journal-card: #ffffff;
+    --note-journal-radius: 22px;
+    --note-line-x: 20px;
+    --note-body-inset: 44px;
+    --note-fade-height: clamp(3rem, 8vh, 5rem);
+    --font-journal-display: "Pixelify Sans", var(--font-mono), ui-monospace,
+      monospace;
+    background: var(--note-journal-bg);
+  }
+
+  .note-page .top-nav {
+    padding: 10px 10px 4px;
+    background: transparent;
+  }
+
+  .note-page .top-nav__menu-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: var(--note-journal-ink);
+    font-size: 0;
+    line-height: 0;
+  }
+
+  .note-page .top-nav__menu-btn:hover,
+  .note-page .top-nav__menu-btn[aria-expanded="true"] {
+    background: transparent;
+  }
+
+  .note-page .top-nav__menu-btn::before {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    margin: 0 auto;
+    background: currentColor;
+    border-radius: 1px;
+    box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+  }
+
+  .note-page .layout > .root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    min-height: calc(100dvh - 4.25rem);
+    margin: 0;
+    padding: 4px 10px 10px;
+  }
+
+  .note-journal__head {
+    flex-shrink: 0;
+    padding: 4px 6px 14px;
+  }
+
+  .note-journal__date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--note-journal-muted);
+  }
+
+  .note-journal__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f04a2a;
+  }
+
+  .note-page .note-journal__title,
+  .note-journal__title {
+    margin: 0;
+    font-family: var(--font-journal-display);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--note-journal-ink);
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-wrap: balance;
+  }
+
+  .note-page .layout > .root > .article,
+  .note-page .article-shell.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--note-journal-card);
+    border: 0;
+    border-radius: var(--note-journal-radius);
+    box-shadow: 0 10px 28px rgb(15 23 42 / 0.06);
+  }
+
+  .note-page .article-shell__scroll {
+    height: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-500) transparent;
+  }
+
+  .note-page .layout > .root > .article {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-500) transparent;
+  }
+
+  .note-page .article-shell .article {
+    flex: none;
+    min-height: 0;
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 18px 0 28px;
+  }
+
+  .note-page .layout > .root > .article {
+    padding: 18px 0 28px;
+  }
+
+  .note-page .article {
+    --note-body-pad: calc(var(--note-line-x) + var(--note-body-inset));
+    position: relative;
+  }
+
+  .note-page .article::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    bottom: 28px;
+    left: var(--note-line-x);
+    z-index: 0;
+    border-left: 1px dashed var(--note-journal-line);
+    pointer-events: none;
+  }
+
+  .note-page .article > .article-meta,
+  .note-page .article-byline,
+  .note-page .article-toc--mobile,
+  .note-page .article > .banner,
+  .note-page .article .article-content-section > .banner:first-child {
+    display: none !important;
+  }
+
+  .note-page:has(.note-journal__head) .article > h1,
+  .note-page:has(.note-journal__head) .article .article-content-section h1 {
+    display: none;
+  }
+
+  .note-page .article > .article-meta,
+  .note-page .article > h1,
+  .note-page .article > .article-dek,
+  .note-page .article > .article-tldr,
+  .note-page .article > .element-caption,
+  .note-page .article > .article-content-section,
+  .note-page .article .article-content-section h1 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .note-page .article > .article-content-section:first-child,
+  .note-page .article > .article-meta,
+  .note-page .article > .article-content-section:first-child .article-meta {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .note-page .article p,
+  .note-page .article .article-dek,
+  .note-page .article .article-tldr,
+  .note-page .article .element-caption,
+  .note-page .article pre,
+  .note-page .article figure,
+  .note-page .article .banner,
+  .note-page .article .install-code,
+  .note-page .article .code-block,
+  .note-page .article .idx-command,
+  .note-page .article .idx-list,
+  .note-page .article .idx-terms,
+  .note-page .article .dq-sparkline,
+  .note-page .article .arch-diagram,
+  .note-page .article .plan-table-wrap,
+  .note-page .article .bar-chart {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    margin-left: var(--note-body-pad);
+    margin-right: 16px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .note-page .article p,
+  .note-page .article li {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--note-journal-ink);
+    opacity: 1;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  .note-page .article p {
+    margin-bottom: 1.15rem;
+  }
+
+  .note-page .article .article-dek {
+    margin: 0 16px 1.25rem var(--note-body-pad);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--note-journal-muted);
+  }
+
+  .note-page .article .article-tldr {
+    margin-bottom: 1.5rem;
+    padding: 0.85rem 0.95rem;
+    border-radius: 12px;
+    background: var(--note-journal-bg);
+    border-color: var(--note-journal-line);
+  }
+
+  .note-page .article h2 {
+    display: inline-flex;
+    position: relative;
+    z-index: 1;
+    max-width: calc(100% - 24px);
+    margin: 1.85rem 16px 0.9rem 8px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: var(--note-journal-muted);
+    background: var(--note-journal-card);
+    border: 1px dashed var(--note-journal-line);
+    border-radius: 999px;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .note-page .article h2:first-of-type {
+    margin-top: 0.15rem;
+  }
+
+  .note-page .article ul,
+  .note-page .article ol {
+    position: relative;
+    z-index: 1;
+    list-style: none;
+    margin: 0 16px 1.5rem var(--note-body-pad);
+    padding: 0;
+    opacity: 1;
+  }
+
+  .note-page .article li {
+    position: relative;
+    margin: 0;
+    padding: 14px 0 14px 28px;
+    border-bottom: 1px solid rgb(26 26 28 / 0.08);
+  }
+
+  .note-page .article li:last-child {
+    border-bottom: 0;
+  }
+
+  .note-page .article ul > li::before {
+    content: "";
+    position: absolute;
+    top: 1.15em;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border: 1.5px solid #c5c6cb;
+    border-radius: 4px;
+    transform: translateY(-50%);
+  }
+
+  .note-page .article-nav {
+    position: relative;
+    z-index: 1;
+    margin: 1.75rem 16px 0 var(--note-body-pad);
+    padding: 0;
+  }
+
+  .note-journal__fade {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    flex-shrink: 0;
+    height: var(--note-fade-height);
+    margin-top: calc(-1 * var(--note-fade-height));
+    pointer-events: none;
+    border-radius: 0 0 var(--note-journal-radius) var(--note-journal-radius);
+    background: linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 0),
+      var(--note-journal-card)
+    );
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .note-page .article.is-scrollable:not(.is-scrolled-end) .note-journal__fade,
+  .note-page
+    .article-shell__scroll.is-scrollable:not(.is-scrolled-end)
+    .note-journal__fade {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .note-journal__fade {
+      transition: none;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  body.note-page.note-page--journal:has(.layout > .root > .article):not(
+      :has(.about-page, .project-page)
+    ),
+  body.note-page.note-page--journal:has(.layout--notes-index) {
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--note-journal-bg, #eef0f3);
+
+    .top-nav {
+      padding: 10px 10px 4px;
+      background: transparent;
+    }
+
+    .layout {
+      height: calc(100dvh - 3.75rem);
+      max-height: calc(100dvh - 3.75rem);
+      overflow: hidden;
+    }
+
+    .layout > .root {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      max-height: 100%;
+      min-height: 0;
+      margin: 0;
+      padding: 4px 10px 10px;
+      overflow: hidden;
+    }
+
+    .article-shell.card,
+    .layout > .root > .article {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      background: #fff;
+      border: 0;
+      border-radius: 22px;
+      box-shadow: 0 10px 28px rgb(15 23 42 / 0.06);
+    }
+
+    .article-shell__scroll {
+      height: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .article-shell__toggle,
+    .article-shell__toc--rail,
+    .article-toc--mobile,
+    .article-byline {
+      display: none !important;
+    }
+  }
+}
+
