@@ -101,9 +101,16 @@
     var article = root && root.querySelector(".article");
     if (!root || !article) return;
 
-    var srcTitle = article.querySelector("h1");
-    if (srcTitle && !document.querySelector(".note-journal__head")) {
-      var head = document.createElement("header");
+    var shell = article.closest(".article-shell");
+    var scroller = shell && shell.querySelector(".article-shell__scroll");
+
+    var head = document.querySelector(".note-journal__head");
+    var srcTitle =
+      (head && head.querySelector("h1")) ||
+      article.querySelector("h1") ||
+      document.querySelector("h1.note-journal__title");
+    if (srcTitle && !head) {
+      head = document.createElement("header");
       head.className = "note-journal__head";
 
       var dateEl = document.createElement("p");
@@ -113,17 +120,29 @@
 
       srcTitle.classList.add("note-journal__title");
       head.appendChild(srcTitle);
-      root.insertBefore(head, root.firstChild);
+    }
 
+    if (head) {
+      if (shell && scroller) {
+        if (head.parentNode !== shell || head.nextSibling !== scroller) {
+          shell.insertBefore(head, scroller);
+        }
+      } else if (article.firstChild !== head) {
+        article.insertBefore(head, article.firstChild);
+      }
+    }
+
+    var dateLine = head && head.querySelector(".note-journal__date");
+    if (dateLine && dateLine.hidden) {
       resolveDate(article, function (label) {
-        if (!label || !dateEl.isConnected) return;
-        dateEl.textContent = "";
-        dateEl.appendChild(document.createTextNode(label));
+        if (!label || !dateLine.isConnected) return;
+        dateLine.textContent = "";
+        dateLine.appendChild(document.createTextNode(label));
         var dot = document.createElement("span");
         dot.className = "note-journal__dot";
         dot.setAttribute("aria-hidden", "true");
-        dateEl.appendChild(dot);
-        dateEl.hidden = false;
+        dateLine.appendChild(dot);
+        dateLine.hidden = false;
       });
     }
 

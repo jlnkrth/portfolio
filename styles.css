@@ -4418,14 +4418,15 @@ body.nav-sheet-open {
     --note-journal-line: var(--color-gray-500);
     --note-journal-card: #ffffff;
     --note-journal-radius: 22px;
-    --note-line-x: 20px;
-    --note-body-inset: 44px;
+    --note-line-x: 12px;
+    --note-body-inset: 10px;
+    --note-edge: 12px;
     --note-fade-height: clamp(3rem, 8vh, 5rem);
     background: var(--bg);
   }
 
   .note-page .top-nav {
-    padding: 10px 10px 4px;
+    padding: 8px 6px 4px;
     background: transparent;
   }
 
@@ -4465,12 +4466,28 @@ body.nav-sheet-open {
     max-width: none;
     min-height: calc(100dvh - 4.25rem);
     margin: 0;
-    padding: 4px 10px 10px;
+    padding: 6px;
   }
 
   .note-journal__head {
+    position: relative;
+    z-index: 3;
     flex-shrink: 0;
-    padding: 4px 6px 14px;
+    margin: 0;
+    padding: 16px var(--note-edge) 12px;
+    background: var(--note-journal-card);
+  }
+
+  .note-page .article-shell.card > .note-journal__head {
+    border-radius: var(--note-journal-radius) var(--note-journal-radius) 0 0;
+  }
+
+  .note-page .note-journal__head,
+  .note-page .note-journal__head p,
+  .note-page .note-journal__title {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
   }
 
   .note-journal__date {
@@ -4553,11 +4570,11 @@ body.nav-sheet-open {
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    padding: 18px 0 28px;
+    padding: 10px 0 28px;
   }
 
   .note-page .layout > .root > .article {
-    padding: 18px 0 28px;
+    padding: 0 0 28px;
   }
 
   .note-page .article {
@@ -4568,7 +4585,7 @@ body.nav-sheet-open {
   .note-page .article::before {
     content: "";
     position: absolute;
-    top: 18px;
+    top: 8px;
     bottom: 28px;
     left: var(--note-line-x);
     z-index: 0;
@@ -4584,8 +4601,11 @@ body.nav-sheet-open {
     display: none !important;
   }
 
-  .note-page:has(.note-journal__head) .article > h1,
-  .note-page:has(.note-journal__head) .article .article-content-section h1 {
+  .note-page:has(.note-journal__head) .article > h1:not(.note-journal__title),
+  .note-page:has(.note-journal__head)
+    .article
+    .article-content-section
+    h1:not(.note-journal__title) {
     display: none;
   }
 
@@ -4614,7 +4634,7 @@ body.nav-sheet-open {
     padding-bottom: 0;
   }
 
-  .note-page .article p,
+  .note-page .article p:not(.note-journal__date),
   .note-page .article .article-dek,
   .note-page .article .article-tldr,
   .note-page .article .element-caption,
@@ -4634,7 +4654,7 @@ body.nav-sheet-open {
     z-index: 1;
     max-width: 100%;
     margin-left: var(--note-body-pad);
-    margin-right: 16px;
+    margin-right: var(--note-edge);
     padding-left: 0;
     padding-right: 0;
   }
@@ -4655,7 +4675,7 @@ body.nav-sheet-open {
   }
 
   .note-page .article .article-dek {
-    margin: 0 16px 1.25rem var(--note-body-pad);
+    margin: 0 var(--note-edge) 1.25rem var(--note-body-pad);
     font-size: 15px;
     line-height: 1.5;
     color: var(--note-journal-muted);
@@ -4675,8 +4695,8 @@ body.nav-sheet-open {
     position: relative;
     z-index: 1;
     width: fit-content;
-    max-width: calc(100% - 28px);
-    margin: 1.85rem 12px 0.9rem 8px;
+    max-width: calc(100% - var(--note-edge) - 6px);
+    margin: 1.85rem var(--note-edge) 0.9rem 6px;
     padding: 5px 12px;
     font-family: inherit;
     font-size: 12px;
@@ -4713,7 +4733,7 @@ body.nav-sheet-open {
     position: relative;
     z-index: 1;
     list-style: none;
-    margin: 0 16px 1.5rem var(--note-body-pad);
+    margin: 0 var(--note-edge) 1.5rem var(--note-body-pad);
     padding: 0;
     opacity: 1;
   }
@@ -4745,7 +4765,7 @@ body.nav-sheet-open {
   .note-page .article-nav {
     position: relative;
     z-index: 1;
-    margin: 1.75rem 16px 0 var(--note-body-pad);
+    margin: 1.75rem var(--note-edge) 0 var(--note-body-pad);
     padding: 0;
   }
 
@@ -4791,7 +4811,7 @@ body.nav-sheet-open {
     background: var(--bg);
 
     .top-nav {
-      padding: 10px 10px 4px;
+      padding: 8px 6px 4px;
       background: transparent;
     }
 
@@ -4810,7 +4830,7 @@ body.nav-sheet-open {
       max-height: 100%;
       min-height: 0;
       margin: 0;
-      padding: 4px 10px 10px;
+      padding: 6px;
       overflow: hidden;
     }
 
@@ -4825,6 +4845,12 @@ body.nav-sheet-open {
       border: 0;
       border-radius: 22px;
       box-shadow: 0 10px 28px rgb(15 23 42 / 0.06);
+    }
+
+    .article-shell.card > .note-journal__head {
+      flex-shrink: 0;
+      z-index: 3;
+      border-radius: 22px 22px 0 0;
     }
 
     .article-shell__scroll {
@@ -4844,6 +4870,42 @@ body.nav-sheet-open {
       display: none !important;
     }
 
+    .article > .article-content-section,
+    .article .article-content-section,
+    .article > .article-content-section:first-child {
+      padding: 0;
+    }
+
+    .article > h1:not(.note-journal__title),
+    .article .article-content-section h1:not(.note-journal__title) {
+      display: none;
+    }
+
+    .article p:not(.note-journal__date),
+    .article .article-dek,
+    .article .article-tldr,
+    .article .element-caption,
+    .article pre,
+    .article figure,
+    .article ul,
+    .article ol,
+    .article-nav,
+    .article .plan-table-wrap,
+    .article .idx-list,
+    .article .arch-diagram,
+    .article .code-block,
+    .article .install-code,
+    .article .idx-command,
+    .article .idx-terms,
+    .article .dq-sparkline,
+    .article .bar-chart,
+    .article .banner {
+      margin-left: var(--note-body-pad, 22px);
+      margin-right: var(--note-edge, 12px);
+      padding-left: 0;
+      padding-right: 0;
+    }
+
     .note-journal__title,
     .article h1.note-journal__title {
       font-family: inherit;
@@ -4852,12 +4914,24 @@ body.nav-sheet-open {
       line-height: var(--text-title-lh);
     }
 
+    .note-journal__head {
+      padding: 16px var(--note-edge, 12px) 12px;
+    }
+
+    .note-journal__head,
+    .note-journal__head p,
+    .note-journal__title {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+    }
+
     .article h2 {
       display: inline-block;
       box-sizing: border-box;
       width: fit-content;
-      max-width: calc(100% - 28px);
-      margin: 1.85rem 12px 0.9rem 8px;
+      max-width: calc(100% - var(--note-edge, 12px) - 6px);
+      margin: 1.85rem var(--note-edge, 12px) 0.9rem 6px;
       padding: 5px 12px;
       font-family: inherit;
       font-size: 12px;
