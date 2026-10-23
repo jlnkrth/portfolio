@@ -32,6 +32,7 @@ const ROOT_FILES = [
   "hidden-footer.js",
   "about-card.js",
   "note-toc.js",
+  "swipe-nav.js",
   "robots.txt",
   ".nojekyll",
 ];

@@ -2007,20 +2007,29 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     top: 0;
     z-index: 300;
     padding: 12px max(var(--page-pad-x), env(safe-area-inset-right, 0px))
-      12px max(var(--page-pad-x), env(safe-area-inset-left, 0px));
+      12px max(70px, env(safe-area-inset-left, 0px));
     background: transparent;
   }
 
+  /* Avatar lives in the shared top trigger on mobile, not inside the card. */
+  .profile-card .avatar-link,
+  .profile-card .avatar {
+    display: none;
+  }
+
+  .top-nav__logo {
+    display: none;
+  }
+
   .top-nav__menu-btn {
-    display: inline-flex;
-    flex-shrink: 0;
+    display: none;
   }
 
   .note-page .top-nav__logo,
   body:has(.layout--notes-index) .top-nav__logo,
   body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
     .top-nav__logo {
-    display: block;
+    display: none;
   }
 
   .note-page .top-nav__menu-btn,
@@ -4174,7 +4183,7 @@ body.nav-sheet-open {
   .note-page,
   body:has(.layout--notes-index),
   body:has(.layout > .root > .article):not(:has(.about-page, .project-page)) {
-    background: #f1f2f5;
+    background: var(--bg);
 
     .top-nav {
       background: transparent;
@@ -4195,7 +4204,7 @@ body.nav-sheet-open {
       border: 0;
       border-radius: 0;
       padding: 0;
-      background: #ffffff;
+      background: var(--bg);
       box-shadow: none;
     }
 
@@ -4442,7 +4451,7 @@ body.nav-sheet-open {
    Note essay (Tree-style). Replaces the mobile journal card.
    ========================================================================== */
 body.note-page.note-page--essay {
-  background: #fff;
+  background: var(--bg);
   --essay-pad-top: 48px;
   --essay-pad-x: 20px;
   --essay-pad-bottom: 128px;
@@ -4462,6 +4471,12 @@ body.note-page.note-page--essay {
   --essay-para: 1rem;
   --essay-heading-top: 2.25rem;
   --essay-heading-bottom: 0.85rem;
+}
+
+@media (max-width: 767px) {
+  body.note-page.note-page--essay {
+    --essay-pad-top: 80px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -4501,7 +4516,7 @@ body.note-page.note-page--essay .article-shell__scroll {
   margin: 0;
   padding: 0;
   overflow: visible;
-  background: #fff;
+  background: var(--bg);
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -4879,7 +4894,7 @@ body.note-page.note-page--essay .article-nav {
   body.note-page.note-page--essay:has(.layout--notes-index) {
     height: auto;
     overflow: visible;
-    background: #fff !important;
+    background: var(--bg) !important;
 
     .layout,
     .layout > .root,
@@ -4892,7 +4907,7 @@ body.note-page.note-page--essay .article-nav {
       margin: 0 !important;
       padding: 0 !important;
       overflow: visible !important;
-      background: #fff !important;
+      background: var(--bg) !important;
     }
 
     .article,
@@ -5004,7 +5019,7 @@ body.note-page.note-page--essay .article-nav {
     height: auto;
     max-height: none;
     overflow: visible;
-    background: #fff;
+    background: var(--bg);
   }
 
   body.note-page.note-page--essay .article > h1,
@@ -5223,7 +5238,9 @@ body.footer-revealed {
 
 .note-toc__label {
   overflow: hidden;
-  max-width: min(9.5rem, calc(100vw - 168px));
+  width: 7.75rem;
+  min-width: 7.75rem;
+  max-width: 7.75rem;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
@@ -5249,13 +5266,17 @@ body.footer-revealed {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 42px;
+  box-sizing: border-box;
+  width: 3.5em;
+  min-width: 3.5em;
   height: 30px;
-  padding: 0 10px;
+  padding: 0;
   border-radius: 999px;
   background: #3c3c3c;
   font-size: 13px;
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
   letter-spacing: -0.02em;
   color: #fff;
 }
@@ -5323,5 +5344,202 @@ body.footer-revealed {
   .note-toc,
   .note-toc__chevron {
     transition: none;
+  }
+}
+
+/* ==========================================================================
+   Mobile swipe-from-behind navigation
+   ========================================================================== */
+.swipe-nav,
+.swipe-nav__trigger {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  body.swipe-nav-ready {
+    background: var(--bg);
+  }
+
+  .swipe-nav {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--bg);
+  }
+
+  body.swipe-nav-open .swipe-nav {
+    pointer-events: auto;
+  }
+
+  .swipe-nav__panel {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: min(300px, 82vw);
+    height: 100%;
+    padding: 18px 22px calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .swipe-nav__brand {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 0 36px;
+    line-height: 0;
+    border-radius: 999px;
+  }
+
+  .swipe-nav__brand:focus-visible {
+    outline: 2px solid var(--color-gray-1200);
+    outline-offset: 3px;
+  }
+
+  .swipe-nav__brand-img,
+  .swipe-nav__who-img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 999px;
+  }
+
+  .swipe-nav__primary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .swipe-nav__primary a {
+    color: #111;
+    font-size: 32px;
+    font-weight: 450;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+
+  .swipe-nav__primary a:focus-visible,
+  .swipe-nav__secondary a:focus-visible,
+  .swipe-nav__who:focus-visible {
+    outline: 2px solid var(--color-gray-1200);
+    outline-offset: 3px;
+  }
+
+  .swipe-nav__secondary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 28px 0 0;
+  }
+
+  .swipe-nav__secondary a {
+    color: rgb(17 17 17 / 0.48);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+  }
+
+  .swipe-nav__who {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    color: #111;
+    font-size: 14px;
+    font-weight: 450;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .swipe-nav__who-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .swipe-nav__trigger {
+    display: block;
+    position: fixed;
+    top: 14px;
+    left: max(14px, env(safe-area-inset-left, 0px));
+    z-index: 350;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    line-height: 0;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .swipe-nav__trigger .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .swipe-nav__trigger:focus-visible {
+    outline: 2px solid var(--color-gray-1200);
+    outline-offset: 2px;
+  }
+
+  .swipe-nav__trigger[hidden] {
+    display: none !important;
+  }
+
+  .swipe-nav__frame {
+    position: relative;
+    z-index: 2;
+    min-height: 100dvh;
+    background: var(--bg, #fcfcfc);
+    transform-origin: left center;
+    will-change: transform;
+  }
+
+  body.note-page.note-page--essay .swipe-nav__frame {
+    background: var(--bg);
+  }
+
+  body.swipe-nav-open .swipe-nav__trigger {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .swipe-nav__frame.is-offset {
+    box-shadow: -12px 0 40px rgb(0 0 0 / 0.18), -2px 0 0 rgb(0 0 0 / 0.04);
+  }
+
+  body.swipe-nav-open {
+    overflow: hidden;
+  }
+
+  body.swipe-nav-open .note-toc {
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .swipe-nav,
+  .swipe-nav__trigger {
+    display: none !important;
+  }
+
+  .swipe-nav__frame {
+    transform: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-nav__frame {
+    transition: none !important;
   }
 }
