@@ -53,8 +53,7 @@
 
     function rememberScroll() {
       if (scrollLocked) return;
-      var now = window.scrollY || window.pageYOffset || 0;
-      if (now > 0) lockY = now;
+      lockY = window.scrollY || window.pageYOffset || 0;
     }
 
     var nav = document.createElement("div");
@@ -153,8 +152,8 @@
 
     function lockScroll() {
       if (scrollLocked) return;
-      rememberScroll();
-      if (!lockY) lockY = window.scrollY || window.pageYOffset || 0;
+      var now = window.scrollY || window.pageYOffset || 0;
+      if (now > 0) lockY = now;
       scrollLocked = true;
       document.documentElement.classList.add("swipe-nav-locked");
       document.body.classList.add("swipe-nav-locked");
@@ -188,8 +187,6 @@
       document.body.classList.toggle("swipe-nav-open", open);
       if (open) {
         refreshFocusables();
-        var first = focusables[0];
-        if (first) first.focus({ preventScroll: true });
       } else {
         unlockScroll();
       }
@@ -296,8 +293,8 @@
       setOpen(false);
     }
 
-    window.addEventListener("scroll", rememberScroll, { passive: true });
     document.addEventListener("pointerdown", rememberScroll, { passive: true });
+    document.addEventListener("touchstart", rememberScroll, { passive: true });
 
     trigger.addEventListener("click", function (event) {
       event.preventDefault();
