@@ -2046,13 +2046,13 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   .availability--nav {
     display: inline-flex;
     min-width: 0;
-    max-width: calc(100% - 58px);
+    max-width: 100%;
     flex-shrink: 1;
     margin-left: auto;
   }
 
   .availability--nav .availability__location {
-    min-width: 0;
+    flex-shrink: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -4499,7 +4499,7 @@ body.note-page.note-page--essay {
   body.note-page.note-page--essay .availability--nav {
     display: inline-flex !important;
     pointer-events: auto;
-    max-width: calc(100% - 58px);
+    max-width: 100%;
   }
 }
 

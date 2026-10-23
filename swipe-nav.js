@@ -51,6 +51,12 @@
     var scrollLocked = false;
     var lockY = 0;
 
+    function rememberScroll() {
+      if (scrollLocked) return;
+      var now = window.scrollY || window.pageYOffset || 0;
+      if (now > 0) lockY = now;
+    }
+
     var nav = document.createElement("div");
     nav.className = "swipe-nav";
     nav.id = "swipe-nav";
@@ -147,8 +153,9 @@
 
     function lockScroll() {
       if (scrollLocked) return;
+      rememberScroll();
+      if (!lockY) lockY = window.scrollY || window.pageYOffset || 0;
       scrollLocked = true;
-      lockY = window.scrollY || window.pageYOffset || 0;
       document.documentElement.classList.add("swipe-nav-locked");
       document.body.classList.add("swipe-nav-locked");
       document.body.style.position = "fixed";
@@ -288,6 +295,9 @@
       if (event.target.closest(".swipe-nav__trigger")) return;
       setOpen(false);
     }
+
+    window.addEventListener("scroll", rememberScroll, { passive: true });
+    document.addEventListener("pointerdown", rememberScroll, { passive: true });
 
     trigger.addEventListener("click", function (event) {
       event.preventDefault();
