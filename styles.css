@@ -4443,6 +4443,33 @@ body.nav-sheet-open {
    ========================================================================== */
 body.note-page.note-page--essay {
   background: #fff;
+  --essay-pad-top: 48px;
+  --essay-pad-x: 20px;
+  --essay-pad-bottom: 128px;
+  --essay-measure: 520px;
+  --essay-title-size: 17px;
+  --essay-title-lh: 1.28;
+  --essay-title-weight: 450;
+  --essay-title-tracking: -0.01em;
+  --essay-body-size: 16.5px;
+  --essay-body-lh: 1.62;
+  --essay-body-color: #171717;
+  --essay-meta-size: 14px;
+  --essay-meta-lh: 1.4;
+  --essay-caption-size: 13.5px;
+  --essay-caption-lh: 1.45;
+  --essay-block: 1.75rem;
+  --essay-para: 1rem;
+  --essay-heading-top: 2.25rem;
+  --essay-heading-bottom: 0.85rem;
+}
+
+@media (min-width: 768px) {
+  body.note-page.note-page--essay {
+    --essay-pad-top: 64px;
+    --essay-title-size: 18px;
+    --essay-body-size: 17px;
+  }
 }
 
 body.note-page.note-page--essay .top-nav,
@@ -4484,9 +4511,9 @@ body.note-page.note-page--essay .layout > .root > .article,
 body.note-page.note-page--essay .article-shell .article,
 body.note-page.note-page--essay .article {
   position: relative;
-  max-width: 520px;
+  max-width: var(--essay-measure);
   margin: 0 auto;
-  padding: 120px 20px 128px;
+  padding: var(--essay-pad-top) var(--essay-pad-x) var(--essay-pad-bottom);
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -4504,23 +4531,23 @@ body.note-page.note-page--essay .article {
   body.note-page.note-page--essay .layout > .root > .article,
   body.note-page.note-page--essay .article-shell .article,
   body.note-page.note-page--essay .article {
-    padding: 120px 0 128px;
+    padding: var(--essay-pad-top) 0 var(--essay-pad-bottom);
   }
 }
 
 .essay-crumb {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 10;
+  position: relative;
+  top: auto;
+  left: auto;
+  z-index: auto;
   display: flex;
   align-items: center;
   gap: 4px;
-  max-width: calc(100vw - 40px);
-  margin: 0;
+  max-width: 100%;
+  margin: 0 0 var(--essay-block, 1.75rem);
   overflow: hidden;
-  font-size: var(--text-small-size);
-  line-height: var(--text-small-lh);
+  font-size: var(--essay-meta-size, 14px);
+  line-height: var(--essay-meta-lh, 1.4);
   color: var(--text-meta-color);
   white-space: nowrap;
   opacity: 0;
@@ -4560,21 +4587,21 @@ body.note-page.note-page--essay .essay-title {
   display: block;
   margin: 0;
   padding: 0;
-  font-size: var(--text-title-size);
-  font-weight: var(--text-title-weight);
-  line-height: var(--text-title-lh);
-  letter-spacing: var(--text-title-tracking);
-  color: #000;
+  font-size: var(--essay-title-size);
+  font-weight: var(--essay-title-weight);
+  line-height: var(--essay-title-lh);
+  letter-spacing: var(--essay-title-tracking);
+  color: #111;
 }
 
 .essay-date,
 body.note-page.note-page--essay .article p.essay-date {
-  margin: 2px 0 0;
+  margin: 0.35em 0 0;
   padding: 0;
-  font-size: var(--text-meta-size);
+  font-size: var(--essay-meta-size);
   font-weight: var(--text-meta-weight);
-  line-height: var(--text-meta-lh);
-  letter-spacing: var(--text-meta-tracking);
+  line-height: var(--essay-meta-lh);
+  letter-spacing: 0;
   color: var(--text-meta-color);
 }
 
@@ -4585,7 +4612,7 @@ body.note-page.note-page--essay .article p.essay-date {
   justify-content: center;
   width: 100%;
   aspect-ratio: 13 / 9;
-  margin: 24px 0 0;
+  margin: var(--essay-block) 0;
   padding: 0;
   overflow: hidden;
   background: #fff;
@@ -4601,12 +4628,16 @@ body.note-page.note-page--essay .article img {
   margin-bottom: 0;
 }
 
-/* Reference Tree: section.mt-6 = 24px between hero and first body line. */
+body.note-page.note-page--essay .essay-stage {
+  margin-bottom: var(--essay-block);
+}
+
+/* Gap lives on the stage so a hidden dek sibling cannot collapse it. */
 body.note-page.note-page--essay .essay-stage + p,
 body.note-page.note-page--essay .article .essay-stage + p:not(.essay-date),
 body.note-page.note-page--essay .essay-stage + .article-content-section,
 body.note-page.note-page--essay .essay-stage + .article-content-section > p:first-of-type {
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 .essay-mark {
@@ -4760,43 +4791,65 @@ body.note-page.note-page--essay .essay-body {
 body.note-page.note-page--essay .article p,
 body.note-page.note-page--essay .article li {
   margin: 0;
+  margin-bottom: 0;
   padding: 0;
-  font-size: var(--text-body-size);
+  font-size: var(--essay-body-size);
   font-weight: var(--text-body-weight);
-  line-height: var(--text-body-lh);
-  color: #111827;
+  line-height: var(--essay-body-lh);
+  color: var(--essay-body-color);
   opacity: 1;
 }
 
 body.note-page.note-page--essay .article p + p {
-  margin-top: 10px;
+  margin-top: var(--essay-para);
 }
 
-body.note-page.note-page--essay .article h2 {
+body.note-page.note-page--essay .article h2,
+body.note-page.note-page--essay .article h3 {
   display: block;
   width: auto;
   max-width: none;
-  margin: 28px 0 10px;
+  margin: var(--essay-heading-top) 0 var(--essay-heading-bottom);
   padding: 0;
-  font-size: var(--text-title-size);
-  font-weight: var(--text-title-weight);
-  line-height: var(--text-title-lh);
-  letter-spacing: var(--text-title-tracking);
-  color: #000;
+  font-size: var(--essay-title-size);
+  font-weight: var(--essay-title-weight);
+  line-height: var(--essay-title-lh);
+  letter-spacing: var(--essay-title-tracking);
+  color: #111;
   background: none;
   border: 0;
   border-radius: 0;
 }
 
+body.note-page.note-page--essay .article h3 {
+  font-size: var(--essay-body-size);
+  font-weight: 550;
+}
+
 body.note-page.note-page--essay .article ul,
 body.note-page.note-page--essay .article ol {
-  margin: 10px 0 0;
-  padding-left: 1.15rem;
+  margin: var(--essay-para) 0 0;
+  padding-left: 1.25rem;
 }
 
 body.note-page.note-page--essay .article li {
   padding: 0;
   border: 0;
+}
+
+body.note-page.note-page--essay .article li + li {
+  margin-top: 0.45em;
+}
+
+body.note-page.note-page--essay .article .element-caption,
+body.note-page.note-page--essay .article figcaption,
+body.note-page.note-page--essay .article .arch-diagram__caption,
+body.note-page.note-page--essay .article .bar-chart__title {
+  margin: 0.6em 0 var(--essay-block);
+  font-size: var(--essay-caption-size);
+  font-weight: 400;
+  line-height: var(--essay-caption-lh);
+  color: rgb(0 0 0 / 0.52);
 }
 
 body.note-page.note-page--essay .article ul > li::before {
@@ -4844,9 +4897,9 @@ body.note-page.note-page--essay .article-nav {
     .article,
     .layout > .root > .article,
     .article-shell .article {
-      max-width: 520px !important;
+      max-width: var(--essay-measure) !important;
       margin: 0 auto !important;
-      padding: 120px 20px 128px !important;
+      padding: var(--essay-pad-top) var(--essay-pad-x) var(--essay-pad-bottom) !important;
       background: transparent !important;
     }
 
@@ -4857,6 +4910,17 @@ body.note-page.note-page--essay .article-nav {
       padding: 0 !important;
     }
 
+    .essay-crumb {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      z-index: auto !important;
+      max-width: 100% !important;
+      margin: 0 0 var(--essay-block) !important;
+      font-size: var(--essay-meta-size) !important;
+      line-height: var(--essay-meta-lh) !important;
+    }
+
     .article > h1,
     .article .article-content-section h1,
     .article h1,
@@ -4864,54 +4928,70 @@ body.note-page.note-page--essay .article-nav {
       display: block !important;
       margin: 0 !important;
       padding: 0 !important;
-      font-size: 15px !important;
-      font-weight: 450 !important;
-      line-height: 0.9 !important;
-      letter-spacing: -0.00563rem !important;
-      color: #000 !important;
+      font-size: var(--essay-title-size) !important;
+      font-weight: var(--essay-title-weight) !important;
+      line-height: var(--essay-title-lh) !important;
+      letter-spacing: var(--essay-title-tracking) !important;
+      color: #111 !important;
     }
 
     .essay-date {
-      margin: 2px 0 0 !important;
+      margin: 0.35em 0 0 !important;
       padding: 0 !important;
-      font-size: 15px !important;
+      font-size: var(--essay-meta-size) !important;
       font-weight: 400 !important;
-      line-height: 1.2 !important;
-      letter-spacing: -0.00563rem !important;
+      line-height: var(--essay-meta-lh) !important;
+      letter-spacing: 0 !important;
       color: rgb(0 0 0 / 0.45) !important;
     }
 
-    .article p:not(.essay-date),
+    .article p:not(.essay-date):not(.element-caption),
     .article li {
       margin-left: 0 !important;
       margin-right: 0 !important;
+      margin-bottom: 0 !important;
       padding: 0 !important;
-      font-size: 15px !important;
+      font-size: var(--essay-body-size) !important;
       font-weight: 400 !important;
-      line-height: 1.6 !important;
-      color: #111827 !important;
+      line-height: var(--essay-body-lh) !important;
+      color: var(--essay-body-color) !important;
+    }
+
+    .essay-stage {
+      margin: var(--essay-block) 0 !important;
     }
 
     .essay-stage + p:not(.essay-date),
     .essay-stage + .article-content-section > p:first-of-type {
-      margin-top: 24px !important;
+      margin-top: 0 !important;
     }
 
     .article p + p {
-      margin-top: 10px !important;
+      margin-top: var(--essay-para) !important;
     }
 
-    .article h2 {
+    .article h2,
+    .article h3 {
       display: block !important;
       width: auto !important;
       max-width: none !important;
-      margin: 28px 0 10px !important;
+      margin: var(--essay-heading-top) 0 var(--essay-heading-bottom) !important;
       padding: 0 !important;
-      font-size: 15px !important;
-      font-weight: 450 !important;
-      line-height: 0.9 !important;
+      font-size: var(--essay-title-size) !important;
+      font-weight: var(--essay-title-weight) !important;
+      line-height: var(--essay-title-lh) !important;
       background: none !important;
       border: 0 !important;
+    }
+
+    .article .element-caption,
+    .article figcaption,
+    .article .arch-diagram__caption,
+    .article .bar-chart__title {
+      margin: 0.6em 0 var(--essay-block) !important;
+      font-size: var(--essay-caption-size) !important;
+      line-height: var(--essay-caption-lh) !important;
+      color: rgb(0 0 0 / 0.52) !important;
     }
   }
 
@@ -4929,16 +5009,16 @@ body.note-page.note-page--essay .article-nav {
   body.note-page.note-page--essay .article > h1,
   body.note-page.note-page--essay .article .article-content-section h1,
   body.note-page.note-page--essay .article h1 {
-    font-size: var(--text-title-size);
-    font-weight: var(--text-title-weight);
-    line-height: var(--text-title-lh);
-    letter-spacing: var(--text-title-tracking);
+    font-size: var(--essay-title-size);
+    font-weight: var(--essay-title-weight);
+    line-height: var(--essay-title-lh);
+    letter-spacing: var(--essay-title-tracking);
   }
 
   body.note-page.note-page--essay .article p,
   body.note-page.note-page--essay .article li {
-    font-size: var(--text-body-size);
-    line-height: var(--text-body-lh);
+    font-size: var(--essay-body-size);
+    line-height: var(--essay-body-lh);
     margin-left: 0;
     margin-right: 0;
   }
