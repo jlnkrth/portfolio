@@ -133,7 +133,8 @@
       itemsHtml +
       "</div>";
 
-    document.body.appendChild(root);
+    var host = document.querySelector(".swipe-nav__frame") || document.body;
+    host.appendChild(root);
 
     var pill = root.querySelector(".note-toc__pill");
     var menu = root.querySelector(".note-toc__menu");
