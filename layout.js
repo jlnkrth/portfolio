@@ -483,13 +483,20 @@
       var node = article.firstChild;
       while (node && node !== firstWrapper) {
         var after = node.nextSibling;
-        if (node !== introSection && !(node.nodeType === 1 && node.matches("h2"))) {
+        if (
+          node !== introSection &&
+          !(node.nodeType === 1 && node.matches("h2, .essay-crumb"))
+        ) {
           introSection.appendChild(node);
         }
         node = after;
       }
       if (introSection.childNodes.length) {
-        article.insertBefore(introSection, article.firstChild);
+        var crumbEl = article.querySelector(":scope > .essay-crumb");
+        article.insertBefore(
+          introSection,
+          crumbEl ? crumbEl.nextSibling : article.firstChild
+        );
         hasIntro = true;
       }
     }

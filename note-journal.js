@@ -165,8 +165,9 @@
 
     title.classList.add("essay-title");
 
-    if (!document.querySelector(".essay-crumb")) {
-      var crumb = document.createElement("nav");
+    var crumb = document.querySelector(".essay-crumb");
+    if (!crumb) {
+      crumb = document.createElement("nav");
       crumb.className = "essay-crumb";
       crumb.setAttribute("aria-label", "Breadcrumb");
       crumb.innerHTML =
@@ -182,10 +183,12 @@
       var crumbTitle = title.textContent.replace(/\s+/g, " ").trim();
       crumb.querySelector(".essay-crumb__here").textContent =
         crumbTitle.length > 28 ? crumbTitle.slice(0, 25).trim() + "…" : crumbTitle;
-      document.body.appendChild(crumb);
       window.requestAnimationFrame(function () {
         crumb.classList.add("is-ready");
       });
+    }
+    if (crumb.parentNode !== article) {
+      article.insertBefore(crumb, article.firstChild);
     }
 
     var dateLine = article.querySelector(".essay-date");
@@ -212,7 +215,20 @@
       button.setAttribute("aria-label", "Press the stamp");
       button.innerHTML = markSvg() + '<span class="essay-mark__bits" aria-hidden="true"></span>';
       stage.appendChild(button);
-      (dateLine || title).insertAdjacentElement("afterend", stage);
+      var insertAfter = dateLine || title;
+      var probe = insertAfter.nextElementSibling;
+      while (
+        probe &&
+        (probe.hidden ||
+          probe.classList.contains("article-dek") ||
+          probe.classList.contains("article-meta") ||
+          probe.classList.contains("article-byline") ||
+          probe.getAttribute("hidden") !== null)
+      ) {
+        insertAfter = probe;
+        probe = probe.nextElementSibling;
+      }
+      insertAfter.insertAdjacentElement("afterend", stage);
       bindMark(button);
     } else {
       bindMark(article.querySelector(".essay-mark"));
