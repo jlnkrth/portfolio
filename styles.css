@@ -2046,7 +2046,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   .availability--nav {
     display: inline-flex;
     min-width: 0;
-    max-width: min(100%, 240px);
+    max-width: calc(100% - 58px);
     flex-shrink: 1;
     margin-left: auto;
   }
@@ -4499,7 +4499,7 @@ body.note-page.note-page--essay {
   body.note-page.note-page--essay .availability--nav {
     display: inline-flex !important;
     pointer-events: auto;
-    max-width: min(100%, 220px);
+    max-width: calc(100% - 58px);
   }
 }
 
