@@ -173,13 +173,13 @@
 
     function setOpen(next) {
       open = !!next;
+      if (open) lockScroll();
       setProgress(open ? 1 : 0, true);
       trigger.setAttribute("aria-expanded", open ? "true" : "false");
       trigger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       nav.setAttribute("aria-hidden", open ? "false" : "true");
       document.body.classList.toggle("swipe-nav-open", open);
       if (open) {
-        lockScroll();
         refreshFocusables();
         var first = focusables[0];
         if (first) first.focus({ preventScroll: true });
