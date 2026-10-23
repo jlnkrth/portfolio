@@ -42,6 +42,7 @@
     var velocity = 0;
     var axis = "";
     var pointerId = null;
+    var ignoreClick = false;
 
     var nav = document.createElement("div");
     nav.className = "swipe-nav";
@@ -202,6 +203,12 @@
       }
       dragging = false;
       pointerId = null;
+      if (axis === "x") {
+        ignoreClick = true;
+        window.setTimeout(function () {
+          ignoreClick = false;
+        }, 0);
+      }
       if (axis === "y" || !axis) {
         setProgress(open ? 1 : 0, true);
         return;
@@ -231,6 +238,7 @@
     }
 
     function onFrameClick(event) {
+      if (ignoreClick) return;
       if (!open) return;
       if (event.target.closest(".swipe-nav")) return;
       if (event.target.closest(".swipe-nav__trigger")) return;
