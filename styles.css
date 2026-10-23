@@ -5274,6 +5274,11 @@ body.footer-revealed {
   box-shadow: 0 14px 36px rgb(0 0 0 / 0.22);
 }
 
+.note-toc[hidden],
+.note-toc__menu[hidden] {
+  display: none !important;
+}
+
 .note-toc__item {
   display: block;
   width: 100%;

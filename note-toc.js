@@ -159,9 +159,8 @@
       pill.setAttribute("aria-expanded", open ? "true" : "false");
       if (open) {
         menu.removeAttribute("hidden");
-        focusIndex = activeIndex >= 0 ? activeIndex : 0;
+        focusIndex = activeIndex >= 0 ? activeIndex : -1;
         syncOptionState();
-        options[focusIndex] && options[focusIndex].focus();
       } else {
         menu.setAttribute("hidden", "");
       }
@@ -293,6 +292,9 @@
         if (event.target !== pill) return;
         event.preventDefault();
         setOpen(true);
+        focusIndex = event.key === "ArrowUp" ? options.length - 1 : 0;
+        options[focusIndex].focus();
+        syncOptionState();
         return;
       }
 
@@ -300,7 +302,7 @@
       var last = options.length - 1;
       if (event.key === "ArrowDown") {
         event.preventDefault();
-        focusIndex = focusIndex >= last ? 0 : focusIndex + 1;
+        focusIndex = focusIndex >= last ? 0 : Math.max(0, focusIndex) + 1;
         options[focusIndex].focus();
         syncOptionState();
       } else if (event.key === "ArrowUp") {
