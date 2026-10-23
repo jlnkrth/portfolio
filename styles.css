@@ -2039,21 +2039,16 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     margin-left: auto;
   }
 
-  .note-page .availability--nav,
-  body:has(.layout--notes-index) .availability--nav,
-  body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
-    .availability--nav {
-    display: none;
-  }
-
   .top-nav__inner {
     display: none;
   }
 
   .availability--nav {
+    display: inline-flex;
     min-width: 0;
-    max-width: 100%;
+    max-width: min(100%, 240px);
     flex-shrink: 1;
+    margin-left: auto;
   }
 
   .availability--nav .availability__location {
@@ -4477,6 +4472,35 @@ body.note-page.note-page--essay {
   body.note-page.note-page--essay {
     --essay-pad-top: 80px;
   }
+
+  /* Keep the location pill in the top-nav row; hide the rest of the chrome. */
+  body.note-page.note-page--essay .top-nav {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 14px max(var(--page-pad-x), env(safe-area-inset-right, 0px)) 14px
+      70px;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  body.note-page.note-page--essay .top-nav__logo,
+  body.note-page.note-page--essay .top-nav__menu-btn,
+  body.note-page.note-page--essay .top-nav__inner,
+  body.note-page.note-page--essay .nav-sheet {
+    display: none !important;
+  }
+
+  body.note-page.note-page--essay .availability--nav {
+    display: inline-flex !important;
+    pointer-events: auto;
+    max-width: min(100%, 220px);
+  }
 }
 
 @media (min-width: 768px) {
@@ -4485,9 +4509,12 @@ body.note-page.note-page--essay {
     --essay-title-size: 18px;
     --essay-body-size: 17px;
   }
+
+  body.note-page.note-page--essay .top-nav {
+    display: none !important;
+  }
 }
 
-body.note-page.note-page--essay .top-nav,
 body.note-page.note-page--essay .sidebar,
 body.note-page.note-page--essay .notes-index,
 body.note-page.note-page--essay .article-shell__toggle,
@@ -5380,30 +5407,7 @@ body.footer-revealed {
     box-sizing: border-box;
     width: min(300px, 82vw);
     height: 100%;
-    padding: 18px 22px calc(20px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .swipe-nav__brand {
-    display: block;
-    width: 40px;
-    height: 40px;
-    margin: 0 0 36px;
-    line-height: 0;
-    border-radius: 999px;
-  }
-
-  .swipe-nav__brand:focus-visible {
-    outline: 2px solid var(--color-gray-1200);
-    outline-offset: 3px;
-  }
-
-  .swipe-nav__brand-img,
-  .swipe-nav__who-img {
-    display: block;
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 999px;
+    padding: 36px 22px calc(20px + env(safe-area-inset-bottom, 0px));
   }
 
   .swipe-nav__primary {
@@ -5476,6 +5480,9 @@ body.footer-revealed {
     line-height: 0;
     cursor: pointer;
     border-radius: 12px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
   }
 
   .swipe-nav__trigger .avatar {
@@ -5483,11 +5490,23 @@ body.footer-revealed {
     height: 44px;
     border-radius: 12px;
     object-fit: cover;
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
-  .swipe-nav__trigger:focus-visible {
-    outline: 2px solid var(--color-gray-1200);
-    outline-offset: 2px;
+  .swipe-nav__trigger:focus,
+  .swipe-nav__trigger:focus-visible,
+  .swipe-nav__trigger:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .swipe-nav__trigger:focus-visible {
+      outline: 2px solid var(--color-gray-1200);
+      outline-offset: 2px;
+    }
   }
 
   .swipe-nav__trigger[hidden] {
@@ -5507,17 +5526,15 @@ body.footer-revealed {
     background: var(--bg);
   }
 
-  body.swipe-nav-open .swipe-nav__trigger {
-    visibility: hidden;
-    pointer-events: none;
-  }
-
   .swipe-nav__frame.is-offset {
     box-shadow: -12px 0 40px rgb(0 0 0 / 0.18), -2px 0 0 rgb(0 0 0 / 0.04);
   }
 
-  body.swipe-nav-open {
+  body.swipe-nav-open,
+  html.swipe-nav-locked,
+  body.swipe-nav-locked {
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   body.swipe-nav-open .note-toc {

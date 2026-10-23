@@ -48,6 +48,8 @@
     var axis = "";
     var pointerId = null;
     var ignoreClick = false;
+    var scrollLocked = false;
+    var lockY = 0;
 
     var nav = document.createElement("div");
     nav.className = "swipe-nav";
@@ -58,9 +60,6 @@
     nav.setAttribute("aria-hidden", "true");
     nav.innerHTML =
       '<div class="swipe-nav__panel">' +
-      '<a class="swipe-nav__brand" href="/" aria-label="Home">' +
-      '<img class="swipe-nav__brand-img" src="/assets/avatar.avif" alt="" width="40" height="40" data-avatar />' +
-      "</a>" +
       '<nav class="swipe-nav__primary" aria-label="Primary">' +
       '<a href="/projects/">Projects</a>' +
       '<a href="/books/">Books</a>' +
@@ -146,6 +145,32 @@
       document.body.classList.toggle("swipe-nav-open", progress > 0.5);
     }
 
+    function lockScroll() {
+      if (scrollLocked) return;
+      scrollLocked = true;
+      lockY = window.scrollY || window.pageYOffset || 0;
+      document.documentElement.classList.add("swipe-nav-locked");
+      document.body.classList.add("swipe-nav-locked");
+      document.body.style.position = "fixed";
+      document.body.style.top = "-" + lockY + "px";
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    }
+
+    function unlockScroll() {
+      if (!scrollLocked) return;
+      scrollLocked = false;
+      document.documentElement.classList.remove("swipe-nav-locked");
+      document.body.classList.remove("swipe-nav-locked");
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, lockY);
+    }
+
     function setOpen(next) {
       open = !!next;
       setProgress(open ? 1 : 0, true);
@@ -154,11 +179,12 @@
       nav.setAttribute("aria-hidden", open ? "false" : "true");
       document.body.classList.toggle("swipe-nav-open", open);
       if (open) {
+        lockScroll();
         refreshFocusables();
         var first = focusables[0];
-        if (first) first.focus();
-      } else if (!trigger.hidden) {
-        trigger.focus();
+        if (first) first.focus({ preventScroll: true });
+      } else {
+        unlockScroll();
       }
     }
 
@@ -201,6 +227,7 @@
           dragging = false;
           return;
         }
+        lockScroll();
       }
       if (axis !== "x") return;
       event.preventDefault();
@@ -266,7 +293,13 @@
       event.preventDefault();
       event.stopPropagation();
       setOpen(!open);
+      trigger.blur();
     });
+
+    function onTouchMove(event) {
+      if (!open && !scrollLocked) return;
+      event.preventDefault();
+    }
 
     var topLogo = document.querySelector(".top-nav__logo");
     if (topLogo) {
@@ -283,6 +316,15 @@
     frame.addEventListener("pointercancel", onPointerUp);
     frame.addEventListener("click", onFrameClick);
     document.addEventListener("keydown", onKeydown);
+    document.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.addEventListener(
+      "wheel",
+      function (event) {
+        if (!open && !scrollLocked) return;
+        event.preventDefault();
+      },
+      { passive: false }
+    );
 
     window.addEventListener("resize", function () {
       panelWidth = Math.min(PANEL, Math.round(window.innerWidth * 0.82));
@@ -291,6 +333,7 @@
         frame.style.transform = "";
         frame.style.borderRadius = "";
         document.body.classList.remove("swipe-nav-open");
+        unlockScroll();
       } else {
         setProgress(open ? 1 : 0, false);
       }
