@@ -951,6 +951,7 @@
         loadScript("/sidebar-preview.js?v=8"),
         loadScript("/avatar.js?v=1"),
         loadScript("/hidden-footer.js?v=2"),
+        loadScript("/note-toc.js?v=1"),
       ]);
     })
     .then(function () {
