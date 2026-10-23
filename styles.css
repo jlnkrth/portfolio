@@ -4791,6 +4791,7 @@ body.note-page.note-page--essay .essay-body {
 body.note-page.note-page--essay .article p,
 body.note-page.note-page--essay .article li {
   margin: 0;
+  margin-bottom: 0;
   padding: 0;
   font-size: var(--essay-body-size);
   font-weight: var(--text-body-weight);
@@ -4948,6 +4949,7 @@ body.note-page.note-page--essay .article-nav {
     .article li {
       margin-left: 0 !important;
       margin-right: 0 !important;
+      margin-bottom: 0 !important;
       padding: 0 !important;
       font-size: var(--essay-body-size) !important;
       font-weight: 400 !important;
@@ -4986,6 +4988,7 @@ body.note-page.note-page--essay .article-nav {
     .article figcaption,
     .article .arch-diagram__caption,
     .article .bar-chart__title {
+      margin: 0.6em 0 var(--essay-block) !important;
       font-size: var(--essay-caption-size) !important;
       line-height: var(--essay-caption-lh) !important;
       color: rgb(0 0 0 / 0.52) !important;
