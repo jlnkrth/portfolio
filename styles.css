@@ -4819,6 +4819,7 @@ body.note-page.note-page--essay .article h3 {
   background: none;
   border: 0;
   border-radius: 0;
+  scroll-margin-top: 72px;
 }
 
 body.note-page.note-page--essay .article h3 {
@@ -5145,6 +5146,177 @@ body.footer-revealed {
 
 @media (prefers-reduced-motion: reduce) {
   .hidden-footer {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Note TOC / reading-progress pill
+   ========================================================================== */
+.note-toc {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  max-width: min(360px, calc(100vw - 24px));
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.note-toc.is-visible {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.note-toc__pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 4px 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.2), 0 2px 8px rgb(0 0 0 / 0.12);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.note-toc__pill:focus-visible {
+  outline: 2px solid #2891df;
+  outline-offset: 3px;
+}
+
+.note-toc__ring {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.note-toc__ring-track {
+  stroke: rgb(255 255 255 / 0.28);
+  stroke-width: 2;
+}
+
+.note-toc__ring-fill {
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.note-toc__name {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.note-toc__label {
+  overflow: hidden;
+  max-width: min(9.5rem, calc(100vw - 168px));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-toc__chevron {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: rgb(255 255 255 / 0.72);
+  transition: transform 160ms ease;
+}
+
+.note-toc.is-open .note-toc__chevron {
+  transform: rotate(180deg);
+}
+
+.note-toc__pct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #3c3c3c;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.note-toc__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: min(300px, calc(100vw - 24px));
+  max-height: min(360px, calc(100vh - 88px));
+  margin-top: 8px;
+  padding: 8px;
+  overflow: auto;
+  background: #111;
+  border-radius: 18px;
+  box-shadow: 0 14px 36px rgb(0 0 0 / 0.22);
+}
+
+.note-toc__item {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: rgb(255 255 255 / 0.72);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.note-toc__item--h3 {
+  padding-left: 20px;
+  font-size: 13px;
+}
+
+.note-toc__item.is-current,
+.note-toc__item[aria-selected="true"] {
+  color: #fff;
+  background: #2a2a2a;
+}
+
+.note-toc__item.is-active,
+.note-toc__item:hover,
+.note-toc__item:focus-visible {
+  color: #fff;
+  background: #2f2f2f;
+}
+
+.note-toc__item:focus-visible {
+  outline: 2px solid #2891df;
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-toc,
+  .note-toc__chevron {
     transition: none;
   }
 }

@@ -31,6 +31,7 @@ const ROOT_FILES = [
   "note-journal.js",
   "hidden-footer.js",
   "about-card.js",
+  "note-toc.js",
   "robots.txt",
   ".nojekyll",
 ];
