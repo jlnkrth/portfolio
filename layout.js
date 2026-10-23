@@ -952,7 +952,7 @@
         loadScript("/avatar.js?v=1"),
         loadScript("/hidden-footer.js?v=2"),
         loadScript("/note-toc.js?v=2"),
-        loadScript("/swipe-nav.js?v=4"),
+        loadScript("/swipe-nav.js?v=5"),
       ]);
     })
     .then(function () {

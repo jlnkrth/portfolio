@@ -2022,7 +2022,9 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   }
 
   .top-nav__menu-btn {
-    display: none;
+    display: inline-flex;
+    margin-left: auto;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .note-page .top-nav__logo,
@@ -2039,23 +2041,15 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     margin-left: auto;
   }
 
-  .top-nav__inner {
-    display: none;
+  .top-nav__inner,
+  .nav-sheet {
+    display: none !important;
   }
 
-  .availability--nav {
-    display: inline-flex;
-    min-width: 0;
-    max-width: 100%;
-    flex-shrink: 1;
-    margin-left: auto;
-  }
-
-  .availability--nav .availability__location {
-    flex-shrink: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .availability,
+  .availability--nav,
+  .availability--fixed {
+    display: none !important;
   }
 
   /* Keep the full profile card in the phone flow; navigation stays in the sheet. */
@@ -4473,7 +4467,7 @@ body.note-page.note-page--essay {
     --essay-pad-top: 80px;
   }
 
-  /* Keep the location pill in the top-nav row; hide the rest of the chrome. */
+  /* Menu button only in the article top-nav row. */
   body.note-page.note-page--essay .top-nav {
     display: flex !important;
     position: fixed;
@@ -4490,16 +4484,16 @@ body.note-page.note-page--essay {
   }
 
   body.note-page.note-page--essay .top-nav__logo,
-  body.note-page.note-page--essay .top-nav__menu-btn,
   body.note-page.note-page--essay .top-nav__inner,
-  body.note-page.note-page--essay .nav-sheet {
+  body.note-page.note-page--essay .nav-sheet,
+  body.note-page.note-page--essay .availability,
+  body.note-page.note-page--essay .availability--nav {
     display: none !important;
   }
 
-  body.note-page.note-page--essay .availability--nav {
+  body.note-page.note-page--essay .top-nav__menu-btn {
     display: inline-flex !important;
     pointer-events: auto;
-    max-width: 100%;
   }
 }
 

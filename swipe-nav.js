@@ -50,6 +50,7 @@
     var ignoreClick = false;
     var scrollLocked = false;
     var lockY = 0;
+    var menuBtn = document.querySelector(".top-nav__menu-btn, [data-nav-menu-toggle]");
 
     function rememberScroll() {
       if (scrollLocked) return;
@@ -184,6 +185,7 @@
       trigger.setAttribute("aria-expanded", open ? "true" : "false");
       trigger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       nav.setAttribute("aria-hidden", open ? "false" : "true");
+      if (menuBtn) menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
       document.body.classList.toggle("swipe-nav-open", open);
       if (open) {
         refreshFocusables();
@@ -315,6 +317,21 @@
         event.preventDefault();
         setOpen(!open);
       });
+    }
+
+    if (menuBtn) {
+      menuBtn.addEventListener(
+        "click",
+        function (event) {
+          if (!isMobile()) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          setOpen(!open);
+          menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+          menuBtn.blur();
+        },
+        true
+      );
     }
 
     frame.addEventListener("pointerdown", onPointerDown);
