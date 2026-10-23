@@ -16,27 +16,6 @@
     );
   }
 
-  function isVisible(el) {
-    if (!el) return false;
-    var node = el;
-    while (node && node !== document.body) {
-      var style = window.getComputedStyle(node);
-      if (style.display === "none" || style.visibility === "hidden") return false;
-      node = node.parentElement;
-    }
-    var box = el.getBoundingClientRect();
-    return box.width > 0 && box.height > 0;
-  }
-
-  function hasVisibleProfileCard() {
-    var cards = document.querySelectorAll(".profile-card");
-    for (var i = 0; i < cards.length; i++) {
-      if (cards[i].closest(".swipe-nav")) continue;
-      if (isVisible(cards[i])) return true;
-    }
-    return false;
-  }
-
   function cardAvatarSrc() {
     var img = document.querySelector(".profile-card img.avatar, .profile-card [data-avatar]");
     return (img && img.getAttribute("src")) || "/assets/avatar.avif";
@@ -94,7 +73,6 @@
       '<a href="https://github.com/jlnkrth" target="_blank" rel="noreferrer">GitHub</a>' +
       "</nav>" +
       '<a class="swipe-nav__who" href="/about/">' +
-      '<img class="swipe-nav__who-img" src="/assets/avatar.avif" alt="" width="36" height="36" data-avatar />' +
       "<span>Julian Kreth</span>" +
       "</a>" +
       "</div>";
@@ -130,10 +108,9 @@
     document.body.classList.add("swipe-nav-ready");
 
     function syncTrigger() {
-      var hide = hasVisibleProfileCard();
-      trigger.hidden = hide;
-      trigger.tabIndex = hide ? -1 : 0;
-      trigger.setAttribute("aria-hidden", hide ? "true" : "false");
+      trigger.hidden = false;
+      trigger.tabIndex = 0;
+      trigger.setAttribute("aria-hidden", "false");
       var img = trigger.querySelector("img");
       if (img) {
         img.className = "avatar";

@@ -2007,8 +2007,14 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     top: 0;
     z-index: 300;
     padding: 12px max(var(--page-pad-x), env(safe-area-inset-right, 0px))
-      12px max(var(--page-pad-x), env(safe-area-inset-left, 0px));
+      12px max(70px, env(safe-area-inset-left, 0px));
     background: transparent;
+  }
+
+  /* Avatar lives in the shared top trigger on mobile, not inside the card. */
+  .profile-card .avatar-link,
+  .profile-card .avatar {
+    display: none;
   }
 
   .top-nav__logo {
@@ -4177,7 +4183,7 @@ body.nav-sheet-open {
   .note-page,
   body:has(.layout--notes-index),
   body:has(.layout > .root > .article):not(:has(.about-page, .project-page)) {
-    background: #f1f2f5;
+    background: var(--bg);
 
     .top-nav {
       background: transparent;
@@ -4198,7 +4204,7 @@ body.nav-sheet-open {
       border: 0;
       border-radius: 0;
       padding: 0;
-      background: #ffffff;
+      background: var(--bg);
       box-shadow: none;
     }
 
@@ -4445,7 +4451,7 @@ body.nav-sheet-open {
    Note essay (Tree-style). Replaces the mobile journal card.
    ========================================================================== */
 body.note-page.note-page--essay {
-  background: #fff;
+  background: var(--bg);
   --essay-pad-top: 48px;
   --essay-pad-x: 20px;
   --essay-pad-bottom: 128px;
@@ -4465,6 +4471,12 @@ body.note-page.note-page--essay {
   --essay-para: 1rem;
   --essay-heading-top: 2.25rem;
   --essay-heading-bottom: 0.85rem;
+}
+
+@media (max-width: 767px) {
+  body.note-page.note-page--essay {
+    --essay-pad-top: 80px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -4504,7 +4516,7 @@ body.note-page.note-page--essay .article-shell__scroll {
   margin: 0;
   padding: 0;
   overflow: visible;
-  background: #fff;
+  background: var(--bg);
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -4882,7 +4894,7 @@ body.note-page.note-page--essay .article-nav {
   body.note-page.note-page--essay:has(.layout--notes-index) {
     height: auto;
     overflow: visible;
-    background: #fff !important;
+    background: var(--bg) !important;
 
     .layout,
     .layout > .root,
@@ -4895,7 +4907,7 @@ body.note-page.note-page--essay .article-nav {
       margin: 0 !important;
       padding: 0 !important;
       overflow: visible !important;
-      background: #fff !important;
+      background: var(--bg) !important;
     }
 
     .article,
@@ -5007,7 +5019,7 @@ body.note-page.note-page--essay .article-nav {
     height: auto;
     max-height: none;
     overflow: visible;
-    background: #fff;
+    background: var(--bg);
   }
 
   body.note-page.note-page--essay .article > h1,
@@ -5345,7 +5357,7 @@ body.footer-revealed {
 
 @media (max-width: 767px) {
   body.swipe-nav-ready {
-    background: #fff;
+    background: var(--bg);
   }
 
   .swipe-nav {
@@ -5355,7 +5367,7 @@ body.footer-revealed {
     z-index: 1;
     overflow: hidden;
     pointer-events: none;
-    background: #fff;
+    background: var(--bg);
   }
 
   body.swipe-nav-open .swipe-nav {
@@ -5455,7 +5467,7 @@ body.footer-revealed {
     position: fixed;
     top: 14px;
     left: max(14px, env(safe-area-inset-left, 0px));
-    z-index: 45;
+    z-index: 350;
     width: 44px;
     height: 44px;
     padding: 0;
@@ -5492,7 +5504,12 @@ body.footer-revealed {
   }
 
   body.note-page.note-page--essay .swipe-nav__frame {
-    background: #fff;
+    background: var(--bg);
+  }
+
+  body.swipe-nav-open .swipe-nav__trigger {
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .swipe-nav__frame.is-offset {
