@@ -5386,7 +5386,6 @@ body.footer-revealed {
   }
 
   .swipe-nav__brand-img,
-  .swipe-nav__trigger img,
   .swipe-nav__who-img {
     display: block;
     width: 40px;
@@ -5457,19 +5456,30 @@ body.footer-revealed {
     top: 14px;
     left: max(14px, env(safe-area-inset-left, 0px));
     z-index: 45;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     padding: 0;
     border: 0;
     background: transparent;
     line-height: 0;
     cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .swipe-nav__trigger .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
   }
 
   .swipe-nav__trigger:focus-visible {
     outline: 2px solid var(--color-gray-1200);
-    outline-offset: 3px;
-    border-radius: 999px;
+    outline-offset: 2px;
+  }
+
+  .swipe-nav__trigger[hidden] {
+    display: none !important;
   }
 
   .swipe-nav__frame {

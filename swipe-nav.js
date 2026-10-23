@@ -16,6 +16,32 @@
     );
   }
 
+  function isVisible(el) {
+    if (!el) return false;
+    var node = el;
+    while (node && node !== document.body) {
+      var style = window.getComputedStyle(node);
+      if (style.display === "none" || style.visibility === "hidden") return false;
+      node = node.parentElement;
+    }
+    var box = el.getBoundingClientRect();
+    return box.width > 0 && box.height > 0;
+  }
+
+  function hasVisibleProfileCard() {
+    var cards = document.querySelectorAll(".profile-card");
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i].closest(".swipe-nav")) continue;
+      if (isVisible(cards[i])) return true;
+    }
+    return false;
+  }
+
+  function cardAvatarSrc() {
+    var img = document.querySelector(".profile-card img.avatar, .profile-card [data-avatar]");
+    return (img && img.getAttribute("src")) || "/assets/avatar.avif";
+  }
+
   function keepOut(node) {
     if (!node || node.nodeType !== 1) return false;
     return (
@@ -80,7 +106,9 @@
     trigger.setAttribute("aria-controls", "swipe-nav");
     trigger.setAttribute("aria-label", "Open menu");
     trigger.innerHTML =
-      '<img src="/assets/avatar.avif" alt="" width="40" height="40" data-avatar />';
+      '<img class="avatar" src="' +
+      cardAvatarSrc() +
+      '" alt="" width="44" height="44" data-avatar />';
 
     var frame = document.querySelector(".swipe-nav__frame");
     if (!frame) {
@@ -100,6 +128,18 @@
     document.body.insertBefore(nav, document.body.firstChild);
     frame.appendChild(trigger);
     document.body.classList.add("swipe-nav-ready");
+
+    function syncTrigger() {
+      var hide = hasVisibleProfileCard();
+      trigger.hidden = hide;
+      trigger.tabIndex = hide ? -1 : 0;
+      trigger.setAttribute("aria-hidden", hide ? "true" : "false");
+      var img = trigger.querySelector("img");
+      if (img) {
+        img.className = "avatar";
+        img.setAttribute("src", cardAvatarSrc());
+      }
+    }
 
     var focusables = [];
 
@@ -140,7 +180,7 @@
         refreshFocusables();
         var first = focusables[0];
         if (first) first.focus();
-      } else {
+      } else if (!trigger.hidden) {
         trigger.focus();
       }
     }
@@ -286,6 +326,13 @@
     });
 
     if (window.initAvatars) window.initAvatars(document.body);
+    syncTrigger();
+    if (typeof MutationObserver !== "undefined") {
+      new MutationObserver(function () {
+        syncTrigger();
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+    window.addEventListener("resize", syncTrigger);
 
     setProgress(0, false);
   }
