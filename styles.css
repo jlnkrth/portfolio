@@ -817,6 +817,12 @@ article,
   margin-bottom: 16px;
 }
 
+.profile-card__menu {
+  display: none;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .avatar-link {
   display: block;
   flex-shrink: 0;
@@ -1771,8 +1777,12 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
 .top-nav__logo {
   display: none;
   flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
   line-height: 0;
   border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .top-nav__logo:focus-visible {
@@ -1786,6 +1796,30 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.top-nav__logo-text {
+  display: none;
+  position: relative;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-gray-1200);
+}
+
+.top-nav__logo-name,
+.top-nav__logo-handle {
+  display: block;
+  white-space: nowrap;
+}
+
+.top-nav__logo-handle {
+  position: absolute;
+  inset: 0 auto 0 0;
+  opacity: 0;
 }
 
 .top-nav__menu-btn {
@@ -2007,32 +2041,33 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     top: 0;
     z-index: 300;
     padding: 12px max(var(--page-pad-x), env(safe-area-inset-right, 0px))
-      12px max(70px, env(safe-area-inset-left, 0px));
+      12px max(var(--page-pad-x), env(safe-area-inset-left, 0px));
     background: transparent;
   }
 
   .top-nav__logo {
-    display: none;
+    display: inline-flex;
+    min-width: 0;
+  }
+
+  .top-nav__logo-text {
+    display: grid;
+  }
+
+  .top-nav__logo:hover .top-nav__logo-name,
+  .top-nav__logo:focus-visible .top-nav__logo-name {
+    opacity: 0;
+  }
+
+  .top-nav__logo:hover .top-nav__logo-handle,
+  .top-nav__logo:focus-visible .top-nav__logo-handle {
+    opacity: 1;
   }
 
   .top-nav__menu-btn {
     display: inline-flex;
     margin-left: auto;
     -webkit-tap-highlight-color: transparent;
-  }
-
-  .note-page .top-nav__logo,
-  body:has(.layout--notes-index) .top-nav__logo,
-  body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
-    .top-nav__logo {
-    display: none;
-  }
-
-  .note-page .top-nav__menu-btn,
-  body:has(.layout--notes-index) .top-nav__menu-btn,
-  body:has(.layout > .root > .article):not(:has(.about-page, .project-page))
-    .top-nav__menu-btn {
-    margin-left: auto;
   }
 
   .top-nav__inner,
@@ -2065,6 +2100,28 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
 
   .layout > .root {
     padding-top: var(--page-pad-y);
+  }
+
+  /* Homepage / card pages: card is the top chrome; Menu lives in the card. */
+  body.mobile-profile-card .top-nav {
+    display: none !important;
+  }
+
+  body.mobile-profile-card .layout > .sidebar {
+    margin-top: 0;
+    padding-top: max(12px, env(safe-area-inset-top, 0px));
+  }
+
+  body.mobile-profile-card .profile-card__menu {
+    display: inline-flex;
+  }
+
+  body.mobile-profile-card .profile-card__head {
+    align-items: flex-start;
+  }
+
+  body.mobile-profile-card .profile-card__id {
+    padding-top: 2px;
   }
 }
 
@@ -4461,7 +4518,7 @@ body.note-page.note-page--essay {
     --essay-pad-top: 80px;
   }
 
-  /* Menu button only in the article top-nav row. */
+  /* Article top-nav: avatar + name (handle on hover) and Menu. */
   body.note-page.note-page--essay .top-nav {
     display: flex !important;
     position: fixed;
@@ -4470,19 +4527,28 @@ body.note-page.note-page--essay {
     right: 0;
     z-index: 300;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 10px;
     padding: 14px max(var(--page-pad-x), env(safe-area-inset-right, 0px)) 14px
-      70px;
+      max(var(--page-pad-x), env(safe-area-inset-left, 0px));
     background: transparent;
     pointer-events: none;
   }
 
-  body.note-page.note-page--essay .top-nav__logo,
   body.note-page.note-page--essay .top-nav__inner,
   body.note-page.note-page--essay .nav-sheet,
   body.note-page.note-page--essay .availability,
   body.note-page.note-page--essay .availability--nav {
     display: none !important;
+  }
+
+  body.note-page.note-page--essay .top-nav__logo {
+    display: inline-flex !important;
+    pointer-events: auto;
+  }
+
+  body.note-page.note-page--essay .top-nav__logo-text {
+    display: grid;
   }
 
   body.note-page.note-page--essay .top-nav__menu-btn {
@@ -5468,22 +5534,7 @@ body.footer-revealed {
   }
 
   .swipe-nav__trigger {
-    display: block;
-    position: fixed;
-    top: 14px;
-    left: max(14px, env(safe-area-inset-left, 0px));
-    z-index: 350;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    line-height: 0;
-    cursor: pointer;
-    border-radius: 12px;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
+    display: none !important;
   }
 
   .swipe-nav__trigger .avatar {

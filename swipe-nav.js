@@ -28,20 +28,18 @@
     return box.width > 0 && box.height > 0;
   }
 
-  function hasVisibleCardAvatar() {
-    var imgs = document.querySelectorAll(
-      ".profile-card img.avatar, .profile-card .avatar-link"
-    );
-    for (var i = 0; i < imgs.length; i++) {
-      if (imgs[i].closest(".swipe-nav")) continue;
-      if (isVisible(imgs[i])) return true;
+  function hasVisibleProfileCard() {
+    var cards = document.querySelectorAll(".profile-card");
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i].closest(".swipe-nav")) continue;
+      if (isVisible(cards[i])) return true;
     }
     return false;
   }
 
   function cardAvatarSrc() {
     var img = document.querySelector(
-      ".profile-card img.avatar, .profile-card [data-avatar]"
+      ".profile-card img.avatar, .profile-card [data-avatar], .top-nav__logo-img[data-avatar]"
     );
     return (img && img.getAttribute("src")) || "/assets/avatar.avif";
   }
@@ -73,8 +71,8 @@
     var ignoreClick = false;
     var scrollLocked = false;
     var lockY = 0;
-    var menuBtn = document.querySelector(
-      ".top-nav__menu-btn, [data-nav-menu-toggle]"
+    var menuButtons = Array.prototype.slice.call(
+      document.querySelectorAll(".top-nav__menu-btn, [data-nav-menu-toggle]")
     );
 
     function rememberScroll() {
@@ -139,16 +137,22 @@
     document.body.appendChild(trigger);
     document.body.classList.add("swipe-nav-ready");
 
-    function syncTrigger() {
-      var hide = hasVisibleCardAvatar();
-      trigger.hidden = hide;
-      trigger.tabIndex = hide ? -1 : 0;
-      trigger.setAttribute("aria-hidden", hide ? "true" : "false");
-      var img = trigger.querySelector("img");
-      if (img) {
-        img.className = "avatar";
-        img.setAttribute("src", cardAvatarSrc());
-      }
+    function syncChrome() {
+      var hasCard = isMobile() && hasVisibleProfileCard();
+      document.body.classList.toggle("mobile-profile-card", hasCard);
+      // Identity lives in the card or the navbar logo — never a floating trigger.
+      trigger.hidden = true;
+      trigger.tabIndex = -1;
+      trigger.setAttribute("aria-hidden", "true");
+      menuButtons = Array.prototype.slice.call(
+        document.querySelectorAll(".top-nav__menu-btn, [data-nav-menu-toggle]")
+      );
+    }
+
+    function syncMenuButtons() {
+      menuButtons.forEach(function (btn) {
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
     }
 
     var focusables = [];
@@ -217,7 +221,7 @@
       trigger.setAttribute("aria-expanded", open ? "true" : "false");
       trigger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       nav.setAttribute("aria-hidden", open ? "false" : "true");
-      if (menuBtn) menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      syncMenuButtons();
       document.body.classList.toggle("swipe-nav-open", open);
       if (open) {
         refreshFocusables();
@@ -342,29 +346,21 @@
       event.preventDefault();
     }
 
-    var topLogo = document.querySelector(".top-nav__logo");
-    if (topLogo) {
-      topLogo.addEventListener("click", function (event) {
+    document.addEventListener(
+      "click",
+      function (event) {
         if (!isMobile()) return;
+        var btn = event.target.closest(
+          ".top-nav__menu-btn, [data-nav-menu-toggle], .profile-card__menu"
+        );
+        if (!btn) return;
         event.preventDefault();
+        event.stopImmediatePropagation();
         setOpen(!open);
-      });
-    }
-
-    if (menuBtn) {
-      menuBtn.addEventListener(
-        "click",
-        function (event) {
-          if (!isMobile()) return;
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          setOpen(!open);
-          menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-          menuBtn.blur();
-        },
-        true
-      );
-    }
+        btn.blur();
+      },
+      true
+    );
 
     frame.addEventListener("pointerdown", onPointerDown);
     frame.addEventListener("pointermove", onPointerMove, { passive: false });
@@ -402,13 +398,13 @@
     });
 
     if (window.initAvatars) window.initAvatars(document.body);
-    syncTrigger();
+    syncChrome();
     if (typeof MutationObserver !== "undefined") {
       new MutationObserver(function () {
-        syncTrigger();
+        syncChrome();
       }).observe(document.body, { childList: true, subtree: true });
     }
-    window.addEventListener("resize", syncTrigger);
+    window.addEventListener("resize", syncChrome);
 
     setProgress(0, false);
   }
