@@ -1,4 +1,5 @@
 // Mobile swipe-from-behind site menu. Desktop is a no-op.
+// Profile / Menu chrome stays put; only page content slides to reveal the menu.
 (function () {
   var EDGE = 28;
   var PANEL = 300;
@@ -47,7 +48,7 @@
   function keepOut(node) {
     if (!node || node.nodeType !== 1) return false;
     return node.matches(
-      "script, style, .swipe-nav, .swipe-nav__frame, .swipe-nav__trigger, [data-hidden-footer], .hidden-footer"
+      "script, style, .swipe-nav, .swipe-nav__frame, .swipe-nav__trigger, .top-nav, .swipe-nav__stay, [data-hidden-footer], .hidden-footer"
     );
   }
 
@@ -137,6 +138,45 @@
     document.body.appendChild(trigger);
     document.body.classList.add("swipe-nav-ready");
 
+    function placeStay(el) {
+      if (!el || el.classList.contains("swipe-nav__stay")) return;
+      el.classList.add("swipe-nav__stay");
+      document.body.insertBefore(el, frame);
+    }
+
+    function ensureStayChrome() {
+      if (!isMobile()) return;
+
+      var topNav = document.querySelector(".top-nav");
+      if (topNav) placeStay(topNav);
+
+      var layout = frame.querySelector(".layout");
+      var sidebar = layout && layout.querySelector(":scope > .sidebar");
+      if (!sidebar) {
+        sidebar = document.querySelector("body > .sidebar.swipe-nav__stay");
+      }
+      if (sidebar) {
+        var card = sidebar.querySelector(".profile-card");
+        if (card && isVisible(card)) {
+          placeStay(sidebar);
+        }
+      }
+    }
+
+    function restoreStayChrome() {
+      var sidebar = document.querySelector("body > .sidebar.swipe-nav__stay");
+      var layout = frame.querySelector(".layout");
+      if (sidebar && layout) {
+        sidebar.classList.remove("swipe-nav__stay");
+        layout.insertBefore(sidebar, layout.firstChild);
+      }
+      var topNav = document.querySelector("body > .top-nav.swipe-nav__stay");
+      if (topNav) {
+        topNav.classList.remove("swipe-nav__stay");
+        document.body.insertBefore(topNav, frame);
+      }
+    }
+
     function syncChrome() {
       var hasCard = isMobile() && hasVisibleProfileCard();
       document.body.classList.toggle("mobile-profile-card", hasCard);
@@ -144,6 +184,8 @@
       trigger.hidden = true;
       trigger.tabIndex = -1;
       trigger.setAttribute("aria-hidden", "true");
+      if (isMobile()) ensureStayChrome();
+      else restoreStayChrome();
       menuButtons = Array.prototype.slice.call(
         document.querySelectorAll(".top-nav__menu-btn, [data-nav-menu-toggle]")
       );
@@ -235,6 +277,8 @@
       if (event.pointerType === "mouse" && event.button !== 0) return;
       if (document.body.classList.contains("footer-revealed")) return;
       if (event.target.closest("input, textarea, select, [data-note-toc]")) return;
+      // Stay chrome handles its own taps; don't start an edge drag from it.
+      if (event.target.closest(".swipe-nav__stay, .top-nav, .profile-card")) return;
 
       var x = event.clientX;
       var y = event.clientY;
@@ -328,6 +372,7 @@
       if (!open) return;
       if (event.target.closest(".swipe-nav")) return;
       if (event.target.closest(".swipe-nav__trigger")) return;
+      if (event.target.closest(".swipe-nav__stay, .top-nav, .profile-card")) return;
       setOpen(false);
     }
 
@@ -386,7 +431,9 @@
         frame.style.borderRadius = "";
         document.body.classList.remove("swipe-nav-open");
         unlockScroll();
+        restoreStayChrome();
       } else {
+        ensureStayChrome();
         setProgress(open ? 1 : 0, false);
       }
     });
