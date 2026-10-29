@@ -2107,7 +2107,8 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     display: none !important;
   }
 
-  body.mobile-profile-card .layout > .sidebar {
+  body.mobile-profile-card .layout > .sidebar,
+  body.mobile-profile-card > .sidebar.swipe-nav__stay {
     margin-top: 0;
     padding-top: max(12px, env(safe-area-inset-top, 0px));
   }
@@ -5575,12 +5576,37 @@ body.footer-revealed {
     overscroll-behavior-y: none;
   }
 
+  /* Stay chrome already occupies the top of the page; don't double-count viewport height. */
+  body.swipe-nav-ready.mobile-profile-card .swipe-nav__frame {
+    min-height: 0;
+  }
+
   body.note-page.note-page--essay .swipe-nav__frame {
     background: var(--bg);
   }
 
   .swipe-nav__frame.is-offset {
     box-shadow: -12px 0 40px rgb(0 0 0 / 0.18), -2px 0 0 rgb(0 0 0 / 0.04);
+  }
+
+  /* Avatar + Menu stay outside the sliding sheet so they never leave the viewport. */
+  body.swipe-nav-ready > .top-nav.swipe-nav__stay,
+  body.swipe-nav-ready > .sidebar.swipe-nav__stay {
+    position: relative;
+    z-index: 5;
+  }
+
+  body.swipe-nav-ready > .sidebar.swipe-nav__stay {
+    display: block;
+    width: calc(100% - (2 * var(--page-pad-x)));
+    max-width: 692px;
+    margin: 12px auto 0;
+    background: var(--bg, #fcfcfc);
+  }
+
+  body.swipe-nav-ready > .sidebar.swipe-nav__stay .collections,
+  body.swipe-nav-ready > .sidebar.swipe-nav__stay .nowplaying {
+    display: none;
   }
 
   body.swipe-nav-open,
