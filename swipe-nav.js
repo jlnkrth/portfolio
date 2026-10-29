@@ -16,17 +16,38 @@
     );
   }
 
+  function isVisible(el) {
+    if (!el) return false;
+    var node = el;
+    while (node && node !== document.body) {
+      var style = window.getComputedStyle(node);
+      if (style.display === "none" || style.visibility === "hidden") return false;
+      node = node.parentElement;
+    }
+    var box = el.getBoundingClientRect();
+    return box.width > 0 && box.height > 0;
+  }
+
+  function hasVisibleProfileCard() {
+    var cards = document.querySelectorAll(".profile-card");
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i].closest(".swipe-nav")) continue;
+      if (isVisible(cards[i])) return true;
+    }
+    return false;
+  }
+
   function cardAvatarSrc() {
-    var img = document.querySelector(".profile-card img.avatar, .profile-card [data-avatar]");
+    var img = document.querySelector(
+      ".profile-card img.avatar, .profile-card [data-avatar], .top-nav__logo-img[data-avatar]"
+    );
     return (img && img.getAttribute("src")) || "/assets/avatar.avif";
   }
 
   function keepOut(node) {
     if (!node || node.nodeType !== 1) return false;
-    return (
-      node.matches(
-        "script, style, .swipe-nav, .swipe-nav__frame, .swipe-nav__trigger, [data-hidden-footer], .hidden-footer"
-      )
+    return node.matches(
+      "script, style, .swipe-nav, .swipe-nav__frame, .swipe-nav__trigger, [data-hidden-footer], .hidden-footer"
     );
   }
 
@@ -50,7 +71,9 @@
     var ignoreClick = false;
     var scrollLocked = false;
     var lockY = 0;
-    var menuBtn = document.querySelector(".top-nav__menu-btn, [data-nav-menu-toggle]");
+    var menuButtons = Array.prototype.slice.call(
+      document.querySelectorAll(".top-nav__menu-btn, [data-nav-menu-toggle]")
+    );
 
     function rememberScroll() {
       if (scrollLocked) return;
@@ -109,25 +132,34 @@
     }
 
     document.body.insertBefore(nav, document.body.firstChild);
-    frame.appendChild(trigger);
+    // Keep the trigger on body so position:fixed stays viewport-bound and
+    // is never trapped by the frame's transform / will-change.
+    document.body.appendChild(trigger);
     document.body.classList.add("swipe-nav-ready");
 
-    function syncTrigger() {
-      trigger.hidden = false;
-      trigger.tabIndex = 0;
-      trigger.setAttribute("aria-hidden", "false");
-      var img = trigger.querySelector("img");
-      if (img) {
-        img.className = "avatar";
-        img.setAttribute("src", cardAvatarSrc());
-      }
+    function syncChrome() {
+      var hasCard = isMobile() && hasVisibleProfileCard();
+      document.body.classList.toggle("mobile-profile-card", hasCard);
+      // Identity lives in the card or the navbar logo — never a floating trigger.
+      trigger.hidden = true;
+      trigger.tabIndex = -1;
+      trigger.setAttribute("aria-hidden", "true");
+      menuButtons = Array.prototype.slice.call(
+        document.querySelectorAll(".top-nav__menu-btn, [data-nav-menu-toggle]")
+      );
+    }
+
+    function syncMenuButtons() {
+      menuButtons.forEach(function (btn) {
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
     }
 
     var focusables = [];
 
     function refreshFocusables() {
       focusables = Array.prototype.slice.call(
-        nav.querySelectorAll('a[href], button:not([disabled])')
+        nav.querySelectorAll("a[href], button:not([disabled])")
       );
     }
 
@@ -137,8 +169,11 @@
       var scale = prefersReducedMotion() ? 1 : 1 - progress * 0.035;
       var radius = Math.round(progress * 18);
       var reduce = prefersReducedMotion();
+      var revealed = progress > 0.01;
       frame.style.transition =
-        animate && !reduce ? "transform 280ms ease, border-radius 280ms ease" : "none";
+        animate && !reduce
+          ? "transform 280ms ease, border-radius 280ms ease"
+          : "none";
       if (progress <= 0) {
         frame.style.transform = "";
         frame.style.borderRadius = "";
@@ -147,7 +182,8 @@
           "translate3d(" + x + "px,0,0) scale(" + scale + ")";
         frame.style.borderRadius = radius + "px";
       }
-      frame.classList.toggle("is-offset", progress > 0.01);
+      frame.classList.toggle("is-offset", revealed);
+      nav.classList.toggle("is-revealed", revealed);
       document.body.classList.toggle("swipe-nav-open", progress > 0.5);
     }
 
@@ -185,7 +221,7 @@
       trigger.setAttribute("aria-expanded", open ? "true" : "false");
       trigger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       nav.setAttribute("aria-hidden", open ? "false" : "true");
-      if (menuBtn) menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      syncMenuButtons();
       document.body.classList.toggle("swipe-nav-open", open);
       if (open) {
         refreshFocusables();
@@ -310,29 +346,21 @@
       event.preventDefault();
     }
 
-    var topLogo = document.querySelector(".top-nav__logo");
-    if (topLogo) {
-      topLogo.addEventListener("click", function (event) {
+    document.addEventListener(
+      "click",
+      function (event) {
         if (!isMobile()) return;
+        var btn = event.target.closest(
+          ".top-nav__menu-btn, [data-nav-menu-toggle], .profile-card__menu"
+        );
+        if (!btn) return;
         event.preventDefault();
+        event.stopImmediatePropagation();
         setOpen(!open);
-      });
-    }
-
-    if (menuBtn) {
-      menuBtn.addEventListener(
-        "click",
-        function (event) {
-          if (!isMobile()) return;
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          setOpen(!open);
-          menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-          menuBtn.blur();
-        },
-        true
-      );
-    }
+        btn.blur();
+      },
+      true
+    );
 
     frame.addEventListener("pointerdown", onPointerDown);
     frame.addEventListener("pointermove", onPointerMove, { passive: false });
@@ -370,13 +398,13 @@
     });
 
     if (window.initAvatars) window.initAvatars(document.body);
-    syncTrigger();
+    syncChrome();
     if (typeof MutationObserver !== "undefined") {
       new MutationObserver(function () {
-        syncTrigger();
+        syncChrome();
       }).observe(document.body, { childList: true, subtree: true });
     }
-    window.addEventListener("resize", syncTrigger);
+    window.addEventListener("resize", syncChrome);
 
     setProgress(0, false);
   }
