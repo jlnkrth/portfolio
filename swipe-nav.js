@@ -16,17 +16,40 @@
     );
   }
 
+  function isVisible(el) {
+    if (!el) return false;
+    var node = el;
+    while (node && node !== document.body) {
+      var style = window.getComputedStyle(node);
+      if (style.display === "none" || style.visibility === "hidden") return false;
+      node = node.parentElement;
+    }
+    var box = el.getBoundingClientRect();
+    return box.width > 0 && box.height > 0;
+  }
+
+  function hasVisibleCardAvatar() {
+    var imgs = document.querySelectorAll(
+      ".profile-card img.avatar, .profile-card .avatar-link"
+    );
+    for (var i = 0; i < imgs.length; i++) {
+      if (imgs[i].closest(".swipe-nav")) continue;
+      if (isVisible(imgs[i])) return true;
+    }
+    return false;
+  }
+
   function cardAvatarSrc() {
-    var img = document.querySelector(".profile-card img.avatar, .profile-card [data-avatar]");
+    var img = document.querySelector(
+      ".profile-card img.avatar, .profile-card [data-avatar]"
+    );
     return (img && img.getAttribute("src")) || "/assets/avatar.avif";
   }
 
   function keepOut(node) {
     if (!node || node.nodeType !== 1) return false;
-    return (
-      node.matches(
-        "script, style, .swipe-nav, .swipe-nav__frame, .swipe-nav__trigger, [data-hidden-footer], .hidden-footer"
-      )
+    return node.matches(
+      "script, style, .swipe-nav, .swipe-nav__frame, .swipe-nav__trigger, [data-hidden-footer], .hidden-footer"
     );
   }
 
@@ -50,7 +73,9 @@
     var ignoreClick = false;
     var scrollLocked = false;
     var lockY = 0;
-    var menuBtn = document.querySelector(".top-nav__menu-btn, [data-nav-menu-toggle]");
+    var menuBtn = document.querySelector(
+      ".top-nav__menu-btn, [data-nav-menu-toggle]"
+    );
 
     function rememberScroll() {
       if (scrollLocked) return;
@@ -109,13 +134,16 @@
     }
 
     document.body.insertBefore(nav, document.body.firstChild);
-    frame.appendChild(trigger);
+    // Keep the trigger on body so position:fixed stays viewport-bound and
+    // is never trapped by the frame's transform / will-change.
+    document.body.appendChild(trigger);
     document.body.classList.add("swipe-nav-ready");
 
     function syncTrigger() {
-      trigger.hidden = false;
-      trigger.tabIndex = 0;
-      trigger.setAttribute("aria-hidden", "false");
+      var hide = hasVisibleCardAvatar();
+      trigger.hidden = hide;
+      trigger.tabIndex = hide ? -1 : 0;
+      trigger.setAttribute("aria-hidden", hide ? "true" : "false");
       var img = trigger.querySelector("img");
       if (img) {
         img.className = "avatar";
@@ -127,7 +155,7 @@
 
     function refreshFocusables() {
       focusables = Array.prototype.slice.call(
-        nav.querySelectorAll('a[href], button:not([disabled])')
+        nav.querySelectorAll("a[href], button:not([disabled])")
       );
     }
 
@@ -137,8 +165,11 @@
       var scale = prefersReducedMotion() ? 1 : 1 - progress * 0.035;
       var radius = Math.round(progress * 18);
       var reduce = prefersReducedMotion();
+      var revealed = progress > 0.01;
       frame.style.transition =
-        animate && !reduce ? "transform 280ms ease, border-radius 280ms ease" : "none";
+        animate && !reduce
+          ? "transform 280ms ease, border-radius 280ms ease"
+          : "none";
       if (progress <= 0) {
         frame.style.transform = "";
         frame.style.borderRadius = "";
@@ -147,7 +178,8 @@
           "translate3d(" + x + "px,0,0) scale(" + scale + ")";
         frame.style.borderRadius = radius + "px";
       }
-      frame.classList.toggle("is-offset", progress > 0.01);
+      frame.classList.toggle("is-offset", revealed);
+      nav.classList.toggle("is-revealed", revealed);
       document.body.classList.toggle("swipe-nav-open", progress > 0.5);
     }
 
