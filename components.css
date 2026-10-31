@@ -2,19 +2,20 @@
    Component library tokens
    ========================================================================== */
 :root {
+  /* Founder Profiles palette */
   --gray0: #fff;
-  --gray1: #fcfcfc;
-  --gray2: #f9f9f9;
-  --gray3: #efefef;
-  --gray4: #e8e8e8;
-  --gray5: #e8e8e8;
-  --gray6: #e2e2e2;
-  --gray7: #dbdbdb;
-  --gray8: #c7c7c7;
-  --gray9: #8f8f8f;
-  --gray10: #858585;
-  --gray11: #6f6f6f;
-  --gray12: #171717;
+  --gray1: #f5f5f0;
+  --gray2: #ecebe4;
+  --gray3: #e4e1d4;
+  --gray4: #ddd9cc;
+  --gray5: #d5d1c4;
+  --gray6: #c6c2b7;
+  --gray7: #b0aea3;
+  --gray8: #8a9aa6;
+  --gray9: #6b7f8f;
+  --gray10: #516a7e;
+  --gray11: #3d556a;
+  --gray12: #0b2f4c;
 
   --font-sans: "Inter", "Inter Fallback", Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
@@ -22,7 +23,7 @@
   --font-serif: Georgia, "Times New Roman", "Iowan Old Style", serif;
 
   --side-padding: 16px;
-  --hover: #282828;
+  --hover: #0b2f4c;
 }
 
 *,
@@ -3821,14 +3822,15 @@ a.reading-card__cover:hover img {
    Text highlight — notepad-style muted palette (mark.hl)
    ========================================================================== */
 mark.hl {
-  padding: 0.1em 0;
-  border-radius: 3px;
-  background: #fdeeb5;
+  padding: 0 2px;
+  border-radius: 4px;
+  background: #ffdd7e;
   color: inherit;
+  mix-blend-mode: multiply;
 }
 
-mark.hl--yellow { background: #fdeeb5; }
-mark.hl--orange { background: #fbdcb5; }
-mark.hl--rose   { background: #f6d3d3; }
+mark.hl--yellow { background: #ffdd7e; }
+mark.hl--orange { background: #f99c004d; }
+mark.hl--rose   { background: #ffcaca; }
 mark.hl--green  { background: #d6e9cf; }
-mark.hl--blue   { background: #d2e2f2; }
+mark.hl--blue   { background: #0b2f4c14; }
