@@ -67,13 +67,13 @@
   function markSvg() {
     return (
       '<svg class="essay-mark__body" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-      '<rect x="22" y="38" width="28" height="30" rx="6" fill="#21201c"/>' +
-      '<circle cx="36" cy="26" r="14" fill="#21201c"/>' +
-      '<circle cx="31" cy="24" r="2.4" fill="#fcfcfc"/>' +
-      '<circle cx="41" cy="24" r="2.4" fill="#fcfcfc"/>' +
-      '<rect x="31" y="30" width="10" height="2" rx="1" fill="#fcfcfc"/>' +
-      '<rect x="16" y="44" width="10" height="4" rx="2" fill="#21201c"/>' +
-      '<rect x="46" y="44" width="10" height="4" rx="2" fill="#21201c"/>' +
+      '<rect x="22" y="38" width="28" height="30" rx="6" fill="#0b2f4c"/>' +
+      '<circle cx="36" cy="26" r="14" fill="#0b2f4c"/>' +
+      '<circle cx="31" cy="24" r="2.4" fill="#f5f5f0"/>' +
+      '<circle cx="41" cy="24" r="2.4" fill="#f5f5f0"/>' +
+      '<rect x="31" y="30" width="10" height="2" rx="1" fill="#f5f5f0"/>' +
+      '<rect x="16" y="44" width="10" height="4" rx="2" fill="#0b2f4c"/>' +
+      '<rect x="46" y="44" width="10" height="4" rx="2" fill="#0b2f4c"/>' +
       "</svg>"
     );
   }

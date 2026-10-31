@@ -154,7 +154,7 @@ if (typeof mermaid !== "undefined") {
     theme: "base",
     themeVariables: {
       darkMode: false,
-      background: "#ffffff",
+      background: "#f5f5f0",
       primaryColor: "#f9f9f9",
       primaryTextColor: "#1a1a1a",
       primaryBorderColor: "#d4d4d4",
@@ -162,7 +162,7 @@ if (typeof mermaid !== "undefined") {
       tertiaryColor: "#efefef",
       lineColor: "#666666",
       textColor: "#1a1a1a",
-      mainBkg: "#ffffff",
+      mainBkg: "#f5f5f0",
       actorBkg: "#ffffff",
       actorBorder: "#d4d4d4",
       actorTextColor: "#1a1a1a",
