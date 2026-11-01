@@ -1,10 +1,25 @@
-// Page-load entrance: chrome first (profile, nav, Spotify), then page content.
+// Page-load entrance: chrome first, then content — once per browser session.
 (function () {
   "use strict";
 
+  var ENTERED_KEY = "kreth-chrome-entered";
   var reduceMotion =
     typeof window.matchMedia === "function" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function hasEntered() {
+    try {
+      return sessionStorage.getItem(ENTERED_KEY) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function markEntered() {
+    try {
+      sessionStorage.setItem(ENTERED_KEY, "1");
+    } catch (_) {}
+  }
 
   function finish(el) {
     if (!el) return;
@@ -19,6 +34,10 @@
     }
 
     if (window.persistChromeCache) window.persistChromeCache();
+  }
+
+  function showNow(el) {
+    finish(el);
   }
 
   function enter(el, delayMs) {
@@ -58,6 +77,12 @@
     });
   }
 
+  function claimSpotify(spotifyRoot) {
+    if (!spotifyRoot) return;
+    spotifyRoot.setAttribute("data-entrance", "chrome");
+    if (!spotifyRoot.dataset.hydrated) spotifyRoot.dataset.hydrated = "1";
+  }
+
   function initChromeEntrance() {
     var profile = document.querySelector(".layout .profile-card");
     var topNav = document.querySelector(".top-nav");
@@ -65,19 +90,28 @@
     var spotify = spotifyRoot && spotifyRoot.querySelector(".nowplaying__widget");
     var pageRoot = document.querySelector(".layout > .root");
 
-    // Chrome wave — fast, first, tight stagger.
-    enter(profile, 0);
-    enter(topNav, 35);
-    if (spotify) {
-      // Own the Spotify entrance so it does not wait on the API poll.
-      spotifyRoot.setAttribute("data-entrance", "chrome");
-      if (!spotifyRoot.dataset.hydrated) spotifyRoot.dataset.hydrated = "1";
-      enter(spotify, 70);
+    // Later navigations in this session: keep chrome + content visible, no replay.
+    if (hasEntered() || reduceMotion) {
+      claimSpotify(spotifyRoot);
+      showNow(profile);
+      showNow(topNav);
+      showNow(spotify);
+      showNow(pageRoot);
+      markEntered();
+      return;
     }
 
-    // Page content after chrome has started landing.
+    // First visit — chrome wave, then page content.
+    claimSpotify(spotifyRoot);
+    enter(profile, 0);
+    enter(topNav, 35);
+    enter(spotify, 70);
     enter(pageRoot, 200);
+
+    // Persist after chrome has landed so the next page skips the wave.
+    window.setTimeout(markEntered, 70 + 400);
   }
 
   window.initChromeEntrance = initChromeEntrance;
+  window.hasChromeEntered = hasEntered;
 })();

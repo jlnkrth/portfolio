@@ -2,8 +2,9 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "52";
+  var CHROME_CACHE_VERSION = "53";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
+  var CHROME_ENTERED_KEY = "kreth-chrome-entered";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
@@ -42,11 +43,41 @@
     return html;
   }
 
+  function hasChromeEntered() {
+    try {
+      return sessionStorage.getItem(CHROME_ENTERED_KEY) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function revealChromeNow() {
+    document
+      .querySelectorAll(
+        ".layout .profile-card, .top-nav, .nowplaying__widget, .layout > .root"
+      )
+      .forEach(function (el) {
+        el.classList.remove("is-pending", "is-entering");
+        el.classList.add("is-in");
+        el.style.removeProperty("--enter-delay");
+      });
+    var spotifyRoot = document.querySelector("[data-now-playing]");
+    if (spotifyRoot) {
+      spotifyRoot.setAttribute("data-entrance", "chrome");
+      if (!spotifyRoot.dataset.hydrated) spotifyRoot.dataset.hydrated = "1";
+      spotifyRoot.classList.add("is-spin-ready");
+    }
+  }
+
   function claimChromePending() {
     var reduceMotion =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
+    // After the first visit in this session, never hide chrome again.
+    if (hasChromeEntered() || reduceMotion) {
+      revealChromeNow();
+      return;
+    }
     var profile = document.querySelector(".layout .profile-card");
     var topNav = document.querySelector(".top-nav");
     var pageRoot = document.querySelector(".layout > .root");
@@ -998,7 +1029,7 @@
       return Promise.all([
         loadScript("/availability.js"),
         loadScript("/now-playing.js?v=20"),
-        loadScript("/chrome-entrance.js?v=2"),
+        loadScript("/chrome-entrance.js?v=3"),
         loadScript("/admin-auth.js?v=14"),
         loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
