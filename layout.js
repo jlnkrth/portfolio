@@ -2,19 +2,36 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "46";
+  var CHROME_CACHE_VERSION = "47";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
-    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
+    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
+  var NOWPLAYING_ENTRANCE_CLASS_RE =
+    /\s*\b(?:is-pending|is-entering|is-in|is-spin-ready|is-loaded|is-spinning|is-coasting)\b/g;
 
   var topSlot = document.getElementById("chrome-top");
   var sidebarSlot = document.getElementById("chrome-sidebar");
 
   function sanitizeChromeHtml(html) {
     if (!html) return html;
-    return html.replace(RUNTIME_ATTR_RE, "");
+    html = html.replace(RUNTIME_ATTR_RE, "");
+    // Drop now-playing entrance/spin classes so a mid-animation cache cannot
+    // leave the Spotify widget stuck at opacity 0.
+    html = html.replace(
+      /(<[^>]*\bnowplaying\b[^>]*class=")([^"]*)(")/gi,
+      function (_m, open, classes, close) {
+        return open + classes.replace(NOWPLAYING_ENTRANCE_CLASS_RE, " ").replace(/\s+/g, " ").trim() + close;
+      }
+    );
+    html = html.replace(
+      /(<[^>]*class=")([^"]*\bnowplaying\b[^"]*)(")/gi,
+      function (_m, open, classes, close) {
+        return open + classes.replace(NOWPLAYING_ENTRANCE_CLASS_RE, " ").replace(/\s+/g, " ").trim() + close;
+      }
+    );
+    return html;
   }
 
   // Keep the article archive pinned beside every note. When the user arrives
@@ -944,7 +961,7 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js?v=18"),
+        loadScript("/now-playing.js?v=19"),
         loadScript("/admin-auth.js?v=14"),
         loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
