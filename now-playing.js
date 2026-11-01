@@ -23,16 +23,152 @@
     var coverEl = root.querySelector(".nowplaying__cover");
     var widgetEl = root.querySelector(".nowplaying__widget");
     var labelEl = root.querySelector(".nowplaying__status-label");
+    var reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var coastEndHandler = null;
 
     function setStatus(status) {
+      var prev = root.dataset.status;
       root.hidden = false;
       root.dataset.status = status;
       if (labelEl) labelEl.textContent = STATUS_LABELS[status] || STATUS_LABELS.offline;
+
+      if (!widgetEl || !widgetEl.classList.contains("is-in")) return;
+      if (status === "listening") startSpin();
+      else if (prev === "listening") stopSpin();
+    }
+
+    function markCoverLoaded() {
+      if (coverEl) coverEl.classList.add("is-loaded");
+    }
+
+    function bindCoverLoad() {
+      if (!coverEl) return;
+      if (coverEl.getAttribute("src") && coverEl.complete && coverEl.naturalWidth > 0) {
+        markCoverLoaded();
+        return;
+      }
+      coverEl.addEventListener("load", function onLoad() {
+        coverEl.removeEventListener("load", onLoad);
+        markCoverLoaded();
+      });
+      coverEl.addEventListener("error", function onError() {
+        coverEl.removeEventListener("error", onError);
+        markCoverLoaded();
+      });
+    }
+
+    function rotationDeg(el) {
+      var t = getComputedStyle(el).transform;
+      if (!t || t === "none") return 0;
+      var m = t.match(/matrix\(([^)]+)\)/);
+      if (!m) return 0;
+      var parts = m[1].split(",");
+      var a = parseFloat(parts[0]);
+      var b = parseFloat(parts[1]);
+      return (Math.atan2(b, a) * 180) / Math.PI;
+    }
+
+    function clearCoastHandler() {
+      if (!coverEl || !coastEndHandler) return;
+      coverEl.removeEventListener("transitionend", coastEndHandler);
+      coastEndHandler = null;
+    }
+
+    function startSpin() {
+      if (reduceMotion || !coverEl) return;
+      clearCoastHandler();
+      coverEl.classList.remove("is-coasting");
+      coverEl.style.transition = "";
+      coverEl.style.transform = "";
+      coverEl.classList.add("is-spinning");
+    }
+
+    function stopSpin() {
+      if (reduceMotion || !coverEl) return;
+      if (
+        !coverEl.classList.contains("is-spinning") &&
+        !coverEl.classList.contains("is-coasting")
+      ) {
+        return;
+      }
+
+      var deg = rotationDeg(coverEl);
+      clearCoastHandler();
+      coverEl.classList.remove("is-spinning");
+      coverEl.style.transition = "none";
+      coverEl.style.transform = "rotate(" + deg + "deg)";
+      // Force the freeze frame before coasting.
+      void coverEl.offsetWidth;
+
+      coverEl.classList.add("is-coasting");
+      coverEl.style.transition =
+        "transform 1.5s cubic-bezier(0.05, 0.7, 0.1, 1)";
+      coverEl.style.transform = "rotate(" + (deg + 110) + "deg)";
+
+      coastEndHandler = function onCoastEnd(event) {
+        if (event.target !== coverEl) return;
+        if (event.propertyName !== "transform") return;
+        clearCoastHandler();
+        coverEl.classList.remove("is-coasting");
+        // Keep the final angle so it doesn't snap back.
+      };
+      coverEl.addEventListener("transitionend", coastEndHandler);
+    }
+
+    function finishEntrance() {
+      if (!widgetEl) return;
+      widgetEl.classList.remove("is-pending", "is-entering");
+      widgetEl.classList.add("is-in");
+      root.classList.add("is-spin-ready");
+      if (root.dataset.status === "listening") startSpin();
+    }
+
+    function runEntrance() {
+      if (!widgetEl) return;
+
+      bindCoverLoad();
+
+      if (reduceMotion) {
+        widgetEl.classList.remove("is-pending", "is-entering");
+        widgetEl.classList.add("is-in");
+        root.classList.add("is-spin-ready");
+        return;
+      }
+
+      var vinyl = widgetEl.querySelector(".nowplaying__vinyl-wrapper");
+      var info = widgetEl.querySelector(".nowplaying__info");
+      var status = widgetEl.querySelector(".nowplaying__status");
+      if (vinyl) vinyl.style.setProperty("--enter-delay", "40ms");
+      if (info) info.style.setProperty("--enter-delay", "90ms");
+      if (status) status.style.setProperty("--enter-delay", "140ms");
+
+      widgetEl.classList.add("is-pending");
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          widgetEl.classList.remove("is-pending");
+          widgetEl.classList.add("is-entering");
+          widgetEl.addEventListener(
+            "transitionend",
+            function onEnd(event) {
+              if (event.target !== widgetEl) return;
+              if (event.propertyName !== "opacity") return;
+              finishEntrance();
+              widgetEl.removeEventListener("transitionend", onEnd);
+            }
+          );
+        });
+      });
     }
 
     function markHydrated() {
       if (root.dataset.hydrated) return;
+      // Pending before hydrated so the first painted frame is opacity 0.
+      if (widgetEl && !reduceMotion) widgetEl.classList.add("is-pending");
       root.dataset.hydrated = "1";
+      runEntrance();
       if (window.persistChromeCache) window.persistChromeCache();
     }
 
@@ -49,8 +185,14 @@
       }
 
       if (coverEl && data.albumArt) {
-        coverEl.src = data.albumArt;
         coverEl.alt = (data.title || "Album") + " cover art";
+        if (coverEl.getAttribute("src") !== data.albumArt) {
+          coverEl.classList.remove("is-loaded");
+          coverEl.src = data.albumArt;
+          bindCoverLoad();
+        } else {
+          markCoverLoaded();
+        }
       }
 
       if (widgetEl && data.url) {
