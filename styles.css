@@ -962,8 +962,9 @@ a.handle:hover {
 .profile-card__bio {
   margin: 0 0 16px;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--kw-text-muted);
+  text-wrap: pretty;
 }
 
 .profile-card__bio a {
@@ -980,20 +981,21 @@ a.handle:hover {
   text-decoration-color: var(--kw-text-muted);
 }
 
+/* Keep the masse chip in the text flow — inline-flex was dropping the
+   icon/link below the surrounding baseline and bloating the line box. */
 .profile-card__bio-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
+  display: inline;
   white-space: nowrap;
 }
 
 .profile-card__bio-favicon {
   display: inline-block;
-  width: 1.125em;
-  height: 1.125em;
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.28em;
+  vertical-align: -0.14em;
   object-fit: contain;
-  border-radius: 3px;
-  flex-shrink: 0;
+  border-radius: 2px;
 }
 
 .email-copy {
