@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Components — kreth.work</title>
-    <meta name="description" content="Internal component library for kreth.work." />
+    <title>Studio — kreth.work</title>
+    <meta name="description" content="Studio styleguide for kreth.work. Internal, not for search." />
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
 
@@ -16,27 +16,472 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="tokens.css" />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="components.css?v=26" />
+    <link rel="stylesheet" href="/books/book-detail.css" />
+    <link rel="stylesheet" href="components.css?v=28" />
   </head>
   <body>
-    <div id="chrome-top"></div>
-    <div class="layout">
-      <div id="chrome-sidebar"></div>
-      <div class="root">
-    <div class="guide">
-      <h1 class="guide__title">Components</h1>
-      <p class="guide__lead">
-        Internal library of every component used across the site. Not linked from
-        the public site and excluded from search engines.
-      </p>
-      <span class="guide__note">Hidden page · not for visitors</span>
+    <header class="studio-shell" data-component="StudioShell">
+      <div class="studio-shell__inner">
+        <a class="studio-shell__brand" href="/components.html">Studio</a>
+        <nav class="studio-shell__nav" aria-label="Studio">
+          <a href="/components.html" aria-current="page">Styleguide</a>
+          <a href="#components">Components</a>
+          <a class="studio-shell__soon" href="/studio/soon.html"
+            >Blog <span class="studio-shell__badge">Soon</span></a
+          >
+          <a class="studio-shell__soon" href="/studio/soon.html"
+            >Notepad <span class="studio-shell__badge">Soon</span></a
+          >
+          <a class="studio-shell__soon" href="/studio/soon.html"
+            >Scratchpad <span class="studio-shell__badge">Soon</span></a
+          >
+        </nav>
+      </div>
+    </header>
 
-      <!-- COMPONENT: Announcement banner -->
-      <section class="specimen">
+    <div class="guide">
+      <header class="guide__intro" id="intro">
+        <h1 class="guide__title">Styleguide</h1>
+        <p class="guide__lead">
+          Tokens, foundations, components, and the patterns they combine into.
+          Private Studio surface on the admin host.
+        </p>
+        <span class="guide__note">Hidden page · not for visitors</span>
+        <nav class="guide__nav" aria-label="Styleguide sections">
+          <a href="#intro">Intro</a>
+          <a href="#tokens">Tokens</a>
+          <a href="#foundations">Foundations</a>
+          <a href="#components">Components</a>
+          <a href="#patterns">Patterns</a>
+        </nav>
+      </header>
+
+      <section class="guide__section" id="tokens" aria-labelledby="tokens-title">
+        <h2 class="guide__section-title" id="tokens-title">Tokens</h2>
+        <p class="guide__section-lead">Swatches read the --kw-* custom properties. Change a token and the chip follows.</p>
+        <ul class="guide__index">
+          <li><a href="#ColorSwatch">ColorSwatch</a></li>
+          <li><a href="#SpaceScale">SpaceScale</a></li>
+          <li><a href="#RadiusScale">RadiusScale</a></li>
+        </ul>
+      <section class="specimen" id="ColorSwatch">
+        <span class="specimen__label">Color</span>
+        <p class="specimen__caption">Each chip is painted with the custom property itself.</p>
+        <div class="swatch-grid" data-component="ColorSwatch">
+          <h3 class="swatch-group__title">Brand</h3>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-cream)"></span>
+            <span class="swatch__name">--kw-cream</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-navy)"></span>
+            <span class="swatch__name">--kw-navy</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-white)"></span>
+            <span class="swatch__name">--kw-white</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-navy-deep)"></span>
+            <span class="swatch__name">--kw-navy-deep</span>
+          </div>
+          <h3 class="swatch-group__title">Neutral</h3>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-0)"></span>
+            <span class="swatch__name">--kw-neutral-0</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-50)"></span>
+            <span class="swatch__name">--kw-neutral-50</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-100)"></span>
+            <span class="swatch__name">--kw-neutral-100</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-150)"></span>
+            <span class="swatch__name">--kw-neutral-150</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-200)"></span>
+            <span class="swatch__name">--kw-neutral-200</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-300)"></span>
+            <span class="swatch__name">--kw-neutral-300</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-400)"></span>
+            <span class="swatch__name">--kw-neutral-400</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-500)"></span>
+            <span class="swatch__name">--kw-neutral-500</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-600)"></span>
+            <span class="swatch__name">--kw-neutral-600</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-700)"></span>
+            <span class="swatch__name">--kw-neutral-700</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-800)"></span>
+            <span class="swatch__name">--kw-neutral-800</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-900)"></span>
+            <span class="swatch__name">--kw-neutral-900</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-1000)"></span>
+            <span class="swatch__name">--kw-neutral-1000</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-neutral-1100)"></span>
+            <span class="swatch__name">--kw-neutral-1100</span>
+          </div>
+          <h3 class="swatch-group__title">Surface</h3>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-surface)"></span>
+            <span class="swatch__name">--kw-surface</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-surface-raised)"></span>
+            <span class="swatch__name">--kw-surface-raised</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-surface-subtle)"></span>
+            <span class="swatch__name">--kw-surface-subtle</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-fill)"></span>
+            <span class="swatch__name">--kw-fill</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-fill-muted)"></span>
+            <span class="swatch__name">--kw-fill-muted</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-row-hover)"></span>
+            <span class="swatch__name">--kw-row-hover</span>
+          </div>
+          <h3 class="swatch-group__title">Text</h3>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-text)"></span>
+            <span class="swatch__name">--kw-text</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-text-muted)"></span>
+            <span class="swatch__name">--kw-text-muted</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-text-subtle)"></span>
+            <span class="swatch__name">--kw-text-subtle</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-text-faint)"></span>
+            <span class="swatch__name">--kw-text-faint</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-text-inverse)"></span>
+            <span class="swatch__name">--kw-text-inverse</span>
+          </div>
+          <h3 class="swatch-group__title">Border</h3>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-line)"></span>
+            <span class="swatch__name">--kw-line</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-border-muted)"></span>
+            <span class="swatch__name">--kw-border-muted</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-border)"></span>
+            <span class="swatch__name">--kw-border</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-border-strong)"></span>
+            <span class="swatch__name">--kw-border-strong</span>
+          </div>
+          <h3 class="swatch-group__title">Status</h3>
+          <p class="specimen__caption" style="grid-column: 1 / -1; margin: 0 0 8px">
+            Live dots only. Availability and NowPlaying map to these — never hard-code
+            <code>#30a46c</code> / <code>#e5484d</code> in component CSS.
+          </p>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-status-ok)"></span>
+            <span class="swatch__name">--kw-status-ok</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-status-bad)"></span>
+            <span class="swatch__name">--kw-status-bad</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-status-idle)"></span>
+            <span class="swatch__name">--kw-status-idle</span>
+          </div>
+          <h3 class="swatch-group__title">Control</h3>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-control-bg)"></span>
+            <span class="swatch__name">--kw-control-bg</span>
+          </div>
+          <div class="swatch">
+            <span class="swatch__chip" style="--swatch: var(--kw-control-hover)"></span>
+            <span class="swatch__name">--kw-control-hover</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="specimen" id="SpaceScale">
+        <span class="specimen__label">Space</span>
+        <div class="space-scale" data-component="SpaceScale">
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-1)"></span>
+            <code class="space-row__name">--kw-space-1</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-2)"></span>
+            <code class="space-row__name">--kw-space-2</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-3)"></span>
+            <code class="space-row__name">--kw-space-3</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-4)"></span>
+            <code class="space-row__name">--kw-space-4</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-5)"></span>
+            <code class="space-row__name">--kw-space-5</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-6)"></span>
+            <code class="space-row__name">--kw-space-6</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-8)"></span>
+            <code class="space-row__name">--kw-space-8</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-10)"></span>
+            <code class="space-row__name">--kw-space-10</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-12)"></span>
+            <code class="space-row__name">--kw-space-12</code>
+          </div>
+          <div class="space-row">
+            <span class="space-row__bar" style="--space: var(--kw-space-16)"></span>
+            <code class="space-row__name">--kw-space-16</code>
+          </div>
+        </div>
+      </section>
+
+      <section class="specimen" id="RadiusScale">
+        <span class="specimen__label">Radius</span>
+        <div class="radius-scale" data-component="RadiusScale">
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-xs)"></span>
+            <code class="radius-item__name">--kw-radius-xs</code>
+          </div>
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-sm)"></span>
+            <code class="radius-item__name">--kw-radius-sm</code>
+          </div>
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-control)"></span>
+            <code class="radius-item__name">--kw-radius-control</code>
+          </div>
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-md)"></span>
+            <code class="radius-item__name">--kw-radius-md</code>
+          </div>
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-lg)"></span>
+            <code class="radius-item__name">--kw-radius-lg</code>
+          </div>
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-card)"></span>
+            <code class="radius-item__name">--kw-radius-card</code>
+          </div>
+          <div class="radius-item">
+            <span class="radius-item__chip" style="--radius: var(--kw-radius-pill)"></span>
+            <code class="radius-item__name">--kw-radius-pill</code>
+          </div>
+        </div>
+      </section>
+      </section>
+
+      <section class="guide__section" id="foundations" aria-labelledby="foundations-title">
+        <h2 class="guide__section-title" id="foundations-title">Foundations</h2>
+        <p class="guide__section-lead">Type stacks and the text primitives the rest of the library is set in.</p>
+        <ul class="guide__index">
+          <li><a href="#TypeScale">TypeScale</a></li>
+          <li><a href="#SectionHeading">SectionHeading</a></li>
+          <li><a href="#Prose">Prose</a></li>
+          <li><a href="#RuleNote">RuleNote</a></li>
+          <li><a href="#ArticleProse">ArticleProse</a></li>
+          <li><a href="#ArticleHeading">ArticleHeading</a></li>
+          <li><a href="#CodeChip">CodeChip</a></li>
+          <li><a href="#SerifEmphasis">SerifEmphasis</a></li>
+          <li><a href="#Highlight">Highlight</a></li>
+          <li><a href="#PathLabel">PathLabel</a></li>
+          <li><a href="#HeroLead">HeroLead</a></li>
+          <li><a href="#SectionHead">SectionHead</a></li>
+          <li><a href="#SectionLead">SectionLead</a></li>
+        </ul>
+      <section class="specimen" id="TypeScale">
+        <span class="specimen__label">Type</span>
+        <div class="type-scale" data-component="TypeScale">
+          <p class="type-scale__sample type-scale__sample--sans">Sans. Inter for interface text.</p>
+          <p class="type-scale__sample type-scale__sample--serif">Serif. Georgia for emphasis and quotes.</p>
+          <p class="type-scale__sample type-scale__sample--mono">Mono. ui-monospace for code.</p>
+        </div>
+      </section>
+
+      <section class="specimen" id="SectionHeading">
+        <span class="specimen__label">Section heading + prose + inline code</span>
+        <h2 class="section-heading" data-component="SectionHeading">Expand</h2>
+        <p class="prose" id="Prose" data-component="Prose">
+          You can change the amount of toasts visible through the
+          <code>visibleToasts</code> prop.
+        </p>
+      </section>
+
+      <section class="specimen" id="RuleNote">
+        <span class="specimen__label">Rule-of-thumb note</span>
+        <p class="rule-note" data-component="RuleNote">
+          As a rule of thumb, UI animations should generally stay under
+          <code>300ms</code>.
+        </p>
+      </section>
+
+      <section class="specimen" id="ArticleProse">
+        <span class="specimen__label">Article lead prose + inline link</span>
+        <p class="article-prose" data-component="ArticleProse">
+          A short write-up about building small, deliberate interfaces. My goal
+          was a library that stays out of the way, so I documented every
+          component in one place, like
+          <a class="article-link" href="#">this catalog</a>. Every specimen maps
+          onto the same handful of tokens.
+        </p>
+        <p class="article-prose" data-component="ArticleProse">
+          Nothing here is load-bearing prose — it exists only to show how a
+          paragraph and its links read at rest.
+        </p>
+      </section>
+
+      <section class="specimen" id="ArticleHeading">
+        <span class="specimen__label">Section heading (h2, anchored)</span>
+        <h2 class="article-h2" id="the-approach" data-component="ArticleHeading">The approach</h2>
+        <p class="article-prose">
+          Section headings are set only a touch heavier than body text, so the
+          rhythm of the page stays calm.
+        </p>
+      </section>
+
+      <section class="specimen" id="CodeChip">
+        <span class="specimen__label">Inline code chip</span>
+        <p class="article-prose">
+          Each lesson ships a <code class="code-chip" data-component="CodeChip">SKILL.md</code> file you can
+          hand to an agent, alongside a plain <code class="code-chip" data-component="CodeChip">config.json</code>.
+        </p>
+      </section>
+
+      <section class="specimen" id="SerifEmphasis">
+        <span class="specimen__label">Inline serif italic emphasis</span>
+        <p class="article-prose">
+          In a world of scarcity we treasure <em class="serif-em" data-component="SerifEmphasis">tools</em>. In
+          a world of abundance we treasure <em class="serif-em" data-component="SerifEmphasis">taste</em>.
+        </p>
+      </section>
+
+      <section class="specimen" id="Highlight">
+        <span class="specimen__label">Text highlight</span>
+        <p class="article-prose">
+          A notepad-style marker for the line that matters:
+          <mark data-component="Highlight" class="hl hl--yellow">the default is yellow</mark>, with
+          <mark data-component="Highlight" class="hl hl--orange">orange</mark>,
+          <mark data-component="Highlight" class="hl hl--rose">rose</mark>,
+          <mark data-component="Highlight" class="hl hl--green">green</mark>, and
+          <mark data-component="Highlight" class="hl hl--blue">blue</mark> as muted alternatives.
+        </p>
+      </section>
+
+      <section class="specimen" id="PathLabel">
+        <span class="specimen__label">Mono path label</span>
+        <p class="exp-path" data-component="PathLabel">kreth.work/exploration</p>
+      </section>
+
+      <section class="specimen" id="HeroLead">
+        <span class="specimen__label">Hero lead (balanced intro)</span>
+        <p class="exp-hero-lead" data-component="HeroLead">
+          Designer and engineer. Hamburg. Exploring interface patterns, compact
+          components, and calm product surfaces.
+        </p>
+      </section>
+
+      <section class="specimen" id="SectionHead">
+        <span class="specimen__label">Section heading + lead (compact)</span>
+        <h2 class="exp-section-head" data-component="SectionHead">Patterns</h2>
+        <p class="exp-section-lead" id="SectionLead" data-component="SectionLead" style="margin-top: 8px">
+          Small interface studies, motion sketches, and component specimens.
+        </p>
+      </section>
+      </section>
+
+      <section class="guide__section" id="components" aria-labelledby="components-title">
+        <h2 class="guide__section-title" id="components-title">Components</h2>
+        <p class="guide__section-lead">Each specimen root carries data-component. The name matches the block, not the catalog wrapper.</p>
+        <ul class="guide__index">
+          <li><a href="#Banner">Banner</a></li>
+          <li><a href="#FeatureCard">FeatureCard</a></li>
+          <li><a href="#Button">Button</a></li>
+          <li><a href="#InstallCode">InstallCode</a></li>
+          <li><a href="#CodeBlock">CodeBlock</a></li>
+          <li><a href="#MarkdownBlock">MarkdownBlock</a></li>
+          <li><a href="#PillGroup">PillGroup</a></li>
+          <li><a href="#Toast">Toast</a></li>
+          <li><a href="#Availability">Availability</a></li>
+          <li><a href="#Footer">Footer</a></li>
+          <li><a href="#IndexHead">IndexHead</a></li>
+          <li><a href="#GlossaryTerm">GlossaryTerm</a></li>
+          <li><a href="#CommandSnippet">CommandSnippet</a></li>
+          <li><a href="#IndexList">IndexList</a></li>
+          <li><a href="#Waitlist">Waitlist</a></li>
+          <li><a href="#ArticleHeader">ArticleHeader</a></li>
+          <li><a href="#PullQuote">PullQuote</a></li>
+          <li><a href="#Figure">Figure</a></li>
+          <li><a href="#VideoPreview">VideoPreview</a></li>
+          <li><a href="#CtaLink">CtaLink</a></li>
+          <li><a href="#ProfileCard">ProfileCard</a></li>
+          <li><a href="#Handle">Handle</a></li>
+          <li><a href="#Collections">Collections</a></li>
+          <li><a href="#NowPlaying">NowPlaying</a></li>
+          <li><a href="#Toggle">Toggle</a></li>
+          <li><a href="#CompactButton">CompactButton</a></li>
+          <li><a href="#ExperimentCard">ExperimentCard</a></li>
+          <li><a href="#ExperimentTitle">ExperimentTitle</a></li>
+          <li><a href="#CodePanel">CodePanel</a></li>
+          <li><a href="#ScrollFade">ScrollFade</a></li>
+          <li><a href="#AnimatedBanner">AnimatedBanner</a></li>
+          <li><a href="#Sparkline">Sparkline</a></li>
+          <li><a href="#BarChart">BarChart</a></li>
+          <li><a href="#DynamicButton">DynamicButton</a></li>
+          <li><a href="#ArchitectureDiagram">ArchitectureDiagram</a></li>
+          <li><a href="#XPost">XPost</a></li>
+          <li><a href="#PhotoGallery">PhotoGallery</a></li>
+          <li><a href="#ReadingCard">ReadingCard</a></li>
+          <li><a href="#PlanTable">PlanTable</a></li>
+        </ul>
+      <section class="specimen" id="Banner">
         <span class="specimen__label">Announcement banner</span>
-        <div class="banner">
+        <div class="banner" data-component="Banner">
           <div class="banner__inner">
             <p style="margin: 0">
               <a href="#">Enrollment for my animation course is open!</a>
@@ -56,10 +501,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Feature card (toast preview + actions) -->
-      <section class="specimen">
+      <section class="specimen" id="FeatureCard">
         <span class="specimen__label">Feature card (toast preview + actions)</span>
-        <article class="feature-card exp-small-shadow">
+        <article class="feature-card exp-small-shadow" data-component="FeatureCard" data-dialkit="feature-card">
           <div class="feature-card__toasts" aria-hidden="true">
             <div class="toast-stub"></div>
             <div class="toast-stub"></div>
@@ -75,19 +519,26 @@
         </article>
       </section>
 
-      <!-- COMPONENT: Raised buttons -->
-      <section class="specimen">
-        <span class="specimen__label">Raised button — primary / secondary</span>
+      <section class="specimen" id="Button">
+        <span class="specimen__label">Raised button — canonical .btn</span>
+        <p class="specimen__caption">
+          Height <code>var(--kw-control-height)</code> (40px). Radius
+          <code>var(--kw-radius-control)</code>. Variants: primary, secondary (default),
+          block. Only raised action buttons on the site — do not invent parallel button CSS.
+        </p>
         <div class="hero__buttons">
-          <button class="btn btn--primary">Primary</button>
-          <button class="btn">Secondary</button>
+          <button class="btn btn--primary" data-component="Button">Primary</button>
+          <button class="btn" data-component="Button">Secondary</button>
+        </div>
+        <div class="profile-card__actions" style="max-width: 300px; margin-top: 16px">
+          <a class="btn btn--block btn--primary" data-component="Button" href="#">Primary block</a>
+          <a class="btn btn--block" data-component="Button" href="#">Secondary block</a>
         </div>
       </section>
 
-      <!-- COMPONENT: Inline install code -->
-      <section class="specimen">
+      <section class="specimen" id="InstallCode">
         <span class="specimen__label">Install code (inline, copyable)</span>
-        <div class="install-code" data-copy="npm install sonner">
+        <div class="install-code" data-component="InstallCode" data-copy="npm install sonner">
           <code>npm install sonner</code>
           <button class="copy-button" aria-label="Copy code" data-copy-btn>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -98,20 +549,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Section heading + prose + inline code -->
-      <section class="specimen">
-        <span class="specimen__label">Section heading + prose + inline code</span>
-        <h2 class="section-heading">Expand</h2>
-        <p class="prose">
-          You can change the amount of toasts visible through the
-          <code>visibleToasts</code> prop.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Multi-line code block -->
-      <section class="specimen">
+      <section class="specimen" id="CodeBlock">
         <span class="specimen__label">Code block (multi-line, copyable)</span>
-        <div class="code-block" data-copy="import { Toaster, toast } from 'sonner'&#10;&#10;function App() {&#10;  return (&#10;    &lt;div&gt;&#10;      &lt;Toaster /&gt;&#10;      &lt;button onClick={() =&gt; toast('My first toast')}&gt;&#10;        Render a toast&#10;      &lt;/button&gt;&#10;    &lt;/div&gt;&#10;  )&#10;}">
+        <div class="code-block" data-component="CodeBlock" data-copy="import { Toaster, toast } from 'sonner'&#10;&#10;function App() {&#10;  return (&#10;    &lt;div&gt;&#10;      &lt;Toaster /&gt;&#10;      &lt;button onClick={() =&gt; toast('My first toast')}&gt;&#10;        Render a toast&#10;      &lt;/button&gt;&#10;    &lt;/div&gt;&#10;  )&#10;}">
           <button class="copy-button" aria-label="Copy code" data-copy-btn>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -133,10 +573,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Faded markdown code block -->
-      <section class="specimen">
+      <section class="specimen" id="MarkdownBlock">
         <span class="specimen__label">Faded markdown code block</span>
-        <figure class="md-block">
+        <figure class="md-block" data-component="MarkdownBlock">
           <pre class="md-code" tabindex="0" data-language="md"><div class="md-code__inner"><code><span class="md-line"><span class="md-h">## Typography</span></span>
 <span class="md-line"> </span>
 <span class="md-line"><span class="md-num">1.</span><span class="md-text"> Cap body text at about 65ch instead of stretching full width so line length stays comfortable to read.</span></span>
@@ -150,40 +589,30 @@
         </figure>
       </section>
 
-      <!-- COMPONENT: Pill button group -->
-      <section class="specimen">
+      <section class="specimen" id="PillGroup">
         <span class="specimen__label">Pill button group</span>
         <p class="specimen__caption">
           One component, two interaction modes. Labels are placeholders — not semantic
           color variants.
         </p>
         <p class="specimen__caption">Single-select — one active pill at a time.</p>
-        <div class="pill-group" data-pill-group>
+        <div class="pill-group" data-component="PillGroup" data-pill-group>
           <button class="pill" type="button" data-active="true">Default</button>
           <button class="pill" type="button" data-active="false">Success</button>
           <button class="pill" type="button" data-active="false">Warning</button>
           <button class="pill" type="button" data-active="false">Error</button>
         </div>
         <p class="specimen__caption" style="margin-top: 16px">Multi-select — each pill toggles on its own.</p>
-        <div class="pill-group">
+        <div class="pill-group" data-component="PillGroup">
           <button class="pill" type="button">Rich colors</button>
           <button class="pill" type="button">Close button</button>
           <button class="pill" type="button">Headless</button>
         </div>
       </section>
 
-      <!-- COMPONENT: Rule-of-thumb note -->
-      <section class="specimen">
-        <span class="specimen__label">Rule-of-thumb note</span>
-        <p class="rule-note">
-          As a rule of thumb, UI animations should generally stay under
-          <code>300ms</code>.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Live toast -->
-      <section class="specimen">
+      <section class="specimen" id="Toast">
         <span class="specimen__label">Toast (live)</span>
+        <div class="toast" data-component="Toast" data-mounted="true" role="status">Saved to library</div>
         <p class="prose">Click to render a live toast in the corner.</p>
         <div class="hero__buttons">
           <button class="pill" data-render-toast>Render a toast</button>
@@ -192,10 +621,13 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Availability status -->
-      <section class="specimen">
+      <section class="specimen" id="Availability">
         <span class="specimen__label">Availability (local time + working-hours dot)</span>
-        <span class="availability" data-availability data-tz="Europe/Berlin" data-start="7" data-end="21" data-location="Hamburg, Germany" data-lat="53.5511" data-lon="9.9937">
+        <p class="specimen__caption">
+          Dot colors only via <code>--kw-status-ok</code> / <code>--kw-status-idle</code> /
+          <code>--kw-status-bad</code> (weekend). Canonical global chrome.
+        </p>
+        <span class="availability" data-component="Availability" data-availability data-tz="Europe/Berlin" data-start="7" data-end="21" data-location="Hamburg, Germany" data-lat="53.5511" data-lon="9.9937">
           <span class="availability__location">Hamburg, Germany</span>
           <span class="availability__dot" aria-hidden="true"></span>
           <span class="availability__time">--:--</span>
@@ -203,10 +635,9 @@
         </span>
       </section>
 
-      <!-- COMPONENT: Footer -->
-      <section class="specimen">
+      <section class="specimen" id="Footer">
         <span class="specimen__label">Footer</span>
-        <footer class="site-footer">
+        <footer class="site-footer" data-component="Footer">
           <div class="site-footer__inner">
             <span class="site-footer__avatar" aria-hidden="true"></span>
             <span>By <a href="/">Julian Kreth</a></span>
@@ -214,10 +645,9 @@
         </footer>
       </section>
 
-      <!-- COMPONENT: Numbered section header (index-style eyebrow + rule) -->
-      <section class="specimen">
+      <section class="specimen" id="IndexHead">
         <span class="specimen__label">Numbered section header (number + rule)</span>
-        <div class="idx-head">
+        <div class="idx-head" data-component="IndexHead">
           <a class="idx-head__link" href="#">
             <span class="idx-head__num">07</span>
             <h2 class="idx-head__title">Accessibility</h2>
@@ -226,29 +656,27 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Glossary term + definition -->
-      <section class="specimen">
+      <section class="specimen" id="GlossaryTerm">
         <span class="specimen__label">Glossary term + definition</span>
         <div class="idx-terms">
-          <div class="idx-term">
+          <div class="idx-term" data-component="GlossaryTerm">
             <span class="idx-term__name">Tabular numbers</span>
             <p class="idx-term__def">Digits share one width so figures stay aligned in columns. Apply <code>tabular-nums</code> to prices and tables.</p>
           </div>
-          <div class="idx-term">
+          <div class="idx-term" data-component="GlossaryTerm">
             <span class="idx-term__name">Optical alignment</span>
             <p class="idx-term__def">Nudging an element off its mathematical center so it reads as centered to the eye.</p>
           </div>
-          <div class="idx-term">
+          <div class="idx-term" data-component="GlossaryTerm">
             <span class="idx-term__name">Skip link</span>
             <p class="idx-term__def">A hidden link that jumps to main content, revealed only on keyboard focus.</p>
           </div>
         </div>
       </section>
 
-      <!-- COMPONENT: Command snippet (copyable, with caption) -->
-      <section class="specimen">
+      <section class="specimen" id="CommandSnippet">
         <span class="specimen__label">Command snippet (copyable, with caption)</span>
-        <div class="idx-command" data-copy="npx create-index@latest">
+        <div class="idx-command" data-component="CommandSnippet" data-copy="npx create-index@latest">
           <div class="idx-command__bar">
             <code class="idx-command__code"><span class="idx-command__prompt">npx</span> create-index@latest</code>
             <button class="copy-button" aria-label="Copy code" data-copy-btn>
@@ -264,10 +692,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Index list rows (monospace sitemap) -->
-      <section class="specimen">
+      <section class="specimen" id="IndexList">
         <span class="specimen__label">Index list rows (monospace)</span>
-        <div class="idx-list">
+        <div class="idx-list" data-component="IndexList">
           <a class="idx-list__row" href="#"><span>typography</span><span class="idx-list__count">21</span></a>
           <a class="idx-list__row" href="#"><span>color</span><span class="idx-list__count">13</span></a>
           <a class="idx-list__row" href="#"><span>accessibility</span><span class="idx-list__count">11</span></a>
@@ -278,10 +705,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Waitlist CTA (inline email capture) -->
-      <section class="specimen">
+      <section class="specimen" id="Waitlist">
         <span class="specimen__label">Waitlist CTA (inline email capture)</span>
-        <div class="idx-waitlist">
+        <div class="idx-waitlist" data-component="Waitlist">
           <p class="idx-waitlist__copy">A new component library, arriving soon. Join the list for early access and behind-the-scenes notes.</p>
           <form class="idx-waitlist__form" data-waitlist>
             <input class="idx-waitlist__input" type="email" placeholder="you@example.com" aria-label="Email" required />
@@ -292,102 +718,17 @@
         </div>
       </section>
 
-      <!-- ====================================================================
-           BATCH 1 — Article page components (from an article-style layout)
-           ==================================================================== -->
-
-      <!-- COMPONENT: Article header (back-to-home name + role) -->
-      <section class="specimen">
+      <section class="specimen" id="ArticleHeader">
         <span class="specimen__label">Article header (name link + role)</span>
-        <header class="article-head">
+        <header class="article-head" data-component="ArticleHeader">
           <a class="article-head__name" href="/">Julian Kreth</a>
           <span class="article-head__role">Head of Strategy Engineering</span>
         </header>
       </section>
 
-      <!-- COMPONENT: Article types — meta, dek, tldr, callouts, protocol, takeaway -->
-      <section class="specimen">
-        <span class="specimen__label">Article types (Principle · Playbook · Case study)</span>
-        <article class="article" style="max-width: 692px">
-          <div class="article-meta">
-            <span class="article-type">Playbook</span>
-          </div>
-          <h1>Example title</h1>
-          <p class="article-dek">One-line hook that names the human outcome.</p>
-          <aside class="article-tldr" aria-label="Summary">
-            <span class="article-tldr__label">TL;DR</span>
-            <ul>
-              <li>Wiki is source of truth; agent files hold references only.</li>
-              <li>Pause before every memory write.</li>
-            </ul>
-          </aside>
-        </article>
-        <p class="prose" style="margin-top: 1rem">
-          See <code>notes/ARTICLE-GUIDE.md</code> for required components per type.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Article lead prose + inline link -->
-      <section class="specimen">
-        <span class="specimen__label">Article lead prose + inline link</span>
-        <p class="article-prose">
-          A short write-up about building small, deliberate interfaces. My goal
-          was a library that stays out of the way, so I documented every
-          component in one place, like
-          <a class="article-link" href="#">this catalog</a>. Every specimen maps
-          onto the same handful of tokens.
-        </p>
-        <p class="article-prose">
-          Nothing here is load-bearing prose — it exists only to show how a
-          paragraph and its links read at rest.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Section heading (h2, anchored) -->
-      <section class="specimen">
-        <span class="specimen__label">Section heading (h2, anchored)</span>
-        <h2 class="article-h2" id="the-approach">The approach</h2>
-        <p class="article-prose">
-          Section headings are set only a touch heavier than body text, so the
-          rhythm of the page stays calm.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Inline code chip -->
-      <section class="specimen">
-        <span class="specimen__label">Inline code chip</span>
-        <p class="article-prose">
-          Each lesson ships a <code class="code-chip">SKILL.md</code> file you can
-          hand to an agent, alongside a plain <code class="code-chip">config.json</code>.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Inline serif italic emphasis -->
-      <section class="specimen">
-        <span class="specimen__label">Inline serif italic emphasis</span>
-        <p class="article-prose">
-          In a world of scarcity we treasure <em class="serif-em">tools</em>. In
-          a world of abundance we treasure <em class="serif-em">taste</em>.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Text highlight (mark.hl) -->
-      <section class="specimen">
-        <span class="specimen__label">Text highlight</span>
-        <p class="article-prose">
-          A notepad-style marker for the line that matters:
-          <mark class="hl hl--yellow">the default is yellow</mark>, with
-          <mark class="hl hl--orange">orange</mark>,
-          <mark class="hl hl--rose">rose</mark>,
-          <mark class="hl hl--green">green</mark>, and
-          <mark class="hl hl--blue">blue</mark> as muted alternatives.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Pull quote (serif + attribution) -->
-      <section class="specimen">
+      <section class="specimen" id="PullQuote">
         <span class="specimen__label">Pull quote (serif + attribution)</span>
-        <blockquote class="pull-quote">
+        <blockquote class="pull-quote" data-component="PullQuote">
           <p class="pull-quote__text">
             <span class="pull-quote__mark pull-quote__mark--open" aria-hidden="true">&ldquo;</span>The
             details are not the details. They make the design.<span class="pull-quote__mark" aria-hidden="true">&rdquo;</span>
@@ -402,10 +743,9 @@
         </blockquote>
       </section>
 
-      <!-- COMPONENT: Figure with caption -->
-      <section class="specimen">
+      <section class="specimen" id="Figure">
         <span class="specimen__label">Figure (rounded frame + caption)</span>
-        <figure class="article-figure">
+        <figure class="article-figure" data-component="Figure">
           <div class="article-figure__frame">
             <img src="/assets/now-playing.jpeg" alt="Example figure" />
           </div>
@@ -415,10 +755,9 @@
         </figure>
       </section>
 
-      <!-- COMPONENT: Video / media preview (rounded frame + play button) -->
-      <section class="specimen">
+      <section class="specimen" id="VideoPreview">
         <span class="specimen__label">Video preview (rounded frame + play button)</span>
-        <div class="video-preview">
+        <div class="video-preview" data-component="VideoPreview">
           <div class="video-preview__frame">
             <img src="/assets/now-playing.jpeg" alt="Video thumbnail" />
             <button class="video-preview__play" type="button" aria-label="Play video">
@@ -431,10 +770,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Course CTA link (arrow icon) -->
-      <section class="specimen">
+      <section class="specimen" id="CtaLink">
         <span class="specimen__label">CTA link (arrow icon)</span>
-        <a class="cta-link" href="#">
+        <a class="cta-link" data-component="CtaLink" href="#">
           Check out the course
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M7 17 17 7" />
@@ -443,14 +781,9 @@
         </a>
       </section>
 
-      <!-- ====================================================================
-           BATCH 2 — Homepage sidebar components
-           ==================================================================== -->
-
-      <!-- COMPONENT: Profile card -->
-      <section class="specimen">
+      <section class="specimen" id="ProfileCard">
         <span class="specimen__label">Profile card</span>
-        <div class="card profile-card" style="max-width: 300px">
+        <div class="card profile-card" data-component="ProfileCard" style="max-width: 300px">
           <div class="profile-card__head">
             <img class="avatar" src="/assets/avatar.avif" alt="Julian Kreth" width="44" height="44" />
             <div class="profile-card__id">
@@ -481,18 +814,16 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Handle pill -->
-      <section class="specimen">
+      <section class="specimen" id="Handle">
         <span class="specimen__label">Handle pill</span>
-        <span class="handle">@jlnkrth</span>
+        <span class="handle" data-component="Handle">@jlnkrth</span>
       </section>
 
-      <!-- COMPONENT: Raised action buttons (primary / secondary) -->
-      <section class="specimen">
+      <section class="specimen" id="ButtonBlock">
         <span class="specimen__label">Raised action buttons (sidebar, .btn--block)</span>
         <div class="profile-card__actions" style="max-width: 300px">
-          <a class="btn btn--block btn--primary" href="#">Project Inquiry</a>
-          <a class="btn btn--block" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
+          <a class="btn btn--block btn--primary" data-component="Button" href="#">Project Inquiry</a>
+          <a class="btn btn--block" data-component="Button" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
             <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
             </svg>
@@ -501,10 +832,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Collections list card -->
-      <section class="specimen">
+      <section class="specimen" id="Collections">
         <span class="specimen__label">Collections list card</span>
-        <nav class="collections collections--standalone" aria-label="Collections" style="max-width: 300px">
+        <nav class="collections collections--standalone" data-component="Collections" aria-label="Collections" style="max-width: 300px">
           <span class="label">Collections</span>
           <ul class="collections__list">
             <li>
@@ -519,10 +849,9 @@
         </nav>
       </section>
 
-      <!-- COMPONENT: Now-playing vinyl player -->
-      <section class="specimen">
+      <section class="specimen" id="NowPlaying">
         <span class="specimen__label">Now-playing vinyl player</span>
-        <div class="nowplaying" data-status="listening" style="max-width: 300px">
+        <div class="nowplaying" data-component="NowPlaying" data-status="listening" style="max-width: 300px">
           <div class="nowplaying__widget">
             <div class="nowplaying__inner">
               <div class="nowplaying__vinyl-wrapper">
@@ -550,41 +879,12 @@
         </div>
       </section>
 
-      <!-- ====================================================================
-           BATCH — dqnamo.com
-           ==================================================================== -->
-
-      <!-- COMPONENT: Mono path label -->
-      <section class="specimen">
-        <span class="specimen__label">Mono path label</span>
-        <p class="exp-path">kreth.work/exploration</p>
-      </section>
-
-      <!-- COMPONENT: Hero lead (balanced intro) -->
-      <section class="specimen">
-        <span class="specimen__label">Hero lead (balanced intro)</span>
-        <p class="exp-hero-lead">
-          Designer and engineer. Hamburg. Exploring interface patterns, compact
-          components, and calm product surfaces.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Section heading + lead (compact) -->
-      <section class="specimen">
-        <span class="specimen__label">Section heading + lead (compact)</span>
-        <h2 class="exp-section-head">Patterns</h2>
-        <p class="exp-section-lead" style="margin-top: 8px">
-          Small interface studies, motion sketches, and component specimens.
-        </p>
-      </section>
-
-      <!-- COMPONENT: Toggle switch -->
-      <section class="specimen">
+      <section class="specimen" id="Toggle">
         <span class="specimen__label">Toggle switch</span>
         <div class="exp-toggle-row" style="max-width: 240px">
           <span class="exp-toggle-row__label">Dark mode</span>
           <button
-            class="exp-toggle"
+            class="exp-toggle" data-component="Toggle"
             type="button"
             role="switch"
             aria-checked="false"
@@ -596,47 +896,17 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Floating context dock -->
-      <section class="specimen">
-        <span class="specimen__label">Floating context dock</span>
-        <div class="exp-dock exp-small-shadow" style="max-width: 240px">
-          <div class="exp-dock__section">
-            <div class="exp-dock__brand">
-              <span class="exp-wordmark">Studio</span>
-              <span class="exp-path">kreth.work/exploration</span>
-            </div>
-          </div>
-          <div class="exp-dock__section">
-            <div class="exp-toggle-row">
-              <span class="exp-toggle-row__label">Dark mode</span>
-              <button
-                class="exp-toggle"
-                type="button"
-                role="switch"
-                aria-checked="false"
-                aria-label="Toggle dark mode"
-                data-exp-toggle
-              >
-                <span class="exp-toggle__thumb"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPONENT: Compact CTA pair -->
-      <section class="specimen">
+      <section class="specimen" id="CompactButton">
         <span class="specimen__label">Compact CTA pair (primary / secondary)</span>
         <div class="exp-btn-row">
-          <a class="exp-btn-compact exp-btn-compact--primary" href="#">Start a project</a>
-          <a class="exp-btn-compact" href="#">Learn more</a>
+          <a class="exp-btn-compact exp-btn-compact--primary" data-component="CompactButton" href="#">Start a project</a>
+          <a class="exp-btn-compact" data-component="CompactButton" href="#">Learn more</a>
         </div>
       </section>
 
-      <!-- COMPONENT: Experiment card -->
-      <section class="specimen">
+      <section class="specimen" id="ExperimentCard">
         <span class="specimen__label">Experiment card (preview + meta)</span>
-        <div class="exp-card exp-small-shadow" style="max-width: 360px">
+        <div class="exp-card exp-small-shadow" data-component="ExperimentCard" style="max-width: 360px">
           <div class="exp-card__preview">
             <button class="exp-dyn-btn" type="button" data-exp-dyn-btn>
               <span class="exp-dyn-btn__inner">
@@ -664,10 +934,9 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Experiment title block -->
-      <section class="specimen">
+      <section class="specimen" id="ExperimentTitle">
         <span class="specimen__label">Experiment title block</span>
-        <div class="exp-title" style="padding: 0 8px">
+        <div class="exp-title" data-component="ExperimentTitle" style="padding: 0 8px">
           <h2 class="exp-title__heading">Dynamic Button</h2>
           <p class="exp-title__lead">
             A button that resizes to fit its label and crossfades the text and
@@ -676,52 +945,11 @@
         </div>
       </section>
 
-      <!-- COMPONENT: Experiment stage (canvas + controls) -->
-      <section class="specimen">
-        <span class="specimen__label">Experiment stage — canvas + control rows</span>
-        <div class="exp-stage" style="max-width: 640px">
-          <div class="exp-stage__panel">
-            <div class="exp-stage__canvas" style="min-height: 180px">
-              <button class="exp-dyn-btn">
-                <span class="exp-dyn-btn__inner">Save</span>
-              </button>
-            </div>
-            <div class="exp-stage__controls">
-              <div class="exp-control">
-                <span class="exp-control__label">Demo</span>
-                <div class="exp-seg">
-                  <button class="exp-seg__btn" data-active="true">Save</button>
-                  <button class="exp-seg__btn">Copy</button>
-                  <button class="exp-seg__btn">Invite teammates</button>
-                  <button class="exp-seg__btn">Processing</button>
-                </div>
-              </div>
-              <div class="exp-control">
-                <span class="exp-control__label">Variant</span>
-                <div class="exp-seg">
-                  <button class="exp-seg__btn" data-active="true">Primary</button>
-                  <button class="exp-seg__btn">Secondary</button>
-                </div>
-              </div>
-              <div class="exp-control">
-                <span class="exp-control__label">Status (static, colored)</span>
-                <div class="exp-seg exp-seg--static">
-                  <span class="exp-seg__btn" data-active="true" data-tone="green">Finished</span>
-                  <span class="exp-seg__btn" data-tone="orange">Re-reading</span>
-                  <span class="exp-seg__btn" data-tone="grey">On the shelf</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPONENT: File-tab code panel -->
-      <section class="specimen">
+      <section class="specimen" id="CodePanel">
         <span class="specimen__label">File-tab code panel (inside stage tray)</span>
         <div class="exp-stage" style="max-width: 640px">
           <div class="exp-stage__panel">
-            <div class="exp-code">
+            <div class="exp-code" data-component="CodePanel">
               <div class="exp-code__bar">
                 <div class="exp-code__tabs">
                   <button class="exp-code__tab" data-active="true">Notes.md</button>
@@ -739,14 +967,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- ====================================================================
-           BATCH — dqnamo experiments
-           ==================================================================== -->
-
-      <!-- COMPONENT: Scroll fade list -->
-      <section class="specimen">
+      <section class="specimen" id="ScrollFade">
         <span class="specimen__label">Scroll fade list</span>
-        <div class="dq-scroll-fade" data-dq-scroll-fade data-max-fade="76">
+        <div class="dq-scroll-fade" data-component="ScrollFade" data-dq-scroll-fade data-max-fade="76">
           <div class="dq-scroll-fade__scroll">
             <ul class="dq-scroll-fade__list">
               <li class="dq-scroll-fade__item"><span class="dq-scroll-fade__index">01</span>Hamburg</li>
@@ -766,10 +989,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- COMPONENT: Animated banner -->
-      <section class="specimen">
+      <section class="specimen" id="AnimatedBanner">
         <span class="specimen__label">Animated banner</span>
-        <div class="dq-banner" data-dq-banner>
+        <div class="dq-banner" data-component="AnimatedBanner" data-dq-banner>
           <div class="dq-banner__media" aria-hidden="true"></div>
           <div class="dq-banner__overlay" aria-hidden="true"></div>
           <div class="dq-banner__content">
@@ -784,10 +1006,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- COMPONENT: Animated sparkline -->
-      <section class="specimen">
+      <section class="specimen" id="Sparkline">
         <span class="specimen__label">Animated sparkline</span>
-        <div class="dq-sparkline" data-dq-sparkline data-trend="up">
+        <div class="dq-sparkline" data-component="Sparkline" data-dq-sparkline data-trend="up">
           <div class="dq-sparkline__head">
             <div>
               <p class="dq-sparkline__label">Revenue</p>
@@ -809,10 +1030,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- COMPONENT: Bar chart (grouped horizontal comparison) -->
-      <section class="specimen">
+      <section class="specimen" id="BarChart">
         <span class="specimen__label">Bar chart — grouped horizontal comparison</span>
-        <div class="bar-chart">
+        <div class="bar-chart" data-component="BarChart">
           <p class="bar-chart__title">Response time by variant (ms, lower is better)</p>
           <div class="bar-chart__group">
             <div class="bar-chart__label">Cold start</div>
@@ -829,10 +1049,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- COMPONENT: Dynamic button -->
-      <section class="specimen">
+      <section class="specimen" id="DynamicButton">
         <span class="specimen__label">Dynamic button</span>
-        <div class="dq-dynamic" data-dq-dynamic>
+        <div class="dq-dynamic" data-component="DynamicButton" data-dq-dynamic>
           <button type="button" class="dq-dynamic-btn" data-variant="primary">
             <span class="dq-dynamic-btn__icon"></span>
             <span class="dq-dynamic-btn__label">Save</span>
@@ -846,34 +1065,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- BATCH — nav fan-out -->
-      <section class="specimen">
-        <span class="specimen__label">Top nav item — fan-out preview (3 cards)</span>
-        <div class="top-nav-demo">
-          <div class="top-nav__inner">
-          <div class="top-nav__track">
-            <div class="top-nav__item-wrap top-nav__item-wrap--demo">
-              <a class="top-nav__item" href="/books/">
-                <span class="top-nav__label">Books</span>
-                <span class="top-nav__meta-wrap">
-                  <span class="top-nav__meta">54 items</span>
-                </span>
-              </a>
-              <div class="top-nav__fan top-nav__fan--book" aria-hidden="true">
-                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e2bfa165379a7d80f13_zero%20to%20one.avif" alt="" /></a>
-                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e4d8f4d0bfe59d33f5c_the-lean-startup.avif" alt="" /></a>
-                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e893f433410891fccb3b1d0_essentialism.avif" alt="" /></a>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPONENT: Architecture diagram (Mermaid) -->
-      <section class="specimen">
+      <section class="specimen" id="ArchitectureDiagram">
         <span class="specimen__label">Architecture diagram (Mermaid sequence)</span>
-        <figure class="arch-diagram">
+        <figure class="arch-diagram" data-component="ArchitectureDiagram">
           <p class="arch-diagram__eyebrow">Claudia Poke intake index — full flow</p>
           <details class="arch-diagram__source">
             <summary>Show Mermaid source</summary>
@@ -963,16 +1157,11 @@ company is nobody building?</pre>
         </figure>
       </section>
 
-      <!-- ====================================================================
-           BATCH — About page cards (from kreth.webflow.io/about)
-           ==================================================================== -->
-
-      <!-- COMPONENT: X post card -->
-      <section class="specimen">
+      <section class="specimen" id="XPost">
         <span class="specimen__label">X post card (avatar + tweet + follow CTA)</span>
-        <div class="x-card" style="max-width: 300px">
+        <div class="x-card" data-component="XPost" style="max-width: 300px">
           <div class="x-card__head">
-            <img class="x-card__avatar" src="/assets/x-avatar.jpg" alt="Julian Kreth" width="40" height="40" />
+            <img class="x-card__avatar" src="/assets/avatar-twitter.jpg" alt="Julian Kreth" width="40" height="40" />
             <div class="x-card__id">
               <span class="x-card__name">Julian Kreth</span>
               <span class="x-card__handle">@herdingbots</span>
@@ -990,10 +1179,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- COMPONENT: Photo gallery -->
-      <section class="specimen">
+      <section class="specimen" id="PhotoGallery">
         <span class="specimen__label">Photo gallery (vertical slider + segment dots)</span>
-        <div class="photo-gallery" data-photo-gallery style="max-width: 230px">
+        <div class="photo-gallery" data-component="PhotoGallery" data-photo-gallery style="max-width: 230px">
           <div class="photo-gallery__viewport">
             <img class="photo-gallery__slide" src="/assets/about-photo.avif" alt="Street view in New York" data-active="true" />
             <img class="photo-gallery__slide" src="/assets/gallery-02.avif" alt="" hidden />
@@ -1007,10 +1195,9 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <!-- COMPONENT: Currently-reading card -->
-      <section class="specimen">
+      <section class="specimen" id="ReadingCard">
         <span class="specimen__label">Currently-reading card (label + book cover)</span>
-        <div class="reading-card" style="max-width: 300px">
+        <div class="reading-card" data-component="ReadingCard" style="max-width: 300px">
           <span class="reading-card__label">Currently Reading</span>
           <a class="reading-card__cover" href="/books/unreasonable-hospitality/">
             <img src="/assets/books/unreasonable-hospitality.jpg" alt="Unreasonable Hospitality by Will Guidara" />
@@ -1018,10 +1205,10 @@ company is nobody building?</pre>
         </div>
       </section>
 
-      <section class="specimen">
+      <section class="specimen" id="PlanTable">
         <span class="specimen__label">Plan symptom table (architecture notes)</span>
         <div class="plan-table-wrap">
-          <table class="plan-table">
+          <table class="plan-table" data-component="PlanTable">
             <thead>
               <tr>
                 <th scope="col">Symptom</th>
@@ -1049,13 +1236,315 @@ company is nobody building?</pre>
           </table>
         </div>
       </section>
-      </div>
+      </section>
+
+      <section class="guide__section" id="patterns" aria-labelledby="patterns-title">
+        <h2 class="guide__section-title" id="patterns-title">Patterns</h2>
+        <p class="guide__section-lead">Page regions built by combining components.</p>
+        <ul class="guide__index">
+          <li><a href="#Article">Article</a></li>
+          <li><a href="#ContextDock">ContextDock</a></li>
+          <li><a href="#ExperimentStage">ExperimentStage</a></li>
+          <li><a href="#TopNav">TopNav</a></li>
+          <li><a href="#ProjectPageChrome">ProjectPageChrome</a></li>
+          <li><a href="#BookDetail">BookDetail</a></li>
+          <li><a href="#StickerBoard">StickerBoard</a></li>
+          <li><a href="#NotesArchive">NotesArchive</a></li>
+          <li><a href="#EssayNote">EssayNote</a></li>
+          <li><a href="#SwipeNav">SwipeNav</a></li>
+          <li><a href="#HiddenFooter">HiddenFooter</a></li>
+        </ul>
+      <section class="specimen" id="Article">
+        <span class="specimen__label">Article types (Principle · Playbook · Case study)</span>
+        <article class="article" data-component="Article" style="max-width: 692px">
+          <div class="article-meta">
+            <span class="article-type">Playbook</span>
+          </div>
+          <h1>Example title</h1>
+          <p class="article-dek">One-line hook that names the human outcome.</p>
+          <aside class="article-tldr" aria-label="Summary">
+            <span class="article-tldr__label">TL;DR</span>
+            <ul>
+              <li>Wiki is source of truth; agent files hold references only.</li>
+              <li>Pause before every memory write.</li>
+            </ul>
+          </aside>
+        </article>
+        <p class="prose" style="margin-top: 1rem">
+          See <code>notes/ARTICLE-GUIDE.md</code> for required components per type.
+        </p>
+      </section>
+
+      <section class="specimen" id="ContextDock">
+        <span class="specimen__label">Floating context dock</span>
+        <div class="exp-dock exp-small-shadow" data-component="ContextDock" style="max-width: 240px">
+          <div class="exp-dock__section">
+            <div class="exp-dock__brand">
+              <span class="exp-wordmark">Studio</span>
+              <span class="exp-path">kreth.work/exploration</span>
+            </div>
+          </div>
+          <div class="exp-dock__section">
+            <div class="exp-toggle-row">
+              <span class="exp-toggle-row__label">Dark mode</span>
+              <button
+                class="exp-toggle"
+                type="button"
+                role="switch"
+                aria-checked="false"
+                aria-label="Toggle dark mode"
+                data-exp-toggle
+              >
+                <span class="exp-toggle__thumb"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="specimen" id="ExperimentStage">
+        <span class="specimen__label">Experiment stage — canvas + control rows</span>
+        <div class="exp-stage" data-component="ExperimentStage" style="max-width: 640px">
+          <div class="exp-stage__panel">
+            <div class="exp-stage__canvas" style="min-height: 180px">
+              <button class="exp-dyn-btn">
+                <span class="exp-dyn-btn__inner">Save</span>
+              </button>
+            </div>
+            <div class="exp-stage__controls">
+              <div class="exp-control">
+                <span class="exp-control__label">Demo</span>
+                <div class="exp-seg">
+                  <button class="exp-seg__btn" data-active="true">Save</button>
+                  <button class="exp-seg__btn">Copy</button>
+                  <button class="exp-seg__btn">Invite teammates</button>
+                  <button class="exp-seg__btn">Processing</button>
+                </div>
+              </div>
+              <div class="exp-control">
+                <span class="exp-control__label">Variant</span>
+                <div class="exp-seg">
+                  <button class="exp-seg__btn" data-active="true">Primary</button>
+                  <button class="exp-seg__btn">Secondary</button>
+                </div>
+              </div>
+              <div class="exp-control">
+                <span class="exp-control__label">Status (static, colored)</span>
+                <div class="exp-seg exp-seg--static">
+                  <span class="exp-seg__btn" data-active="true" data-tone="green">Finished</span>
+                  <span class="exp-seg__btn" data-tone="orange">Re-reading</span>
+                  <span class="exp-seg__btn" data-tone="grey">On the shelf</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="specimen" id="TopNav">
+        <span class="specimen__label">Top nav item — fan-out preview (3 cards)</span>
+        <div class="top-nav-demo">
+          <div class="top-nav__inner" data-component="TopNav">
+          <div class="top-nav__track">
+            <div class="top-nav__item-wrap top-nav__item-wrap--demo">
+              <a class="top-nav__item" href="/books/">
+                <span class="top-nav__label">Books</span>
+                <span class="top-nav__meta-wrap">
+                  <span class="top-nav__meta">54 items</span>
+                </span>
+              </a>
+              <div class="top-nav__fan top-nav__fan--book" aria-hidden="true">
+                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e2bfa165379a7d80f13_zero%20to%20one.avif" alt="" /></a>
+                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e4d8f4d0bfe59d33f5c_the-lean-startup.avif" alt="" /></a>
+                <a class="top-nav__preview-card" href="#"><img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e893f433410891fccb3b1d0_essentialism.avif" alt="" /></a>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="specimen" id="ProjectPageChrome">
+        <span class="specimen__label">Project page chrome — back + share</span>
+        <div class="project-page__chrome" data-component="ProjectPageChrome" style="position: relative; justify-content: flex-start; gap: 12px">
+          <a class="project-page__back" href="/projects/" aria-label="Back to projects">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </a>
+          <button class="project-page__share" type="button" aria-label="Copy link" data-copy="https://kreth.work/projects/skills/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l1.42-1.42a5 5 0 0 0-7.07-7.07l-.88.88" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54L5.04 11.88a5 5 0 0 0 7.07 7.07l.88-.88" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="specimen" id="BookDetail">
+        <span class="specimen__label">Book detail chrome — path, title, overview + meta</span>
+        <main class="book-detail" data-component="BookDetail" style="max-width: 100%">
+          <p class="exp-path"><a href="/books/" style="color: inherit; text-decoration: none">books</a> / rework</p>
+          <div class="exp-title">
+            <h1 class="exp-title__heading">Rework</h1>
+            <p class="exp-title__lead">Ignore the real world, embrace constraints, and ship.</p>
+          </div>
+          <div class="book-detail__body">
+            <div class="book-detail__main">
+              <section class="exp-stage" aria-label="Book overview">
+                <div class="exp-stage__panel">
+                  <div class="exp-stage__canvas">
+                    <span class="book-read-badge exp-seg__btn" data-active="true" data-tone="purple">🎓 Educational</span>
+                    <img
+                      class="book-cover"
+                      src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789409508f8fbdd5752c4a9_rework.avif"
+                      alt="Rework book cover"
+                      width="160"
+                      height="240"
+                      style="max-width: 140px; height: auto"
+                    />
+                  </div>
+                  <div class="exp-stage__controls">
+                    <div class="exp-control">
+                      <span class="exp-control__label">Status</span>
+                      <div class="exp-seg exp-seg--static" role="group" aria-label="Reading status">
+                        <span class="exp-seg__btn" data-active="true" data-tone="green">Finished</span>
+                        <span class="exp-seg__btn" data-tone="orange">Re-reading</span>
+                        <span class="exp-seg__btn" data-tone="grey">On the shelf</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <aside class="book-detail__meta" aria-label="Book details">
+              <div class="idx-list">
+                <div class="idx-list__row"><span>author</span><span class="idx-list__count">Jason Fried</span></div>
+                <div class="idx-list__row"><span>published</span><span class="idx-list__count">2010</span></div>
+                <div class="idx-list__row idx-list__row--total"><span>total</span><span class="idx-list__count">11</span></div>
+              </div>
+            </aside>
+          </div>
+        </main>
+      </section>
+
+      <section class="specimen" id="StickerBoard">
+        <span class="specimen__label">Clients sticker board (static scatter)</span>
+        <div class="sticker-board sticker-board--specimen" data-component="StickerBoard" data-sticker-board-specimen>
+          <a class="sticker" href="#" aria-label="Standard Bots" style="--rot: -6deg; left: 8%; top: 12%">
+            <img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a365fd02db49f800979c_StandardBots.svg" alt="Standard Bots" draggable="false" />
+          </a>
+          <a class="sticker" href="#" aria-label="HiComply" style="--rot: 4deg; left: 36%; top: 28%">
+            <img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a556bb014213c7d212cc_HiComply.svg" alt="HiComply" draggable="false" />
+          </a>
+          <a class="sticker" href="#" aria-label="Switchboard" style="--rot: -2deg; left: 62%; top: 10%">
+            <img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a3f481c67ac0b2ab2718_Switchboard.svg" alt="Switchboard" draggable="false" />
+          </a>
+          <a class="sticker" href="#" aria-label="Metaphysiks" style="--rot: 7deg; left: 48%; top: 52%">
+            <img src="https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a543cbffa3f6045fb994_Metaphysiks.svg" alt="Metaphysiks" draggable="false" />
+          </a>
+        </div>
+      </section>
+
+      <section class="specimen" id="NotesArchive">
+        <span class="specimen__label">Notes archive list</span>
+        <div class="notes-archive" data-component="NotesArchive" style="max-width: 520px">
+          <a class="notes-archive__row" href="#">
+            <span class="notes-archive__row-title">Your Agent Needs a Design File, Not a Screenshot</span>
+            <span class="notes-archive__row-meta">Julian · Oct 15, 2026</span>
+          </a>
+          <a class="notes-archive__row" href="#">
+            <span class="notes-archive__row-title">Argentinian Engineering</span>
+            <span class="notes-archive__row-meta">Julian · Sep 2, 2026</span>
+          </a>
+          <a class="notes-archive__row" href="#">
+            <span class="notes-archive__row-title">The default is yellow</span>
+            <span class="notes-archive__row-meta">Julian · Aug 12, 2026</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="specimen" id="EssayNote">
+        <span class="specimen__label">Essay note chrome — crumb, title, date, stamp</span>
+        <article class="essay-note-specimen" data-component="EssayNote">
+          <nav class="essay-crumb is-ready" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <svg class="essay-crumb__chevron" width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <a href="/notes/">Fieldnotes</a>
+            <svg class="essay-crumb__chevron" width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span class="essay-crumb__here">Example essay</span>
+          </nav>
+          <h1 class="essay-title">Example essay</h1>
+          <p class="essay-date">October 2026</p>
+          <div class="essay-stage">
+            <button type="button" class="essay-mark" aria-label="Press the stamp">
+              <svg class="essay-mark__body" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="22" y="38" width="28" height="30" rx="6" fill="#21201c"/>
+                <circle cx="36" cy="26" r="14" fill="#21201c"/>
+                <circle cx="31" cy="24" r="2.4" fill="#fcfcfc"/>
+                <circle cx="41" cy="24" r="2.4" fill="#fcfcfc"/>
+                <rect x="31" y="30" width="10" height="2" rx="1" fill="#fcfcfc"/>
+                <rect x="16" y="44" width="10" height="4" rx="2" fill="#21201c"/>
+                <rect x="46" y="44" width="10" height="4" rx="2" fill="#21201c"/>
+              </svg>
+              <span class="essay-mark__bits" aria-hidden="true"></span>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <section class="specimen" id="SwipeNav">
+        <span class="specimen__label">Swipe nav panel (static mobile mock)</span>
+        <p class="specimen__caption">Live only on small viewports via <code>swipe-nav.js</code>. This is a static mock for the inspector.</p>
+        <div class="swipe-nav swipe-nav--specimen" data-component="SwipeNav" role="dialog" aria-label="Site menu">
+          <div class="swipe-nav__panel">
+            <nav class="swipe-nav__primary" aria-label="Primary">
+              <a href="/projects/">Projects</a>
+              <a href="/books/">Books</a>
+              <a href="/clients/">Clients</a>
+              <a href="/notes/">Fieldnotes</a>
+              <a href="/about/">About</a>
+            </nav>
+            <nav class="swipe-nav__secondary" aria-label="More">
+              <a href="#">Contact</a>
+              <a href="#">GitHub</a>
+            </nav>
+            <a class="swipe-nav__who" href="/about/">
+              <img class="swipe-nav__who-img avatar" src="/assets/avatar.avif" alt="" width="36" height="36" />
+              <span>Julian Kreth</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="specimen" id="HiddenFooter">
+        <span class="specimen__label">Hidden footer (overscroll Easter egg)</span>
+        <p class="specimen__caption">Live only on mobile. Specimen shows the open state in-flow.</p>
+        <div class="hidden-footer hidden-footer--specimen is-open" data-component="HiddenFooter" data-hidden-footer aria-hidden="false">
+          <div class="hidden-footer__sheet" aria-hidden="true"></div>
+          <div class="hidden-footer__bar">
+            <div class="hidden-footer__now">
+              <svg class="hidden-footer__eq" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <rect x="3" y="8" width="2.4" height="7" rx="1.2" fill="currentColor"/>
+                <rect x="7.8" y="4" width="2.4" height="11" rx="1.2" fill="currentColor"/>
+                <rect x="12.6" y="6.5" width="2.4" height="8.5" rx="1.2" fill="currentColor"/>
+              </svg>
+              <span class="hidden-footer__label" data-hidden-footer-label>Last played</span>
+              <span class="hidden-footer__track" data-hidden-footer-track data-state="last">Motion · Luke Howard</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      </section>
     </div>
 
     <div class="toaster" id="toaster"></div>
 
-    <script src="/layout.js"></script>
-
+    <script src="/admin-auth.js?v=14"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
     <script src="components.js"></script>
     <script src="photo-gallery.js"></script>

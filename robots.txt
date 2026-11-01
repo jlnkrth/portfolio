@@ -4,5 +4,6 @@ Disallow: /components
 Disallow: /components.html
 Disallow: /notes/_templates/
 Disallow: /social/
+Disallow: /studio/
 
 Sitemap: https://kreth.work/sitemap.xml
