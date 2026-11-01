@@ -175,7 +175,7 @@
         '<svg class="essay-crumb__chevron" width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
         '<path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>' +
         "</svg>" +
-        '<a href="/notes/">Archive</a>' +
+        '<a href="/notes/">fieldnotes</a>' +
         '<svg class="essay-crumb__chevron" width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
         '<path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>' +
         "</svg>" +
