@@ -466,13 +466,6 @@ article,
   white-space: nowrap;
 }
 
-.notes-archive__soon-label,
-.notes-archive__drafts-label {
-  margin: 1.75rem 0 0.35rem;
-  padding-top: 0.5rem;
-  color: var(--kw-text-muted);
-}
-
 .notes-archive__row--draft .notes-archive__row-title {
   font-style: italic;
   color: var(--kw-text-muted);
@@ -536,11 +529,29 @@ article,
 }
 
 @media (min-width: 768px) {
-  /* Match the Archive's right edge to the availability control in the nav. */
+  /* Full-width column; pin the archive to the Spotify player's baseline. */
   .layout > .root:has(.notes-page) {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     width: 100%;
     max-width: none;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding-right: 0;
+    /* Match the fixed sidebar's 30px bottom inset. */
+    padding-bottom: 30px;
+  }
+
+  .notes-page {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .notes-page .notes-archive {
+    margin-top: auto;
   }
 }
 

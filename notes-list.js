@@ -98,31 +98,15 @@
     var draftItems = (drafts || []).slice();
 
     listEl.className = "notes-archive";
+    // One continuous list: published, then upcoming, then drafts.
+    // Status lives in each row's meta ("Coming soon" / "Draft") — no section labels.
     var html = items
+      .concat(soonItems)
+      .concat(draftItems)
       .map(function (item) {
         return archiveRow(item);
       })
       .join("");
-
-    if (soonItems.length) {
-      html +=
-        '<p class="notes-archive__soon-label label">Coming soon</p>' +
-        soonItems
-          .map(function (item) {
-            return archiveRow(item);
-          })
-          .join("");
-    }
-
-    if (draftItems.length) {
-      html +=
-        '<p class="notes-archive__drafts-label label">Drafts on this build</p>' +
-        draftItems
-          .map(function (item) {
-            return archiveRow(item);
-          })
-          .join("");
-    }
 
     listEl.innerHTML = html;
 
