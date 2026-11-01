@@ -594,7 +594,7 @@ code {
 @media (max-width: 639px) {
   .install-code {
     height: auto;
-    min-height: 40px;
+    min-height: var(--kw-control-height);
     padding: 10px 48px 10px 12px;
     align-items: flex-start;
   }
