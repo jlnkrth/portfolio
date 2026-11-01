@@ -1898,7 +1898,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   display: none;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: var(--kw-control-height);
   padding: 0 14px;
   background: #fff;
   border: 1px solid var(--kw-fill-muted);
