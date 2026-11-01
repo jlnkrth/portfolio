@@ -146,7 +146,7 @@
   "books": {
     "label": "Books",
     "path": "/books/",
-    "count": 217,
+    "count": 218,
     "previewKind": "book",
     "items": [
       {
@@ -1446,6 +1446,12 @@
         "image": "/assets/books/unreasonable-hospitality.jpg"
       },
       {
+        "title": "How to Hold a Cockroach",
+        "slug": "how-to-hold-a-cockroach",
+        "href": "/books/how-to-hold-a-cockroach/",
+        "image": "/assets/books/how-to-hold-a-cockroach.jpg"
+      },
+      {
         "title": "Coming Soon",
         "slug": "coming-soon",
         "href": "/books/coming-soon/",
@@ -1666,7 +1672,7 @@
     "path": "/about/",
     "sections": [
       {
-        "heading": "Julian Kreth \u2014 Head of Strategy Engineering at Masse, founder of Karma Studio."
+        "heading": "Julian Kreth — Head of Strategy Engineering at Masse, founder of Karma Studio."
       }
     ]
   }
