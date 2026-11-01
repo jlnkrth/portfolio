@@ -2768,14 +2768,63 @@ body.nav-sheet-open {
   display: block;
 }
 
-@media (min-width: 1280px) {
-  /* The article card owns all scrolling on this layout; the page itself
-     stays pinned so the card never moves. */
+/* Desktop: pin the article card; only .article-shell__scroll moves.
+   (Archive rail / three-column padding stay gated at 1280px below.) */
+@media (min-width: 768px) {
   html:has(.layout--notes-index) {
     overflow: hidden;
     overflow-anchor: none;
   }
 
+  body:has(.layout--notes-index) {
+    overflow: hidden;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .layout--notes-index > .root:has(.article) {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .layout--notes-index .article-shell {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    max-height: 100%;
+    padding: 0;
+    overflow: hidden;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .layout--notes-index .article-shell__scroll {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 24px 24px 24px 72px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
+  }
+
+  .layout--notes-index .article-shell .article h1 {
+    padding-right: 3rem;
+  }
+
+  .layout--notes-index .article-content-section,
+  .layout--notes-index .article h2 {
+    scroll-margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
   .layout--notes-index {
     /* One-third Archive, two-thirds article, with a fixed gutter. */
     --notes-archive-column: calc(33.333333vw - 143.333333px);
@@ -2801,30 +2850,6 @@ body.nav-sheet-open {
     padding-left: 0;
     padding-right: 0;
     padding-top: 9rem;
-  }
-
-  .layout--notes-index .article-shell {
-    /* Card stays pinned; only the inner scroller moves. */
-    position: relative;
-    padding: 0;
-    /* 9rem root top padding + 4rem root bottom padding: the card fills the
-       viewport exactly, so the page itself has nothing left to scroll. */
-    height: calc(100vh - 9rem - 4rem);
-    overflow: hidden;
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .layout--notes-index .article-shell__scroll {
-    height: 100%;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 24px 24px 24px 72px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--kw-border-muted) transparent;
-  }
-
-  .layout--notes-index .article-shell .article h1 {
-    padding-right: 3rem;
   }
 
   .layout--notes-index .notes-index {
