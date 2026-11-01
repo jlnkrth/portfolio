@@ -435,10 +435,10 @@ article,
 
 .notes-archive__row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 1.125rem 0;
+  gap: 1.25rem;
+  padding: 0.7rem 0;
   border-bottom: 1px solid var(--kw-border-muted);
   text-decoration: none;
   color: var(--kw-text);
@@ -451,26 +451,33 @@ article,
 
 .notes-archive__row-title {
   min-width: 0;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.4;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .notes-archive__row-meta {
   flex-shrink: 0;
-  font-size: 0.875rem;
-  line-height: 1.45;
+  font-size: 0.75rem;
+  line-height: 1.4;
   color: var(--kw-text-subtle);
   white-space: nowrap;
 }
 
-.notes-archive__soon-label,
-.notes-archive__drafts-label {
-  margin: 1.75rem 0 0.35rem;
-  padding-top: 0.5rem;
+.notes-archive__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15em 0.55em;
+  border: 1px solid var(--kw-border-muted);
+  border-radius: 999px;
+  background: var(--kw-surface-subtle);
   color: var(--kw-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
 }
 
 .notes-archive__row--draft .notes-archive__row-title {
@@ -478,24 +485,16 @@ article,
   color: var(--kw-text-muted);
 }
 
-.notes-archive__row--soon {
-  color: var(--kw-text-muted);
-}
-
 .notes-archive__row--soon .notes-archive__row-title {
-  color: var(--kw-text-muted);
-}
-
-.notes-archive__row--soon .notes-archive__row-meta {
-  color: var(--kw-text-faint);
-}
-
-.notes-archive__row--soon:hover {
-  color: var(--kw-text-subtle);
+  color: var(--kw-text);
 }
 
 .notes-archive__row--soon:hover .notes-archive__row-title {
-  color: var(--kw-text-subtle);
+  color: var(--kw-text-muted);
+}
+
+.notes-archive__row--soon .notes-archive__chip {
+  color: var(--kw-text-muted);
 }
 
 .article--soon .note-soon-banner {
@@ -527,7 +526,7 @@ article,
     flex-direction: column;
     align-items: flex-start;
     gap: 0.35rem;
-    padding: 1rem 0;
+    padding: 0.75rem 0;
   }
 
   .notes-archive__row-meta {
@@ -536,11 +535,29 @@ article,
 }
 
 @media (min-width: 768px) {
-  /* Match the Archive's right edge to the availability control in the nav. */
+  /* Full-width column; pin the archive to the Spotify player's baseline. */
   .layout > .root:has(.notes-page) {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     width: 100%;
     max-width: none;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding-right: 0;
+    /* Match the fixed sidebar's 30px bottom inset. */
+    padding-bottom: 30px;
+  }
+
+  .notes-page {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .notes-page .notes-archive {
+    margin-top: auto;
   }
 }
 
@@ -883,6 +900,52 @@ article,
   z-index: 1;
 }
 
+/* Chrome + page content entrance (chrome first, content after). */
+.profile-card.is-pending,
+.top-nav.is-pending,
+.layout > .root.is-pending {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: none;
+  pointer-events: none;
+}
+
+.profile-card.is-entering,
+.top-nav.is-entering,
+.layout > .root.is-entering {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--enter-delay, 0ms);
+  pointer-events: none;
+}
+
+.profile-card.is-in,
+.top-nav.is-in,
+.layout > .root.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card.is-pending,
+  .profile-card.is-entering,
+  .profile-card.is-in,
+  .top-nav.is-pending,
+  .top-nav.is-entering,
+  .top-nav.is-in,
+  .layout > .root.is-pending,
+  .layout > .root.is-entering,
+  .layout > .root.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    pointer-events: auto;
+  }
+}
+
 .profile-card__head {
   display: flex;
   align-items: center;
@@ -951,8 +1014,9 @@ a.handle:hover {
 .profile-card__bio {
   margin: 0 0 16px;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--kw-text-muted);
+  text-wrap: pretty;
 }
 
 .profile-card__bio a {
@@ -969,20 +1033,21 @@ a.handle:hover {
   text-decoration-color: var(--kw-text-muted);
 }
 
+/* Keep the masse chip in the text flow — inline-flex was dropping the
+   icon/link below the surrounding baseline and bloating the line box. */
 .profile-card__bio-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
+  display: inline;
   white-space: nowrap;
 }
 
 .profile-card__bio-favicon {
   display: inline-block;
-  width: 1.125em;
-  height: 1.125em;
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.28em;
+  vertical-align: -0.14em;
   object-fit: contain;
-  border-radius: 3px;
-  flex-shrink: 0;
+  border-radius: 2px;
 }
 
 .email-copy {
@@ -1401,7 +1466,7 @@ a.collections__item:hover {
 
 .nowplaying__widget.is-pending {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(10px);
   transition: none;
   pointer-events: none;
 }
@@ -1410,8 +1475,9 @@ a.collections__item:hover {
   opacity: 1;
   transform: none;
   transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--enter-delay, 0ms);
   pointer-events: none;
 }
 
@@ -2768,14 +2834,63 @@ body.nav-sheet-open {
   display: block;
 }
 
-@media (min-width: 1280px) {
-  /* The article card owns all scrolling on this layout; the page itself
-     stays pinned so the card never moves. */
+/* Desktop: pin the article card; only .article-shell__scroll moves.
+   (Archive rail / three-column padding stay gated at 1280px below.) */
+@media (min-width: 768px) {
   html:has(.layout--notes-index) {
     overflow: hidden;
     overflow-anchor: none;
   }
 
+  body:has(.layout--notes-index) {
+    overflow: hidden;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .layout--notes-index > .root:has(.article) {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .layout--notes-index .article-shell {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    max-height: 100%;
+    padding: 0;
+    overflow: hidden;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .layout--notes-index .article-shell__scroll {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 24px 24px 24px 72px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
+  }
+
+  .layout--notes-index .article-shell .article h1 {
+    padding-right: 3rem;
+  }
+
+  .layout--notes-index .article-content-section,
+  .layout--notes-index .article h2 {
+    scroll-margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
   .layout--notes-index {
     /* One-third Archive, two-thirds article, with a fixed gutter. */
     --notes-archive-column: calc(33.333333vw - 143.333333px);
@@ -2801,30 +2916,6 @@ body.nav-sheet-open {
     padding-left: 0;
     padding-right: 0;
     padding-top: 9rem;
-  }
-
-  .layout--notes-index .article-shell {
-    /* Card stays pinned; only the inner scroller moves. */
-    position: relative;
-    padding: 0;
-    /* 9rem root top padding + 4rem root bottom padding: the card fills the
-       viewport exactly, so the page itself has nothing left to scroll. */
-    height: calc(100vh - 9rem - 4rem);
-    overflow: hidden;
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .layout--notes-index .article-shell__scroll {
-    height: 100%;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 24px 24px 24px 72px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--kw-border-muted) transparent;
-  }
-
-  .layout--notes-index .article-shell .article h1 {
-    padding-right: 3rem;
   }
 
   .layout--notes-index .notes-index {
@@ -4966,16 +5057,9 @@ body.note-page.note-page--essay {
     --essay-title-size: 18px;
     --essay-body-size: 17px;
   }
-
-  body.note-page.note-page--essay .top-nav {
-    display: none !important;
-  }
 }
 
-body.note-page.note-page--essay .sidebar,
-body.note-page.note-page--essay .notes-index,
-body.note-page.note-page--essay .article-shell__toggle,
-body.note-page.note-page--essay .article-shell__toc,
+/* Essay reading chrome inside the article — all viewports */
 body.note-page.note-page--essay .article-byline,
 body.note-page.note-page--essay .article-toc--mobile,
 body.note-page.note-page--essay .article-meta,
@@ -4986,51 +5070,46 @@ body.note-page.note-page--essay .note-journal__fade {
   display: none !important;
 }
 
-body.note-page.note-page--essay .layout,
-body.note-page.note-page--essay .layout--notes-index,
-body.note-page.note-page--essay .layout > .root,
-body.note-page.note-page--essay .article-shell.card,
-body.note-page.note-page--essay .article-shell__scroll {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: auto;
-  max-height: none;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  background: var(--kw-surface);
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
+/* Mobile-only: full-bleed Tree layout (hide site chrome, collapse shell) */
+@media (max-width: 767px) {
+  body.note-page.note-page--essay .sidebar,
+  body.note-page.note-page--essay .notes-index,
+  body.note-page.note-page--essay .article-shell__toggle,
+  body.note-page.note-page--essay .article-shell__toc {
+    display: none !important;
+  }
 
-body.note-page.note-page--essay .layout > .root > .article,
-body.note-page.note-page--essay .article-shell .article,
-body.note-page.note-page--essay .article {
-  position: relative;
-  max-width: var(--essay-measure);
-  margin: 0 auto;
-  padding: var(--essay-pad-top) var(--essay-pad-x) var(--essay-pad-bottom);
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-@media (min-width: 640px) {
   body.note-page.note-page--essay .layout,
+  body.note-page.note-page--essay .layout--notes-index,
   body.note-page.note-page--essay .layout > .root,
   body.note-page.note-page--essay .article-shell.card,
   body.note-page.note-page--essay .article-shell__scroll {
-    padding: 0 !important;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: var(--kw-surface);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   body.note-page.note-page--essay .layout > .root > .article,
   body.note-page.note-page--essay .article-shell .article,
   body.note-page.note-page--essay .article {
-    padding: var(--essay-pad-top) 0 var(--essay-pad-bottom);
+    position: relative;
+    max-width: var(--essay-measure);
+    margin: 0 auto;
+    padding: var(--essay-pad-top) var(--essay-pad-x) var(--essay-pad-bottom);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 

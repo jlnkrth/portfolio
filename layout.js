@@ -2,13 +2,14 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "48";
+  var CHROME_CACHE_VERSION = "53";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
+  var CHROME_ENTERED_KEY = "kreth-chrome-entered";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
-    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
-  var NOWPLAYING_ENTRANCE_CLASS_RE =
+    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated|entrance)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
+  var CHROME_ENTRANCE_CLASS_RE =
     /\s*\b(?:is-pending|is-entering|is-in|is-spin-ready|is-loaded|is-spinning|is-coasting)\b/g;
 
   var topSlot = document.getElementById("chrome-top");
@@ -17,21 +18,78 @@
   function sanitizeChromeHtml(html) {
     if (!html) return html;
     html = html.replace(RUNTIME_ATTR_RE, "");
-    // Drop now-playing entrance/spin classes so a mid-animation cache cannot
-    // leave the Spotify widget stuck at opacity 0.
+    // Drop entrance/spin classes so a mid-animation cache cannot leave
+    // chrome stuck at opacity 0 on the next page.
     html = html.replace(
-      /(<[^>]*\bnowplaying\b[^>]*class=")([^"]*)(")/gi,
+      /(<[^>]*class=")([^"]*)(")/gi,
       function (_m, open, classes, close) {
-        return open + classes.replace(NOWPLAYING_ENTRANCE_CLASS_RE, " ").replace(/\s+/g, " ").trim() + close;
-      }
-    );
-    html = html.replace(
-      /(<[^>]*class=")([^"]*\bnowplaying\b[^"]*)(")/gi,
-      function (_m, open, classes, close) {
-        return open + classes.replace(NOWPLAYING_ENTRANCE_CLASS_RE, " ").replace(/\s+/g, " ").trim() + close;
+        if (
+          !/(?:^|\s)(?:nowplaying(?:__\w+)?|profile-card|top-nav)(?:\s|$)/.test(
+            classes
+          )
+        ) {
+          return _m;
+        }
+        return (
+          open +
+          classes
+            .replace(CHROME_ENTRANCE_CLASS_RE, " ")
+            .replace(/\s+/g, " ")
+            .trim() +
+          close
+        );
       }
     );
     return html;
+  }
+
+  function hasChromeEntered() {
+    try {
+      return sessionStorage.getItem(CHROME_ENTERED_KEY) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function revealChromeNow() {
+    document
+      .querySelectorAll(
+        ".layout .profile-card, .top-nav, .nowplaying__widget, .layout > .root"
+      )
+      .forEach(function (el) {
+        el.classList.remove("is-pending", "is-entering");
+        el.classList.add("is-in");
+        el.style.removeProperty("--enter-delay");
+      });
+    var spotifyRoot = document.querySelector("[data-now-playing]");
+    if (spotifyRoot) {
+      spotifyRoot.setAttribute("data-entrance", "chrome");
+      if (!spotifyRoot.dataset.hydrated) spotifyRoot.dataset.hydrated = "1";
+      spotifyRoot.classList.add("is-spin-ready");
+    }
+  }
+
+  function claimChromePending() {
+    var reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // After the first visit in this session, never hide chrome again.
+    if (hasChromeEntered() || reduceMotion) {
+      revealChromeNow();
+      return;
+    }
+    var profile = document.querySelector(".layout .profile-card");
+    var topNav = document.querySelector(".top-nav");
+    var pageRoot = document.querySelector(".layout > .root");
+    var spotifyRoot = document.querySelector("[data-now-playing]");
+    var spotify = spotifyRoot && spotifyRoot.querySelector(".nowplaying__widget");
+    if (profile) profile.classList.add("is-pending");
+    if (topNav) topNav.classList.add("is-pending");
+    if (spotify) spotify.classList.add("is-pending");
+    // Claim Spotify before now-playing.js's poll can start its own entrance.
+    if (spotifyRoot) spotifyRoot.setAttribute("data-entrance", "chrome");
+    // Hold page content until chrome has started entering.
+    if (pageRoot) pageRoot.classList.add("is-pending");
   }
 
   // Keep the article archive pinned beside every note. When the user arrives
@@ -810,6 +868,7 @@
   };
 
   restoreChromeFromCache();
+  claimChromePending();
 
   function initCopyButtons() {
     document.querySelectorAll("[data-copy-btn]").forEach(function (btn) {
@@ -915,6 +974,7 @@
     } catch (_) {}
     restoreAvailabilityCache(topSlot);
     if (window.initNavCurrent) window.initNavCurrent(topSlot);
+    claimChromePending();
   }
 
   function injectSidebar(html) {
@@ -934,6 +994,7 @@
     try {
       sessionStorage.setItem(SIDEBAR_CACHE_KEY, html);
     } catch (_) {}
+    claimChromePending();
   }
 
   var tasks = [];
@@ -967,7 +1028,8 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js?v=19"),
+        loadScript("/now-playing.js?v=20"),
+        loadScript("/chrome-entrance.js?v=3"),
         loadScript("/admin-auth.js?v=14"),
         loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
@@ -980,6 +1042,19 @@
     })
     .then(function () {
       if (window.initAvailabilityWidgets) window.initAvailabilityWidgets();
+      if (window.initChromeEntrance) {
+        window.initChromeEntrance();
+      } else {
+        // Fallback if the entrance script failed to load — never leave UI hidden.
+        document
+          .querySelectorAll(
+            ".profile-card.is-pending, .top-nav.is-pending, .nowplaying__widget.is-pending, .layout > .root.is-pending"
+          )
+          .forEach(function (el) {
+            el.classList.remove("is-pending", "is-entering");
+            el.classList.add("is-in");
+          });
+      }
       if (window.initNowPlaying) window.initNowPlaying();
       if (window.initAdminAuth) window.initAdminAuth();
       if (window.initNavPreview) window.initNavPreview();

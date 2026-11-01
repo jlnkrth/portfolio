@@ -18,6 +18,7 @@ const ROOT_FILES = [
   "components.html",
   "components.js",
   "layout.js",
+  "chrome-entrance.js",
   "now-playing.js",
   "availability.js",
   "avatar.js",

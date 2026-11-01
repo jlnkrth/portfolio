@@ -25,13 +25,16 @@
       opts && opts.currentPath && item.href === opts.currentPath
         ? ' aria-current="page"'
         : "";
-    var meta = item.draft
-      ? "Draft"
-      : item.soon
-        ? "Coming soon"
-        : item.author && item.date
-          ? item.author + " · " + formatDate(item.date)
-          : item.author || formatDate(item.date);
+    var meta;
+    if (item.draft) {
+      meta = '<span class="notes-archive__chip">Draft</span>';
+    } else if (item.soon) {
+      meta = '<span class="notes-archive__chip">Coming soon</span>';
+    } else if (item.author && item.date) {
+      meta = item.author + " · " + formatDate(item.date);
+    } else {
+      meta = item.author || formatDate(item.date);
+    }
 
     var rowClass =
       "notes-archive__row" +
@@ -91,42 +94,23 @@
   }
 
   function render(published, upcoming, drafts) {
-    var items = (published || []).slice().sort(function (a, b) {
+    var publishedItems = (published || []).slice().sort(function (a, b) {
       return (b.date || "").localeCompare(a.date || "");
     });
     var soonItems = (upcoming || []).slice();
     var draftItems = (drafts || []).slice();
 
     listEl.className = "notes-archive";
-    var html = items
+    // Fieldnotes index: shipping queue only. Published notes stay on Home /
+    // article rails (layout.js reads notes.json directly).
+    var pageItems = soonItems.concat(draftItems);
+    listEl.innerHTML = pageItems
       .map(function (item) {
         return archiveRow(item);
       })
       .join("");
 
-    if (soonItems.length) {
-      html +=
-        '<p class="notes-archive__soon-label label">Coming soon</p>' +
-        soonItems
-          .map(function (item) {
-            return archiveRow(item);
-          })
-          .join("");
-    }
-
-    if (draftItems.length) {
-      html +=
-        '<p class="notes-archive__drafts-label label">Drafts on this build</p>' +
-        draftItems
-          .map(function (item) {
-            return archiveRow(item);
-          })
-          .join("");
-    }
-
-    listEl.innerHTML = html;
-
-    var allForIndex = items.concat(soonItems).concat(draftItems);
+    var allForIndex = publishedItems.concat(soonItems).concat(draftItems);
     listEl.addEventListener("click", function (event) {
       var clicked = event.target.closest("a.notes-archive__row");
       if (!clicked) return;
