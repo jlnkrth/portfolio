@@ -241,6 +241,35 @@
     });
   }
 
+  function isOwnModeHost() {
+    var host = location.hostname.toLowerCase();
+    if (host === "admin.kreth.work") return true;
+    var isLocal =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host.endsWith(".workers.dev") ||
+      host.endsWith(".workers-preview.dev");
+    if (!isLocal) return false;
+    try {
+      var params = new URLSearchParams(location.search);
+      if (params.get("own") === "1" || params.get("admin") === "1") return true;
+    } catch (_) {}
+    return isAdmin();
+  }
+
+  function bootOwnMode() {
+    if (!isOwnModeHost()) return;
+    if (document.querySelector('script[data-own-mode-boot]')) return;
+    if (window.krethOwnMode) {
+      window.krethOwnMode.enable();
+      return;
+    }
+    var s = document.createElement("script");
+    s.src = "/own-mode.js";
+    s.dataset.ownModeBoot = "1";
+    document.head.appendChild(s);
+  }
+
   window.initAdminAuth = function () {
     if (isAdmin()) {
       document.body.classList.add("ed-book-admin");
@@ -251,6 +280,7 @@
     bindLoginButtons(document);
     syncLoginButtons();
     if (isLoginPage()) bindLoginPage();
+    bootOwnMode();
   };
 
   window.krethAdminAuth = {
@@ -258,6 +288,10 @@
     setAdmin: setAdmin,
     googleConfigured: Boolean(GOOGLE_CLIENT_ID),
   };
+
+  window.addEventListener("kreth-admin-change", function (e) {
+    if (e && e.detail && e.detail.admin) bootOwnMode();
+  });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {

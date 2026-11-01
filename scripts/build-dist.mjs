@@ -10,6 +10,9 @@ const DIST = join(ROOT, "dist");
 const ROOT_FILES = [
   "index.html",
   "tokens.css",
+  "own-inspector.css",
+  "own-inspector.js",
+  "own-mode.js",
   "styles.css",
   "components.css",
   "components.html",
