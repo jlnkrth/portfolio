@@ -153,319 +153,319 @@
         "title": "Zero to One",
         "slug": "zero-to-one",
         "href": "/books/zero-to-one/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e2bfa165379a7d80f13_zero%20to%20one.avif"
+        "image": "/assets/books/zero-to-one.avif"
       },
       {
         "title": "The Lean Startup",
         "slug": "the-lean-startup",
         "href": "/books/the-lean-startup/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893e4d8f4d0bfe59d33f5c_the-lean-startup.avif"
+        "image": "/assets/books/the-lean-startup.avif"
       },
       {
         "title": "Essentialism",
         "slug": "essentialism",
         "href": "/books/essentialism/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893f433410891fccb3b1d0_essentialism.avif"
+        "image": "/assets/books/essentialism.avif"
       },
       {
         "title": "The Intelligent Investor",
         "slug": "the-intelligent-investor",
         "href": "/books/the-intelligent-investor/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893f5d3410891fccb3c2cd_the-intelligent-investor.avif"
+        "image": "/assets/books/the-intelligent-investor.avif"
       },
       {
         "title": "Made to Stick",
         "slug": "made-to-stick",
         "href": "/books/made-to-stick/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893f88ffcabe1fdebb0a80_made-to-stick.avif"
+        "image": "/assets/books/made-to-stick.avif"
       },
       {
         "title": "Extreme Ownership",
         "slug": "extreme-ownership",
         "href": "/books/extreme-ownership/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893fb574916c6d949e34b9_extreme-ownership.avif"
+        "image": "/assets/books/extreme-ownership.avif"
       },
       {
         "title": "Blitzscaling",
         "slug": "blitzscaling",
         "href": "/books/blitzscaling/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893fd7e3b424ad0328fd30_blitzscaling.avif"
+        "image": "/assets/books/blitzscaling.avif"
       },
       {
         "title": "The E-Myth Revisited",
         "slug": "the-e-myth-revisited",
         "href": "/books/the-e-myth-revisited/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67893ffbf2e3d0977f4726ac_the-e-myth-revisited.avif"
+        "image": "/assets/books/the-e-myth-revisited.avif"
       },
       {
         "title": "The Obstacle Is the Way",
         "slug": "the-obstacle-is-the-way",
         "href": "/books/the-obstacle-is-the-way/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940161d61679d2026df47_the-obstacle-is-the-way.avif"
+        "image": "/assets/books/the-obstacle-is-the-way.avif"
       },
       {
         "title": "The Almanack of Naval Ravikant",
         "slug": "the-almanack-of-naval-ravikant",
         "href": "/books/the-almanack-of-naval-ravikant/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67894030577dd885f5f0a16a_the-alamack-of-naval-ravikant.avif"
+        "image": "/assets/books/the-almanack-of-naval-ravikant.avif"
       },
       {
         "title": "Start with Why",
         "slug": "start-with-why",
         "href": "/books/start-with-why/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940519867fcc2f98709aa_start-with-why.avif"
+        "image": "/assets/books/start-with-why.avif"
       },
       {
         "title": "Hooked",
         "slug": "hooked",
         "href": "/books/hooked/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940748f4d0bfe59d5aba7_hooked.avif"
+        "image": "/assets/books/hooked.avif"
       },
       {
         "title": "Rework",
         "slug": "rework",
         "href": "/books/rework/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789409508f8fbdd5752c4a9_rework.avif"
+        "image": "/assets/books/rework.avif"
       },
       {
         "title": "The ONE Thing",
         "slug": "the-one-thing",
         "href": "/books/the-one-thing/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940b61d61679d20278f60_the-one-thing.avif"
+        "image": "/assets/books/the-one-thing.avif"
       },
       {
         "title": "Ego is the Enemy",
         "slug": "ego-is-the-enemy",
         "href": "/books/ego-is-the-enemy/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678940d84ffc1cca95e4c1c7_ego-is-the-enemy.avif"
+        "image": "/assets/books/ego-is-the-enemy.avif"
       },
       {
         "title": "Never Split the Difference",
         "slug": "never-split-the-difference",
         "href": "/books/never-split-the-difference/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678941115abf17058d1e1c1e_never-split-the-difference.avif"
+        "image": "/assets/books/never-split-the-difference.avif"
       },
       {
         "title": "Trillion Dollar Coach",
         "slug": "trillion-dollar-coach",
         "href": "/books/trillion-dollar-coach/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789413074916c6d949fa10a_trillion-dollar-coach.avif"
+        "image": "/assets/books/trillion-dollar-coach.avif"
       },
       {
         "title": "Super Pumped",
         "slug": "super-pumped",
         "href": "/books/super-pumped/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67894152e57e088f2981a501_super-pumped.avif"
+        "image": "/assets/books/super-pumped.avif"
       },
       {
         "title": "Remote",
         "slug": "remote",
         "href": "/books/remote/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789417308f8fbdd5753936f_remote.avif"
+        "image": "/assets/books/remote.avif"
       },
       {
         "title": "Chaos Monkeys",
         "slug": "chaos-monkeys",
         "href": "/books/chaos-monkeys/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6789419558c5da7323f8ebd9_chaos-monkeys.avif"
+        "image": "/assets/books/chaos-monkeys.avif"
       },
       {
         "title": "The Power Law",
         "slug": "the-power-law",
         "href": "/books/the-power-law/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9bfdf1a21217bf8b66a9_The%20Power%20Law.avif"
+        "image": "/assets/books/the-power-law.avif"
       },
       {
         "title": "Small Giants",
         "slug": "small-giants",
         "href": "/books/small-giants/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9c3086f976d7dd86c0d0_small-giants.avif"
+        "image": "/assets/books/small-giants.avif"
       },
       {
         "title": "How Google Works",
         "slug": "how-google-works",
         "href": "/books/how-google-works/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9c5f8f4f01ed7b5f3d21_how-google-works.avif"
+        "image": "/assets/books/how-google-works.avif"
       },
       {
         "title": "The Psychology of Money",
         "slug": "the-psychology-of-money",
         "href": "/books/the-psychology-of-money/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9c8335b5d4f839c84355_Psychology%20of%20Money.avif"
+        "image": "/assets/books/the-psychology-of-money.avif"
       },
       {
         "title": "The Signal and the Noise",
         "slug": "the-signal-and-the-noise",
         "href": "/books/the-signal-and-the-noise/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9bfdf1a21217bf8b66a9_The%20Power%20Law.avif"
+        "image": "/assets/books/the-signal-and-the-noise.avif"
       },
       {
         "title": "The Tao of Charlie Munger",
         "slug": "the-tao-of-charlie-munger",
         "href": "/books/the-tao-of-charlie-munger/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9cd2e1e4cb980a6b678d_the-tao-of-charlie-munger.avif"
+        "image": "/assets/books/the-tao-of-charlie-munger.avif"
       },
       {
         "title": "Charlie Munger",
         "slug": "charlie-munger",
         "href": "/books/charlie-munger/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d00ddee1e6232ee2241_charlie-munger.avif"
+        "image": "/assets/books/charlie-munger.avif"
       },
       {
         "title": "The Daily Stoic",
         "slug": "the-daily-stoic",
         "href": "/books/the-daily-stoic/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d2c0302f04059ede937_the-daily-stoic.avif"
+        "image": "/assets/books/the-daily-stoic.avif"
       },
       {
         "title": "Freakonomics",
         "slug": "freakonomics",
         "href": "/books/freakonomics/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d4e35b5d4f839c8fcdd_Freaconomics.avif"
+        "image": "/assets/books/freakonomics.avif"
       },
       {
         "title": "The Dip",
         "slug": "the-dip",
         "href": "/books/the-dip/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9d78f65649bea01b0b4e_the-dip.avif"
+        "image": "/assets/books/the-dip.avif"
       },
       {
         "title": "Titan",
         "slug": "titan",
         "href": "/books/titan/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9da042f1b75212ebf2db_titan.avif"
+        "image": "/assets/books/titan.avif"
       },
       {
         "title": "Leonardo da Vinci",
         "slug": "leonardo-da-vinci",
         "href": "/books/leonardo-da-vinci/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9dcddd6b15715a5a3620_leonardo-da-vinci.avif"
+        "image": "/assets/books/leonardo-da-vinci.avif"
       },
       {
         "title": "The War of Art",
         "slug": "the-war-of-art",
         "href": "/books/the-war-of-art/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e108a424a7db24ea6d5_the%20war%20of%20art.avif"
+        "image": "/assets/books/the-war-of-art.avif"
       },
       {
         "title": "So Good They Can&#x27;t Ignore You",
         "slug": "so-good-they-can-x27-t-ignore-you",
         "href": "/books/so-good-they-can-x27-t-ignore-you/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e39cd60de009d8c008d_so-good-they-cant-ignore-you.avif"
+        "image": "/assets/books/so-good-they-can-x27-t-ignore-you.avif"
       },
       {
         "title": "The Richest Man in Babylon",
         "slug": "the-richest-man-in-babylon",
         "href": "/books/the-richest-man-in-babylon/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e6269106a37ee746bc4_the-richest-man-in-babylon.avif"
+        "image": "/assets/books/the-richest-man-in-babylon.avif"
       },
       {
         "title": "Outliers",
         "slug": "outliers",
         "href": "/books/outliers/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9e878b740d83e953cf14_outliers.avif"
+        "image": "/assets/books/outliers.avif"
       },
       {
         "title": "No Rules Rules",
         "slug": "no-rules-rules",
         "href": "/books/no-rules-rules/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9eab0973506d759793f5_no-rules-rules.avif"
+        "image": "/assets/books/no-rules-rules.avif"
       },
       {
         "title": "Ogilvy on Advertising",
         "slug": "ogilvy-on-advertising",
         "href": "/books/ogilvy-on-advertising/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9ed78a461c05208ba6c1_ogilvy-on-advertising.avif"
+        "image": "/assets/books/ogilvy-on-advertising.avif"
       },
       {
         "title": "Deep Work",
         "slug": "deep-work",
         "href": "/books/deep-work/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9efd81fc03e385e4d019_deep-work.avif"
+        "image": "/assets/books/deep-work.avif"
       },
       {
         "title": "Principles",
         "slug": "principles",
         "href": "/books/principles/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9f24125c27c78095780f_principles.avif"
+        "image": "/assets/books/principles.avif"
       },
       {
         "title": "Originals",
         "slug": "originals",
         "href": "/books/originals/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9f48489afaaef7e37f64_originals.avif"
+        "image": "/assets/books/originals.avif"
       },
       {
         "title": "Discipline Equals Freedom",
         "slug": "discipline-equals-freedom",
         "href": "/books/discipline-equals-freedom/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9f7b5c4926d2bec0d4c7_discipline-equals-freedom.avif"
+        "image": "/assets/books/discipline-equals-freedom.avif"
       },
       {
         "title": "Sapiens",
         "slug": "sapiens",
         "href": "/books/sapiens/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9fa8ee6a4b461d8e16ec_sapiens.avif"
+        "image": "/assets/books/sapiens.avif"
       },
       {
         "title": "The Art of War",
         "slug": "the-art-of-war",
         "href": "/books/the-art-of-war/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9fd2c14912a61b997485_the-art-of-war.avif"
+        "image": "/assets/books/the-art-of-war.avif"
       },
       {
         "title": "The Black Swan",
         "slug": "the-black-swan",
         "href": "/books/the-black-swan/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678f9ffe7ef388fca112ecbf_the-black-swan.avif"
+        "image": "/assets/books/the-black-swan.avif"
       },
       {
         "title": "The Undoing Project",
         "slug": "the-undoing-project",
         "href": "/books/the-undoing-project/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa026ddee1e6232f17fa1_the-undoing-project.avif"
+        "image": "/assets/books/the-undoing-project.avif"
       },
       {
         "title": "Flow",
         "slug": "flow",
         "href": "/books/flow/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa04069106a37ee7633c3_flow.avif"
+        "image": "/assets/books/flow.avif"
       },
       {
         "title": "Common Sense on Mutual Funds",
         "slug": "common-sense-on-mutual-funds",
         "href": "/books/common-sense-on-mutual-funds/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0858f4f01ed7b63b4e2_common-sense-on-mutual-funds.avif"
+        "image": "/assets/books/common-sense-on-mutual-funds.avif"
       },
       {
         "title": "How Emotions Are Made",
         "slug": "how-emotions-are-made",
         "href": "/books/how-emotions-are-made/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0aa02aac33db3275907_how-emotions-are-made.avif"
+        "image": "/assets/books/how-emotions-are-made.avif"
       },
       {
         "title": "Hackers &amp; Painters",
         "slug": "hackers-amp-painters",
         "href": "/books/hackers-amp-painters/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0d15c5c2f06609728d0_hackers--painters.avif"
+        "image": "/assets/books/hackers-amp-painters.avif"
       },
       {
         "title": "The 4-Hour Workweek",
         "slug": "the-4-hour-workweek",
         "href": "/books/the-4-hour-workweek/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa0f77781a604d1b792cd_the-4-hour-workweek.avif"
+        "image": "/assets/books/the-4-hour-workweek.avif"
       },
       {
         "title": "Switch",
         "slug": "switch",
         "href": "/books/switch/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa11a2b04d5d484b71a94_switch.avif"
+        "image": "/assets/books/switch.avif"
       },
       {
         "title": "Fooled by Randomness",
         "slug": "fooled-by-randomness",
         "href": "/books/fooled-by-randomness/",
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678fa13902aac33db327f601_fooled-by-randomness.avif"
+        "image": "/assets/books/fooled-by-randomness.avif"
       },
       {
         "title": "Company of One",
@@ -1464,140 +1464,140 @@
         "slug": "standard-bots",
         "href": "https://standardbots.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a365fd02db49f800979c_StandardBots.svg"
+        "image": "/assets/clients/standard-bots.svg"
       },
       {
         "title": "HiComply",
         "slug": "hicomply",
         "href": "https://www.hicomply.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a556bb014213c7d212cc_HiComply.svg"
+        "image": "/assets/clients/hicomply.svg"
       },
       {
         "title": "Switchboard",
         "slug": "switchboard",
         "href": "#",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a3f481c67ac0b2ab2718_Switchboard.svg"
+        "image": "/assets/clients/switchboard.svg"
       },
       {
         "title": "Metaphysiks",
         "slug": "metaphysiks",
         "href": "https://www.metaphysiks.ch/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a543cbffa3f6045fb994_Metaphysiks.svg"
+        "image": "/assets/clients/metaphysiks.svg"
       },
       {
         "title": "Instaffo",
         "slug": "instaffo",
         "href": "https://www.instaffo.com/en/talent",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4611ca6c2aa23cc02c6_Instaffo.svg"
+        "image": "/assets/clients/instaffo.svg"
       },
       {
         "title": "Bestever",
         "slug": "bestever",
         "href": "https://www.bestever.ai/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a5a5328d5c36c8d34774_Bestever.svg"
+        "image": "/assets/clients/bestever.svg"
       },
       {
         "title": "Notch.so",
         "slug": "notch-so",
         "href": "https://www.notch.so/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a44abd2da9d1c96d3d17_Notch.svg"
+        "image": "/assets/clients/notch-so.svg"
       },
       {
         "title": "Newsbreak",
         "slug": "newsbreak",
         "href": "https://www.newsbreak.com/about",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4380ef2cba48eff9f17_Newsbreak.svg"
+        "image": "/assets/clients/newsbreak.svg"
       },
       {
         "title": "Lantern",
         "slug": "lantern",
         "href": "https://www.lanterninsurance.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4c4da89b8ba35bd1518_lanterninsurance.svg"
+        "image": "/assets/clients/lantern.svg"
       },
       {
         "title": "Meter",
         "slug": "meter",
         "href": "https://www.meter.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a40dfa4ac4bfeef13f11_Meter.svg"
+        "image": "/assets/clients/meter.svg"
       },
       {
         "title": "Bestow",
         "slug": "bestow",
         "href": "https://www.bestow.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4d2c30d63643af0d684_Bestow.svg"
+        "image": "/assets/clients/bestow.svg"
       },
       {
         "title": "Weights",
         "slug": "weights",
         "href": "http://weights.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a34a1c21711e692e5474_Weights.svg"
+        "image": "/assets/clients/weights.svg"
       },
       {
         "title": "Banxware",
         "slug": "banxware",
         "href": "https://www.banxware.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a37bc30d63643aeff080_Banxware.svg"
+        "image": "/assets/clients/banxware.svg"
       },
       {
         "title": "Pult",
         "slug": "pult",
         "href": "https://www.pult.com/de",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a43ee1821a4c6c30db55_Pult.svg"
+        "image": "/assets/clients/pult.svg"
       },
       {
         "title": "Adalo",
         "slug": "adalo",
         "href": "https://www.adalo.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a399aaef929d61a477c1_Adalo.svg"
+        "image": "/assets/clients/adalo.svg"
       },
       {
         "title": "WorkOS",
         "slug": "workos",
         "href": "https://workos.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a42984846dd3008d5bd1_Workos.svg"
+        "image": "/assets/clients/workos.svg"
       },
       {
         "title": "ElevenLabs",
         "slug": "elevenlabs",
         "href": "https://elevenlabs.io/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a574b6005ccf5d4e3368_ElevenLabs.svg"
+        "image": "/assets/clients/elevenlabs.svg"
       },
       {
         "title": "Fiverr",
         "slug": "fiverr",
         "href": "https://www.fiverr.com/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a471f2095942df87429a_Fiverr.svg"
+        "image": "/assets/clients/fiverr.svg"
       },
       {
         "title": "Voy.Tax",
         "slug": "voy-tax",
         "href": "https://voy.law/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a4559112ca5f6e6a91a1_Voy.svg"
+        "image": "/assets/clients/voy-tax.svg"
       },
       {
         "title": "Lindy.ai",
         "slug": "lindy-ai",
         "href": "https://www.lindy.ai/",
         "external": true,
-        "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6819a403fb677ca74a45ec07_Lindy.svg"
+        "image": "/assets/clients/lindy-ai.svg"
       }
     ]
   },
@@ -1631,7 +1631,7 @@
     ]
   },
   "notes": {
-    "label": "Archive",
+    "label": "Fieldnotes",
     "path": "/notes/",
     "count": 4,
     "previewKind": "project",
@@ -1666,7 +1666,7 @@
     "path": "/about/",
     "sections": [
       {
-        "heading": "Julian Kreth — Head of Strategy Engineering at Masse, founder of Karma Studio."
+        "heading": "Julian Kreth \u2014 Head of Strategy Engineering at Masse, founder of Karma Studio."
       }
     ]
   }
