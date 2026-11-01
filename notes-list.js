@@ -29,7 +29,7 @@
     if (item.draft) {
       meta = '<span class="notes-archive__chip">Draft</span>';
     } else if (item.soon) {
-      meta = '<span class="notes-archive__chip">Ship</span>';
+      meta = '<span class="notes-archive__chip">Coming soon</span>';
     } else if (item.author && item.date) {
       meta = item.author + " · " + formatDate(item.date);
     } else {
