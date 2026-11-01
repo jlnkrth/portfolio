@@ -2,13 +2,13 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "50";
+  var CHROME_CACHE_VERSION = "51";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
     /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
-  var NOWPLAYING_ENTRANCE_CLASS_RE =
+  var CHROME_ENTRANCE_CLASS_RE =
     /\s*\b(?:is-pending|is-entering|is-in|is-spin-ready|is-loaded|is-spinning|is-coasting)\b/g;
 
   var topSlot = document.getElementById("chrome-top");
@@ -17,21 +17,40 @@
   function sanitizeChromeHtml(html) {
     if (!html) return html;
     html = html.replace(RUNTIME_ATTR_RE, "");
-    // Drop now-playing entrance/spin classes so a mid-animation cache cannot
-    // leave the Spotify widget stuck at opacity 0.
+    // Drop entrance/spin classes so a mid-animation cache cannot leave
+    // chrome stuck at opacity 0 on the next page.
     html = html.replace(
-      /(<[^>]*\bnowplaying\b[^>]*class=")([^"]*)(")/gi,
+      /(<[^>]*class=")([^"]*)(")/gi,
       function (_m, open, classes, close) {
-        return open + classes.replace(NOWPLAYING_ENTRANCE_CLASS_RE, " ").replace(/\s+/g, " ").trim() + close;
-      }
-    );
-    html = html.replace(
-      /(<[^>]*class=")([^"]*\bnowplaying\b[^"]*)(")/gi,
-      function (_m, open, classes, close) {
-        return open + classes.replace(NOWPLAYING_ENTRANCE_CLASS_RE, " ").replace(/\s+/g, " ").trim() + close;
+        if (
+          !/(?:^|\s)(?:nowplaying(?:__\w+)?|profile-card|top-nav)(?:\s|$)/.test(
+            classes
+          )
+        ) {
+          return _m;
+        }
+        return (
+          open +
+          classes
+            .replace(CHROME_ENTRANCE_CLASS_RE, " ")
+            .replace(/\s+/g, " ")
+            .trim() +
+          close
+        );
       }
     );
     return html;
+  }
+
+  function claimChromePending() {
+    var reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+    var profile = document.querySelector(".layout .profile-card");
+    var topNav = document.querySelector(".top-nav");
+    if (profile) profile.classList.add("is-pending");
+    if (topNav) topNav.classList.add("is-pending");
   }
 
   // Keep the article archive pinned beside every note. When the user arrives
@@ -810,6 +829,7 @@
   };
 
   restoreChromeFromCache();
+  claimChromePending();
 
   function initCopyButtons() {
     document.querySelectorAll("[data-copy-btn]").forEach(function (btn) {
@@ -915,6 +935,7 @@
     } catch (_) {}
     restoreAvailabilityCache(topSlot);
     if (window.initNavCurrent) window.initNavCurrent(topSlot);
+    claimChromePending();
   }
 
   function injectSidebar(html) {
@@ -934,6 +955,7 @@
     try {
       sessionStorage.setItem(SIDEBAR_CACHE_KEY, html);
     } catch (_) {}
+    claimChromePending();
   }
 
   var tasks = [];
@@ -968,6 +990,7 @@
       return Promise.all([
         loadScript("/availability.js"),
         loadScript("/now-playing.js?v=19"),
+        loadScript("/chrome-entrance.js?v=1"),
         loadScript("/admin-auth.js?v=14"),
         loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
@@ -980,6 +1003,17 @@
     })
     .then(function () {
       if (window.initAvailabilityWidgets) window.initAvailabilityWidgets();
+      if (window.initChromeEntrance) {
+        window.initChromeEntrance();
+      } else {
+        // Fallback if the entrance script failed to load — never leave chrome hidden.
+        document
+          .querySelectorAll(".profile-card.is-pending, .top-nav.is-pending")
+          .forEach(function (el) {
+            el.classList.remove("is-pending", "is-entering");
+            el.classList.add("is-in");
+          });
+      }
       if (window.initNowPlaying) window.initNowPlaying();
       if (window.initAdminAuth) window.initAdminAuth();
       if (window.initNavPreview) window.initNavPreview();
