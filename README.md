@@ -8,7 +8,8 @@ and served by the Worker in `worker/index.js`.
 
 - `index.html` / `styles.css` — public site
 - `admin/` — public branded login landing (`Continue with Google` → Access)
-- `components.html` — component library (protected on `admin.kreth.work`)
+- `components.html` — Studio styleguide (protected on `admin.kreth.work`)
+- `studio/` — Studio shell placeholders (`soon.html`, noindex; not linked from the public site)
 - `notes/`, `projects/`, `books/`, … — content
 - `worker/` + `wrangler.jsonc` — host routing, redirects, now-playing proxy
 - `scripts/build-dist.mjs` — copies only public files into `dist/`
@@ -35,6 +36,21 @@ repo.
 
 Local article/book **save** still needs the edit server below (UI-only admin
 toggle via sessionStorage when Access is not in play).
+
+## Own mode
+
+Own mode turns on private Studio tooling (hover inspector). It never loads on
+the public host for anonymous visitors.
+
+| Context | How it gates |
+|---------|----------------|
+| Production | Access on `admin.kreth.work` — own mode boots automatically on that host |
+| Local / preview | Append `?own=1` or `?admin=1` on localhost / `*.workers.dev`, or sign in via `/admin/` (sessionStorage). With those query params the Worker also maps `/` → the styleguide |
+| Inspector | Hover highlights `data-component` roots. Toggle with **⌘⇧E** / **Ctrl+Shift+E**; **Escape** turns it off |
+
+Scripts: `own-mode.js` (boot + `body.own-mode`) and `own-inspector.js` /
+`own-inspector.css`. Public `layout.js` does not load the inspector; `admin-auth.js`
+loads own-mode only when the host/query/session checks pass.
 
 ## Develop
 

@@ -54,6 +54,7 @@ const ROOT_DIRS = [
   "projects",
   "rabbit-hole",
   "social",
+  "studio",
 ];
 
 const SKIP_NAMES = new Set([
