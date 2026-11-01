@@ -72,3 +72,28 @@ Production deploys also run from Cloudflare Workers Builds on pushes to `main`
 (configure the GitHub App for this repo). After DNS is on Cloudflare, custom
 domains `kreth.work`, `www.kreth.work`, and `admin.kreth.work` attach to the
 `kreth-work` Worker.
+
+## PR previews (hosted draft review)
+
+Pull requests get a live Workers preview via `.github/workflows/preview.yml`.
+Each PR uploads a version with a stable alias (`pr-<number>-kreth-work.<account>.workers.dev`)
+and the bot comments that URL plus deep links to any `noindex` draft notes.
+
+**One-time setup** (repo → Settings → Secrets and variables → Actions):
+
+| Secret | Where to get it |
+|--------|-----------------|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare → My Profile → API Tokens → **Edit Cloudflare Workers** |
+| `CLOUDFLARE_ACCOUNT_ID` | Workers overview sidebar → Account ID |
+
+Local equivalent (requires `wrangler login`):
+
+```bash
+npm run preview                          # versioned preview URL
+npx wrangler versions upload --preview-alias staging
+npm run drafts -- --base https://staging-kreth-work.<account>.workers.dev
+```
+
+Optional: in the Cloudflare Worker **Settings → Builds**, turn on
+**non-production branch builds** so Workers Builds also posts preview URLs
+(same `wrangler versions upload` path as the GitHub Action).
