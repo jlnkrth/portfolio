@@ -4,9 +4,9 @@
 :root {
   /* —— Primitives —— */
   --kw-cream: #f5f5f0;
-  --kw-navy: #0b2f4c;
+  --kw-navy: #061e32;
   --kw-white: #ffffff;
-  --kw-navy-deep: #082538;
+  --kw-navy-deep: #041525;
 
   /* Neutral ladder (roles match the old gray scales; cream-tinted where surface-facing) */
   --kw-neutral-0: #ffffff;
