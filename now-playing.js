@@ -85,7 +85,7 @@
       coverEl.classList.add("is-spinning");
     }
 
-    function stopSpin() {
+    function stopSpin(options) {
       if (reduceMotion || !coverEl) return;
       if (
         !coverEl.classList.contains("is-spinning") &&
@@ -93,6 +93,11 @@
       ) {
         return;
       }
+
+      var opts = options || {};
+      var extraDeg = typeof opts.extraDeg === "number" ? opts.extraDeg : 110;
+      var durationMs = typeof opts.durationMs === "number" ? opts.durationMs : 1500;
+      var easing = opts.easing || "cubic-bezier(0.05, 0.7, 0.1, 1)";
 
       var deg = rotationDeg(coverEl);
       clearCoastHandler();
@@ -104,8 +109,8 @@
 
       coverEl.classList.add("is-coasting");
       coverEl.style.transition =
-        "transform 1.5s cubic-bezier(0.05, 0.7, 0.1, 1)";
-      coverEl.style.transform = "rotate(" + (deg + 110) + "deg)";
+        "transform " + durationMs / 1000 + "s " + easing;
+      coverEl.style.transform = "rotate(" + (deg + extraDeg) + "deg)";
 
       coastEndHandler = function onCoastEnd(event) {
         if (event.target !== coverEl) return;
@@ -117,12 +122,31 @@
       coverEl.addEventListener("transitionend", coastEndHandler);
     }
 
+    // Offline first paint: brief spin, then a long coast so it feels like
+    // the record just wound down. Listening keeps the infinite spin.
+    function playEntranceMotion() {
+      if (reduceMotion || !coverEl) return;
+      if (root.dataset.status === "listening") {
+        startSpin();
+        return;
+      }
+      startSpin();
+      window.setTimeout(function () {
+        if (root.dataset.status === "listening") return;
+        stopSpin({
+          extraDeg: 200,
+          durationMs: 2200,
+          easing: "cubic-bezier(0.02, 0.85, 0.15, 1)",
+        });
+      }, 520);
+    }
+
     function finishEntrance() {
       if (!widgetEl) return;
       widgetEl.classList.remove("is-pending", "is-entering");
       widgetEl.classList.add("is-in");
       root.classList.add("is-spin-ready");
-      if (root.dataset.status === "listening") startSpin();
+      playEntranceMotion();
     }
 
     function runEntrance() {
