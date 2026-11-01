@@ -915,19 +915,18 @@ a.handle:hover {
 
 .profile-card__bio-link {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.3em;
+  align-items: center;
+  gap: 0.35em;
   white-space: nowrap;
 }
 
 .profile-card__bio-favicon {
   display: inline-block;
-  width: 0.875em;
-  height: 0.875em;
+  width: 1.125em;
+  height: 1.125em;
   object-fit: contain;
-  border-radius: 2px;
+  border-radius: 3px;
   flex-shrink: 0;
-  translate: 0 0.1em;
 }
 
 .email-copy {
