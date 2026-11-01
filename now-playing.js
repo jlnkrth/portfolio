@@ -147,6 +147,10 @@
       widgetEl.classList.add("is-in");
       root.classList.add("is-spin-ready");
       playEntranceMotion();
+      // Persist only after the widget is visible. Saving mid-entrance left
+      // chrome cache with data-hydrated + is-pending, so later loads stayed
+      // at opacity 0 forever.
+      if (window.persistChromeCache) window.persistChromeCache();
     }
 
     function runEntrance() {
@@ -155,9 +159,7 @@
       bindCoverLoad();
 
       if (reduceMotion) {
-        widgetEl.classList.remove("is-pending", "is-entering");
-        widgetEl.classList.add("is-in");
-        root.classList.add("is-spin-ready");
+        finishEntrance();
         return;
       }
 
@@ -168,7 +170,15 @@
       if (info) info.style.setProperty("--enter-delay", "90ms");
       if (status) status.style.setProperty("--enter-delay", "140ms");
 
+      widgetEl.classList.remove("is-in", "is-entering");
       widgetEl.classList.add("is-pending");
+
+      var finished = false;
+      function complete() {
+        if (finished) return;
+        finished = true;
+        finishEntrance();
+      }
 
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
@@ -179,21 +189,28 @@
             function onEnd(event) {
               if (event.target !== widgetEl) return;
               if (event.propertyName !== "opacity") return;
-              finishEntrance();
               widgetEl.removeEventListener("transitionend", onEnd);
+              complete();
             }
           );
+          // Fallback if transitionend never fires (cached mid-state, reduced paint).
+          window.setTimeout(complete, 700);
         });
       });
     }
 
     function markHydrated() {
-      if (root.dataset.hydrated) return;
+      if (root.dataset.hydrated) {
+        // Recover from chrome cache that saved while still pending/hidden.
+        if (widgetEl && !widgetEl.classList.contains("is-in")) {
+          runEntrance();
+        }
+        return;
+      }
       // Pending before hydrated so the first painted frame is opacity 0.
       if (widgetEl && !reduceMotion) widgetEl.classList.add("is-pending");
       root.dataset.hydrated = "1";
       runEntrance();
-      if (window.persistChromeCache) window.persistChromeCache();
     }
 
     function applyTrack(data) {
