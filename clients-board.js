@@ -7,6 +7,9 @@
   var DRAG_THRESHOLD = 6; // px before a press counts as a drag
   var zCounter = 10;
   var stickers = [];
+  var reduceMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Fit the board to the remaining viewport height so the page never scrolls.
   function fitBoard() {
@@ -49,15 +52,68 @@
     return arr;
   }
 
+  function markLoaded(img) {
+    img.classList.add("is-loaded");
+  }
+
+  function bindImageLoad(img) {
+    if (img.complete && img.naturalWidth > 0) {
+      markLoaded(img);
+      return;
+    }
+    img.addEventListener("load", function onLoad() {
+      img.removeEventListener("load", onLoad);
+      markLoaded(img);
+    });
+    img.addEventListener("error", function onError() {
+      img.removeEventListener("error", onError);
+      markLoaded(img);
+    });
+  }
+
+  function revealStickers(list) {
+    if (reduceMotion) {
+      list.forEach(function (sticker) {
+        sticker.classList.remove("is-pending");
+        sticker.classList.add("is-in");
+      });
+      return;
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        list.forEach(function (sticker) {
+          sticker.classList.remove("is-pending");
+          sticker.classList.add("is-entering");
+          sticker.addEventListener(
+            "transitionend",
+            function onEnd(event) {
+              if (event.target !== sticker) return;
+              if (event.propertyName !== "opacity") return;
+              sticker.classList.remove("is-entering");
+              sticker.classList.add("is-in");
+              sticker.style.removeProperty("--enter-delay");
+              sticker.removeEventListener("transitionend", onEnd);
+            }
+          );
+        });
+      });
+    });
+  }
+
   function layoutStickers(items) {
     board.innerHTML = "";
     fitBoard();
 
-    stickers = items.map(function (item) {
+    stickers = items.map(function (item, index) {
       var sticker = document.createElement("a");
-      sticker.className = "sticker";
+      sticker.className =
+        "sticker" + (reduceMotion ? "" : " is-pending");
       sticker.href = item.href;
       sticker.setAttribute("aria-label", item.title);
+      if (!reduceMotion) {
+        sticker.style.setProperty("--enter-delay", index * 32 + "ms");
+      }
       if (item.external || (item.href && item.href.indexOf("http") === 0)) {
         sticker.target = "_blank";
         sticker.rel = "noreferrer";
@@ -68,6 +124,10 @@
         img.src = item.image;
         img.alt = item.title;
         img.draggable = false;
+        img.decoding = "async";
+        img.loading = "eager";
+        if (index < 8) img.fetchPriority = "high";
+        bindImageLoad(img);
         sticker.appendChild(img);
       } else {
         var ph = document.createElement("span");
@@ -89,6 +149,7 @@
     requestAnimationFrame(function () {
       fitBoard();
       scatter(stickers);
+      revealStickers(stickers);
     });
   }
 
