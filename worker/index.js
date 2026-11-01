@@ -29,12 +29,16 @@ export default {
 
     const onAdminHost = host === adminHost;
 
-    // Public site: send old admin asset URLs to the protected host
+    // Public site: send old admin asset URLs / Studio placeholders to the protected host
     if (!onAdminHost && !isLocal) {
       if (url.pathname === "/components.html" || url.pathname === "/components") {
         return Response.redirect(`https://${adminHost}/`, 302);
       }
       if (url.pathname.startsWith("/notes/_templates")) {
+        const dest = new URL(url.pathname + url.search, `https://${adminHost}`);
+        return Response.redirect(dest.toString(), 302);
+      }
+      if (url.pathname === "/studio" || url.pathname.startsWith("/studio/")) {
         const dest = new URL(url.pathname + url.search, `https://${adminHost}`);
         return Response.redirect(dest.toString(), 302);
       }
@@ -51,8 +55,11 @@ export default {
       }
     }
 
-    // Local/dev admin simulation via ?admin=1
-    if (isLocal && url.searchParams.get("admin") === "1") {
+    // Local/dev admin / own-mode simulation via ?admin=1 or ?own=1
+    if (
+      isLocal &&
+      (url.searchParams.get("admin") === "1" || url.searchParams.get("own") === "1")
+    ) {
       if (url.pathname === "/" || url.pathname === "") {
         return serveAsset(env, url, "/components.html");
       }
