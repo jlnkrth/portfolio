@@ -115,6 +115,7 @@ function toast(message, type = "default") {
 
   const el = document.createElement("div");
   el.className = "toast";
+  el.setAttribute("data-component", "Toast");
   el.setAttribute("role", "status");
 
   const icons = {
@@ -147,6 +148,60 @@ function toast(message, type = "default") {
 }
 
 // --- Mermaid architecture diagrams (Cursor plan style) ---
+// --- DialKit: feature card specimen (localhost / ?dialkit=1 only) ---
+(function () {
+  function bindFeatureCardDial() {
+    var card = document.querySelector('[data-dialkit="feature-card"]');
+    if (!card || card.getAttribute("data-dialkit-bound") === "1") return;
+    if (!window.DialKit || !window.DialKit.createDialKit) return;
+
+    card.setAttribute("data-dialkit-bound", "1");
+    var stubs = card.querySelectorAll(".toast-stub");
+    var kit = window.DialKit.createDialKit(
+      "Feature card",
+      {
+        radius: [12, 0, 32],
+        padding: [20, 8, 40],
+        maxWidth: [360, 240, 480],
+        shadow: {
+          _collapsed: true,
+          blur: [12, 0, 40],
+          opacity: [0.1, 0, 0.4, 0.01],
+          toastRadius: [6, 0, 24],
+        },
+      },
+      { id: "feature-card", persist: true }
+    );
+
+    kit.subscribe(function (values) {
+      card.style.borderRadius = values.radius + "px";
+      card.style.padding = values.padding + "px";
+      card.style.maxWidth = values.maxWidth + "px";
+      card.style.boxShadow =
+        "0 4px " +
+        values.shadow.blur +
+        "px rgba(0, 0, 0, " +
+        values.shadow.opacity +
+        ")";
+      stubs.forEach(function (stub) {
+        stub.style.borderRadius = values.shadow.toastRadius + "px";
+        stub.style.boxShadow =
+          "0 4px " +
+          values.shadow.blur +
+          "px rgba(0, 0, 0, " +
+          values.shadow.opacity +
+          ")";
+      });
+    });
+  }
+
+  if (window.DialKit) {
+    bindFeatureCardDial();
+  } else {
+    document.addEventListener("dialkit:ready", bindFeatureCardDial, { once: true });
+  }
+})();
+
 if (typeof mermaid !== "undefined") {
   mermaid.initialize({
     startOnLoad: false,
@@ -154,7 +209,7 @@ if (typeof mermaid !== "undefined") {
     theme: "base",
     themeVariables: {
       darkMode: false,
-      background: "#f5f5f0",
+      background: "#ffffff",
       primaryColor: "#f9f9f9",
       primaryTextColor: "#1a1a1a",
       primaryBorderColor: "#d4d4d4",
@@ -162,7 +217,7 @@ if (typeof mermaid !== "undefined") {
       tertiaryColor: "#efefef",
       lineColor: "#666666",
       textColor: "#1a1a1a",
-      mainBkg: "#f5f5f0",
+      mainBkg: "#ffffff",
       actorBkg: "#ffffff",
       actorBorder: "#d4d4d4",
       actorTextColor: "#1a1a1a",
