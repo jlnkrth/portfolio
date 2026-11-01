@@ -913,6 +913,23 @@ a.handle:hover {
   text-decoration-color: var(--kw-text-muted);
 }
 
+.profile-card__bio-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+  white-space: nowrap;
+}
+
+.profile-card__bio-favicon {
+  display: inline-block;
+  width: 0.875em;
+  height: 0.875em;
+  object-fit: contain;
+  border-radius: 2px;
+  flex-shrink: 0;
+  translate: 0 0.1em;
+}
+
 .email-copy {
   display: inline-flex;
   align-items: center;
