@@ -1,0 +1,92 @@
+/* kreth.work design tokens — single source of truth.
+   Cream / navy brand. Single token layer; prior gray/fp palette entries removed. */
+
+:root {
+  /* —— Primitives —— */
+  --kw-cream: #f5f5f0;
+  --kw-navy: #0b2f4c;
+  --kw-white: #ffffff;
+  --kw-navy-deep: #082538;
+
+  /* Neutral ladder (roles match the old gray scales; cream-tinted where surface-facing) */
+  --kw-neutral-0: #ffffff;
+  --kw-neutral-50: #fafaf6;
+  --kw-neutral-100: #f5f5f0;
+  --kw-neutral-150: #ecece7;
+  --kw-neutral-200: #f9f9f9;
+  --kw-neutral-300: #efefef;
+  --kw-neutral-400: #e8e8e8;
+  --kw-neutral-500: #e2e1de;
+  --kw-neutral-600: #dad9d6;
+  --kw-neutral-700: #cfceca;
+  --kw-neutral-800: #bcbbb5;
+  --kw-neutral-900: #8d8d86;
+  --kw-neutral-1000: #82827c;
+  --kw-neutral-1100: #63635e;
+
+  /* —— Semantic: surfaces —— */
+  --kw-surface: var(--kw-cream);
+  --kw-surface-raised: var(--kw-white);
+  --kw-surface-subtle: var(--kw-neutral-50);
+  --kw-fill: var(--kw-neutral-200);
+  --kw-fill-muted: var(--kw-neutral-300);
+  --kw-row-hover: var(--kw-neutral-150);
+
+  /* —— Semantic: text —— */
+  --kw-text: var(--kw-navy);
+  --kw-text-muted: var(--kw-neutral-1100);
+  --kw-text-subtle: var(--kw-neutral-1000);
+  --kw-text-faint: var(--kw-neutral-900);
+  --kw-text-inverse: var(--kw-cream);
+
+  /* —— Semantic: borders —— */
+  --kw-line: var(--kw-neutral-400);
+  --kw-border-muted: var(--kw-neutral-500);
+  --kw-border: var(--kw-neutral-600);
+  --kw-border-strong: var(--kw-neutral-700);
+
+  /* —— Semantic: status ——
+     Availability + NowPlaying dots only. Do not re-declare these hexes in
+     component CSS — use the tokens. */
+  --kw-status-ok: #30a46c;
+  --kw-status-bad: #e5484d;
+  --kw-status-idle: var(--kw-neutral-800);
+
+  /* —— Semantic: controls —— */
+  --kw-control-bg: var(--kw-navy);
+  --kw-control-hover: var(--kw-navy-deep);
+  --kw-control-height: 40px;
+
+  /* —— Space scale —— */
+  --kw-space-1: 0.25rem;
+  --kw-space-2: 0.5rem;
+  --kw-space-3: 0.75rem;
+  --kw-space-4: 1rem;
+  --kw-space-5: 1.25rem;
+  --kw-space-6: 1.5rem;
+  --kw-space-8: 2rem;
+  --kw-space-10: 2.5rem;
+  --kw-space-12: 3rem;
+  --kw-space-16: 4rem;
+
+  /* —— Radii —— */
+  --kw-radius-xs: 2px;
+  --kw-radius-sm: 4px;
+  --kw-radius-control: 6px;
+  --kw-radius-md: 8px;
+  --kw-radius-lg: 12px;
+  --kw-radius-card: 16px;
+  --kw-radius-pill: 9999px;
+
+  /* —— Type stacks —— */
+  --kw-font-sans: "Inter", "Inter Fallback", Arial, sans-serif;
+  --kw-font-serif: Georgia, "Times New Roman", "Iowan Old Style", serif;
+  --kw-font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* Shared aliases used by existing rules */
+  --font-sans: var(--kw-font-sans);
+  --font-serif: var(--kw-font-serif);
+  --font-mono: var(--kw-font-mono);
+  --side-padding: 16px;
+}
