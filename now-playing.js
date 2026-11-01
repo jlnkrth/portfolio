@@ -200,6 +200,32 @@
     }
 
     function markHydrated() {
+      // chrome-entrance.js owns the first paint when present — don't re-run
+      // and wait on the API; just finish spin once the widget is visible.
+      if (root.getAttribute("data-entrance") === "chrome") {
+        root.dataset.hydrated = "1";
+        if (widgetEl && widgetEl.classList.contains("is-in")) {
+          root.classList.add("is-spin-ready");
+          playEntranceMotion();
+        } else if (widgetEl) {
+          widgetEl.addEventListener(
+            "transitionend",
+            function onChromeIn(event) {
+              if (event.target !== widgetEl) return;
+              if (event.propertyName !== "opacity") return;
+              widgetEl.removeEventListener("transitionend", onChromeIn);
+              root.classList.add("is-spin-ready");
+              playEntranceMotion();
+            }
+          );
+          window.setTimeout(function () {
+            root.classList.add("is-spin-ready");
+            playEntranceMotion();
+          }, 700);
+        }
+        return;
+      }
+
       if (root.dataset.hydrated) {
         // Recover from chrome cache that saved while still pending/hidden.
         if (widgetEl && !widgetEl.classList.contains("is-in")) {

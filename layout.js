@@ -2,12 +2,12 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "51";
+  var CHROME_CACHE_VERSION = "52";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
   var RUNTIME_ATTR_RE =
-    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
+    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated|entrance)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
   var CHROME_ENTRANCE_CLASS_RE =
     /\s*\b(?:is-pending|is-entering|is-in|is-spin-ready|is-loaded|is-spinning|is-coasting)\b/g;
 
@@ -49,8 +49,16 @@
     if (reduceMotion) return;
     var profile = document.querySelector(".layout .profile-card");
     var topNav = document.querySelector(".top-nav");
+    var pageRoot = document.querySelector(".layout > .root");
+    var spotifyRoot = document.querySelector("[data-now-playing]");
+    var spotify = spotifyRoot && spotifyRoot.querySelector(".nowplaying__widget");
     if (profile) profile.classList.add("is-pending");
     if (topNav) topNav.classList.add("is-pending");
+    if (spotify) spotify.classList.add("is-pending");
+    // Claim Spotify before now-playing.js's poll can start its own entrance.
+    if (spotifyRoot) spotifyRoot.setAttribute("data-entrance", "chrome");
+    // Hold page content until chrome has started entering.
+    if (pageRoot) pageRoot.classList.add("is-pending");
   }
 
   // Keep the article archive pinned beside every note. When the user arrives
@@ -989,8 +997,8 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js?v=19"),
-        loadScript("/chrome-entrance.js?v=1"),
+        loadScript("/now-playing.js?v=20"),
+        loadScript("/chrome-entrance.js?v=2"),
         loadScript("/admin-auth.js?v=14"),
         loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
@@ -1006,9 +1014,11 @@
       if (window.initChromeEntrance) {
         window.initChromeEntrance();
       } else {
-        // Fallback if the entrance script failed to load — never leave chrome hidden.
+        // Fallback if the entrance script failed to load — never leave UI hidden.
         document
-          .querySelectorAll(".profile-card.is-pending, .top-nav.is-pending")
+          .querySelectorAll(
+            ".profile-card.is-pending, .top-nav.is-pending, .nowplaying__widget.is-pending, .layout > .root.is-pending"
+          )
           .forEach(function (el) {
             el.classList.remove("is-pending", "is-entering");
             el.classList.add("is-in");

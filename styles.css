@@ -900,27 +900,31 @@ article,
   z-index: 1;
 }
 
+/* Chrome + page content entrance (chrome first, content after). */
 .profile-card.is-pending,
-.top-nav.is-pending {
+.top-nav.is-pending,
+.layout > .root.is-pending {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(10px);
   transition: none;
   pointer-events: none;
 }
 
 .profile-card.is-entering,
-.top-nav.is-entering {
+.top-nav.is-entering,
+.layout > .root.is-entering {
   opacity: 1;
   transform: none;
   transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--enter-delay, 0ms);
   pointer-events: none;
 }
 
 .profile-card.is-in,
-.top-nav.is-in {
+.top-nav.is-in,
+.layout > .root.is-in {
   opacity: 1;
   transform: none;
 }
@@ -931,7 +935,10 @@ article,
   .profile-card.is-in,
   .top-nav.is-pending,
   .top-nav.is-entering,
-  .top-nav.is-in {
+  .top-nav.is-in,
+  .layout > .root.is-pending,
+  .layout > .root.is-entering,
+  .layout > .root.is-in {
     opacity: 1;
     transform: none;
     transition: none;
@@ -1459,7 +1466,7 @@ a.collections__item:hover {
 
 .nowplaying__widget.is-pending {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(10px);
   transition: none;
   pointer-events: none;
 }
@@ -1468,8 +1475,9 @@ a.collections__item:hover {
   opacity: 1;
   transform: none;
   transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--enter-delay, 0ms);
   pointer-events: none;
 }
 

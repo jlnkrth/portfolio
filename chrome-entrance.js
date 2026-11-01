@@ -1,4 +1,4 @@
-// Page-load entrance for profile card + top nav (matches now-playing motion).
+// Page-load entrance: chrome first (profile, nav, Spotify), then page content.
 (function () {
   "use strict";
 
@@ -11,6 +11,14 @@
     el.classList.remove("is-pending", "is-entering");
     el.classList.add("is-in");
     el.style.removeProperty("--enter-delay");
+
+    // Spotify spin cue — same handoff now-playing.js uses after its own entrance.
+    if (el.classList.contains("nowplaying__widget")) {
+      var np = el.closest("[data-now-playing]");
+      if (np) np.classList.add("is-spin-ready");
+    }
+
+    if (window.persistChromeCache) window.persistChromeCache();
   }
 
   function enter(el, delayMs) {
@@ -30,7 +38,6 @@
       if (finished) return;
       finished = true;
       finish(el);
-      if (window.persistChromeCache) window.persistChromeCache();
     }
 
     requestAnimationFrame(function () {
@@ -46,16 +53,30 @@
             complete();
           }
         );
-        window.setTimeout(complete, 700 + (delayMs || 0));
+        window.setTimeout(complete, 520 + (delayMs || 0));
       });
     });
   }
 
   function initChromeEntrance() {
-    // Replay each load, same as the Spotify widget. layout.js sanitizes
-    // entrance classes out of the chrome cache so we never stick at opacity 0.
-    enter(document.querySelector(".layout .profile-card"), 0);
-    enter(document.querySelector(".top-nav"), 70);
+    var profile = document.querySelector(".layout .profile-card");
+    var topNav = document.querySelector(".top-nav");
+    var spotifyRoot = document.querySelector("[data-now-playing]");
+    var spotify = spotifyRoot && spotifyRoot.querySelector(".nowplaying__widget");
+    var pageRoot = document.querySelector(".layout > .root");
+
+    // Chrome wave — fast, first, tight stagger.
+    enter(profile, 0);
+    enter(topNav, 35);
+    if (spotify) {
+      // Own the Spotify entrance so it does not wait on the API poll.
+      spotifyRoot.setAttribute("data-entrance", "chrome");
+      if (!spotifyRoot.dataset.hydrated) spotifyRoot.dataset.hydrated = "1";
+      enter(spotify, 70);
+    }
+
+    // Page content after chrome has started landing.
+    enter(pageRoot, 200);
   }
 
   window.initChromeEntrance = initChromeEntrance;
