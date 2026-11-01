@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Soon — Studio</title>
+    <meta
+      name="description"
+      content="Placeholder for a future Studio workspace surface. Internal, not for search."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/components.css?v=28" />
+  </head>
+  <body>
+    <header class="studio-shell" data-component="StudioShell">
+      <div class="studio-shell__inner">
+        <a class="studio-shell__brand" href="/components.html">Studio</a>
+        <nav class="studio-shell__nav" aria-label="Studio">
+          <a href="/components.html">Styleguide</a>
+          <a href="/components.html#components">Components</a>
+          <a class="studio-shell__soon" href="/studio/soon.html" aria-current="page"
+            >Blog <span class="studio-shell__badge">Soon</span></a
+          >
+          <a class="studio-shell__soon" href="/studio/soon.html"
+            >Notepad <span class="studio-shell__badge">Soon</span></a
+          >
+          <a class="studio-shell__soon" href="/studio/soon.html"
+            >Scratchpad <span class="studio-shell__badge">Soon</span></a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="studio-soon">
+      <h1 class="studio-soon__title">Coming soon</h1>
+      <p class="studio-soon__lead">
+        Blog, Notepad, and Scratchpad are reserved slots in the Studio shell.
+        No backends yet — this page is only a quiet placeholder.
+      </p>
+      <a class="studio-soon__back" href="/components.html">Back to Styleguide</a>
+    </main>
+
+    <script src="/admin-auth.js?v=14"></script>
+    <script>if (window.initAdminAuth) window.initAdminAuth();</script>
+  </body>
+</html>
