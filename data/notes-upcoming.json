@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "title": "Coding Is the New Excel",
+      "slug": "coding-is-the-new-excel",
+      "href": "/notes/coding-is-the-new-excel/",
+      "dek": "My head of content opened a pull request this morning. Coding is not hard anymore, and it is becoming part of the job the way spreadsheets did.",
+      "author": "Julian Kreth",
+      "date": null,
+      "soon": true,
+      "viewTransitionName": "note-soon-0"
+    },
+    {
+      "title": "We Packed Our Whole Agency Into a Claude Code Plugin",
+      "slug": "masse-workbench-claude-code-plugin",
+      "href": "/notes/masse-workbench-claude-code-plugin/",
+      "dek": "Fifty people, one install command. What Claude Code plugins actually are, and a tour of the Masse Workbench.",
+      "author": "Julian Kreth",
+      "date": null,
+      "soon": true,
+      "viewTransitionName": "note-soon-1"
+    },
+    {
+      "title": "Cursor, Codex, Claude Code: What I Use for Which",
+      "slug": "cursor-codex-claude-code-what-i-use-for-which",
+      "href": "/notes/cursor-codex-claude-code-what-i-use-for-which/",
+      "dek": "I do not rank coding agents. I route jobs: Cursor for the screen, Claude Code for the team, Codex when I want a long run I can leave alone.",
+      "author": "Julian Kreth",
+      "date": null,
+      "soon": true,
+      "viewTransitionName": "note-soon-2"
+    },
+    {
+      "title": "An LLM Is One Brain Region Pretending to Be a Whole Brain",
+      "slug": "llms-are-one-brain-region",
+      "href": "/notes/llms-are-one-brain-region/",
+      "dek": "We have been comparing chatbots to brains. Wrong metaphor. A brain is more like a chip: many systems lighting up together. An LLM is closer to one of those regions.",
+      "author": "Julian Kreth",
+      "date": null,
+      "soon": true,
+      "viewTransitionName": "note-soon-3"
+    },
+    {
+      "title": "Leaving Notes for the Robots: Do AI Agents Follow Instructions on Pages That Rank?",
+      "slug": "leaving-notes-for-the-robots",
+      "href": "/notes/leaving-notes-for-the-robots/",
+      "dek": "What happens when you put instructions for agents on pages that already rank, and whether crawlers and agents actually follow them.",
+      "author": "Julian Kreth",
+      "date": null,
+      "soon": true,
+      "viewTransitionName": "note-soon-4"
+    }
+  ]
+}

@@ -466,6 +466,62 @@ article,
   white-space: nowrap;
 }
 
+.notes-archive__soon-label,
+.notes-archive__drafts-label {
+  margin: 1.75rem 0 0.35rem;
+  padding-top: 0.5rem;
+  color: var(--kw-text-muted);
+}
+
+.notes-archive__row--draft .notes-archive__row-title {
+  font-style: italic;
+  color: var(--kw-text-muted);
+}
+
+.notes-archive__row--soon {
+  color: var(--kw-text-muted);
+}
+
+.notes-archive__row--soon .notes-archive__row-title {
+  color: var(--kw-text-muted);
+}
+
+.notes-archive__row--soon .notes-archive__row-meta {
+  color: var(--kw-text-faint);
+}
+
+.notes-archive__row--soon:hover {
+  color: var(--kw-text-subtle);
+}
+
+.notes-archive__row--soon:hover .notes-archive__row-title {
+  color: var(--kw-text-subtle);
+}
+
+.article--soon .note-soon-banner {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.125rem;
+  background: var(--kw-fill);
+  border: 1px solid var(--kw-fill-muted);
+  border-radius: var(--kw-radius-md);
+  color: var(--kw-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.article--soon .note-soon-banner a {
+  color: var(--kw-text);
+}
+
+.writing-list__item--soon .writing-list__meta,
+.writing-list__item--soon .writing-list__title {
+  color: var(--kw-text-muted);
+}
+
+.writing-list__item--soon:hover .writing-list__title {
+  color: var(--kw-text-subtle);
+}
+
 @media (max-width: 639px) {
   .notes-archive__row {
     flex-direction: column;

@@ -2,7 +2,7 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "47";
+  var CHROME_CACHE_VERSION = "48";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
@@ -91,15 +91,21 @@
       }
     } catch (_) {}
 
-    fetch("/data/notes.json?v=2")
+    fetch("/data/notes.json?v=4")
       .then(function (response) {
         if (!response.ok) throw new Error("Could not load the article archive");
         return response.json();
       })
       .then(function (data) {
-        var items = (data.items || []).slice().sort(function (a, b) {
-          return (b.date || "").localeCompare(a.date || "");
-        });
+        // Sidebar index: published notes only (teasers stay on /notes/).
+        var items = (data.items || [])
+          .filter(function (item) {
+            return item && !item.soon && !item.draft && item.date;
+          })
+          .slice()
+          .sort(function (a, b) {
+            return (b.date || "").localeCompare(a.date || "");
+          });
         var indexHtml = buildNotesIndexHtml(items);
         try {
           sessionStorage.setItem("kreth-notes-index-html", indexHtml);
@@ -142,8 +148,8 @@
     return (
       '<nav class="notes-index" aria-label="Article archive">' +
       '<div class="notes-index__head">' +
-      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open the Archive">' +
-      '<span class="notes-index__title">Archive</span></a>' +
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open Fieldnotes">' +
+      '<span class="notes-index__title">Fieldnotes</span></a>' +
       "</div>" +
       '<div class="notes-index__list-wrap"><div class="notes-archive notes-archive--index" data-notes-list>' +
       rows +
@@ -157,8 +163,8 @@
     if (!head) return;
 
     head.innerHTML =
-      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open the Archive">' +
-      '<span class="notes-index__title">Archive</span></a>';
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open Fieldnotes">' +
+      '<span class="notes-index__title">Fieldnotes</span></a>';
 
     index.querySelectorAll(".notes-archive__row-title").forEach(function (title) {
       if (title.querySelector(".notes-archive__row-title-inner")) return;

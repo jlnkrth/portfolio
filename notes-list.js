@@ -1,4 +1,4 @@
-// Renders the notes archive list from data/notes.json (+ drafts.json when present)
+// Renders the notes archive list from data/notes.json (+ upcoming + drafts).
 (function () {
   "use strict";
 
@@ -27,14 +27,17 @@
         : "";
     var meta = item.draft
       ? "Draft"
-      : item.author && item.date
-        ? item.author + " · " + formatDate(item.date)
-        : item.author || formatDate(item.date);
+      : item.soon
+        ? "Coming soon"
+        : item.author && item.date
+          ? item.author + " · " + formatDate(item.date)
+          : item.author || formatDate(item.date);
 
     var rowClass =
       "notes-archive__row" +
       (compact ? " notes-archive__row--compact" : "") +
-      (item.draft ? " notes-archive__row--draft" : "");
+      (item.draft ? " notes-archive__row--draft" : "") +
+      (item.soon ? " notes-archive__row--soon" : "");
 
     if (compact) {
       return (
@@ -76,10 +79,10 @@
       .join("");
 
     return (
-      '<nav class="notes-index" aria-label="Article archive">' +
+      '<nav class="notes-index" aria-label="Fieldnotes">' +
       '<div class="notes-index__head">' +
-      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open the Archive">' +
-      '<span class="notes-index__title">Archive</span></a>' +
+      '<a class="label notes-index__head-link" href="/notes/" aria-label="Open Fieldnotes">' +
+      '<span class="notes-index__title">Fieldnotes</span></a>' +
       "</div>" +
       '<div class="notes-index__list-wrap"><div class="notes-archive notes-archive--index" data-notes-list>' +
       rows +
@@ -87,10 +90,11 @@
     );
   }
 
-  function render(published, drafts) {
+  function render(published, upcoming, drafts) {
     var items = (published || []).slice().sort(function (a, b) {
       return (b.date || "").localeCompare(a.date || "");
     });
+    var soonItems = (upcoming || []).slice();
     var draftItems = (drafts || []).slice();
 
     listEl.className = "notes-archive";
@@ -99,6 +103,16 @@
         return archiveRow(item);
       })
       .join("");
+
+    if (soonItems.length) {
+      html +=
+        '<p class="notes-archive__soon-label label">Coming soon</p>' +
+        soonItems
+          .map(function (item) {
+            return archiveRow(item);
+          })
+          .join("");
+    }
 
     if (draftItems.length) {
       html +=
@@ -112,7 +126,7 @@
 
     listEl.innerHTML = html;
 
-    var allForIndex = items.concat(draftItems);
+    var allForIndex = items.concat(soonItems).concat(draftItems);
     listEl.addEventListener("click", function (event) {
       var clicked = event.target.closest("a.notes-archive__row");
       if (!clicked) return;
@@ -126,20 +140,30 @@
     });
   }
 
-  Promise.all([
-    fetch("/data/notes.json?v=3").then(function (r) {
-      return r.json();
-    }),
-    fetch("/data/drafts.json?v=1")
+  function fetchJson(url) {
+    return fetch(url)
       .then(function (r) {
         return r.ok ? r.json() : { items: [] };
       })
       .catch(function () {
         return { items: [] };
-      }),
+      });
+  }
+
+  Promise.all([
+    fetch("/data/notes.json?v=4").then(function (r) {
+      if (!r.ok) throw new Error("notes");
+      return r.json();
+    }),
+    fetchJson("/data/notes-upcoming.json?v=1"),
+    fetchJson("/data/drafts.json?v=1"),
   ])
-    .then(function (pair) {
-      render(pair[0].items || [], pair[1].items || []);
+    .then(function (triple) {
+      render(
+        triple[0].items || [],
+        triple[1].items || [],
+        triple[2].items || []
+      );
     })
     .catch(function () {
       listEl.innerHTML = '<p class="muted">Could not load notes.</p>';

@@ -296,17 +296,36 @@ Each block should usually be followed by `<p class="element-caption">...</p>` un
 - [ ] One type chosen; required components for that type present
 - [ ] `description` and `og:description` match the dek or first sentence
 - [ ] Slug is kebab-case; folder `notes/<slug>/index.html`
-- [ ] Listed on `notes/index.html` and homepage Writing section
+- [ ] Listed in `data/notes.json` and homepage Writing section
 - [ ] Prev/next nav links updated on adjacent articles
 - [ ] No inline styles on dek (use `.article-dek`)
-- [ ] Code blocks only for specs, configs, or copy-pasteable examples — not prose
+- [ ] Code blocks only for specs, configs, or copy-pasteable examples, not prose
+
+---
+
+## Coming soon to published
+
+Public teasers live at `notes/<slug>/index.html` with title, dek, and a Coming soon banner only. Full draft essays stay on draft branches / preview builds (`noindex`) until you say to publish. Preview `dist/data/drafts.json` is separate from the public Coming soon list in `data/notes-upcoming.json`.
+
+When promoting a teaser (or a draft branch) to a live article:
+
+1. Replace the teaser page with the full article HTML (or merge the draft branch carefully).
+2. Remove `noindex` / `nofollow` and any DRAFT banner from the page.
+3. Add the note to `data/notes.json` (title, slug, href, author, date, viewTransitionName).
+4. Remove it from `data/notes-upcoming.json` (clear the `soon` entry).
+5. Update homepage Writing: dated row instead of `writing-list__item--soon`.
+6. Wire `article-nav` prev/next on this note and its neighbors.
+7. `npm run build`, spot-check archive (no Coming soon row for it), homepage, and the article URL.
+8. Confirm robots / canonical look right and the essay is indexable.
+
+Do not ship full draft bodies from open draft PRs onto main without an explicit go-ahead.
 
 ---
 
 ## File checklist (new article)
 
-1. Copy from `notes/_templates/<type>/` → `notes/<slug>/index.html`
-2. `notes/index.html` — add list item (newest first)
+1. Copy from `notes/_templates/<type>/` → `notes/<slug>/index.html` (or start as a Coming soon teaser in `data/notes-upcoming.json`)
+2. `data/notes.json` — add published item (newest first by date)
 3. `index.html` — Writing section list item
 4. Neighbor article — update `article-nav` link
 5. Remove `.banner__template` (and optional CTA copy) from the banner before publish
