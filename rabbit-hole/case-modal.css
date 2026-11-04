@@ -1,0 +1,333 @@
+/* Case-study overlay for the rabbit-hole grid.
+   Layout follows the Office Commun case pages: statement headline, lede,
+   facts row, hero shot, narrative sections, CTA, next project. */
+.case-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+.case-modal[hidden] {
+  display: none;
+}
+
+body.case-modal-open {
+  overflow: hidden;
+}
+
+.case-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(6, 30, 50, 0.45);
+  cursor: pointer;
+}
+
+.case-modal__dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(860px, 100%);
+  max-height: calc(100dvh - 48px);
+}
+
+.case-modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--kw-line);
+  border-radius: var(--kw-radius-pill);
+  background: var(--kw-surface-raised);
+  color: var(--kw-text);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+.case-modal__close:hover {
+  background: var(--kw-fill);
+}
+
+.case-modal__close:focus-visible {
+  outline: 2px solid var(--kw-text);
+  outline-offset: 2px;
+}
+
+.case-modal__scroll {
+  margin-top: 40px;
+  max-height: calc(100dvh - 88px);
+  overflow: auto;
+  min-height: 0;
+  border-radius: var(--kw-radius-card);
+}
+
+.case-modal__tray {
+  padding: 6px;
+  border: 1px solid var(--kw-line);
+  border-radius: var(--kw-radius-card);
+  background: var(--kw-fill);
+}
+
+.case-modal__panel {
+  overflow: hidden;
+  border: 1px solid var(--kw-line);
+  border-radius: calc(var(--kw-radius-card) - 3px);
+  background: var(--kw-surface-raised);
+  box-shadow:
+    rgba(0, 0, 0, 0.02) 2px 2px 4px 0px,
+    rgba(0, 0, 0, 0.03) 0px 1px 2px 0px;
+}
+
+/* —— Hero: kicker, statement headline, lede —— */
+.case-modal__hero {
+  padding: 36px 28px 24px;
+}
+
+.case-modal__kicker {
+  margin: 0 0 14px;
+  font-family: var(--kw-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kw-text-faint);
+}
+
+.case-modal__heading {
+  margin: 0;
+  font-size: clamp(26px, 5vw, 36px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--kw-text);
+}
+
+.case-modal__lede {
+  margin: 14px 0 0;
+  max-width: 46rem;
+  font-size: 15px;
+  line-height: 1.7;
+  text-wrap: pretty;
+  color: var(--kw-text-muted);
+}
+
+/* —— Facts row: Client / What it is / Year / Services —— */
+.case-modal__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+  margin: 0;
+  padding: 20px 28px;
+  border-top: 1px solid var(--kw-line);
+}
+
+.case-modal__fact {
+  min-width: 0;
+}
+
+.case-modal__fact-label {
+  margin: 0 0 6px;
+  font-family: var(--kw-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kw-text-faint);
+}
+
+.case-modal__fact-value {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--kw-text);
+}
+
+.case-modal__fact-line {
+  display: block;
+}
+
+/* —— Hero shot —— */
+.case-modal__media {
+  border-top: 1px solid var(--kw-line);
+  background: var(--kw-fill);
+}
+
+.case-modal__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-modal__media--empty {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+}
+
+.case-modal__media-placeholder {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--kw-text-subtle);
+}
+
+/* —— Narrative sections (optional, data-driven) —— */
+.case-modal__body {
+  padding: 8px 28px 4px;
+  border-top: 1px solid var(--kw-line);
+}
+
+.case-modal__section-heading {
+  margin: 24px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--kw-text);
+}
+
+.case-modal__paragraph {
+  margin: 0 0 16px;
+  max-width: 46rem;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-text-muted);
+}
+
+/* —— CTA row —— */
+.case-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  padding: 20px 28px;
+  border-top: 1px solid var(--kw-line);
+}
+
+.case-modal__cta {
+  display: inline-flex;
+  align-items: center;
+  height: var(--kw-control-height);
+  padding: 0 20px;
+  border-radius: var(--kw-radius-control);
+  background: var(--kw-control-bg);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--kw-text-inverse);
+  text-decoration: none;
+}
+
+.case-modal__cta:hover {
+  background: var(--kw-control-hover);
+}
+
+.case-modal__visit {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kw-text-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--kw-status-idle);
+}
+
+.case-modal__visit:hover {
+  color: var(--kw-text);
+  text-decoration-color: var(--kw-text-muted);
+}
+
+/* —— Next project footer —— */
+.case-modal__next {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 28px 20px;
+  border-top: 1px solid var(--kw-line);
+}
+
+.case-modal__next-label {
+  font-family: var(--kw-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kw-text-faint);
+}
+
+.case-modal__next-link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  color: var(--kw-text);
+  cursor: pointer;
+}
+
+.case-modal__next-client {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--kw-status-idle);
+}
+
+.case-modal__next-link:hover .case-modal__next-client {
+  text-decoration-color: var(--kw-text-muted);
+}
+
+.case-modal__next-what {
+  color: var(--kw-text-muted);
+}
+
+@media (min-width: 640px) {
+  .case-modal__hero {
+    padding: 44px 36px 28px;
+  }
+
+  .case-modal__facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 22px 36px;
+  }
+
+  .case-modal__body {
+    padding: 12px 36px 8px;
+  }
+
+  .case-modal__actions {
+    padding: 22px 36px;
+  }
+
+  .case-modal__next {
+    padding: 18px 36px 22px;
+  }
+}
+
+@media (max-width: 639px) {
+  .case-modal {
+    padding: 16px 12px;
+    place-items: start center;
+  }
+
+  .case-modal__dialog {
+    max-height: calc(100dvh - 32px);
+  }
+
+  .case-modal__scroll {
+    max-height: calc(100dvh - 72px);
+  }
+}

@@ -9,33 +9,56 @@
         "title": "Fitness Video Platform -  No-Code Development",
         "slug": "livetrained",
         "client": "Livetrained",
-        "href": "/rabbit-hole/livetrained/",
+        "href": "/rabbit-hole/#livetrained",
         "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6788024087f995e5483c42d1_udxzjo31qptx5lychr1p.avif",
-        "confidential": false
+        "confidential": false,
+        "what": "Fitness video platform",
+        "services": [
+          "No-code development"
+        ],
+        "website": "https://livetrained.com/",
+        "lede": "No-code development for Livetrained, a fitness video platform."
       },
       {
         "title": "Local News Startup -  Marketing Landingpage",
         "slug": "newsbreak",
         "client": "Newsbreak",
-        "href": "/rabbit-hole/newsbreak/",
+        "href": "/rabbit-hole/#newsbreak",
         "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6788023687f995e5483c3476_wv3qm68glxnrbcm9biep.avif",
-        "confidential": false
+        "confidential": false,
+        "what": "Local news startup",
+        "services": [
+          "Marketing landing page"
+        ],
+        "website": "https://www.newsbreak.com/about",
+        "lede": "Marketing landing page for Newsbreak, a local news startup."
       },
       {
         "title": "Digital Desk Management - Webflow Migration",
         "slug": "pult",
         "client": "Pult",
-        "href": "/rabbit-hole/pult/",
+        "href": "/rabbit-hole/#pult",
         "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/6788021470c80f8dc8aae0aa_qwfknkd2ysj9icofoedt.avif",
-        "confidential": false
+        "confidential": false,
+        "what": "Digital desk management",
+        "services": [
+          "Webflow migration"
+        ],
+        "website": "https://www.pult.com/",
+        "lede": "Webflow migration for Pult, a digital desk management platform."
       },
       {
         "title": "Design Collaboration Tool  - Website Launch",
-        "slug": "confidential",
+        "slug": "confidential-design",
         "client": "Confidential",
-        "href": "/rabbit-hole/#confidential",
+        "href": "/rabbit-hole/#confidential-design",
         "image": "",
-        "confidential": true
+        "confidential": true,
+        "what": "Design collaboration tool",
+        "services": [
+          "Website launch"
+        ],
+        "lede": "Website launch for a design collaboration tool. Client under NDA."
       },
       {
         "title": "Hard Tech Startup - SEO Optimization",
@@ -43,7 +66,13 @@
         "client": "Meter",
         "href": "/rabbit-hole/#meter",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "Hard tech startup",
+        "services": [
+          "SEO optimization"
+        ],
+        "website": "https://www.meter.com/",
+        "lede": "SEO optimization for Meter, a hard tech startup."
       },
       {
         "title": "Recruiting Startup - Website Relaunch",
@@ -51,7 +80,13 @@
         "client": "Instaffo",
         "href": "/rabbit-hole/#instaffo",
         "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678801ecb49b3991b319c787_srfusgmxx7u02ekmqgmh.avif",
-        "confidential": false
+        "confidential": false,
+        "what": "Recruiting startup",
+        "services": [
+          "Website relaunch"
+        ],
+        "website": "https://www.instaffo.com/",
+        "lede": "Website relaunch for Instaffo, a recruiting startup."
       },
       {
         "title": "AI Startup - Blog Relaunch",
@@ -59,15 +94,26 @@
         "client": "Weights",
         "href": "/rabbit-hole/#weights",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "AI startup",
+        "services": [
+          "Blog relaunch"
+        ],
+        "website": "https://weights.com/",
+        "lede": "Blog relaunch for Weights, an AI startup."
       },
       {
         "title": "Ai Prospecting Platform - Website Launch",
-        "slug": "confidential",
+        "slug": "confidential-prospecting",
         "client": "Confidential",
-        "href": "/rabbit-hole/#confidential",
+        "href": "/rabbit-hole/#confidential-prospecting",
         "image": "",
-        "confidential": true
+        "confidential": true,
+        "what": "AI prospecting platform",
+        "services": [
+          "Website launch"
+        ],
+        "lede": "Website launch for an AI prospecting platform. Client under NDA."
       },
       {
         "title": "Ai Agent Startup - Website Relaunch",
@@ -75,7 +121,13 @@
         "client": "Lindy.ai",
         "href": "/rabbit-hole/#lindy-ai",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "AI agent startup",
+        "services": [
+          "Website relaunch"
+        ],
+        "website": "https://www.lindy.ai/",
+        "lede": "Website relaunch for Lindy.ai, an AI agent startup."
       },
       {
         "title": "Saas Startup - Blog Relaunch",
@@ -83,7 +135,13 @@
         "client": "Adalo",
         "href": "/rabbit-hole/#adalo",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "SaaS startup",
+        "services": [
+          "Blog relaunch"
+        ],
+        "website": "https://www.adalo.com/",
+        "lede": "Blog relaunch for Adalo, a SaaS startup."
       },
       {
         "title": "Startup Lawyer - Website Project",
@@ -91,7 +149,13 @@
         "client": "Voy.Tax",
         "href": "/rabbit-hole/#voy-tax",
         "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/678801fe6cca1442e9253b2e_dtrkd7hbawnau5t2c7bf.avif",
-        "confidential": false
+        "confidential": false,
+        "what": "Startup lawyer",
+        "services": [
+          "Website project"
+        ],
+        "website": "https://voy.law/",
+        "lede": "Website project for Voy.Tax, a startup lawyer."
       },
       {
         "title": "Early Stage Sales Software -  Website Launch",
@@ -99,7 +163,14 @@
         "client": "Notch.so",
         "href": "/rabbit-hole/#notch-so",
         "image": "https://cdn.prod.website-files.com/66dff7aa472f9f364f415b38/67880226a6ceca04a1129610_nyv8x8kazlsvqqxwzl2q.avif",
-        "confidential": false
+        "confidential": false,
+        "what": "Early-stage sales software",
+        "services": [
+          "Design",
+          "Development"
+        ],
+        "website": "https://www.notch.so/",
+        "lede": "Website design and development for Notch.so, an early-stage sales software."
       },
       {
         "title": "Legal Startup -  Webflow Migration",
@@ -107,7 +178,13 @@
         "client": "ContractHero",
         "href": "/rabbit-hole/#contracthero",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "Legal startup",
+        "services": [
+          "Webflow migration"
+        ],
+        "website": "https://www.contracthero.com/",
+        "lede": "Webflow migration for ContractHero, a legal startup."
       },
       {
         "title": "Unicorn Startup - Blog Relaunch",
@@ -115,7 +192,13 @@
         "client": "Fiverr",
         "href": "/rabbit-hole/#fiverr",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "Unicorn startup",
+        "services": [
+          "Blog relaunch"
+        ],
+        "website": "https://www.fiverr.com/",
+        "lede": "Blog relaunch for Fiverr."
       },
       {
         "title": "Fintech - Website Launch",
@@ -123,7 +206,14 @@
         "client": "Banxware",
         "href": "/rabbit-hole/#banxware",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "Fintech",
+        "services": [
+          "Design",
+          "Development"
+        ],
+        "website": "https://www.banxware.com/",
+        "lede": "Website design and development for Banxware, a fintech."
       },
       {
         "title": "Enterprise Security Software - SEO Optimization",
@@ -131,7 +221,13 @@
         "client": "WorkOS",
         "href": "/rabbit-hole/#workos",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "Enterprise security software",
+        "services": [
+          "SEO optimization"
+        ],
+        "website": "https://workos.com/",
+        "lede": "SEO optimization for WorkOS, enterprise security software."
       },
       {
         "title": "Collaboration SaaS -  Webflow Development",
@@ -139,7 +235,13 @@
         "client": "Switchboard",
         "href": "/rabbit-hole/#switchboard",
         "image": "",
-        "confidential": false
+        "confidential": false,
+        "what": "Collaboration SaaS",
+        "services": [
+          "Webflow development"
+        ],
+        "website": "https://switchboard.app/",
+        "lede": "Webflow development for Switchboard, a collaboration SaaS."
       }
     ]
   },
@@ -1666,7 +1768,7 @@
     "path": "/about/",
     "sections": [
       {
-        "heading": "Julian Kreth \u2014 Head of Strategy Engineering at Masse, founder of Karma Studio."
+        "heading": "Julian Kreth — Head of Strategy Engineering at Masse, founder of Karma Studio."
       }
     ]
   }
