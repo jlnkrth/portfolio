@@ -65,7 +65,7 @@ function parseClients(html) {
     items.push({
       title,
       slug,
-      href: external || `/clients/#${slug}`,
+      href: external || `/work/#${slug}`,
       external: Boolean(external),
       image,
     });
@@ -189,10 +189,10 @@ async function main() {
       items: books,
     },
     clients: {
-      label: "Clients",
-      path: "/clients/",
+      label: "Work",
+      path: "/work/",
       count: clients.length,
-      previewKind: "client",
+      previewKind: "work",
       items: clients,
     },
     about: {

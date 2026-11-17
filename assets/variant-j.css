@@ -1,0 +1,979 @@
+/* Variant J: the variant I intro set on a hotel notepad sheet.
+   Loads after variant-i.css. Scoped to .home-intro only. */
+
+.home-intro.home-intro--pad {
+  --ink: #23305e;              /* deep stationery navy */
+  --ink-soft: rgba(35, 48, 94, 0.62);
+  --gold: #b48a3c;
+  --paper: #f8f6f0;            /* near-neutral ivory */
+  --paper-edge: #ece8df;
+  --pad-w: 280px;
+  --pad-zoom: 1.15;
+  --pad-tilt: -8.5deg;
+  --drag-lift: 0deg;
+  --ease-flip: cubic-bezier(0.62, 0.02, 0.24, 1);
+  /* row, not the site default column. Pad sits on the left of the content
+     column; the pile is absolutely placed in the upper right. */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  /* Same vertical padding as production so the After Hours band can
+     sit in its original place. The smaller pad + stack fit in that height. */
+  padding: 2px 24px 18px;
+  --pad-scale: 1;
+}
+
+/* ---------- the pad ---------- */
+/* stage carries drag offset so the pad's load animation can keep its own transform */
+.home-intro .pad-stage {
+  --drag-x: 0px;
+  --drag-y: 0px;
+  position: relative;
+  width: calc(var(--pad-w) * var(--pad-zoom));
+  max-width: 100%;
+  /* Julian's rest position at 1718x957: stage left 524, top 151.
+     Horizontal offset is a fraction of the content column so 1280 and
+     1024 keep the pad on the left. Vertical offset only applies when
+     the viewport is tall enough to keep 16px above After Hours. */
+  margin: clamp(0px, calc((100vh - 800px) * 0.4268), 67px) 0 0 calc((100vw - 390px) * 0.1057);
+  z-index: 1;
+  transform-origin: 50% 0%;
+  /* rest tilt lives on the pad; the stage translates, adds a little extra tilt while lifted,
+     and may scale down on short viewports so the rotated pad stays above After Hours */
+  transform: translate3d(var(--drag-x), var(--drag-y), 0) rotate(var(--drag-lift)) scale(var(--pad-scale, 1));
+}
+.home-intro .pad-stage.is-settling {
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-intro .pad-stage.is-dragging {
+  z-index: 40;
+  --drag-lift: -1.6deg;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.home-intro .pad-stage.is-dragging .pad {
+  animation: none;
+  transform: rotate(var(--pad-tilt)) translateY(-6px);
+  transition: transform 160ms ease;
+}
+.home-intro .pad-stage.is-settling .pad {
+  animation: none;
+  transform: rotate(var(--pad-tilt));
+  transition: transform 160ms ease;
+}
+.home-intro .pad-stage.is-dragging .pad__stack span:first-child {
+  box-shadow:
+    0 2px 3px rgba(50, 45, 35, 0.10),
+    0 8px 16px rgba(50, 45, 35, 0.10),
+    0 20px 32px -12px rgba(50, 45, 35, 0.18);
+}
+
+.home-intro .pad {
+  position: relative;
+  width: var(--pad-w);
+  max-width: 100%;
+  /* Scale the whole sheet while the outer stage still drags in screen pixels. */
+  zoom: var(--pad-zoom);
+  margin-left: 0;
+  perspective: 2600px;
+  perspective-origin: 50% 0%;
+  transform-origin: 50% 40%;
+  /* rests at --pad-tilt, like a sheet dropped on the desk; the entrance ends on that angle */
+  transform: rotate(var(--pad-tilt));
+  animation: pad-settle 820ms var(--ease-flip) 180ms both;
+}
+
+/* ---------- page-load entrance (pure CSS, runs once; final frame = rest tilt) ---------- */
+@keyframes pad-settle {
+  from { transform: perspective(1800px) rotateX(8deg) rotate(calc(var(--pad-tilt) - 2deg)) translateY(-8px); }
+  to   { transform: rotate(var(--pad-tilt)); }
+}
+@keyframes flap-lift {
+  0%   { transform: rotateX(0deg); visibility: visible; }
+  99%  { visibility: visible; }
+  100% { transform: rotateX(-172deg); visibility: hidden; }
+}
+@keyframes flap-fade {
+  0%, 60% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+
+/* sheets underneath, slightly out of register */
+.home-intro .pad__stack span {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--paper-edge);
+  box-shadow: 0 1px 0 rgba(60, 55, 45, 0.06);
+}
+.home-intro .pad__stack span:first-child {
+  transform: translate(2px, 3px) rotate(0.35deg);
+  box-shadow: 0 1px 1px rgba(50, 45, 35, 0.08), 0 4px 10px rgba(50, 45, 35, 0.07), 0 14px 26px -10px rgba(50, 45, 35, 0.14);
+}
+.home-intro .pad__stack span:last-child {
+  transform: translate(-1px, 1.5px) rotate(-0.2deg);
+  background: #f2efe7;
+}
+
+/* paper: laid texture (fine horizontal lines + faint chain lines) */
+.home-intro .pad__sheet,
+.home-intro .pad__flap-face {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90, 80, 60, 0.022) 0 1px, transparent 1px 2.5px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(90, 80, 60, 0.01) 31px 32px),
+    radial-gradient(120% 90% at 30% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(140% 120% at 100% 100%, rgba(120, 110, 90, 0.045), transparent 60%);
+}
+
+.home-intro .pad__sheet {
+  position: relative;
+  z-index: 1;
+  border-radius: 2px;
+  padding: 8px 14px 44px;
+  box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13), 0 1px 2px rgba(50, 45, 35, 0.06);
+}
+
+/* ---------- letterhead ---------- */
+.home-intro .letterhead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 2px;
+  margin: 0 0 5px;
+}
+
+.home-intro .letterhead__crest {
+  display: block;
+  width: auto;
+  height: 16px;
+  margin: 0 0 2px;
+  /* the SVG ships in #1f2433; nudge it to the stationery navy */
+  filter: brightness(0) saturate(100%) invert(16%) sepia(26%) saturate(2400%) hue-rotate(205deg) brightness(92%);
+  opacity: 0.94;
+}
+
+.home-intro .letterhead__name,
+.home-intro p.letterhead__name {
+  margin: 0;
+  font-family: "Pinyon Script", cursive;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.home-intro .letterhead__line,
+.home-intro p.letterhead__line {
+  margin: 2px 0 0;
+  font-family: "Alegreya Sans", "Gill Sans", system-ui, sans-serif;
+  font-size: 8.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+/* hairline rule with a short gold seam: kintsugi, quietly */
+.home-intro .letterhead__rule {
+  display: block;
+  width: 80px;
+  height: 1px;
+  margin-top: 4px;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(35, 48, 94, 0.28) 18%, rgba(35, 48, 94, 0.28) 40%,
+      var(--gold) 46%, #d9b56a 50%, var(--gold) 54%,
+      rgba(35, 48, 94, 0.28) 60%, rgba(35, 48, 94, 0.28) 82%, transparent 100%);
+}
+
+/* ---------- Openlead favicon ---------- */
+.home-intro .desk__item--openlead {
+  position: absolute;
+  left: clamp(0px, calc(63% - 48px), calc(100% - 96px));
+  top: calc(70% - 48px);
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  box-shadow: 0 5px 14px rgba(50, 45, 35, 0.18);
+  transform: translate3d(var(--drag-x, 0px), var(--drag-y, 0px), 0);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  z-index: 2;
+}
+
+.home-intro:has(.has-default-layout) .desk__item--openlead {
+  top: auto;
+  bottom: 4%;
+}
+
+.home-intro .desk__item--openlead.is-dragging {
+  cursor: grabbing;
+  z-index: 40;
+}
+
+/* ---------- body text (variant I tokens, flex gap restored) ---------- */
+.home-intro .pad__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* body type: 11px is the floor; leading is tight so the sheet stays short */
+.root--full .home-intro .pad p.greeting,
+.root--full .home-intro .pad p.copy,
+.home-intro .pad p.greeting,
+.home-intro .pad p.copy {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+/* blind emboss: the fox, paper on paper (light edge up-left, shade down-right) */
+.home-intro .pad__emboss {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 28px;
+  height: 14px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.home-intro .pad__emboss::before,
+.home-intro .pad__emboss::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  -webkit-mask: url("letterhead-fox.svg") center / contain no-repeat;
+  mask: url("letterhead-fox.svg") center / contain no-repeat;
+}
+.home-intro .pad__emboss::before {
+  transform: translate(-0.7px, -0.8px);
+  background: rgba(255, 255, 255, 0.55);
+}
+.home-intro .pad__emboss::after {
+  transform: translate(0.5px, 0.6px);
+  background: rgba(100, 90, 70, 0.15);
+}
+
+/* ---------- top sheet (the flap) ---------- */
+.home-intro .pad__flap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  /* resting state: gone. The animation shows it from frame 0 (fill-mode both). */
+  visibility: hidden;
+  transform: rotateX(-172deg);
+  animation: flap-lift 760ms var(--ease-flip) 300ms both;
+}
+
+.home-intro .pad__flap-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: 8px 14px 44px;
+  box-sizing: border-box;
+  display: block;
+  /* opacity on the faces, not the flap: opacity on the flap would flatten preserve-3d */
+  opacity: 0;
+  animation: flap-fade 760ms linear 300ms both;
+}
+
+.home-intro .pad__flap-face--front {
+  box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13), 0 1px 2px rgba(50, 45, 35, 0.08);
+}
+
+.home-intro .pad__flap-face--back {
+  transform: rotateX(180deg);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(120, 82, 40, 0.04) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #f1eee6, #e8e4da);
+  box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13);
+}
+
+.home-intro .pad__flap .letterhead {
+  padding-top: 14px;
+}
+.home-intro .pad__flap .letterhead__name,
+.home-intro .pad__flap .letterhead__line {
+  display: block;
+}
+
+/* fans must escape the sheet and sit above everything in the pad */
+.home-intro .pad__sheet .fan {
+  z-index: 60;
+}
+
+/* Letterhead zone (~28% of the sheet, including the navy glue strip).
+   Dragging here moves the whole pad on desktop and phones. The ::before
+   stripe is only 7px; the rest of the hit area is invisible. */
+.home-intro .pad__handle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 28%;
+  z-index: 8;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.home-intro .pad__handle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 7px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(180deg, #2d3b6e 0%, var(--ink) 55%, #1a2448 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+.home-intro .pad-stage.is-dragging .pad__handle {
+  cursor: grabbing;
+}
+
+@media (max-width: 700px) {
+  .home-intro .pad__sheet,
+  .home-intro .pad__flap-face,
+  .home-intro .leaf__page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro .pad,
+  .home-intro .pad__flap,
+  .home-intro .pad__flap-face {
+    animation: none;
+  }
+  .home-intro .pad__sheet {
+    animation: pad-fade 300ms ease 120ms both;
+  }
+  .home-intro .pad-stage.is-settling,
+  .home-intro .pad-stage.is-dragging .pad,
+  .home-intro .pad-stage.is-settling .pad {
+    transition: none;
+  }
+  .home-intro .pad-stage.is-dragging {
+    --drag-lift: 0deg;
+  }
+  .home-intro .pad-stage.is-dragging .pad {
+    transform: rotate(var(--pad-tilt));
+  }
+}
+@keyframes pad-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ==========================================================================
+   Notepad guestbook (assets/notepad.js): page controls, leaves, pen
+   ========================================================================== */
+.home-intro .pad--paged {
+  touch-action: pan-y; /* horizontal swipes reach the pad, vertical scroll stays native */
+}
+
+.home-intro .pad__leaf,
+.home-intro .pad__flipper {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90, 80, 60, 0.022) 0 1px, transparent 1px 2.5px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(90, 80, 60, 0.01) 31px 32px),
+    radial-gradient(120% 90% at 30% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(140% 120% at 100% 100%, rgba(120, 110, 90, 0.045), transparent 60%);
+  box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13), 0 1px 2px rgba(50, 45, 35, 0.06);
+}
+.home-intro .pad__leaf { z-index: 2; outline: none; }
+.home-intro .pad__leaf[hidden] { display: none; }
+
+.home-intro .pad__flipper {
+  z-index: 6; /* above the page controls while it lifts */
+  transform-origin: 50% 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  animation: page-lift 680ms cubic-bezier(0.45, 0.05, 0.35, 1) both;
+}
+.home-intro .pad__flipper--down {
+  animation: page-drop 600ms cubic-bezier(0.3, 0, 0.25, 1) both;
+}
+/* Interactive swipe: JS drives rotateX from the live progress. */
+.home-intro .pad__flipper.is-gesture {
+  animation: none;
+  will-change: transform, filter, box-shadow;
+}
+.home-intro .pad__under {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: 2px;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90, 80, 60, 0.022) 0 1px, transparent 1px 2.5px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(90, 80, 60, 0.01) 31px 32px),
+    radial-gradient(120% 90% at 30% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(140% 120% at 100% 100%, rgba(120, 110, 90, 0.045), transparent 60%);
+  box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13), 0 1px 2px rgba(50, 45, 35, 0.06);
+}
+/* peel-js overlay: a real fold that follows the finger (calendar / top-bound). */
+.home-intro .pad__peel {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  border-radius: 2px;
+  visibility: hidden;
+  /* vendor .peel starts at opacity 0 until .peel-ready; we keep it unpainted at rest */
+}
+.home-intro .pad.is-peeling .pad__peel {
+  visibility: visible;
+}
+.home-intro .pad__peel.peel,
+.home-intro .pad__peel.peel-ready {
+  opacity: 1;
+}
+.home-intro .pad__peel .peel-top,
+.home-intro .pad__peel .peel-bottom {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90, 80, 60, 0.022) 0 1px, transparent 1px 2.5px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(90, 80, 60, 0.01) 31px 32px),
+    radial-gradient(120% 90% at 30% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(140% 120% at 100% 100%, rgba(120, 110, 90, 0.045), transparent 60%);
+  overflow: hidden;
+}
+.home-intro .pad__peel .peel-back {
+  /* Paper back, not a flat beige slab. Fold shading/highlight are painted in JS. */
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90, 80, 60, 0.016) 0 1px, transparent 1px 2.5px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(90, 80, 60, 0.008) 31px 32px),
+    radial-gradient(90% 70% at 50% 0%, rgba(255, 255, 255, 0.28), transparent 58%),
+    linear-gradient(180deg, rgba(80, 70, 55, 0.035), transparent 45%, rgba(80, 70, 55, 0.045));
+}
+.home-intro .pad__peel-front,
+.home-intro .pad__peel-under {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.home-intro .pad__peel-front > .pad__sheet,
+.home-intro .pad__peel-under > .pad__sheet {
+  box-shadow: none;
+  background: transparent;
+  height: 100%;
+}
+.home-intro .pad__peel-front > .leaf__page,
+.home-intro .pad__peel-under > .leaf__page {
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro .pad__peel { display: none; }
+}
+
+/* the sheet hinges on the glue edge and lifts toward the reader, like tearing over the top */
+@keyframes page-lift {
+  0%   { transform: perspective(1500px) rotateX(0deg); filter: brightness(1); box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13); }
+  55%  { filter: brightness(0.97); box-shadow: 0 0 0 0.75px rgba(70, 62, 50, 0.22), 0 30px 40px -18px rgba(40, 35, 25, 0.28); }
+  100% { transform: perspective(1500px) rotateX(96deg); filter: brightness(0.9); box-shadow: 0 0 0 0.75px rgba(70, 62, 50, 0.22), 0 30px 40px -18px rgba(40, 35, 25, 0); }
+}
+@keyframes page-drop {
+  0%   { transform: perspective(1500px) rotateX(96deg); filter: brightness(0.9); }
+  45%  { box-shadow: 0 0 0 0.75px rgba(70, 62, 50, 0.22), 0 30px 40px -18px rgba(40, 35, 25, 0.24); }
+  100% { transform: perspective(1500px) rotateX(0deg); filter: brightness(1); box-shadow: 0 0 0 0.5px rgba(70, 62, 50, 0.13); }
+}
+/* the intro copy inside a flipper keeps the sheet layout */
+.home-intro .pad__flipper > .pad__sheet { box-shadow: none; background: transparent; }
+
+.home-intro .leaf__page {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 8px 14px 44px;
+  display: flex;
+  flex-direction: column;
+}
+.home-intro .leaf__page--intro { display: block; }
+
+.home-intro .leaf__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+.home-intro .leaf__crest {
+  height: 17px;
+  width: auto;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(16%) sepia(26%) saturate(2400%) hue-rotate(205deg) brightness(92%);
+}
+.home-intro .leaf__name {
+  font-family: "Pinyon Script", cursive;
+  font-size: 17px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.home-intro .leaf__rule {
+  width: 90px;
+  height: 1px;
+  margin-top: 7px;
+  background: linear-gradient(90deg, transparent, rgba(35, 48, 94, 0.35) 30%, rgba(35, 48, 94, 0.35) 70%, transparent);
+}
+
+.home-intro .leaf__area {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.home-intro .leaf__area .pad-ink {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  overflow: visible;
+}
+.home-intro .leaf__area--draw {
+  cursor: crosshair;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.home-intro .leaf__area.is-loading::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 40px;
+  height: 1px;
+  background: rgba(35, 48, 94, 0.25);
+  transform: translateX(-50%);
+  animation: leaf-wait 1.1s ease-in-out infinite alternate;
+}
+@keyframes leaf-wait { from { width: 16px; } to { width: 64px; } }
+
+.home-intro .leaf__hint {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  font-family: Caveat, cursive;
+  font-weight: 600;
+  font-size: 19px;
+  color: rgba(70, 72, 84, 0.34);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.home-intro .leaf__page.is-inked .leaf__hint { opacity: 0; }
+
+/* Saved note footer. */
+.home-intro .leaf__foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  margin-top: 6px;
+  font-family: "Alegreya Sans", system-ui, sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.home-intro .pad__arrow {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 3px 2px;
+  cursor: pointer;
+}
+.home-intro .pad__arrow:hover:not(:disabled) { color: var(--ink); }
+.home-intro .pad__arrow:disabled { opacity: 0.35; cursor: default; }
+.home-intro .leaf__meta { letter-spacing: 0.16em; }
+
+.home-intro .leaf__toast {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 74px;
+  margin: 0;
+  text-align: center;
+  font-family: Caveat, cursive;
+  font-weight: 600;
+  font-size: 21px;
+  color: rgba(35, 48, 94, 0.75);
+  pointer-events: none;
+  animation: leaf-toast 2.6s ease 0.4s both;
+}
+@keyframes leaf-toast { 0% { opacity: 0; transform: translateY(4px); } 15%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+/* Page navigation remains on the notepad. */
+.home-intro .pad__nav {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  z-index: 5;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Alegreya Sans", system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+.home-intro .pad__nav > * { pointer-events: auto; }
+.home-intro .pad__pager { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; }
+.home-intro .pad__arrow { font-size: 14px; line-height: 1; padding: 1px 5px; letter-spacing: 0; text-transform: none; }
+.home-intro .pad__count { font-variant-numeric: tabular-nums; min-width: 44px; text-align: center; }
+.home-intro .pad__nav button:focus-visible {
+  outline: 1.5px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.home-intro .pad__leaf .pad__emboss { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro .pad__flipper,
+  .home-intro .leaf__toast,
+  .home-intro .leaf__area.is-loading::after { animation: none; }
+  .home-intro .pad__flipper { display: none; }
+}
+
+
+@media (min-width: 768px) {
+  .home-intro.home-intro--pad {
+    /* Production intro box is 608.922px (500px pad + 10/18 padding).
+       Keep that height so the grid spacers and bottom band don't move. */
+    min-height: 608.922px;
+    /* Shrink a little on shorter viewports so the rotated pad stays
+       above After Hours at 1280x800 and 1024x768. 1440 stays at 1. */
+    --pad-scale: clamp(0.88, calc(1 + (100vh - 900px) / 800px), 1);
+  }
+  /* Grab / move lives only on the letterhead zone; the rest of the
+     sheet is for the page curl. Keep grabbing on the stage while
+     a drag is in progress so the cursor stays consistent. */
+  .home-intro .pad-stage.is-dragging {
+    cursor: grabbing;
+  }
+  /* subtle lift in the paper shadow when the letterhead is hovered */
+  .home-intro .pad-stage:has(.pad__handle:hover):not(.is-dragging) .pad__stack span:first-child {
+    box-shadow:
+      0 1px 1px rgba(50, 45, 35, 0.08),
+      0 6px 12px rgba(50, 45, 35, 0.09),
+      0 16px 28px -10px rgba(50, 45, 35, 0.16);
+  }
+}
+
+/* Phones: the entrance transform leaves stale scroll overflow (about 17px) that makes
+   mobile browsers load the home page slightly zoomed out. Clip it at the full-width root.
+   The letterhead zone keeps touch-action: none so a drag there moves the pad;
+   the rest of the sheet stays pan-y so a vertical swipe still scrolls. */
+@media (max-width: 767px) {
+  .root:has(.home-intro--pad) { overflow-x: clip; }
+  .home-intro.home-intro--pad {
+    --pad-tilt: -2deg;
+    justify-content: flex-start;
+    padding: calc(
+        var(--mobile-profile-sticky, 78px)
+        - var(--page-pad-y, 2.5rem)
+        + 14px
+        + 4px
+      )
+      16px 28px;
+    min-height: 0;
+  }
+  .home-intro .pad-stage {
+    order: 2;
+    position: relative;
+    z-index: 3;
+    /* Slight desk overlap with the pile above-right; letter text stays clear.
+       z-index 3 puts the pad on top of the stack (z-index 1) in the tuck. */
+    margin: -18px auto 0;
+  }
+
+  .home-intro .desk__item--openlead {
+    position: relative;
+    order: 3;
+    align-self: flex-end;
+    inset: auto;
+    margin: 16px 8px 0;
+  }
+}
+
+/* The toolbar stays above the movable desk, including on phones. */
+.desk-toolbar {
+  position: fixed;
+  z-index: 600;
+  bottom: max(14px, env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  translate: -50%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: calc(100% - 16px);
+  padding: 5px;
+  border: 1px solid var(--kw-line);
+  border-radius: var(--kw-radius-lg);
+  background: var(--kw-surface-raised);
+  box-shadow: var(--kw-shadow-chrome);
+  color: var(--kw-text);
+}
+
+.desk-toolbar[hidden],
+.desk-toolbar__ink-tools[hidden],
+body.swipe-nav-open .desk-toolbar {
+  display: none;
+}
+
+.desk-toolbar__ink-tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 2px;
+  padding-left: 4px;
+  border-left: 1px solid var(--kw-line);
+}
+
+.desk-toolbar__button,
+.desk-toolbar__ink {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kw-radius-md);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.desk-toolbar__button svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.desk-toolbar__button:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.desk-toolbar__button:hover:not(:disabled),
+.desk-toolbar__ink:hover {
+  background: var(--kw-fill-muted);
+}
+
+.desk-toolbar__button[aria-pressed="true"],
+.desk-toolbar__button--save {
+  background: var(--kw-control-bg);
+  color: var(--kw-text-inverse);
+}
+
+.desk-toolbar__button[aria-pressed="true"]:hover,
+.desk-toolbar__button--save:hover:not(:disabled) {
+  background: var(--kw-control-hover);
+}
+
+.desk-toolbar__ink { width: 25px; }
+.desk-toolbar__ink::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--swatch);
+}
+.desk-toolbar__ink[aria-pressed="true"]::before {
+  outline: 1px solid var(--swatch);
+  outline-offset: 2px;
+}
+
+.desk-toolbar__button--save {
+  width: auto;
+  padding-inline: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.desk-toolbar__status:not(:empty) {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  width: max-content;
+  max-width: min(260px, 100%);
+  padding: 4px 8px;
+  border-radius: var(--kw-radius-sm);
+  background: var(--kw-surface-raised);
+  box-shadow: var(--kw-shadow-chrome);
+  font-size: 12px;
+}
+
+.desk-slot-outline {
+  position: fixed;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  border: 2px dotted var(--kw-border-strong);
+  border-radius: var(--kw-radius-lg);
+  color: var(--kw-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.desk-slot-outline.is-near {
+  border-color: var(--kw-text-muted);
+  color: var(--kw-text);
+}
+
+.desk-slot-outline--local {
+  position: absolute;
+  z-index: 0;
+}
+
+.home-intro[data-desk-layer] {
+  z-index: var(--desk-z, 0);
+  pointer-events: none;
+}
+.home-split[data-desk-layer] {
+  position: relative;
+  z-index: var(--desk-z, 1);
+  pointer-events: none;
+}
+
+.home-intro[data-desk-layer] > [data-draggable],
+.home-intro[data-desk-layer] .polaroids,
+.home-split[data-desk-layer] > [data-draggable] {
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .layout > .sidebar[data-desk-layer] {
+    z-index: var(--desk-z, 2);
+    pointer-events: none;
+  }
+  .layout > .sidebar[data-desk-layer] > :not(.nowplaying),
+  .layout > .sidebar[data-desk-layer] .nowplaying > :not(.is-pending, .is-entering) {
+    pointer-events: auto;
+  }
+  .sidebar[data-desk-layer]:has(.nowplaying__widget:is(.is-dragging, .is-off-slot)) {
+    overflow: visible;
+  }
+}
+
+.home-split > [data-draggable],
+.nowplaying__widget[data-draggable] {
+  position: relative;
+  translate: var(--drag-x, 0px) var(--drag-y, 0px);
+  z-index: var(--desk-z, auto);
+}
+
+.home-intro .pad-stage:is(.is-dragging, .is-off-slot),
+.home-intro .desk__item--openlead:is(.is-dragging, .is-off-slot) {
+  z-index: var(--desk-z, 12);
+}
+
+.home-intro .polaroids__spread { z-index: var(--desk-z, 4); }
+.home-intro .polaroid--anchor {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html[data-desk-tool="drag"] .home-split > [data-draggable],
+html[data-desk-tool="drag"] .home-split > [data-draggable] a,
+html[data-desk-tool="drag"] .home-intro .pad {
+  cursor: grab;
+}
+
+html[data-desk-tool="drag"] .nowplaying__widget[data-draggable] {
+  /* The Spotify script also sets an inline link cursor. */
+  cursor: grab !important;
+}
+
+html[data-desk-tool="drag"] [data-draggable].is-dragging,
+html[data-desk-tool="drag"] [data-draggable].is-dragging * {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+html[data-desk-tool="drag"] .home-split > [data-draggable] > .label,
+html[data-desk-tool="drag"] .nowplaying__widget[data-draggable] {
+  touch-action: none;
+}
+
+html[data-desk-tool="pen"] .home-intro .pad__handle {
+  pointer-events: none;
+}
+
+html[data-desk-tool="pen"] .home-intro .pad-stage {
+  z-index: var(--desk-z, 1);
+}
+
+html[data-desk-tool="pen"] .home-intro .desk__item--openlead,
+html[data-desk-tool="pen"] .home-intro .polaroid {
+  cursor: default;
+  touch-action: pan-y;
+}
+
+@media (max-width: 767px) {
+  .layout:has([data-desk-layer]) > .root--full {
+    padding-bottom: 68px;
+  }
+}
+
+@media (max-width: 350px) {
+  .desk-toolbar__button:not(.desk-toolbar__button--save) { width: 32px; }
+  .desk-toolbar__ink { width: 21px; }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-notepad-admin>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Notepad pages</title>
+  <style>
+    :root { --ink: #23305e; --paper: #f8f6f0; --bg: #f5f5f0; --muted: #6b6f7a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: #202020; font: 14px/1.5 Inter, system-ui, sans-serif; }
+    main { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+    h1 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+    p.sub { margin: 0 0 24px; color: var(--muted); font-size: 13px; }
+    form { display: flex; gap: 8px; margin-bottom: 24px; }
+    input { flex: 0 1 320px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font: inherit; background: #fff; }
+    button { font: inherit; padding: 7px 12px; border-radius: 6px; border: 1px solid #ddd; background: #fff; cursor: pointer; }
+    button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+    button.danger { color: #b42318; border-color: #f1c4bf; background: #fff; }
+    button.danger:hover { background: #fef3f2; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .card { background: var(--paper); border-radius: 4px; box-shadow: 0 0 0 0.5px rgba(70,62,50,.15), 0 8px 18px -10px rgba(50,45,35,.25); padding: 12px; }
+    .card svg { display: block; width: 100%; height: auto; background: #fff8; border-radius: 2px; }
+    .meta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 12px; color: var(--muted); }
+    .status { font-size: 13px; color: var(--muted); min-height: 20px; margin-bottom: 12px; }
+    .more { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Notepad pages</h1>
+    <p class="sub">Newest first. Deleting is permanent.</p>
+    <form id="tok" autocomplete="off">
+      <input id="token" type="password" placeholder="Admin token" aria-label="Admin token" />
+      <button class="primary" type="submit">Use token</button>
+      <button type="button" id="forget">Forget</button>
+    </form>
+    <div class="status" id="status" aria-live="polite"></div>
+    <div class="grid" id="grid"></div>
+    <button class="more" id="more" hidden>Load more</button>
+  </main>
+  <script src="/assets/notepad.js"></script>
+  <script>
+    (function () {
+      var KEY = "notepad-admin-token";           // sessionStorage only, cleared with the tab
+      var grid = document.getElementById("grid"), status = document.getElementById("status");
+      var more = document.getElementById("more"), input = document.getElementById("token");
+      var cursor = null;
+      input.value = sessionStorage.getItem(KEY) || "";
+      document.getElementById("tok").addEventListener("submit", function (e) {
+        e.preventDefault();
+        sessionStorage.setItem(KEY, input.value.trim());
+        status.textContent = input.value.trim() ? "Token set for this tab." : "";
+      });
+      document.getElementById("forget").addEventListener("click", function () {
+        sessionStorage.removeItem(KEY); input.value = ""; status.textContent = "Token cleared.";
+      });
+      function load() {
+        fetch("/api/notepad/pages?order=desc&limit=24" + (cursor ? "&cursor=" + cursor : ""), { cache: "no-store" })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (!cursor) status.textContent = j.total + " page" + (j.total === 1 ? "" : "s") + " on the pad.";
+            j.pages.forEach(card);
+            cursor = j.next_cursor; more.hidden = !cursor;
+          })
+          .catch(function () { status.textContent = "Couldn't load pages."; });
+      }
+      function card(p) {
+        var c = document.createElement("article");
+        c.className = "card";
+        c.appendChild(window.NotepadInk.renderInk(p.data));
+        var m = document.createElement("div");
+        m.className = "meta";
+        var when = new Date(p.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+        m.innerHTML = "<span>#" + p.id + " &middot; " + when + "</span>";
+        var del = document.createElement("button");
+        del.className = "danger"; del.type = "button"; del.textContent = "Delete";
+        del.addEventListener("click", function () {
+          var token = sessionStorage.getItem(KEY);
+          if (!token) { status.textContent = "Enter the admin token first."; input.focus(); return; }
+          if (!confirm("Delete page #" + p.id + "? This cannot be undone.")) return;
+          del.disabled = true;
+          fetch("/api/notepad/pages/" + p.id, { method: "DELETE", headers: { Authorization: "Bearer " + token } })
+            .then(function (r) {
+              if (r.ok) { c.remove(); status.textContent = "Deleted #" + p.id + "."; }
+              else { del.disabled = false; status.textContent = r.status === 401 ? "Wrong token." : "Delete failed (" + r.status + ")."; }
+            });
+        });
+        m.appendChild(del);
+        c.appendChild(m);
+        grid.appendChild(c);
+      }
+      more.addEventListener("click", load);
+      load();
+    })();
+  </script>
+</body>
+</html>

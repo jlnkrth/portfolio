@@ -6,13 +6,17 @@
     <title>Books - Julian Kreth</title>
     <meta name="description" content="Books Julian Kreth has read and recommends." />
     <link rel="canonical" href="https://kreth.work/books/" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/tokens.css" />
-    <link rel="stylesheet" href="/styles.css?v=67" />
-    <link rel="stylesheet" href="/books/book-modal.css?v=3" />
+    <link rel="stylesheet" href="/styles.css?v=100" />
+    <link rel="stylesheet" href="/books/book-modal.css?v=4" />
     <link rel="preload" href="/data/collections.json" as="fetch" crossorigin />
   </head>
   <body>
@@ -20,35 +24,23 @@
     <div class="layout">
       <div id="chrome-sidebar"></div>
       <div class="root">
-        <main>
-          <section class="book-featured is-pending" aria-label="Featured" style="--enter-delay: 0ms">
-            <span class="label">Featured</span>
-            <a class="book-featured__link" href="/books/unreasonable-hospitality/">
-              <img
-                class="book-featured__cover"
-                src="/assets/books/unreasonable-hospitality.jpg"
-                alt=""
-                width="112"
-                height="168"
-                decoding="async"
-                fetchpriority="high"
-              />
-              <span class="book-featured__copy">
-                <span class="book-featured__title">Unreasonable Hospitality</span>
-                <span class="book-featured__author">Will Guidara</span>
-                <span class="book-featured__now">
-                  <span class="book-featured__now-dot" aria-hidden="true"></span>
-                  Currently reading
-                </span>
-              </span>
-            </a>
-          </section>
-          <div class="collection-grid" data-collection="books" data-collection-kind="book"></div>
+        <main class="books-desk" data-books-desk>
+          <div
+            class="books-canvas"
+            data-books-canvas
+            tabindex="0"
+            aria-label="Books desk. Drag or scroll to pan. Ctrl-scroll to zoom."
+          >
+            <div class="books-canvas__surface" data-books-canvas-surface>
+              <div class="collection-grid" data-collection="books" data-collection-kind="book"></div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
-    <script src="/books/book-modal.js?v=3"></script>
-    <script src="/layout.js"></script>
+    <script src="/books/books-canvas.js?v=14"></script>
+    <script src="/books/book-modal.js?v=4"></script>
+    <script src="/layout.js?v=58"></script>
     <script src="/collection.js?v=2"></script>
   </body>
 </html>

@@ -1,0 +1,176 @@
+/* Desk ↔ List toggle lives inside the Work nav pill and expands it. */
+
+.work-view-toggle {
+  display: none;
+  position: relative;
+  align-items: center;
+  gap: 1px;
+  flex-shrink: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.work-view-toggle__thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--kw-radius-sm);
+  background: var(--kw-fill);
+  pointer-events: none;
+  transform: translate(0, 0);
+  transition:
+    transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+    width 180ms cubic-bezier(0.23, 1, 0.32, 1),
+    height 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.work-view-toggle__btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--kw-radius-sm);
+  background: transparent;
+  color: var(--kw-text-muted);
+  text-decoration: none;
+  line-height: 0;
+  transition: color 0.15s ease;
+}
+
+.work-view-toggle__btn:hover {
+  color: var(--kw-text);
+}
+
+.work-view-toggle__btn[aria-current="page"] {
+  background: transparent;
+  border-color: transparent;
+  color: var(--kw-text);
+}
+
+.work-view-toggle__icon {
+  display: block;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  /*
+   * One pill: the Work wrap owns the chrome; the label keeps its padding,
+   * the toggle expands width-only inside so Fieldnotes/About only shift
+   * with that growth — no separate sibling pill popping in.
+   */
+  .top-nav__item-wrap--work-views {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--kw-fill-muted);
+    border-radius: var(--kw-radius-control);
+  }
+
+  .top-nav__item-wrap--work-views > .top-nav__item {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .top-nav__item-wrap--work-views > .top-nav__item:hover,
+  .top-nav__item-wrap--work-views > .top-nav__item[aria-current="page"],
+  .top-nav__item-wrap--work-views > .top-nav__item[aria-current="page"]:hover {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .work-view-toggle--nav {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    vertical-align: middle;
+    transition:
+      max-width 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      padding 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      margin 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .work-view-toggle--nav.is-in {
+    max-width: 4rem;
+    margin-right: 4px;
+    padding: 0 2px;
+    opacity: 1;
+  }
+
+  /* Fan stays off for Work while you're on /work*. */
+  .top-nav__item-wrap--work-views:hover .top-nav__preview-card,
+  .top-nav__item-wrap--work-views:focus-within .top-nav__preview-card,
+  .top-nav__item-wrap[data-nav-preview="work"]:hover .top-nav__preview-card,
+  .top-nav__item-wrap[data-nav-preview="work"]:focus-within .top-nav__preview-card {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0) !important;
+  }
+
+  .work-view-toggle--mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .work-view-toggle--nav {
+    display: none !important;
+  }
+
+  .work-view-toggle--mobile {
+    display: inline-flex;
+    position: fixed;
+    z-index: 520;
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    gap: 2px;
+    padding: 4px;
+    background: var(--kw-fill);
+    border: 1px solid var(--kw-fill-muted);
+    border-radius: var(--kw-radius-md);
+    box-shadow: var(--kw-shadow-chrome);
+  }
+
+  .work-view-toggle--mobile .work-view-toggle__thumb {
+    background: #fff;
+    border: 1px solid var(--kw-fill-muted);
+    box-sizing: border-box;
+  }
+
+  .work-view-toggle--mobile .work-view-toggle__btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .work-view-toggle--mobile .work-view-toggle__btn[aria-current="page"] {
+    background: transparent;
+    border-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-view-toggle__thumb,
+  .work-view-toggle--nav {
+    transition: none;
+  }
+
+  .work-view-toggle--nav.is-in {
+    max-width: none;
+  }
+}

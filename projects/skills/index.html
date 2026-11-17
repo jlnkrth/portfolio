@@ -9,10 +9,11 @@
       content="Agent skills by Julian Kreth — install with npx skills and run a self-serve technical SEO audit."
     />
     <link rel="canonical" href="https://kreth.work/projects/skills/" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E"
-    />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,8 +21,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/tokens.css" />
-    <link rel="stylesheet" href="/styles.css?v=67" />
-    <link rel="stylesheet" href="/components.css" />
+    <link rel="stylesheet" href="/styles.css?v=105" />
+    <link rel="stylesheet" href="/components.css?v=29" />
   </head>
   <body>
     <div id="chrome-top"></div>
@@ -41,11 +42,16 @@
               aria-label="Copy link to clipboard"
               data-copy="https://kreth.work/projects/skills/"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="project-page__share-icon--link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M10 13a5 5 0 0 0 7.54.54l1.42-1.42a5 5 0 0 0-7.07-7.07l-.88.88" />
                 <path d="M14 11a5 5 0 0 0-7.54-.54L5.04 11.88a5 5 0 0 0 7.07 7.07l.88-.88" />
               </svg>
+              <svg class="project-page__share-icon--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" />
+              </svg>
+              <span class="project-page__share-label" aria-hidden="true"><span data-share-label>Copy link</span></span>
             </button>
+            <span class="sr-only" role="status" data-share-status></span>
           </div>
 
           <header class="project-page__hero">
@@ -158,6 +164,6 @@
         </main>
       </div>
     </div>
-    <script src="/layout.js"></script>
+    <script src="/layout.js?v=2"></script>
   </body>
 </html>

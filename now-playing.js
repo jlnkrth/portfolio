@@ -1,5 +1,7 @@
 // Polls the Cloudflare now-playing Worker. Status stays visible: listening,
 // offline, or disconnected. Last-known track remains as fallback.
+// Across pages: restore the last snapshot immediately, poll silently, and
+// only mutate the DOM when track or status actually changes.
 (function () {
   // Absolute Worker URL until kreth.work is served by the portfolio Worker
   // (which can proxy same-origin /api/now-playing). GitHub Pages has no /api.
@@ -11,7 +13,56 @@
     offline: "Offline",
     disconnected: "Disconnected",
   };
+  var SPIN_ENTRANCE_KEY = "kreth-now-playing-entrance";
+  var STATE_KEY = "kreth-now-playing-state";
   var pollTimer = null;
+
+  function hasPlayedEntrance() {
+    try {
+      return sessionStorage.getItem(SPIN_ENTRANCE_KEY) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function markEntrancePlayed() {
+    try {
+      sessionStorage.setItem(SPIN_ENTRANCE_KEY, "1");
+    } catch (_) {}
+  }
+
+  function readState() {
+    try {
+      var raw = sessionStorage.getItem(STATE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || typeof data !== "object" || !data.title) return null;
+      return data;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function writeState(data) {
+    if (!data || !data.title) return;
+    try {
+      sessionStorage.setItem(
+        STATE_KEY,
+        JSON.stringify({
+          title: data.title || "",
+          artist: data.artist || "",
+          albumArt: data.albumArt || "",
+          url: data.url || "",
+          playing: !!data.playing,
+          status: data.status || (data.playing ? "listening" : "offline"),
+        })
+      );
+    } catch (_) {}
+  }
+
+  function persistChrome() {
+    if (window.persistChromeCache) window.persistChromeCache();
+  }
 
   window.initNowPlaying = function () {
     var root = document.querySelector("[data-now-playing]");
@@ -27,16 +78,36 @@
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var coastEndHandler = null;
+    var lastTrackKey = "";
+
+    function trackKey(data) {
+      if (!data) return "";
+      return [
+        data.title || "",
+        data.artist || "",
+        data.albumArt || "",
+        data.url || "",
+        data.playing ? "1" : "0",
+      ].join("\0");
+    }
 
     function setStatus(status) {
+      var next = STATUS_LABELS[status] ? status : "offline";
       var prev = root.dataset.status;
-      root.hidden = false;
-      root.dataset.status = status;
-      if (labelEl) labelEl.textContent = STATUS_LABELS[status] || STATUS_LABELS.offline;
+      var label = STATUS_LABELS[next];
+      var changed = prev !== next;
 
-      if (!widgetEl || !widgetEl.classList.contains("is-in")) return;
-      if (status === "listening") startSpin();
+      root.hidden = false;
+      if (changed) root.dataset.status = next;
+      if (labelEl && labelEl.textContent !== label) {
+        labelEl.textContent = label;
+        changed = true;
+      }
+
+      if (!widgetEl || !widgetEl.classList.contains("is-in")) return changed;
+      if (next === "listening") startSpin();
       else if (prev === "listening") stopSpin();
+      return changed;
     }
 
     function markCoverLoaded() {
@@ -78,6 +149,7 @@
 
     function startSpin() {
       if (reduceMotion || !coverEl) return;
+      if (coverEl.classList.contains("is-spinning")) return;
       clearCoastHandler();
       coverEl.classList.remove("is-coasting");
       coverEl.style.transition = "";
@@ -124,8 +196,14 @@
 
     // Offline first paint: brief spin, then a long coast so it feels like
     // the record just wound down. Listening keeps the infinite spin.
+    // Only once per browser session — later pages skip the loading spin.
     function playEntranceMotion() {
       if (reduceMotion || !coverEl) return;
+      if (hasPlayedEntrance()) {
+        if (root.dataset.status === "listening") startSpin();
+        return;
+      }
+      markEntrancePlayed();
       if (root.dataset.status === "listening") {
         startSpin();
         return;
@@ -150,7 +228,7 @@
       // Persist only after the widget is visible. Saving mid-entrance left
       // chrome cache with data-hydrated + is-pending, so later loads stayed
       // at opacity 0 forever.
-      if (window.persistChromeCache) window.persistChromeCache();
+      persistChrome();
     }
 
     function runEntrance() {
@@ -199,10 +277,33 @@
       });
     }
 
+    function showReadyQuietly() {
+      root.dataset.hydrated = "1";
+      root.classList.add("is-spin-ready");
+      if (widgetEl) {
+        widgetEl.classList.remove("is-pending", "is-entering");
+        widgetEl.classList.add("is-in");
+      }
+      if (coverEl && coverEl.getAttribute("src")) markCoverLoaded();
+      if (root.dataset.status === "listening") startSpin();
+      else if (!hasPlayedEntrance()) playEntranceMotion();
+    }
+
     function markHydrated() {
       // chrome-entrance.js owns the first paint when present — don't re-run
       // and wait on the API; just finish spin once the widget is visible.
       if (root.getAttribute("data-entrance") === "chrome") {
+        if (root.dataset.hydrated === "1") {
+          if (widgetEl && widgetEl.classList.contains("is-in")) {
+            root.classList.add("is-spin-ready");
+            if (hasPlayedEntrance()) {
+              if (root.dataset.status === "listening") startSpin();
+            } else {
+              playEntranceMotion();
+            }
+          }
+          return;
+        }
         root.dataset.hydrated = "1";
         if (widgetEl && widgetEl.classList.contains("is-in")) {
           root.classList.add("is-spin-ready");
@@ -240,15 +341,24 @@
     }
 
     function applyTrack(data) {
-      if (!data || !data.title) return;
+      if (!data || !data.title) return false;
+
+      var key = trackKey(data);
+      if (key === lastTrackKey) {
+        // Same snapshot — still ensure cover is visible if chrome restored it.
+        if (coverEl && coverEl.getAttribute("src")) markCoverLoaded();
+        return false;
+      }
+      lastTrackKey = key;
 
       if (songEl) {
-        songEl.textContent = data.title;
+        if (songEl.textContent !== data.title) songEl.textContent = data.title;
         songEl.title = data.title;
       }
       if (artistEl) {
-        artistEl.textContent = data.artist || "";
-        artistEl.title = data.artist || "";
+        var artist = data.artist || "";
+        if (artistEl.textContent !== artist) artistEl.textContent = artist;
+        artistEl.title = artist;
       }
 
       if (coverEl && data.albumArt) {
@@ -269,31 +379,75 @@
         widgetEl.style.cursor = "pointer";
         widgetEl.setAttribute("title", "Open in Spotify");
       }
+
+      return true;
+    }
+
+    function adoptDomAsState() {
+      if (!songEl) return null;
+      var title = (songEl.textContent || "").trim();
+      if (!title) return null;
+      return {
+        title: title,
+        artist: artistEl ? (artistEl.textContent || "").trim() : "",
+        albumArt: coverEl ? coverEl.getAttribute("src") || "" : "",
+        url: "",
+        playing: root.dataset.status === "listening",
+        status: root.dataset.status || "offline",
+      };
+    }
+
+    function restoreSnapshot() {
+      var cached = readState() || adoptDomAsState();
+      if (!cached) return false;
+
+      applyTrack(cached);
+      setStatus(cached.status || (cached.playing ? "listening" : "offline"));
+      showReadyQuietly();
+      return true;
     }
 
     async function poll() {
       try {
         var res = await fetch(API_URL, { cache: "no-store" });
         if (!res.ok) {
-          setStatus("disconnected");
+          var disconnectedA = setStatus("disconnected");
           markHydrated();
+          if (disconnectedA) persistChrome();
           return;
         }
         var data = await res.json();
         if (data && data.error) {
-          setStatus("disconnected");
+          var disconnectedB = setStatus("disconnected");
           markHydrated();
+          if (disconnectedB) persistChrome();
           return;
         }
-        applyTrack(data);
-        setStatus(data && data.playing ? "listening" : "offline");
+
+        var status = data && data.playing ? "listening" : "offline";
+        var trackChanged = applyTrack(data);
+        var statusChanged = setStatus(status);
+        if (data && data.title) {
+          writeState({
+            title: data.title,
+            artist: data.artist,
+            albumArt: data.albumArt,
+            url: data.url,
+            playing: !!data.playing,
+            status: status,
+          });
+        }
         markHydrated();
+        if (trackChanged || statusChanged) persistChrome();
       } catch {
-        setStatus("disconnected");
+        var disconnectedC = setStatus("disconnected");
         markHydrated();
+        if (disconnectedC) persistChrome();
       }
     }
 
+    // Paint last-known track immediately; poll only patches when something new lands.
+    restoreSnapshot();
     poll();
     if (pollTimer) clearInterval(pollTimer);
     pollTimer = setInterval(poll, POLL_MS);

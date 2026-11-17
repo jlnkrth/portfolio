@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work list — Julian Kreth</title>
+    <meta name="description" content="Startups and teams Julian Kreth has worked with." />
+    <link rel="canonical" href="https://kreth.work/work/list/" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/styles.css?v=100" />
+    <link rel="stylesheet" href="/work/work-index.css?v=24" />
+    <link rel="stylesheet" href="/work/work-views.css?v=8" />
+    <link rel="stylesheet" href="/work/work-view-morph.css?v=1" />
+    <link rel="preload" href="/data/collections.json" as="fetch" crossorigin />
+    <link rel="preload" href="/data/work.json" as="fetch" crossorigin />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout layout--work-index">
+      <div id="chrome-sidebar"></div>
+
+      <nav class="work-index" aria-label="Work">
+        <div class="work-index__head">
+          <p class="work-index__title">Companies I've worked with</p>
+        </div>
+        <div class="work-index__list-wrap">
+          <div class="work-archive" data-work-list></div>
+        </div>
+      </nav>
+
+      <div class="root">
+        <div class="work-shell card">
+          <button
+            type="button"
+            class="work-shell__toggle"
+            aria-label="Expand work panel"
+            aria-pressed="false"
+            hidden
+          >
+            <svg class="work-shell__toggle-icon work-shell__toggle-icon--expand" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+            <svg class="work-shell__toggle-icon work-shell__toggle-icon--collapse" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="4 14 10 14 10 20"></polyline>
+              <polyline points="20 10 14 10 14 4"></polyline>
+              <line x1="14" y1="10" x2="21" y2="3"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+          </button>
+          <div class="work-shell__scroll" data-work-detail>
+            <div class="work-detail work-detail--empty" role="status">
+              <p class="work-detail__empty">Select a client</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/work/work-view-morph.js?v=1"></script>
+    <script src="/work/work-index.js?v=6"></script>
+    <script src="/work/work-views.js?v=8"></script>
+    <script src="/layout.js?v=58"></script>
+  </body>
+</html>

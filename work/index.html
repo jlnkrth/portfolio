@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work — Julian Kreth</title>
+    <meta name="description" content="Startups and teams Julian Kreth has worked with." />
+    <link rel="canonical" href="https://kreth.work/work/" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/styles.css?v=100" />
+    <link rel="stylesheet" href="/work/work-views.css?v=8" />
+    <link rel="stylesheet" href="/work/work-view-morph.css?v=1" />
+    <link rel="preload" href="/data/collections.json" as="fetch" crossorigin />
+  </head>
+  <body>
+    <div id="chrome-top"></div>
+    <div class="layout">
+      <div id="chrome-sidebar"></div>
+      <div class="root">
+        <main class="work-desk" data-work-desk>
+          <div
+            class="work-canvas"
+            data-work-canvas
+            tabindex="0"
+            aria-label="Work desk. Drag or scroll to pan. Ctrl-scroll to zoom."
+          >
+            <div class="work-canvas__surface" data-work-canvas-surface>
+              <div class="sticker-board" data-sticker-board></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/work/work-view-morph.js?v=1"></script>
+    <script src="/work-board.js?v=10"></script>
+    <script src="/work/work-modal.js?v=8"></script>
+    <script src="/work/work-views.js?v=8"></script>
+    <script src="/layout.js?v=58"></script>
+  </body>
+</html>

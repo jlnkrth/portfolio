@@ -19,17 +19,25 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kreth.work/" />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3EJK%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:opsz,wght@14..32,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:opsz,wght@14..32,100..900&family=Caveat:wght@600&family=Pinyon+Script&family=Alegreya+Sans:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="tokens.css" />
-    <link rel="stylesheet" href="styles.css?v=67" />
+    <link rel="stylesheet" href="styles.css?v=104" />
+    <link rel="stylesheet" href="/assets/variant-i.css?v=1" />
+    <link rel="stylesheet" href="/assets/variant-j.css?v=22" />
+    <link rel="stylesheet" href="/assets/vendor/peel-js/peel.css" />
+    <link rel="stylesheet" href="/assets/polaroids.css?v=16" />
   </head>
   <body>
     <nav class="top-nav" aria-label="Primary">
@@ -61,7 +69,7 @@
         <div class="top-nav__track">
           <div class="top-nav__item-wrap" data-nav-preview="openSource">
             <a class="top-nav__item" href="/projects/">
-              <span class="top-nav__label">Projects</span>
+              <span class="top-nav__label">After Hours</span>
               <span class="top-nav__meta-wrap">
                 <span class="top-nav__meta" data-nav-count="openSource">3 items</span>
               </span>
@@ -77,14 +85,14 @@
             </a>
             <div class="top-nav__fan top-nav__fan--book" aria-hidden="true"></div>
           </div>
-          <div class="top-nav__item-wrap" data-nav-preview="clients">
-            <a class="top-nav__item" href="/clients/">
-              <span class="top-nav__label">Clients</span>
+          <div class="top-nav__item-wrap" data-nav-preview="work">
+            <a class="top-nav__item" href="/work/">
+              <span class="top-nav__label">Work</span>
               <span class="top-nav__meta-wrap">
-                <span class="top-nav__meta" data-nav-count="clients">20 items</span>
+                <span class="top-nav__meta" data-nav-count="work">32 items</span>
               </span>
             </a>
-            <div class="top-nav__fan top-nav__fan--client" aria-hidden="true"></div>
+            <div class="top-nav__fan top-nav__fan--work" aria-hidden="true"></div>
           </div>
           <div class="top-nav__item-wrap" data-nav-preview="notes">
             <a class="top-nav__item" href="/notes/">
@@ -101,21 +109,23 @@
         </div>
       </div>
 
-      <span
-        class="availability availability--nav"
-        data-availability
-        data-tz="Europe/Berlin"
-        data-start="7"
-        data-end="21"
-        data-location="Hamburg, Germany"
-        data-lat="53.5511"
-        data-lon="9.9937"
-      >
-        <span class="availability__location">Hamburg, Germany</span>
-        <span class="availability__dot" aria-hidden="true"></span>
-        <span class="availability__time">--:--</span>
-        <span class="availability__weather" aria-hidden="true"></span>
-      </span>
+      <div class="top-nav__aside">
+        <span
+          class="availability availability--nav"
+          data-availability
+          data-tz="Europe/Berlin"
+          data-start="7"
+          data-end="21"
+          data-location="Hamburg, Germany"
+          data-lat="53.5511"
+          data-lon="9.9937"
+        >
+          <span class="availability__location">Hamburg, Germany</span>
+          <span class="availability__dot" aria-hidden="true"></span>
+          <span class="availability__time">--:--</span>
+          <span class="availability__weather" aria-hidden="true"></span>
+        </span>
+      </div>
 
       <div
         id="nav-sheet"
@@ -137,16 +147,16 @@
 
           <nav class="nav-sheet__section" aria-label="Primary">
             <a class="nav-sheet__link" href="/projects/">
-              <span>Projects</span>
+              <span>After Hours</span>
               <span class="nav-sheet__meta" data-nav-count="openSource">3 items</span>
             </a>
             <a class="nav-sheet__link" href="/books/">
               <span>Books</span>
               <span class="nav-sheet__meta" data-nav-count="books">217 items</span>
             </a>
-            <a class="nav-sheet__link" href="/clients/">
-              <span>Clients</span>
-              <span class="nav-sheet__meta" data-nav-count="clients">20 items</span>
+            <a class="nav-sheet__link" href="/work/">
+              <span>Work</span>
+              <span class="nav-sheet__meta" data-nav-count="work">32 items</span>
             </a>
             <a class="nav-sheet__link" href="/notes/">
               <span>Fieldnotes</span>
@@ -176,7 +186,7 @@
     </nav>
 
     <div class="layout">
-      <aside class="sidebar">
+      <aside class="sidebar" data-desk-layer>
         <div class="card profile-card">
           <div class="profile-card__head">
             <a class="avatar-link" href="/" aria-label="Home">
@@ -191,7 +201,7 @@
               class="top-nav__menu-btn profile-card__menu"
               data-nav-menu-toggle
               aria-expanded="false"
-              aria-controls="swipe-nav"
+              aria-controls="profile-card-menu"
             >
               Menu
             </button>
@@ -202,8 +212,13 @@
               ><img class="profile-card__bio-favicon" src="/assets/masse-favicon.png" alt="" width="14" height="14" decoding="async" />masse</a
             >. Herding an army of AI agents by day. Fixing code by&nbsp;night.
           </p>
-          <div class="profile-card__actions">
-            <a class="btn btn--block btn--primary" href="mailto:julian@karmastudio.co?subject=Contact%20me">Contact me</a>
+          <div class="profile-card__actions profile-card__actions--bio">
+            <a class="btn btn--block btn--primary" href="mailto:julian@karmastudio.co?subject=Contact%20me">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              Contact me
+            </a>
             <a class="btn btn--block" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
               <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
@@ -211,10 +226,33 @@
               GitHub
             </a>
           </div>
+          <div class="profile-card__menu-panel" id="profile-card-menu" hidden>
+            <nav class="profile-card__nav" aria-label="Site">
+              <a class="profile-card__nav-link" href="/projects/">After Hours</a>
+              <a class="profile-card__nav-link" href="/books/">Books</a>
+              <a class="profile-card__nav-link" href="/work/">Work</a>
+              <a class="profile-card__nav-link" href="/notes/">Fieldnotes</a>
+              <a class="profile-card__nav-link" href="/about/">About</a>
+            </nav>
+            <div class="profile-card__actions">
+              <a class="btn btn--block btn--primary" href="mailto:julian@karmastudio.co?subject=Contact%20me">
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+                Contact me
+              </a>
+              <a class="btn btn--block" href="https://github.com/lelantvaris" target="_blank" rel="noreferrer">
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                GitHub
+              </a>
+            </div>
+          </div>
         </div>
 
         <div class="nowplaying" data-now-playing data-status="offline">
-          <div class="nowplaying__widget">
+          <div class="nowplaying__widget" data-draggable data-desk-label="Spotify player">
             <div class="nowplaying__inner">
               <div class="nowplaying__vinyl-wrapper">
                 <img class="nowplaying__vinyl" src="/assets/vinyl.svg" alt="" />
@@ -252,76 +290,230 @@
         </header>
 
         <main>
-        <div class="home-intro" id="about">
-          <p>
-            Hello, I&rsquo;m <span class="home-em">Julian</span> 👋 Welcome to
-            my <span class="home-em">Website</span>. I like building
-            <span class="home-em">AI Agents</span>, and I&rsquo;m currently herding
-            bots for
-            <a
-              class="home-em"
-              href="https://masse.marketing"
-              target="_blank"
-              rel="noreferrer"
-              >masse.marketing</a
-            >.
-          </p>
-          <p>
-            In my free time, I enjoy getting lost in
-            <span class="home-em">rabbit holes</span>, travel to places with
-            <span class="home-em">more animals than humans</span>, or look at
-            <span class="home-em">pretty things</span> other humans created.
-          </p>
-          <p>
-            I do some 🏃 <span class="home-em">running</span> and
-            <span class="home-em">working out</span> as well, but not as
-            consistently, but I&rsquo;m working on reaching a
-            <span class="home-em">decent 10k</span>.
-          </p>
+        <div class="home-intro home-intro--pad" id="about" data-desk-layer>
+          <div class="pad-stage" data-draggable data-desk-label="Notepad" data-drag-touch-handle=".pad__handle">
+          <div class="pad" data-pad>
+            <div class="pad__handle" aria-hidden="true"></div>
+            <div class="pad__stack" aria-hidden="true"><span></span><span></span></div>
+
+            <article class="pad__sheet" id="pad-sheet" aria-label="A note from Julian">
+              <header class="letterhead">
+                <!-- LETTERHEAD: replace src with Julian's image -->
+                <img class="letterhead__crest" src="/assets/letterhead-fox.svg" alt="" width="58" height="48" />
+                <p class="letterhead__name">Julian Kreth</p>
+                <p class="letterhead__line">Hamburg &middot; Germany</p>
+                <span class="letterhead__rule" aria-hidden="true"></span>
+              </header>
+
+                            <div class="pad__body">
+                <p class="greeting">moin<span class="greeting__emoji" aria-hidden="true">👋</span></p>
+
+                <p class="copy">
+                  I&rsquo;m Julian. I&rsquo;m Head of
+                  <span class="underline-drawn"><span class="serif-em">Strategy Engineering</span></span>
+                  at
+                  <span class="fan-source" data-fan="masse"><span class="fan fan--tiles" role="group" aria-label="Masse clients"><a class="fan-tile fan-tile--logo" style="--i: -1.5; --tile-bg:#FFFBF0" href="https://www.lindy.ai/" target="_blank" rel="noreferrer" aria-label="Lindy"><img src="/assets/logos/lindy-favicon-512.png" alt="" /></a><a class="fan-tile fan-tile--logo" style="--i: -0.5; --tile-bg:#ffffff" href="https://elevenlabs.io/" target="_blank" rel="noreferrer" aria-label="ElevenLabs"><img src="/assets/logos/elevenlabs-bars.svg" alt="" /></a><a class="fan-tile fan-tile--logo" style="--i: 0.5; --tile-bg:#111111" href="https://www.cekura.ai/" target="_blank" rel="noreferrer" aria-label="Cekura"><img src="/assets/logos/cekura-wave.svg" alt="" /></a><a class="fan-tile fan-tile--logo" style="--i: 1.5; --tile-bg:#000000" href="https://standardbots.com/" target="_blank" rel="noreferrer" aria-label="Standard Bots"><img src="/assets/logos/standard-bots-icon.svg" alt="" /></a></span><a class="brand-link" href="https://masse.marketing" target="_blank" rel="noreferrer"><span class="brand-mark"><img src="/assets/brands/masse.png" alt="" width="18" height="18" decoding="async" /></span><span class="brand-name">Masse</span></a></span>,
+                  where I joined as Tech Lead in June 2024. My team builds attribution, internal tools, AI workflows and our Claude plugin, and owns client sites end to end so they rank and convert. On the side I build
+                  <a class="ol-chip" href="https://openlead.ai" target="_blank" rel="noreferrer"><img class="ol-chip__mark" src="/assets/brands/openlead-mark.svg" alt="" width="12" height="12" /><span class="ol-chip__div" aria-hidden="true"></span><span class="ol-chip__name">Openlead</span></a>,
+                  which I just relaunched. I started it during the first AI wave, because outreach tools were either expensive or had weak European data.
+                </p>
+
+                <p class="copy">
+                  Before that I was a freelance developer in
+                  <span class="fan-source fan-source--phrase" data-fan="us"><span class="fan" role="group" aria-label="US freelance case studies"><a class="fan-tile" style="--i: -1" href="https://www.fiverr.com/" target="_blank" rel="noreferrer" aria-label="Fiverr"><img src="/assets/work/fiverr-card.jpg" alt="" width="32" height="32" /></a><a class="fan-tile" style="--i: 0" href="https://tdem.texas.gov/" target="_blank" rel="noreferrer" aria-label="TDEM"><img src="/assets/work/tdem-card.jpg" alt="" width="32" height="32" /></a><a class="fan-tile fan-tile--logo" style="--i: 1; --tile-bg:#3E45E6" href="https://www.finerfox.com/" target="_blank" rel="noreferrer" aria-label="Agency client"><img src="/assets/logos/finerfox-star.svg" alt="" /></a></span><span class="phrase"><span class="phrase__thumb"><img src="/assets/brands/us-palm.jpg" alt="" width="23" height="23" decoding="async" /></span><span class="phrase__text">the US</span></span></span>,
+                  and before that a
+                  <span class="handwritten">mercenary</span>
+                  for a UK agency in
+                  <span class="fan-source fan-source--phrase" data-fan="newcastle"><span class="fan" role="group" aria-label="Newcastle agency case studies"><a class="fan-tile" style="--i: -1" href="https://www.hicomply.com/" target="_blank" rel="noreferrer" aria-label="HiComply"><img src="/assets/work/hicomply-card.jpg" alt="" width="32" height="32" /></a><a class="fan-tile" style="--i: 0" href="https://www.metaphysiks.ch/" target="_blank" rel="noreferrer" aria-label="Metaphysiks"><img src="/assets/work/metaphysiks-card.jpg" alt="" width="32" height="32" /></a><a class="fan-tile" style="--i: 1" href="https://www.instaffo.com/en/talent" target="_blank" rel="noreferrer" aria-label="Instaffo"><img src="/assets/work/instaffo-card.jpg" alt="" width="32" height="32" /></a></span><span class="phrase"><span class="phrase__thumb"><img src="/assets/brands/newcastle-tyne.jpg" alt="" width="23" height="23" decoding="async" /></span><span class="phrase__text">Newcastle</span></span></span>.
+                </p>
+
+                <p class="copy">
+                  In 2018 I started my agency
+                  <span class="fan-source" data-fan="201720"><span class="fan" role="group" aria-label="201720 case studies"><a class="fan-tile" style="--i: -1" href="https://www.vehiculum.de/" target="_blank" rel="noreferrer" aria-label="Vehiculum"><img src="/assets/cases/vehiculum-card.jpg" alt="" width="32" height="32" /></a><a class="fan-tile" style="--i: 0" href="https://www.homecompany.de/" target="_blank" rel="noreferrer" aria-label="Home Company"><img src="/assets/cases/homecompany-card.jpg" alt="" width="32" height="32" /></a><a class="fan-tile fan-tile--logo fan-tile--wide" style="--i: 1; --tile-bg:#111111" href="https://www.fritz-kola.com/" target="_blank" rel="noreferrer" aria-label="Fritz-Kola"><img src="/assets/cases/fritz-kola-logo.png" alt="" /></a></span><a class="brand-link" href="https://www.201720.de/" target="_blank" rel="noreferrer"><span class="brand-mark brand-mark--201720"><img src="/assets/brands/201720-mark.png" alt="" width="30" height="22" decoding="async" /></span><span class="brand-name">201720</span></a></span>.
+                  It grew to 20 people, and I led the digital side: landing pages, websites and attribution.
+                </p>
+              </div>
+
+              <span class="pad__emboss" aria-hidden="true"></span>
+            </article>
+
+            <!-- Decorative top sheet: lifts away once on load (pure CSS). Its resting state is hidden, so the text shows without JS. -->
+            <div class="pad__flap" aria-hidden="true">
+              <span class="pad__flap-face pad__flap-face--front">
+                <span class="letterhead" aria-hidden="true">
+                  <!-- LETTERHEAD (top sheet copy): replace src with Julian's image too -->
+                  <img class="letterhead__crest" src="/assets/letterhead-fox.svg" alt="" width="58" height="48" />
+                  <span class="letterhead__name">Julian Kreth</span>
+                  <span class="letterhead__line">Hamburg &middot; Germany</span>
+                  <span class="letterhead__rule"></span>
+                </span>
+                <span class="pad__emboss"></span>
+              </span>
+              <span class="pad__flap-face pad__flap-face--back" aria-hidden="true"></span>
+            </div>
+          </div>
+          </div>
+          <div class="desk__item desk__item--polaroids">
+          <div
+            class="polaroids"
+            data-polaroids
+            tabindex="0"
+            role="group"
+            aria-label="A stack of 20 Polaroid photos. Press Enter or the arrow keys to flip to the next one."
+          >
+            <p class="polaroids__status" data-status aria-live="polite"></p>
+            <figure class="polaroid" data-slot="0" style="--slot:0;--x:1px;--y:0px;--rot:-1.5deg;--cap-rot:-0.4deg;--land:5">
+              <div class="polaroid__card">
+                <div class="polaroid__window">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/polaroids/i-do-what-i-want.webp" />
+                    <img
+                      class="polaroid__photo"
+                      src="/assets/polaroids/i-do-what-i-want.jpg"
+                      alt="Black and white photo of a person in a paper cat hat holding a wine glass"
+                      width="146"
+                      height="146"
+                      sizes="(max-width: 767px) 136px, 146px" decoding="async" loading="eager" fetchpriority="low"
+                    />
+                  </picture>
+                </div>
+                <figcaption class="polaroid__caption">I do what I want</figcaption>
+              </div>
+            </figure>
+            <figure class="polaroid" data-slot="1" style="--slot:1;--x:16px;--y:4px;--rot:7.4deg;--cap-rot:0.6deg;--land:4">
+              <div class="polaroid__card">
+                <div class="polaroid__window">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/polaroids/out-on-the-water.webp" />
+                    <img
+                      class="polaroid__photo"
+                      src="/assets/polaroids/out-on-the-water.jpg"
+                      alt="A person on a boat looking out at sailboats"
+                      width="146"
+                      height="146"
+                      sizes="(max-width: 767px) 136px, 146px" decoding="async" loading="lazy"
+                    />
+                  </picture>
+                </div>
+                <figcaption class="polaroid__caption">Out on the water</figcaption>
+              </div>
+            </figure>
+            <figure class="polaroid" data-slot="2" style="--slot:2;--x:-16px;--y:6px;--rot:-7.8deg;--cap-rot:-0.8deg;--land:3">
+              <div class="polaroid__card">
+                <div class="polaroid__window">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/polaroids/giza.webp" />
+                    <img
+                      class="polaroid__photo"
+                      src="/assets/polaroids/giza.jpg"
+                      alt="A person standing in front of the pyramids at Giza"
+                      width="146"
+                      height="146"
+                      sizes="(max-width: 767px) 136px, 146px" decoding="async" loading="lazy"
+                    />
+                  </picture>
+                </div>
+                <figcaption class="polaroid__caption">Giza</figcaption>
+              </div>
+            </figure>
+            <figure class="polaroid" data-slot="3" style="--slot:3;--x:11px;--y:13px;--rot:4.6deg;--cap-rot:0.4deg;--land:2">
+              <div class="polaroid__card">
+                <div class="polaroid__window">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/polaroids/highway-1.webp" />
+                    <img
+                      class="polaroid__photo"
+                      src="/assets/polaroids/highway-1.jpg"
+                      alt="An empty highway running toward pink mountains"
+                      width="146"
+                      height="146"
+                      sizes="(max-width: 767px) 136px, 146px" decoding="async" loading="lazy"
+                    />
+                  </picture>
+                </div>
+                <figcaption class="polaroid__caption">Highway 1</figcaption>
+              </div>
+            </figure>
+            <figure class="polaroid" data-slot="4" style="--slot:4;--x:-10px;--y:14px;--rot:-5.0deg;--cap-rot:-0.3deg;--land:1">
+              <div class="polaroid__card">
+                <div class="polaroid__window">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/polaroids/trail-day.webp" />
+                    <img
+                      class="polaroid__photo"
+                      src="/assets/polaroids/trail-day.jpg"
+                      alt="A person in a yellow cap on a forest trail"
+                      width="146"
+                      height="146"
+                      sizes="(max-width: 767px) 136px, 146px" decoding="async" loading="lazy"
+                    />
+                  </picture>
+                </div>
+                <figcaption class="polaroid__caption">Trail day</figcaption>
+              </div>
+            </figure>
+            <figure class="polaroid" data-slot="5" style="--slot:5;--x:4px;--y:10px;--rot:2.4deg;--cap-rot:0.2deg;--land:0">
+              <div class="polaroid__card">
+                <div class="polaroid__window">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/polaroids/new-york.webp" />
+                    <img
+                      class="polaroid__photo"
+                      src="/assets/polaroids/new-york.jpg"
+                      alt="The Oculus in New York with a yellow cab in the rain"
+                      width="146"
+                      height="146"
+                      sizes="(max-width: 767px) 136px, 146px" decoding="async" loading="lazy"
+                    />
+                  </picture>
+                </div>
+                <figcaption class="polaroid__caption">New York</figcaption>
+              </div>
+            </figure>
+
+
+
+
+          </div>
+          </div>
+          <img
+            class="desk__item desk__item--openlead"
+            src="/assets/brands/openlead-favicon.svg"
+            alt="Openlead"
+            width="96"
+            height="96"
+            draggable="false"
+            data-draggable
+            data-desk-label="Openlead"
+          />
         </div>
 
-        <div class="home-split">
-        <section class="section" id="projects">
-          <span class="label">Projects</span>
+        <div class="home-split" data-desk-layer>
+        <section class="section" id="projects" data-draggable data-desk-label="After Hours" data-drag-touch-handle=".label" data-drag-exclude="button, input, textarea, select, [data-no-drag]">
+          <span class="label">After Hours</span>
           <div data-projects-grid data-projects-limit="2"></div>
         </section>
 
-        <section class="section">
+        <section class="section" data-draggable data-desk-label="Writing" data-drag-touch-handle=".label" data-drag-exclude="button, input, textarea, select, [data-no-drag]">
           <span class="label">Writing</span>
-          <div class="writing-list">
-            <a class="writing-list__item" href="/notes/agentic-engineering/">
-              <span class="writing-list__meta">September 9, 2026</span>
-              <span class="writing-list__title">Agentic Engineering</span>
-            </a>
-            <a class="writing-list__item" href="/notes/free-chinese-and-banned/">
-              <span class="writing-list__meta">July 17, 2026</span>
-              <span class="writing-list__title">The Best AI Will Be Free, Chinese, and Banned in America</span>
-            </a>
-            <a class="writing-list__item" href="/notes/why-memory-management-matters-for-your-ai-agent/">
-              <span class="writing-list__meta">July 4, 2026</span>
-              <span class="writing-list__title">Why Memory Management Is Important for Your AI Agent</span>
-            </a>
-            <a class="writing-list__item" href="/notes/how-we-improved-our-ai-agent-in-slack-by-making-it-dumber/">
-              <span class="writing-list__meta">July 3, 2026</span>
-              <span class="writing-list__title">How We Improved Our AI Agent in Slack by Making It Dumber</span>
-            </a>
-            <a class="writing-list__item writing-list__item--soon" href="/notes/coding-is-the-new-excel/">
-              <span class="writing-list__meta">Coming soon</span>
-              <span class="writing-list__title">Coding Is the New Excel</span>
-            </a>
-            <a class="writing-list__item writing-list__item--soon" href="/notes/masse-workbench-claude-code-plugin/">
-              <span class="writing-list__meta">Coming soon</span>
-              <span class="writing-list__title">We Packed Our Whole Agency Into a Claude Code Plugin</span>
-            </a>
-            <a class="writing-list__item writing-list__item--soon" href="/notes/cursor-codex-claude-code-what-i-use-for-which/">
-              <span class="writing-list__meta">Coming soon</span>
-              <span class="writing-list__title">Cursor, Codex, Claude Code: What I Use for Which</span>
-            </a>
-          </div>
+          <div
+            class="writing-list notes-archive"
+            data-writing-list
+            data-writing-limit="4"
+          ></div>
         </section>
         </div>
         </main>
       </div>
+    </div>
+    <div class="desk-toolbar swipe-nav__stay" data-desk-toolbar role="group" aria-label="Desk tools" hidden>
+      <button type="button" class="desk-toolbar__button" data-tool="drag" aria-label="Drag" aria-pressed="true" title="Drag">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 14 9-7 1-3 7L5 3Z"/></svg>
+      </button>
+      <button type="button" class="desk-toolbar__button" data-tool="pen" aria-label="Pen" aria-pressed="false" title="Pen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 6.5 4 4M5 19l4.5-1 10-10a2.8 2.8 0 0 0-4-4L5.5 14 5 19Z"/></svg>
+      </button>
+      <div class="desk-toolbar__ink-tools" data-ink-tools role="group" aria-label="Note controls" hidden></div>
     </div>
     <script>
       // Homepage doesn't load layout.js, so clear notes-index mode here too.
@@ -336,15 +528,17 @@
       } catch (_) {}
     </script>
     <script src="/availability.js?v=8"></script>
-    <script src="/now-playing.js?v=19"></script>
+    <script src="/now-playing.js?v=22"></script>
     <script src="/admin-auth.js?v=13"></script>
     <script src="/nav-preview.js?v=9"></script>
     <script src="/nav-mobile.js?v=12"></script>
     <script src="/sidebar-preview.js?v=8"></script>
-    <script src="/projects.js?v=10"></script>
+    <script src="/home-bottom-band.js?v=7"></script>
+    <script src="/projects.js?v=11"></script>
+    <script src="/writing-list.js?v=4"></script>
     <script src="/avatar.js?v=1"></script>
-    <script src="/hidden-footer.js?v=2"></script>
-    <script src="/swipe-nav.js?v=8"></script>
+    <script src="/hidden-footer.js?v=4"></script>
+    <script src="/swipe-nav.js?v=12"></script>
     <script>
       document.querySelectorAll("[data-copy]").forEach((el) => {
         el.addEventListener("click", async () => {
@@ -358,5 +552,170 @@
         });
       });
     </script>
+    <script>
+      (function () {
+        var sources = document.querySelectorAll("[data-fan]");
+        var fineHover =
+          window.matchMedia &&
+          window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        function closeAll(except) {
+          sources.forEach(function (s) {
+            if (s !== except) s.classList.remove("is-open");
+          });
+        }
+
+        sources.forEach(function (source) {
+          source.addEventListener("click", function (event) {
+            if (fineHover) return;
+            if (event.target.closest(".fan-tile[href]")) return;
+            event.preventDefault();
+            event.stopPropagation();
+            var open = !source.classList.contains("is-open");
+            closeAll();
+            source.classList.toggle("is-open", open);
+          });
+        });
+
+        document.addEventListener("click", function (event) {
+          if (!event.target.closest("[data-fan]")) closeAll();
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") closeAll();
+        });
+      })();
+    </script>
+        <script src="/assets/draggable.js?v=8" defer></script>
+    <script type="application/json" id="polaroid-data">
+      {
+        "_comment": "Polaroid stack for the kreth.work intro. Fields: src (JPEG fallback), webp, caption, alt.",
+        "photos": [
+          {
+            "src": "/assets/polaroids/i-do-what-i-want.jpg",
+            "webp": "/assets/polaroids/i-do-what-i-want.webp",
+            "caption": "I do what I want",
+            "alt": "Black and white photo of a person in a paper cat hat holding a wine glass"
+          },
+          {
+            "src": "/assets/polaroids/out-on-the-water.jpg",
+            "webp": "/assets/polaroids/out-on-the-water.webp",
+            "caption": "Out on the water",
+            "alt": "A person on a boat looking out at sailboats"
+          },
+          {
+            "src": "/assets/polaroids/giza.jpg",
+            "webp": "/assets/polaroids/giza.webp",
+            "caption": "Giza",
+            "alt": "A person standing in front of the pyramids at Giza"
+          },
+          {
+            "src": "/assets/polaroids/highway-1.jpg",
+            "webp": "/assets/polaroids/highway-1.webp",
+            "caption": "Highway 1",
+            "alt": "An empty highway running toward pink mountains"
+          },
+          {
+            "src": "/assets/polaroids/trail-day.jpg",
+            "webp": "/assets/polaroids/trail-day.webp",
+            "caption": "Trail day",
+            "alt": "A person in a yellow cap on a forest trail"
+          },
+          {
+            "src": "/assets/polaroids/new-york.jpg",
+            "webp": "/assets/polaroids/new-york.webp",
+            "caption": "New York",
+            "alt": "The Oculus in New York with a yellow cab in the rain"
+          },
+          {
+            "src": "/assets/polaroids/kickflip.jpg",
+            "webp": "/assets/polaroids/kickflip.webp",
+            "caption": "Kickflip",
+            "alt": "A skateboarder mid kickflip on stone steps"
+          },
+          {
+            "src": "/assets/polaroids/definitely-not-italian.jpg",
+            "webp": "/assets/polaroids/definitely-not-italian.webp",
+            "caption": "Definitely not Italian",
+            "alt": "A bar with a sign that reads Definitely not Italian pizza"
+          },
+          {
+            "src": "/assets/polaroids/scotland.jpg",
+            "webp": "/assets/polaroids/scotland.webp",
+            "caption": "Scotland",
+            "alt": "A castle on a loch in Scotland"
+          },
+          {
+            "src": "/assets/polaroids/oysters-on-fire.jpg",
+            "webp": "/assets/polaroids/oysters-on-fire.webp",
+            "caption": "Oysters on fire",
+            "alt": "Oysters cooking on a burning log"
+          },
+          {
+            "src": "/assets/polaroids/korean-fried-chicken.jpg",
+            "webp": "/assets/polaroids/korean-fried-chicken.webp",
+            "caption": "Korean fried chicken",
+            "alt": "A person at a Korean bar with fried chicken"
+          },
+          {
+            "src": "/assets/polaroids/the-valley.jpg",
+            "webp": "/assets/polaroids/the-valley.webp",
+            "caption": "The valley",
+            "alt": "A granite dome and waterfall in a valley"
+          },
+          {
+            "src": "/assets/polaroids/visitor.jpg",
+            "webp": "/assets/polaroids/visitor.webp",
+            "caption": "Visitor",
+            "alt": "A hand holding a Visitor can"
+          },
+          {
+            "src": "/assets/polaroids/panda-4x4.jpg",
+            "webp": "/assets/polaroids/panda-4x4.webp",
+            "caption": "Panda 4x4",
+            "alt": "A green Fiat Panda 4x4 on a street"
+          },
+          {
+            "src": "/assets/polaroids/hamburg.jpg",
+            "webp": "/assets/polaroids/hamburg.webp",
+            "caption": "Hamburg",
+            "alt": "A dog and a walker on a Hamburg street"
+          },
+          {
+            "src": "/assets/polaroids/kitchen.jpg",
+            "webp": "/assets/polaroids/kitchen.webp",
+            "caption": "Kitchen",
+            "alt": "A person in a yellow cap in a kitchen holding a cucumber"
+          },
+          {
+            "src": "/assets/polaroids/alberobello.jpg",
+            "webp": "/assets/polaroids/alberobello.webp",
+            "caption": "Alberobello",
+            "alt": "A person in front of trulli houses in Alberobello"
+          },
+          {
+            "src": "/assets/polaroids/polignano.jpg",
+            "webp": "/assets/polaroids/polignano.webp",
+            "caption": "Polignano",
+            "alt": "A cliff town by the sea in Polignano"
+          },
+          {
+            "src": "/assets/polaroids/kyoto.jpg",
+            "webp": "/assets/polaroids/kyoto.webp",
+            "caption": "Kyoto",
+            "alt": "Autumn trees and a house by a river in Kyoto"
+          },
+          {
+            "src": "/assets/polaroids/torino.jpg",
+            "webp": "/assets/polaroids/torino.webp",
+            "caption": "Torino",
+            "alt": "A gallery arcade in Torino with people in sunglasses"
+          }
+        ]
+      }
+    </script>
+    <script src="/assets/polaroids.js?v=9" defer></script>
+    <script src="/assets/vendor/peel-js/peel.js" defer></script>
+    <script src="/assets/notepad.js?v=8" defer></script>
   </body>
 </html>

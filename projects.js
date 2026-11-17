@@ -19,6 +19,9 @@
           grid.appendChild(buildCard(project));
         });
       });
+      if (typeof window.krethSyncHomeBottomBand === "function") {
+        requestAnimationFrame(window.krethSyncHomeBottomBand);
+      }
     })
     .catch(function () {
       grids.forEach(function (grid) {

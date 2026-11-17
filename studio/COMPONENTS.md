@@ -66,7 +66,7 @@ Studio styleguide catalog for `components.html`. Status values: `stable` · `dra
 | TopNav | `.top-nav` | — | chrome partial | stable |
 | ProjectPageChrome | `.project-page__chrome` | — | projects/* | stable |
 | BookDetail | `.book-detail` | — | books/* | stable |
-| StickerBoard | `.sticker-board` | — | clients/ | stable |
+| StickerBoard | `.sticker-board` | — | work/ | stable |
 | NotesArchive | `.notes-archive` | — | notes/ | stable |
 | EssayNote | `.essay-note chrome` | — | notes essays | stable |
 | SwipeNav | `.swipe-nav` | — | mobile chrome | stable |

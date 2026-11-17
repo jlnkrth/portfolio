@@ -1,11 +1,12 @@
 // Portfolio host Worker: static assets + redirects + same-origin now-playing proxy.
+import { handleNotepad, withNoindex } from "./notepad.js";
 const PUBLIC_HOST_DEFAULT = "kreth.work";
 const ADMIN_HOST_DEFAULT = "admin.kreth.work";
 const SPOTIFY_FALLBACK =
   "https://kreth-now-playing.juliankreth-a09.workers.dev/api/now-playing";
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
     const publicHost = (env.PUBLIC_HOST || PUBLIC_HOST_DEFAULT).toLowerCase();
@@ -25,6 +26,16 @@ export default {
     // Same-origin Spotify proxy
     if (url.pathname === "/api/now-playing") {
       return proxyNowPlaying(request, env);
+    }
+
+    // Notepad guestbook API (GET/POST /api/notepad/pages, DELETE /api/notepad/pages/:id)
+    const notepad = await handleNotepad(request, env, ctx);
+    if (notepad) return notepad;
+
+    // Hidden notepad admin view: never indexed. The token is entered in the page.
+    if (url.pathname === "/notepad-admin" || url.pathname.startsWith("/notepad-admin/")) {
+      const path = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+      return withNoindex(await serveAsset(env, url, path));
     }
 
     const onAdminHost = host === adminHost;
@@ -63,6 +74,14 @@ export default {
       if (url.pathname === "/" || url.pathname === "") {
         return serveAsset(env, url, "/components.html");
       }
+    }
+
+    // Clients → Work
+    if (url.pathname === "/clients" || url.pathname === "/clients/") {
+      const dest = new URL("/work/", url.origin);
+      dest.search = url.search;
+      dest.hash = url.hash;
+      return Response.redirect(dest.toString(), 301);
     }
 
     return serveAsset(env, url, url.pathname);

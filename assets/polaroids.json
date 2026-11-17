@@ -1,0 +1,125 @@
+{
+  "_comment": "Polaroid stack for the kreth.work intro. Fields: src (JPEG fallback), webp, caption, alt.",
+  "photos": [
+    {
+      "src": "/assets/polaroids/i-do-what-i-want.jpg",
+      "webp": "/assets/polaroids/i-do-what-i-want.webp",
+      "caption": "I do what I want",
+      "alt": "Black and white photo of a person in a paper cat hat holding a wine glass"
+    },
+    {
+      "src": "/assets/polaroids/out-on-the-water.jpg",
+      "webp": "/assets/polaroids/out-on-the-water.webp",
+      "caption": "Out on the water",
+      "alt": "A person on a boat looking out at sailboats"
+    },
+    {
+      "src": "/assets/polaroids/giza.jpg",
+      "webp": "/assets/polaroids/giza.webp",
+      "caption": "Giza",
+      "alt": "A person standing in front of the pyramids at Giza"
+    },
+    {
+      "src": "/assets/polaroids/highway-1.jpg",
+      "webp": "/assets/polaroids/highway-1.webp",
+      "caption": "Highway 1",
+      "alt": "An empty highway running toward pink mountains"
+    },
+    {
+      "src": "/assets/polaroids/trail-day.jpg",
+      "webp": "/assets/polaroids/trail-day.webp",
+      "caption": "Trail day",
+      "alt": "A person in a yellow cap on a forest trail"
+    },
+    {
+      "src": "/assets/polaroids/new-york.jpg",
+      "webp": "/assets/polaroids/new-york.webp",
+      "caption": "New York",
+      "alt": "The Oculus in New York with a yellow cab in the rain"
+    },
+    {
+      "src": "/assets/polaroids/kickflip.jpg",
+      "webp": "/assets/polaroids/kickflip.webp",
+      "caption": "Kickflip",
+      "alt": "A skateboarder mid kickflip on stone steps"
+    },
+    {
+      "src": "/assets/polaroids/definitely-not-italian.jpg",
+      "webp": "/assets/polaroids/definitely-not-italian.webp",
+      "caption": "Definitely not Italian",
+      "alt": "A bar with a sign that reads Definitely not Italian pizza"
+    },
+    {
+      "src": "/assets/polaroids/scotland.jpg",
+      "webp": "/assets/polaroids/scotland.webp",
+      "caption": "Scotland",
+      "alt": "A castle on a loch in Scotland"
+    },
+    {
+      "src": "/assets/polaroids/oysters-on-fire.jpg",
+      "webp": "/assets/polaroids/oysters-on-fire.webp",
+      "caption": "Oysters on fire",
+      "alt": "Oysters cooking on a burning log"
+    },
+    {
+      "src": "/assets/polaroids/korean-fried-chicken.jpg",
+      "webp": "/assets/polaroids/korean-fried-chicken.webp",
+      "caption": "Korean fried chicken",
+      "alt": "A person at a Korean bar with fried chicken"
+    },
+    {
+      "src": "/assets/polaroids/the-valley.jpg",
+      "webp": "/assets/polaroids/the-valley.webp",
+      "caption": "The valley",
+      "alt": "A granite dome and waterfall in a valley"
+    },
+    {
+      "src": "/assets/polaroids/visitor.jpg",
+      "webp": "/assets/polaroids/visitor.webp",
+      "caption": "Visitor",
+      "alt": "A hand holding a Visitor can"
+    },
+    {
+      "src": "/assets/polaroids/panda-4x4.jpg",
+      "webp": "/assets/polaroids/panda-4x4.webp",
+      "caption": "Panda 4x4",
+      "alt": "A green Fiat Panda 4x4 on a street"
+    },
+    {
+      "src": "/assets/polaroids/hamburg.jpg",
+      "webp": "/assets/polaroids/hamburg.webp",
+      "caption": "Hamburg",
+      "alt": "A dog and a walker on a Hamburg street"
+    },
+    {
+      "src": "/assets/polaroids/kitchen.jpg",
+      "webp": "/assets/polaroids/kitchen.webp",
+      "caption": "Kitchen",
+      "alt": "A person in a yellow cap in a kitchen holding a cucumber"
+    },
+    {
+      "src": "/assets/polaroids/alberobello.jpg",
+      "webp": "/assets/polaroids/alberobello.webp",
+      "caption": "Alberobello",
+      "alt": "A person in front of trulli houses in Alberobello"
+    },
+    {
+      "src": "/assets/polaroids/polignano.jpg",
+      "webp": "/assets/polaroids/polignano.webp",
+      "caption": "Polignano",
+      "alt": "A cliff town by the sea in Polignano"
+    },
+    {
+      "src": "/assets/polaroids/kyoto.jpg",
+      "webp": "/assets/polaroids/kyoto.webp",
+      "caption": "Kyoto",
+      "alt": "Autumn trees and a house by a river in Kyoto"
+    },
+    {
+      "src": "/assets/polaroids/torino.jpg",
+      "webp": "/assets/polaroids/torino.webp",
+      "caption": "Torino",
+      "alt": "A gallery arcade in Torino with people in sunglasses"
+    }
+  ]
+}

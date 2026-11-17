@@ -141,28 +141,20 @@ body.book-modal-open {
   background: var(--bm-gray0);
 }
 
-.book-modal__bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 16px 18px 18px;
-  border-top: 1px solid var(--bm-gray3);
-}
-
 .book-modal__heading {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.35;
   color: var(--bm-gray12);
+  text-wrap: balance;
 }
 
 .book-modal__lead {
-  margin: 0;
-  max-width: 42rem;
-  font-size: 14px;
-  line-height: 1.7;
-  text-wrap: balance;
+  margin: -8px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  text-wrap: pretty;
   color: var(--bm-gray11);
 }
 
@@ -251,14 +243,19 @@ body.book-modal-open {
 
 @media (min-width: 640px) {
   .book-modal__top {
-    grid-template-columns: minmax(0, 1fr) 168px;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 240px);
   }
 
   .book-modal__facts {
-    justify-content: center;
-    padding: 20px 16px;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 24px 20px;
     border-top: 0;
     border-left: 1px solid var(--bm-gray3);
+  }
+
+  .book-modal__heading {
+    font-size: 17px;
   }
 
   .book-modal__seg {

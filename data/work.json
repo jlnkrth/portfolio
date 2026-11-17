@@ -1,0 +1,381 @@
+{
+  "standard-bots": {
+    "title": "Standard Bots",
+    "href": "https://standardbots.com/",
+    "image": "/assets/clients/standard-bots.svg",
+    "chips": [
+      "CRO",
+      "Dev"
+    ],
+    "lead": "Industrial robot arms for factories that want automation without the drama.",
+    "body": "Standard Bots builds approachable industrial robots for manufacturing floors. Content and SEO supported product education and category demand around factory automation.",
+    "screenshot": "/assets/work/standard-bots.png"
+  },
+  "hicomply": {
+    "title": "HiComply",
+    "href": "https://www.hicomply.com/",
+    "image": "/assets/clients/hicomply.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Compliance automation for security-conscious teams.",
+    "body": "HiComply helps companies run security and compliance programs without drowning in spreadsheets. Engagement focused on SEO and educational content around frameworks and audit readiness.",
+    "screenshot": "/assets/work/hicomply.png"
+  },
+  "switchboard": {
+    "title": "Switchboard",
+    "href": "",
+    "image": "/assets/clients/switchboard.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Collaboration tooling for distributed teams.",
+    "body": "Switchboard explored spatial collaboration for remote work. Brand and product storytelling work sat alongside early go-to-market experiments."
+  },
+  "metaphysiks": {
+    "title": "Metaphysiks",
+    "href": "https://www.metaphysiks.ch/",
+    "image": "/assets/clients/metaphysiks.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Swiss wellness and metaphysics studio site.",
+    "body": "Metaphysiks is a boutique wellness / metaphysics practice. Work covered a clean marketing site and brand presentation for an international audience.",
+    "screenshot": "/assets/work/metaphysiks.png"
+  },
+  "instaffo": {
+    "title": "Instaffo",
+    "href": "https://www.instaffo.com/en/talent",
+    "image": "/assets/clients/instaffo.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Talent marketplace connecting companies with vetted specialists.",
+    "body": "Instaffo matches companies with freelancers and specialists across Europe. SEO and content supported talent-marketplace demand and category education.",
+    "screenshot": "/assets/work/instaffo.png"
+  },
+  "bestever": {
+    "title": "Bestever",
+    "href": "https://www.bestever.ai/",
+    "image": "/assets/clients/bestever.svg",
+    "chips": [
+      "Dev",
+      "CRO"
+    ],
+    "lead": "AI creative platform for performance marketers.",
+    "body": "Bestever generates and scores ad creatives with AI so media teams can ship variants faster. Engagement covered organic content and site SEO while the product positioned against creative-ops workflows. Bestever has since been acquired.",
+    "acquired": true,
+    "screenshot": "/assets/work/bestever.png"
+  },
+  "notch-so": {
+    "title": "Notch.so",
+    "href": "https://www.notch.so/",
+    "image": "/assets/clients/notch-so.svg",
+    "chips": [
+      "Dev",
+      "Consulting"
+    ],
+    "lead": "Modern website tooling for growing brands.",
+    "body": "Notch helps teams ship and iterate marketing sites faster. Organic content and SEO covered site ops and Webflow-adjacent workflows.",
+    "screenshot": "/assets/work/notch-so.png"
+  },
+  "newsbreak": {
+    "title": "Newsbreak",
+    "href": "https://www.newsbreak.com/about",
+    "image": "/assets/clients/newsbreak.svg",
+    "chips": [
+      "Dev",
+      "Landing page"
+    ],
+    "lead": "Local news and content discovery platform.",
+    "body": "Newsbreak distributes local and national news to a large consumer audience. Content strategy work supported discovery and topical coverage.",
+    "screenshot": "/assets/work/newsbreak.png"
+  },
+  "lantern": {
+    "title": "Lantern",
+    "href": "https://www.lanterninsurance.com/",
+    "image": "/assets/clients/lantern.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Insurance products with a clearer customer experience.",
+    "body": "Lantern Insurance modernizes how people buy coverage. SEO and content work focused on trust, education, and comparison intent.",
+    "screenshot": "/assets/work/lantern.png"
+  },
+  "meter": {
+    "title": "Meter",
+    "href": "https://www.meter.com/",
+    "image": "/assets/clients/meter.svg",
+    "chips": [
+      "SEO"
+    ],
+    "lead": "Enterprise network infrastructure — ISP, Wi‑Fi, switches, security.",
+    "body": "Meter sells and operates modern network stacks for offices and campuses. Content and SEO work focused on infrastructure and managed-network demand.",
+    "screenshot": "/assets/work/meter.png"
+  },
+  "bestow": {
+    "title": "Bestow",
+    "href": "https://www.bestow.com/",
+    "image": "/assets/clients/bestow.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Digital-first life insurance.",
+    "body": "Bestow sells life insurance online with a streamlined underwriting flow. Content and SEO supported education around term life and digital insurance.",
+    "screenshot": "/assets/work/bestow.png"
+  },
+  "weights": {
+    "title": "Weights",
+    "href": "http://weights.com/",
+    "image": "/assets/clients/weights.svg",
+    "chips": [
+      "Dev"
+    ],
+    "lead": "Machine learning platform for model builders.",
+    "body": "Weights supports ML teams shipping and iterating models. Marketing site and content work spoke to practitioners and platform buyers. Weights was later acquired by OpenAI.",
+    "acquiredBy": "OpenAI",
+    "screenshot": "/assets/work/weights.png"
+  },
+  "banxware": {
+    "title": "Banxware",
+    "href": "https://www.banxware.com/",
+    "image": "/assets/clients/banxware.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Embedded finance infrastructure for platforms.",
+    "body": "Banxware helps marketplaces and SaaS platforms offer financial products. Site and SEO work targeted embedded-finance and B2B fintech demand.",
+    "screenshot": "/assets/work/banxware.png"
+  },
+  "pult": {
+    "title": "Pult",
+    "href": "https://www.pult.com/de",
+    "image": "/assets/clients/pult.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Flexible office and workplace management.",
+    "body": "Pult helps companies manage desks, rooms, and hybrid work. Content covered workplace ops and flexible-office search intent.",
+    "screenshot": "/assets/work/pult.png"
+  },
+  "adalo": {
+    "title": "Adalo",
+    "href": "https://www.adalo.com/",
+    "image": "/assets/clients/adalo.svg",
+    "chips": [
+      "SEO"
+    ],
+    "lead": "No-code app builder for web and mobile.",
+    "body": "Adalo lets non-engineers build apps visually. SEO content targeted no-code app builder demand and competitor comparison clusters. Adalo has since been acquired.",
+    "acquired": true,
+    "screenshot": "/assets/work/adalo.png"
+  },
+  "workos": {
+    "title": "WorkOS",
+    "href": "https://workos.com/",
+    "image": "/assets/clients/workos.svg",
+    "chips": [
+      "Dev"
+    ],
+    "lead": "Enterprise-ready auth and user management APIs.",
+    "body": "WorkOS helps SaaS companies add SSO, SCIM, and directory sync. Content and SEO spoke to developers adopting enterprise features.",
+    "screenshot": "/assets/work/workos.png"
+  },
+  "elevenlabs": {
+    "title": "ElevenLabs",
+    "href": "https://elevenlabs.io/",
+    "image": "/assets/clients/elevenlabs.svg",
+    "chips": [
+      "CRO"
+    ],
+    "lead": "AI voice synthesis platform.",
+    "body": "ElevenLabs powers realistic AI speech for products and creators. Brand and content work supported category leadership in generative voice.",
+    "screenshot": "/assets/work/elevenlabs.png"
+  },
+  "fiverr": {
+    "title": "Fiverr",
+    "href": "https://www.fiverr.com/",
+    "image": "/assets/clients/fiverr.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Global freelance services marketplace.",
+    "body": "Fiverr connects businesses with freelancers worldwide. Content and SEO collaboration focused on the blog and service-discovery demand.",
+    "screenshot": "/assets/work/fiverr.png"
+  },
+  "voy-tax": {
+    "title": "Voy.Tax",
+    "href": "https://voy.law/",
+    "image": "/assets/clients/voy-tax.svg",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Modern tax and legal services.",
+    "body": "Voy helps people navigate tax and legal workflows with a clearer digital experience. Site and content work emphasized trust and clarity.",
+    "screenshot": "/assets/work/voy-tax.png"
+  },
+  "lindy-ai": {
+    "title": "Lindy.ai",
+    "href": "https://www.lindy.ai/",
+    "image": "/assets/clients/lindy-ai.svg",
+    "chips": [
+      "SEO",
+      "Dev"
+    ],
+    "lead": "AI assistant platform for founders and ops teams.",
+    "body": "Lindy is an AI agent platform for inbox, research, and ops automation. Work spanned SEO content and site growth against assistant / automation demand.",
+    "screenshot": "/assets/work/lindy-ai.png"
+  },
+  "ai-apply": {
+    "title": "AI Apply",
+    "href": "https://aiapply.co/",
+    "image": "/assets/clients/ai-apply.png",
+    "chips": [
+      "CRO",
+      "Website"
+    ],
+    "lead": "AI-assisted job applications.",
+    "body": "AI Apply helps candidates tailor applications faster with AI. Organic content covered job-search and application-automation intent.",
+    "screenshot": "/assets/work/ai-apply.png"
+  },
+  "blaze-tech": {
+    "title": "Blaze Tech",
+    "href": "https://www.blaze.tech/",
+    "image": "/assets/clients/blaze-tech.png",
+    "chips": [
+      "CRO",
+      "SEO"
+    ],
+    "lead": "No-code application platform for compliance-heavy enterprises.",
+    "body": "Blaze helps healthcare, finance, and logistics teams ship internal apps without engineers — with SOC 2 Type 2 and HIPAA-ready deployments as the trust spine.\n\nAt masse we ran SEO + editorial content against healthcare and HIPAA demand, with a heavy backlink program alongside Meta acquisition. The `/healthcare` cluster became the site's primary organic engine.",
+    "screenshot": "/assets/work/blaze-tech.png"
+  },
+  "circles": {
+    "title": "Circles",
+    "href": "https://www.circles.com/",
+    "image": "/assets/clients/circles.png",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Community and social product.",
+    "body": "Circles builds community-centered product experiences. Engagement covered marketing site clarity and growth content.",
+    "screenshot": "/assets/work/circles.png"
+  },
+  "contract-hero": {
+    "title": "Contract Hero",
+    "href": "https://en.contracthero.com/",
+    "image": "/assets/clients/contract-hero.png",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Contract management for growing teams.",
+    "body": "Contract Hero streamlines contract workflows for businesses. SEO and content targeted legal-ops and contract-management demand.",
+    "screenshot": "/assets/work/contract-hero.png"
+  },
+  "exacare": {
+    "title": "ExaCare",
+    "href": "https://www.exacare.com/",
+    "image": "/assets/clients/exacare.png",
+    "chips": [
+      "SEO",
+      "Website"
+    ],
+    "lead": "Healthcare operations software.",
+    "body": "ExaCare supports care teams with operational tooling. Site and content work emphasized clinical-ops clarity and trust.",
+    "screenshot": "/assets/work/exacare.png"
+  },
+  "eppo": {
+    "title": "Eppo",
+    "href": "https://www.geteppo.com/",
+    "image": "/assets/clients/eppo.png",
+    "chips": [
+      "SEO"
+    ],
+    "lead": "Feature flagging and experimentation platform.",
+    "body": "Eppo helps product teams run trustworthy experiments. Content targeted experimentation, feature flags, and data-driven product teams. Eppo was later acquired by Datadog.",
+    "acquiredBy": "Datadog",
+    "screenshot": "/assets/work/eppo.png"
+  },
+  "filmless": {
+    "title": "Filmless",
+    "href": "https://www.filmless.com/",
+    "image": "/assets/clients/filmless.png",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Video production platform for brands.",
+    "body": "Filmless makes it easier for brands to produce video without a full in-house crew. Marketing work covered creative-ops and production demand.",
+    "screenshot": "/assets/work/filmless.png"
+  },
+  "longbow": {
+    "title": "Longbow",
+    "href": "https://www.longbowcs.com/",
+    "image": "/assets/clients/longbow.png",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Client services and go-to-market support.",
+    "body": "Longbow partners with companies on growth and delivery work. Site presentation focused on clarity of offer and proof.",
+    "screenshot": "/assets/work/longbow.png"
+  },
+  "orb": {
+    "title": "Orb",
+    "href": "https://www.withorb.com/",
+    "image": "/assets/clients/orb.png",
+    "chips": [
+      "SEO"
+    ],
+    "lead": "Usage-based billing infrastructure for modern SaaS.",
+    "body": "Orb powers metering and billing for usage-based products. Organic work targeted billing, metering, and monetization search demand. Orb was later acquired by Adyen.",
+    "acquiredBy": "Adyen",
+    "screenshot": "/assets/work/orb.png"
+  },
+  "firecrawl": {
+    "title": "Firecrawl",
+    "href": "https://www.firecrawl.dev/",
+    "image": "/assets/clients/firecrawl.png",
+    "chips": [
+      "Dev"
+    ],
+    "lead": "Web data API for AI agents and apps.",
+    "body": "Firecrawl turns websites into clean, LLM-ready data. Engagement covered product storytelling and organic demand around scraping, crawl APIs, and agent tooling."
+  },
+  "tdem": {
+    "title": "TDEM",
+    "href": "https://tdem.texas.gov/",
+    "image": "/assets/clients/tdem.png",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Texas Division of Emergency Management.",
+    "body": "TDEM coordinates emergency preparedness and response for Texas. Digital work focused on clear public information architecture.",
+    "screenshot": "/assets/work/tdem.png"
+  },
+  "trafficguard": {
+    "title": "Trafficguard",
+    "href": "https://www.trafficguard.ai/",
+    "image": "/assets/clients/trafficguard.png",
+    "chips": [
+      "Dev",
+      "Website"
+    ],
+    "lead": "Ad fraud prevention and traffic quality.",
+    "body": "TrafficGuard protects advertisers from invalid traffic and ad fraud. SEO content targeted media-quality and fraud-prevention demand.",
+    "screenshot": "/assets/work/trafficguard.png"
+  }
+}

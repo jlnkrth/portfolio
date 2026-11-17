@@ -1,0 +1,51 @@
+/* Temporary ghosts for desk ↔ list sticker morph. */
+
+.work-view-morph {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.work-view-morph__item {
+  position: fixed;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #fff;
+  border: 1px solid rgba(33, 32, 28, 0.1);
+  overflow: hidden;
+  transform-origin: 0 0;
+  will-change: transform, border-radius, box-shadow;
+}
+
+.work-view-morph__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+}
+
+.work-view-morph-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Hide real endpoints until ghosts land (class set as early as possible). */
+html.is-work-view-morphing .sticker-board--scattered .sticker[data-tile-dx="0"][data-tile-dy="0"],
+html.is-work-view-morphing .work-archive__icon {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-view-morph {
+    display: none !important;
+  }
+}

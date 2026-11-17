@@ -1,10 +1,10 @@
-// Homepage inline preview links: clients fan, about facts, outdoors mosaic.
+// Homepage inline preview links: work fan, about facts, outdoors mosaic.
 (function () {
   var HOVER_DELAY_MS = 160;
   var MOBILE_SHOWCASE_MS = 1100;
   var MOBILE_SHOWCASE_GAP_MS = 150;
   var CLIENT_SLUGS = ["elevenlabs", "workos", "standard-bots"];
-  var SHOWCASE_KEYS = ["clients", "outdoors", "about"];
+  var SHOWCASE_KEYS = ["work", "outdoors", "about"];
   var openKey = null;
   var hoverTimer = null;
   var showcaseTimer = null;
@@ -184,13 +184,13 @@
     });
   }
 
-  function fillClientsFan(clients) {
-    var fan = document.querySelector("[data-inline-clients-fan]");
+  function fillWorkFan(items) {
+    var fan = document.querySelector("[data-inline-work-fan]");
     if (!fan) return;
     fan.innerHTML = "";
 
     var bySlug = {};
-    (clients || []).forEach(function (item) {
+    (items || []).forEach(function (item) {
       bySlug[item.slug] = item;
     });
 
@@ -279,14 +279,14 @@
 
   bindTriggers();
 
-  var clientsReady = fetch("/data/collections.json?v=8")
+  var workReady = fetch("/data/collections.json?v=8")
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      fillClientsFan(data.clients && data.clients.items);
+      fillWorkFan(data.work && data.work.items);
     })
     .catch(function () {});
 
-  clientsReady.then(startTouchShowcase);
+  workReady.then(startTouchShowcase);
 })();

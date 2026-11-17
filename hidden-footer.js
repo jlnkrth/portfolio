@@ -21,6 +21,11 @@
     return MQ_SMALL.matches || MQ_COARSE.matches;
   }
 
+  /* Work list/desk: preview + company rail own the scroll — no now-playing sheet. */
+  function isWorkPage() {
+    return /^\/work(\/|$)/.test(location.pathname || "");
+  }
+
   function atTop() {
     return (window.scrollY || document.documentElement.scrollTop || 0) <= 1;
   }
@@ -207,7 +212,7 @@
   }
 
   function mount() {
-    if (footer || !isMobile()) return;
+    if (footer || !isMobile() || isWorkPage()) return;
     footer = document.createElement("div");
     footer.className = "hidden-footer";
     footer.setAttribute("data-hidden-footer", "");
@@ -264,7 +269,14 @@
   }
 
   function syncMode() {
-    if (isMobile()) mount();
+    /* The black now-playing peek (equalizer bar) is retired on phones.
+       It was opening on downward drags at the top of the page and
+       sitting over the bottom of the viewport. Desktop is unchanged. */
+    if (MQ_SMALL.matches) {
+      unmount();
+      return;
+    }
+    if (isMobile() && !isWorkPage()) mount();
     else unmount();
   }
 

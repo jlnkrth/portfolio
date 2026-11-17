@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 18" fill="none">
+  <!-- Official hex mark, extracted from Standard Bots docs navbar logo:
+       https://thorhelp.standardbots.com/src/images/Logo-Navbar-Dark.svg -->
+  <path d="M20.9239 0L23.2532 4.05H3.74699L6.07628 0H20.9239Z" fill="#fff"/>
+  <path d="M16.8458 13.95C18.8029 10.7519 21.2248 7.86933 24.0424 5.42223L26.1 9C23.2954 11.5578 20.9445 14.6035 19.1749 18H7.82517C6.05559 14.6035 3.70469 11.5578 0.900024 9L2.95778 5.42223C5.77541 7.86933 8.19723 10.7519 10.1544 13.95H16.8458Z" fill="#fff"/>
+</svg>

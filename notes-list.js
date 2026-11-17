@@ -67,17 +67,20 @@
       name +
       current +
       '><span class="notes-archive__row-title">' +
+      '<span class="notes-archive__row-title-inner">' +
       item.title +
-      '</span><span class="notes-archive__row-meta">' +
+      "</span></span>" +
+      '<span class="notes-archive__row-meta">' +
       meta +
       "</span></a>"
     );
   }
 
   function buildIndexHtml(items) {
+    // Same rows as /notes/ (title + Coming soon chip), used by the article rail.
     var rows = items
       .map(function (item) {
-        return archiveRow(item, { compact: true });
+        return archiveRow(item);
       })
       .join("");
 
@@ -94,15 +97,11 @@
   }
 
   function render(published, upcoming, drafts) {
-    var publishedItems = (published || []).slice().sort(function (a, b) {
-      return (b.date || "").localeCompare(a.date || "");
-    });
     var soonItems = (upcoming || []).slice();
     var draftItems = (drafts || []).slice();
 
     listEl.className = "notes-archive";
-    // Fieldnotes index: shipping queue only. Published notes stay on Home /
-    // article rails (layout.js reads notes.json directly).
+    // Fieldnotes index + article rail: same shipping queue.
     var pageItems = soonItems.concat(draftItems);
     listEl.innerHTML = pageItems
       .map(function (item) {
@@ -110,14 +109,13 @@
       })
       .join("");
 
-    var allForIndex = publishedItems.concat(soonItems).concat(draftItems);
     listEl.addEventListener("click", function (event) {
       var clicked = event.target.closest("a.notes-archive__row");
       if (!clicked) return;
       try {
         sessionStorage.setItem(
           "kreth-notes-index-html",
-          buildIndexHtml(allForIndex)
+          buildIndexHtml(pageItems)
         );
         sessionStorage.setItem("kreth-notes-index", "1");
       } catch (_) {}

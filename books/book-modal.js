@@ -153,25 +153,21 @@
     canvasEl.appendChild(badgeEl);
     var facts = document.createElement("div");
     facts.className = "book-modal__facts";
-    statusEl = document.createElement("div");
-    verdictEl = document.createElement("div");
-    facts.appendChild(statusEl);
-    facts.appendChild(verdictEl);
-
-    var bottom = document.createElement("div");
-    bottom.className = "book-modal__bottom";
     titleEl = document.createElement("h2");
     titleEl.className = "book-modal__heading";
     titleEl.id = "book-modal-title";
     leadEl = document.createElement("p");
     leadEl.className = "book-modal__lead";
-    bottom.appendChild(titleEl);
-    bottom.appendChild(leadEl);
+    statusEl = document.createElement("div");
+    verdictEl = document.createElement("div");
+    facts.appendChild(titleEl);
+    facts.appendChild(leadEl);
+    facts.appendChild(statusEl);
+    facts.appendChild(verdictEl);
 
     top.appendChild(canvasEl);
     top.appendChild(facts);
     panel.appendChild(top);
-    panel.appendChild(bottom);
     tray.appendChild(panel);
 
     scrollEl.appendChild(tray);

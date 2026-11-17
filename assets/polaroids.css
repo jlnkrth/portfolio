@@ -1,0 +1,400 @@
+/* Variant K: a stack of Polaroids beside the notepad.
+   Loads after variant-j.css. Scoped to .home-intro. Palette matches the pad:
+   ivory frame, navy ink, soft cool shadows. No orange or yellow tints.
+
+   The pad is 280px (set in variant-j.css). Polaroids scale with it:
+   172px on desktop (~23% larger than the original 140), 124px on phones. */
+
+/* J makes .home-intro a flex row; the pad and pile are centered as one desk group.
+   Align to the top so the objects stay in the original intro height and the
+   After Hours band can keep its production position. The pile is shifted up
+   and right with relative offsets so the pad stays where it is. */
+.home-intro.home-intro--pad {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0 56px;
+}
+
+/* ---------- drag wrapper for the pile (DeskDrag sets --drag-x / --drag-y) ---------- */
+.home-intro .desk__item--polaroids {
+  --drag-x: 0px;
+  --drag-y: 0px;
+  position: absolute;
+  flex: 0 0 auto;
+  /* Resting pile at 1718x957: left 1272, top 127, under the Hamburg chip.
+     left is a fraction of the intro (content column) so 1280 and 1024
+     keep the same upper-right placement. */
+  /* Grow the prints left/down so the upper-right anchor under the
+     Hamburg widget stays put (172 - 140 = 32px). */
+  left: calc(68.67% - 32px);
+  top: 45.5px;
+  margin: 0;
+  transform: translate3d(var(--drag-x), var(--drag-y), 0);
+  cursor: grab;
+  z-index: 2;
+}
+.home-intro .desk__item--polaroids.is-dragging {
+  z-index: 40;
+  cursor: grabbing;
+  user-select: none;
+}
+.home-intro .desk__item--polaroids.is-settling {
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---------- the pile ---------- */
+/* Frame tokens must live on both the pile and the spread layer.
+   Loose prints are hoisted out of .polaroids; without these variables
+   they lose padding, ivory frame, caption box and shadows. */
+.home-intro .polaroids,
+.home-intro .polaroids__spread {
+  --frame: #fbfaf7;
+  --frame-edge: #eceae4;
+  --ink: #23305e;
+  --polaroid-w: 172px; /* 22.9% larger than 140; phones override */
+  --frame-side: 9px;
+  --frame-bottom: 36px;
+  --photo: calc(var(--polaroid-w) - var(--frame-side) * 2);
+  --polaroid-h: calc(var(--frame-side) + var(--photo) + var(--frame-bottom));
+  --ease-land: cubic-bezier(0.22, 0.84, 0.28, 1);
+  --ease-tuck: cubic-bezier(0.22, 0.7, 0.25, 1);
+}
+
+.home-intro .polaroids {
+  position: relative;
+  width: var(--polaroid-w);
+  height: var(--polaroid-h);
+  /* room for peeking corners and the hover lift */
+  margin: 16px 20px 16px 0;
+  flex: 0 0 auto;
+  /* the pile sits slightly askew on the desk, like the objects in the reference */
+  transform: rotate(7deg);
+  transform-origin: 50% 55%;
+  cursor: grab;
+  touch-action: pan-y;
+  overflow: visible;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.home-intro .desk__item--polaroids {
+  /* extra hit area so peeked corners stay grabable */
+  padding: 0;
+}
+
+.home-intro .polaroids:focus-visible {
+  outline: none;
+}
+
+.home-intro .polaroids:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border: 1.5px solid rgba(35, 48, 94, 0.4);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.home-intro .polaroids__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- one Polaroid ---------- */
+.home-intro .polaroid {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  width: var(--polaroid-w);
+  height: var(--polaroid-h);
+  z-index: calc(10 - var(--slot, 0));
+  transform: translate(var(--x, 0px), var(--y, 0px)) rotate(var(--rot, 0deg));
+  transform-origin: 50% 58%;
+  pointer-events: auto;
+  will-change: transform;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.home-intro .polaroids.is-ready .polaroid:not(.is-dragging):not(.is-settling) {
+  transition: transform 520ms var(--ease-tuck);
+}
+
+.home-intro .polaroid.is-dragging,
+.home-intro .polaroid.is-settling {
+  transition: none;
+  cursor: grabbing;
+}
+
+.home-intro .polaroid.is-buried {
+  pointer-events: none;
+}
+
+.home-intro .polaroid__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--frame-side) var(--frame-side) var(--frame-bottom);
+  border-radius: 2px;
+  background-color: var(--frame);
+  background-image:
+    radial-gradient(120% 80% at 28% 0%, rgba(255, 255, 255, 0.72), transparent 55%),
+    radial-gradient(120% 90% at 100% 100%, rgba(110, 105, 95, 0.045), transparent 55%);
+  /* Hidden prints (slot 6+) sit under the pile and must not cast a shadow,
+     or 20 layered blurs turn into a dirty rectangular smear. Peek prints
+     and the front print get their shadows in the rules below. */
+  box-shadow: none;
+}
+
+/* Peeking back prints: a tight contact shadow only. Same light as the
+   notepad (from above, soft, slightly warm grey). No hairline ring, no
+   wide blur — those stacked into a ghosted smear. */
+.home-intro .polaroid[data-slot="1"] .polaroid__card,
+.home-intro .polaroid[data-slot="2"] .polaroid__card,
+.home-intro .polaroid[data-slot="3"] .polaroid__card,
+.home-intro .polaroid[data-slot="4"] .polaroid__card,
+.home-intro .polaroid[data-slot="5"] .polaroid__card {
+  box-shadow:
+    0 1px 1px rgba(50, 45, 35, 0.08),
+    0 3px 6px rgba(50, 45, 35, 0.07);
+}
+
+/* Front print: the pile's only wider ambient, still modest so it reads as
+   one object on the desk rather than a grey blur box. */
+.home-intro .polaroid[data-slot="0"] .polaroid__card {
+  box-shadow:
+    0 1px 1px rgba(50, 45, 35, 0.09),
+    0 3px 8px rgba(50, 45, 35, 0.10),
+    0 10px 18px -8px rgba(50, 45, 35, 0.12);
+}
+
+.home-intro .polaroids.is-ready .polaroid__card,
+.home-intro .polaroids__spread .polaroid__card {
+  transition: transform 280ms var(--ease-tuck), box-shadow 280ms var(--ease-tuck);
+}
+
+@keyframes polaroid-land {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scale(1.04);
+  }
+  68% {
+    opacity: 1;
+    transform: translateY(3px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.home-intro .polaroid__window {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 1px;
+  background: #e6e3db;
+  box-shadow: 0 0 0 1px rgba(70, 62, 50, 0.06);
+}
+
+.home-intro .polaroid__window picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.home-intro .polaroid__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.home-intro .polaroid__caption {
+  position: absolute;
+  left: var(--frame-side);
+  right: var(--frame-side);
+  bottom: 0;
+  height: var(--frame-bottom);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: Caveat, "Segoe Script", cursive;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-align: center;
+  /* a hair of handwritten tilt, unique per card if --cap-rot is set */
+  transform: rotate(var(--cap-rot, -0.5deg));
+  pointer-events: none;
+}
+
+/* hover: only the print under the cursor lifts a little. Hovering the
+   pile must not move any other photo (the old :hover on .polaroids
+   lifted the top print whenever the pointer was anywhere on the stack). */
+@media (hover: hover) and (pointer: fine) {
+  .home-intro :is(.polaroids.is-ready, .polaroids__spread) .polaroid:not(.is-dragging):not(.is-settling):not(.is-cycling):hover {
+    cursor: grab;
+  }
+  .home-intro :is(.polaroids.is-ready, .polaroids__spread) .polaroid:not(.is-dragging):not(.is-settling):not(.is-cycling):hover .polaroid__card {
+    transform: translateY(-4px);
+    box-shadow:
+      0 1px 2px rgba(50, 45, 35, 0.10),
+      0 8px 16px -4px rgba(50, 45, 35, 0.16),
+      0 16px 28px -10px rgba(50, 45, 35, 0.12);
+  }
+  .home-intro .desk__item--polaroids.is-dragging .polaroid__card,
+  .home-intro .polaroid.is-dragging .polaroid__card,
+  .home-intro .polaroid.is-settling .polaroid__card {
+    transform: none;
+  }
+}
+
+/* while a card is mid-cycle, hold the lifted shadow on the inner card */
+.home-intro .polaroid.is-cycling .polaroid__card {
+  transition: none;
+}
+
+/* Pick-up: a modest lift, same soft warm light as the rest of the desk. */
+.home-intro .polaroid.is-dragging .polaroid__card {
+  transition: none;
+  transform: none;
+  box-shadow:
+    0 1px 2px rgba(50, 45, 35, 0.10),
+    0 8px 18px -6px rgba(50, 45, 35, 0.14),
+    0 18px 28px -12px rgba(50, 45, 35, 0.10);
+}
+
+.home-intro .polaroid.is-loose .polaroid__card {
+  box-shadow:
+    0 1px 1px rgba(50, 45, 35, 0.09),
+    0 3px 8px rgba(50, 45, 35, 0.10),
+    0 10px 18px -8px rgba(50, 45, 35, 0.12);
+}
+
+/* The spread spans the desk and accepts pointer input only on the prints. */
+.home-intro .polaroids__spread {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.home-intro .polaroids__spread .polaroid {
+  inset: auto;
+}
+
+@media (min-width: 1100px) {
+  .home-intro:has(.has-default-layout) {
+    --desk-unit: clamp(0.6px, calc((100vw - 510px) / 925), 1px);
+  }
+
+  .home-intro:has(.has-default-layout) :is(.polaroids, .polaroids__spread) {
+    --polaroid-w: calc(172 * var(--desk-unit));
+    --frame-side: calc(9 * var(--desk-unit));
+    --frame-bottom: calc(36 * var(--desk-unit));
+  }
+
+  .home-intro:has(.has-default-layout) .polaroid__caption {
+    font-size: max(12px, calc(16 * var(--desk-unit)));
+  }
+
+  .home-intro:has(.has-default-layout) .desk__item--polaroids {
+    left: auto;
+    right: calc(166 * var(--desk-unit));
+  }
+
+  .home-intro .polaroids__spread .polaroid.is-placed {
+    right: calc(var(--desk-right) * var(--desk-unit));
+    top: calc(50px + (var(--desk-top) - 50) * var(--desk-unit));
+    transform: rotate(5.5deg);
+  }
+
+  .home-intro .polaroids__spread .polaroid.is-by-profile {
+    right: auto;
+    left: -190px;
+  }
+}
+
+/* phone: the pile sits under the pad, a little smaller and nudged right */
+@media (max-width: 767px) {
+  .home-intro.home-intro--pad {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    /* Root already has --page-pad-y. Add enough to clear the fixed
+       profile chip, ~14px of air, and the pile's rotated overflow. */
+    padding: calc(
+        var(--mobile-profile-sticky, 78px)
+        - var(--page-pad-y, 2.5rem)
+        + 14px
+        + 4px
+      )
+      16px 28px;
+  }
+
+  .home-intro .desk__item--polaroids {
+    position: relative;
+    order: -1;
+    align-self: flex-end;
+    margin: 0 10px 0 0;
+    left: auto;
+    top: auto;
+    /* Under the notepad where they overlap; visible peeks stay tappable. */
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .home-intro .polaroids,
+  .home-intro .polaroids__spread {
+    --polaroid-w: 124px;
+    --frame-side: 10px;
+    --frame-bottom: 38px;
+  }
+  .home-intro .polaroids {
+    margin: 0;
+    transform: rotate(6deg);
+    cursor: pointer;
+  }
+
+  .home-intro .polaroid__caption {
+    font-size: 15px;
+    line-height: 1.05;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro .polaroids.is-ready .polaroid,
+  .home-intro .polaroids.is-ready .polaroid__card,
+  .home-intro .polaroids__spread .polaroid,
+  .home-intro .polaroids__spread .polaroid__card {
+    transition: none;
+  }
+}
+
+/* land keyframes kept unused so a stale reference cannot 404; no entrance plays */
+@keyframes polaroid-land { from, to { opacity: 1; transform: none; } }
+@keyframes polaroid-fade { from, to { opacity: 1; } }

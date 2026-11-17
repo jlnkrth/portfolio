@@ -1,0 +1,721 @@
+/* Fieldnotes-style Work index: client list + detail shell. */
+
+.work-index {
+  display: none;
+}
+
+.layout--work-index .work-shell.card {
+  border: 0;
+  border-radius: var(--kw-radius-card);
+  padding: 0;
+  background: var(--kw-surface-raised);
+  box-shadow: var(--kw-shadow-chrome);
+  overflow: hidden;
+}
+
+.work-shell__toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-control);
+  background: var(--kw-surface-subtle);
+  color: var(--kw-text-muted);
+  box-shadow: 0 1px 2px rgba(33, 32, 28, 0.06);
+  cursor: pointer;
+  font: inherit;
+  line-height: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.work-shell__toggle:hover {
+  background: var(--kw-fill-muted);
+  border-color: var(--kw-border-strong);
+  color: var(--kw-text);
+}
+
+.work-shell__toggle:focus-visible {
+  outline: 2px solid var(--kw-border);
+  outline-offset: 2px;
+}
+
+.work-shell__toggle-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.work-shell__toggle-icon--collapse {
+  display: none;
+}
+
+.layout--work-index-expanded .work-shell__toggle-icon--expand {
+  display: none;
+}
+
+.layout--work-index-expanded .work-shell__toggle-icon--collapse {
+  display: block;
+}
+
+.work-index__head {
+  display: none;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
+}
+
+.work-index__title {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--kw-text-subtle);
+}
+
+.work-index__list-wrap {
+  position: relative;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 2.25rem),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 2.25rem),
+    transparent 100%
+  );
+}
+
+.work-archive {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--kw-border-muted);
+}
+
+.work-archive__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.45rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--kw-border-muted);
+  background: transparent;
+  color: var(--kw-text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: color 0.15s ease;
+}
+
+.work-archive__row:hover {
+  color: var(--kw-text-muted);
+}
+
+.work-archive__row[aria-current="true"] {
+  color: var(--kw-text);
+}
+
+.work-archive__row[aria-current="true"] .work-archive__title-inner {
+  font-weight: 560;
+}
+
+.work-archive__icon {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--kw-border-muted);
+}
+
+.work-archive__icon--fallback {
+  display: inline-grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--kw-text-muted);
+  background: var(--kw-surface-subtle);
+}
+
+.work-archive__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow: hidden;
+}
+
+.work-archive__title-inner {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.work-archive__acquired {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  max-width: 46%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 1px 6px;
+  border: 1px solid var(--kw-border-muted);
+  border-radius: var(--kw-radius-pill);
+  background: var(--kw-surface-subtle);
+  color: var(--kw-text-muted);
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.work-archive__meta {
+  flex: 0 0 auto;
+  max-width: 38%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--kw-text-subtle);
+}
+
+.work-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 100%;
+}
+
+.work-detail--empty {
+  flex: 1 1 auto;
+  display: grid;
+  place-items: center;
+  min-height: min(70vh, 36rem);
+}
+
+.work-detail__empty {
+  margin: 0;
+  color: var(--kw-text-muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.work-detail__shot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 1440 / 1020;
+  max-height: min(52dvh, 520px);
+  margin: 10px;
+  border: 1px solid var(--kw-border-muted);
+  /* Card 12 − margin 10 → ~2; md reads as a soft nested frame. */
+  border-radius: var(--kw-radius-md);
+  overflow: hidden;
+  background: linear-gradient(180deg, #f3f2ef 0%, #eae8e3 100%);
+}
+
+.work-detail__shot--empty {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  aspect-ratio: auto;
+}
+
+.work-detail__shot-chrome {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid rgba(23, 23, 23, 0.06);
+}
+
+.work-detail__shot-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d7d4ce;
+}
+
+.work-detail__shot-frame {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #f6f5f2;
+}
+
+.work-detail__shot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.work-detail__shot-img.is-loaded {
+  opacity: 1;
+}
+
+.work-detail__shot-empty {
+  margin: 0;
+  padding: 24px;
+  font-size: 13px;
+  color: var(--kw-text-subtle);
+  text-align: center;
+}
+
+.work-detail__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 22px 28px;
+}
+
+.work-detail__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.work-detail__heading-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.work-detail__heading {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 560;
+  line-height: 1.25;
+  color: var(--kw-text);
+  text-wrap: balance;
+}
+
+.work-detail__chip--acquired {
+  flex: 0 0 auto;
+  color: var(--kw-text);
+  background: var(--kw-surface);
+}
+
+.work-detail__visit {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  padding: 6px 10px;
+  border: 1px solid var(--kw-border-muted);
+  border-radius: var(--kw-radius-pill);
+  background: var(--kw-surface);
+  color: var(--kw-text);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.work-detail__visit:hover {
+  background: var(--kw-fill-muted);
+}
+
+.work-detail__visit-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 11px;
+  height: 11px;
+  opacity: 0.72;
+}
+
+.work-detail__lead {
+  margin: -4px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--kw-text-muted);
+  text-wrap: pretty;
+}
+
+.work-detail__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.work-detail__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border: 1px solid var(--kw-border-muted);
+  border-radius: var(--kw-radius-pill);
+  background: var(--kw-surface-subtle);
+  color: var(--kw-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.work-detail__label {
+  margin: 0;
+  font-family: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kw-text-subtle);
+}
+
+.work-detail__notes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.work-detail__notes-scroll {
+  padding: 12px 14px;
+  border: 1px solid var(--kw-border-muted);
+  border-radius: var(--kw-radius-md);
+  background: var(--kw-surface-subtle);
+}
+
+.work-detail__notes-scroll p {
+  margin: 0 0 0.85em;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--kw-text-muted);
+  text-wrap: pretty;
+}
+
+.work-detail__notes-scroll p:last-child {
+  margin-bottom: 0;
+}
+
+/* Phone: full-size preview above a short company rail (~5 rows visible). */
+@media (max-width: 767px) {
+  .layout--work-index {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-sizing: border-box;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+
+  /* Fixed stay-chrome profile — pad the column so preview starts below it. */
+  body:has(> .sidebar.swipe-nav__stay) .layout--work-index {
+    padding-top: var(--mobile-profile-sticky, 4.75rem);
+  }
+
+  .layout--work-index > .root {
+    order: 1;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 40;
+    width: 100%;
+    max-width: 692px;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    margin: 0 auto;
+    padding: 0.25rem var(--page-pad-x) 0.35rem;
+    overflow: hidden;
+    background: var(--kw-surface);
+  }
+
+  .layout--work-index .work-index {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    order: 2;
+    flex: 0 0 auto;
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 692px;
+    min-height: 0;
+    max-height: none;
+    margin: 0 auto;
+    padding: 0.15rem var(--page-pad-x) calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+  }
+
+  .work-index__head {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Short rail — fewer companies visible; scroll for the rest. */
+  .work-index__list-wrap {
+    flex: 0 0 auto;
+    max-height: 10.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 calc(100% - 1.5rem),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 calc(100% - 1.5rem),
+      transparent 100%
+    );
+  }
+
+  .layout--work-index .work-shell {
+    position: relative;
+    flex: 0 1 auto;
+    min-height: 0;
+    height: auto;
+    max-height: 100%;
+  }
+
+  .layout--work-index .work-shell.card {
+    border-radius: var(--kw-radius-card);
+    height: auto;
+    max-height: 100%;
+  }
+
+  .layout--work-index .work-shell__scroll {
+    height: auto;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 6px 8px 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
+  }
+
+  .layout--work-index .work-detail {
+    min-height: 0;
+  }
+
+  .work-detail__shot {
+    flex: 0 0 auto;
+    width: auto;
+    margin: 2px 2px 0;
+    /* Wider crop → shorter frame, less dead air under the hero shot. */
+    aspect-ratio: 16 / 10;
+    max-height: min(32dvh, 240px);
+  }
+
+  .work-detail__shot-chrome {
+    height: 22px;
+  }
+
+  .work-detail__body {
+    padding: 8px 8px 10px;
+    gap: 8px;
+  }
+
+  .work-detail__head {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .work-detail__heading {
+    font-size: 1.15rem;
+  }
+
+  .work-detail__lead {
+    margin: 0;
+  }
+
+  .work-detail__notes-scroll {
+    padding: 10px 12px;
+  }
+
+  .work-detail__notes-scroll p {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .work-archive__meta {
+    max-width: 42%;
+    font-size: 0.625rem;
+  }
+
+  .work-archive__row {
+    gap: 0.4rem;
+  }
+}
+
+/*
+ * Desktop: always park the client list in the sidebar column,
+ * above the Spotify player (same slot Fieldnotes uses when expanded).
+ */
+@media (min-width: 768px) {
+  .layout--work-index .work-index {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: fixed;
+    left: 30px;
+    bottom: calc(30px + 173px + 24px);
+    z-index: 501;
+    width: 300px;
+    /* Shorter rail → fewer clients visible at once; rows stay Fieldnotes-sized. */
+    max-height: min(38vh, calc(100vh - 560px));
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .work-index__head {
+    display: block;
+  }
+
+  .work-index__list-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .layout--work-index .work-index {
+    left: calc(5.46875vw - 26px);
+    width: calc(28.125vw + 12px);
+    bottom: calc((5.46875vw - 26px) + 173px + 24px);
+    max-height: min(36vh, calc(100vh - 520px));
+  }
+
+  .layout--work-index > .root {
+    width: min(100%, 640px);
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  /*
+   * Vertically center the detail card in the band between the fixed top nav
+   * bottom and the viewport bottom (equal air above and below the card).
+   */
+  .layout--work-index > .root {
+    --work-nav-top: calc(5.46875vw - 26px);
+    --work-nav-height: 3.6875rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    margin-inline: auto;
+    padding-top: calc(var(--work-nav-top) + var(--work-nav-height));
+    padding-bottom: 0;
+  }
+
+  .layout--work-index .work-shell {
+    position: relative;
+    flex: 0 1 auto;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .layout--work-index .work-shell__scroll {
+    height: auto;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 16px 16px 16px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
+  }
+
+  .layout--work-index .work-detail--empty {
+    min-height: 12rem;
+  }
+}
+
+/* Screenshot on top, copy below — keeps the desktop capture wide. */
+@media (min-width: 720px) {
+  .work-detail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .work-detail__shot {
+    flex: 0 0 auto;
+    width: auto;
+    aspect-ratio: 1440 / 900;
+    min-height: 0;
+    max-height: min(42dvh, 420px);
+    margin: 12px 12px 0;
+  }
+
+  .work-detail__body {
+    flex: 0 0 auto;
+    max-width: none;
+    padding: 18px 20px 22px;
+  }
+
+  .work-detail__notes-scroll {
+    max-height: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .layout--work-index > .root {
+    --work-nav-top: 30px;
+    margin-inline: auto;
+    max-width: min(720px, 100%);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .layout--work-index .work-shell__toggle {
+    display: none;
+  }
+}
+
+/* Sticker desk page still uses the scattered canvas treatment. */
+.layout:has([data-work-desk]) > .sidebar .nowplaying {
+  /* inherited from work desk styles in styles.css */
+}

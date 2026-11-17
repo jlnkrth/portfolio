@@ -565,7 +565,7 @@ code {
 .install-code {
   padding: 0 62px 0 12px;
   border-radius: 6px;
-  background: linear-gradient(to top, var(--kw-fill), var(--kw-surface) 8px);
+  background: var(--kw-neutral-150);
   font-family: var(--font-mono);
   font-size: 14px;
   position: relative;
@@ -628,7 +628,7 @@ code {
   margin: 16px 0;
   border-radius: 6px;
   border: 1px solid var(--kw-fill-muted);
-  background: var(--kw-surface);
+  background: var(--kw-neutral-150);
   padding: 16px;
 }
 

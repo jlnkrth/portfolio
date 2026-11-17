@@ -2,15 +2,22 @@
 (function () {
   var SIDEBAR_CACHE_KEY = "kreth-sidebar-html";
   var TOP_CACHE_KEY = "kreth-top-chrome-html";
-  var CHROME_CACHE_VERSION = "53";
+  var CHROME_CACHE_VERSION = "62";
   var CHROME_CACHE_VERSION_KEY = "kreth-chrome-cache-version";
   var CHROME_ENTERED_KEY = "kreth-chrome-entered";
   // Runtime markers written by init scripts. Persisting them in sessionStorage
   // makes the next page skip rebinding (e.g. mobile Menu stops working).
+  // Keep data-hydrated / data-status on the now-playing root so the widget
+  // does not flash display:none while the silent poll runs.
   var RUNTIME_ATTR_RE =
-    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|hydrated|entrance)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
+    /\sdata-(?:nav-mobile-bound|availability-ready|now-playing-ready|sidebar-ready|copy-bound|admin-login-bound|entrance)(?:=(?:"[^"]*"|'[^']*'|[^\s>]*))?/gi;
   var CHROME_ENTRANCE_CLASS_RE =
-    /\s*\b(?:is-pending|is-entering|is-in|is-spin-ready|is-loaded|is-spinning|is-coasting)\b/g;
+    /\s*\b(?:is-pending|is-entering|is-spin-ready|is-spinning|is-coasting)\b/g;
+  // Work desk/list icons are mounted only on /work*; strip them so a cached
+  // top nav from a Work visit does not show the toggle on other pages.
+  var WORK_VIEW_TOGGLE_RE =
+    /<div\b[^>]*\bwork-view-toggle\b[^>]*>[\s\S]*?<\/div>/gi;
+  var WORK_VIEW_WRAP_CLASS_RE = /\s*\btop-nav__item-wrap--work-views\b/g;
 
   var topSlot = document.getElementById("chrome-top");
   var sidebarSlot = document.getElementById("chrome-sidebar");
@@ -18,6 +25,8 @@
   function sanitizeChromeHtml(html) {
     if (!html) return html;
     html = html.replace(RUNTIME_ATTR_RE, "");
+    html = html.replace(WORK_VIEW_TOGGLE_RE, "");
+    html = html.replace(WORK_VIEW_WRAP_CLASS_RE, "");
     // Drop entrance/spin classes so a mid-animation cache cannot leave
     // chrome stuck at opacity 0 on the next page.
     html = html.replace(
@@ -143,27 +152,27 @@
 
     try {
       var indexHtml = sessionStorage.getItem("kreth-notes-index-html");
-      if (indexHtml) {
+      // Ignore legacy caches that still list published notes.
+      if (
+        indexHtml &&
+        indexHtml.indexOf("notes-archive__chip") !== -1 &&
+        indexHtml.indexOf("Coming soon") !== -1
+      ) {
         activateNotesLayout(indexHtml);
         return;
       }
     } catch (_) {}
 
-    fetch("/data/notes.json?v=4")
+    // Same queue as /notes/: upcoming teasers (not published archive).
+    fetch("/data/notes-upcoming.json?v=1")
       .then(function (response) {
-        if (!response.ok) throw new Error("Could not load the article archive");
+        if (!response.ok) throw new Error("Could not load fieldnotes");
         return response.json();
       })
       .then(function (data) {
-        // Sidebar index: published notes only (teasers stay on /notes/).
-        var items = (data.items || [])
-          .filter(function (item) {
-            return item && !item.soon && !item.draft && item.date;
-          })
-          .slice()
-          .sort(function (a, b) {
-            return (b.date || "").localeCompare(a.date || "");
-          });
+        var items = (data.items || []).map(function (item) {
+          return Object.assign({}, item, { soon: true });
+        });
         var indexHtml = buildNotesIndexHtml(items);
         try {
           sessionStorage.setItem("kreth-notes-index-html", indexHtml);
@@ -190,21 +199,32 @@
         )
           ? ' style="view-transition-name: ' + item.viewTransitionName + '"'
           : "";
+        var soon = item.soon || !item.date;
+        var rowClass =
+          "notes-archive__row" + (soon ? " notes-archive__row--soon" : "");
+        var meta = soon
+          ? '<span class="notes-archive__chip">Coming soon</span>'
+          : escapeHtml(item.author || "");
         return (
-          '<a class="notes-archive__row notes-archive__row--compact" href="' +
+          '<a class="' +
+          rowClass +
+          '" href="' +
           escapeHtml(item.href) +
           '"' +
           transitionName +
           '><span class="notes-archive__row-title">' +
           '<span class="notes-archive__row-title-inner">' +
           escapeHtml(item.title) +
-          "</span></span></a>"
+          "</span></span>" +
+          '<span class="notes-archive__row-meta">' +
+          meta +
+          "</span></a>"
         );
       })
       .join("");
 
     return (
-      '<nav class="notes-index" aria-label="Article archive">' +
+      '<nav class="notes-index" aria-label="Fieldnotes">' +
       '<div class="notes-index__head">' +
       '<a class="label notes-index__head-link" href="/notes/" aria-label="Open Fieldnotes">' +
       '<span class="notes-index__title">Fieldnotes</span></a>' +
@@ -263,12 +283,137 @@
     index.dataset.navBound = "1";
 
     index.addEventListener("click", function (event) {
-      var item = event.target.closest("a.item");
+      var item = event.target.closest(
+        "a.notes-archive__row, a.item"
+      );
       if (!item || item.getAttribute("aria-current") !== "page") return;
       event.preventDefault();
       clearNotesIndexMode();
       window.location.href = "/notes/";
     });
+  }
+
+  function makeNotesFooterLink(href, label, direction) {
+    var link = document.createElement("a");
+    link.href = href;
+    link.textContent = label;
+    if (direction) link.setAttribute("data-nav-dir", direction);
+    return link;
+  }
+
+  function isArchiveOnlyNavLink(anchor) {
+    var href = (anchor.getAttribute("href") || "").replace(/index\.html$/, "");
+    if (href === "/notes/" || href === "/notes") return true;
+    var label = (
+      (anchor.querySelector(".nav-label") || anchor).textContent || ""
+    )
+      .trim()
+      .toLowerCase();
+    var title = (
+      (anchor.querySelector(".nav-title") || {}).textContent || ""
+    )
+      .trim()
+      .toLowerCase();
+    return (
+      label === "back" ||
+      title === "all notes" ||
+      label.indexOf("all notes") !== -1
+    );
+  }
+
+  function classifyNotesNavDirection(anchor) {
+    var label = (
+      (anchor.querySelector(".nav-label") || anchor).textContent || ""
+    )
+      .trim()
+      .toLowerCase();
+    if (label.indexOf("next") !== -1) return "next";
+    if (label.indexOf("prev") !== -1) return "prev";
+    if (anchor.classList.contains("article-nav__link--next")) return "next";
+    if (anchor.classList.contains("article-nav__link--prev")) return "prev";
+    return "";
+  }
+
+  function buildNavFromNotesIndex(layoutEl) {
+    var rows = Array.prototype.slice.call(
+      layoutEl.querySelectorAll(".notes-index a.notes-archive__row[href]")
+    );
+    if (!rows.length) return null;
+
+    var path = location.pathname.replace(/index\.html$/, "");
+    var idx = -1;
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].getAttribute("href") === path) {
+        idx = i;
+        break;
+      }
+    }
+    if (idx === -1) return null;
+
+    var nav = document.createElement("nav");
+    nav.className = "article-nav";
+    if (idx > 0) {
+      nav.appendChild(
+        makeNotesFooterLink(
+          rows[idx - 1].getAttribute("href"),
+          "Previous note",
+          "prev"
+        )
+      );
+    }
+    if (idx < rows.length - 1) {
+      nav.appendChild(
+        makeNotesFooterLink(
+          rows[idx + 1].getAttribute("href"),
+          "Next note",
+          "next"
+        )
+      );
+    }
+    return nav.children.length ? nav : null;
+  }
+
+  function restyleArticleNavAsFooter(nav) {
+    var anchors = Array.prototype.slice.call(nav.querySelectorAll("a"));
+    anchors.forEach(function (anchor) {
+      if (isArchiveOnlyNavLink(anchor)) {
+        anchor.remove();
+        return;
+      }
+      var direction = classifyNotesNavDirection(anchor);
+      if (direction === "next") {
+        anchor.textContent = "Next note";
+        anchor.setAttribute("data-nav-dir", "next");
+      } else if (direction === "prev") {
+        anchor.textContent = "Previous note";
+        anchor.setAttribute("data-nav-dir", "prev");
+      } else if (!anchor.textContent.trim()) {
+        anchor.remove();
+      }
+    });
+    return nav.querySelector("a");
+  }
+
+  function placeNotesFooterNav(layoutEl, rootEl, shell, article) {
+    if (!shell || !article || rootEl.querySelector(".article-nav--footer")) {
+      return;
+    }
+
+    var nav = article.querySelector(".article-nav");
+    if (nav) {
+      if (!restyleArticleNavAsFooter(nav)) {
+        nav.remove();
+        nav = null;
+      }
+    }
+    if (!nav) {
+      nav = buildNavFromNotesIndex(layoutEl);
+    }
+    if (!nav) return;
+
+    nav.classList.add("article-nav--footer");
+    nav.setAttribute("aria-label", "Note navigation");
+    shell.insertAdjacentElement("afterend", nav);
   }
 
   function initNotesIndexArticleShell(layoutEl, rootEl) {
@@ -315,6 +460,8 @@
         isExpanded && scroller.scrollTop > 1;
       setNotesIndexExpanded(layoutEl, isExpanded);
     });
+
+    placeNotesFooterNav(layoutEl, rootEl, shell, article);
 
     // The page itself never scrolls in this layout; undo any restored offset
     // so the pinned card sits exactly where the CSS expects it. Scroll
@@ -902,6 +1049,20 @@
 
   function flashCopied(el) {
     if (!el) return;
+    var shareLabel = el.querySelector("[data-share-label]");
+    if (shareLabel) {
+      var shareStatus = el.parentElement.querySelector("[data-share-status]");
+      clearTimeout(el._copyFlashTimer);
+      el.setAttribute("data-copied", "true");
+      shareLabel.textContent = "Copied to Clipboard";
+      if (shareStatus) shareStatus.textContent = shareLabel.textContent;
+      el._copyFlashTimer = setTimeout(function () {
+        el.removeAttribute("data-copied");
+        shareLabel.textContent = "Copy link";
+        if (shareStatus) shareStatus.textContent = "";
+      }, 1800);
+      return;
+    }
     if (el.matches("button") && !el.querySelector("span") && el.querySelector("svg")) {
       el.setAttribute("data-copied", "true");
       var prev = el.getAttribute("aria-label");
@@ -1028,16 +1189,16 @@
       initCopyButtons();
       return Promise.all([
         loadScript("/availability.js"),
-        loadScript("/now-playing.js?v=20"),
+        loadScript("/now-playing.js?v=22"),
         loadScript("/chrome-entrance.js?v=3"),
         loadScript("/admin-auth.js?v=14"),
         loadScript("/nav-preview.js?v=9"),
         loadScript("/nav-mobile.js?v=12"),
         loadScript("/sidebar-preview.js?v=8"),
         loadScript("/avatar.js?v=1"),
-        loadScript("/hidden-footer.js?v=2"),
+        loadScript("/hidden-footer.js?v=3"),
         loadScript("/note-toc.js?v=2"),
-        loadScript("/swipe-nav.js?v=8"),
+        loadScript("/swipe-nav.js?v=12"),
       ]);
     })
     .then(function () {

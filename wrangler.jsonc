@@ -17,6 +17,23 @@
       "service": "kreth-now-playing"
     }
   ],
+  // Notepad guestbook (D1 database kreth-notepad).
+  "d1_databases": [
+    {
+      "binding": "NOTEPAD_DB",
+      "database_name": "kreth-notepad",
+      "database_id": "a4cf9173-221a-4080-bf71-fe84c4151316",
+      "migrations_dir": "notepad-migrations"
+    }
+  ],
+  // Optional burst guard on top of the D1 windows (10 or 60 s periods only).
+  "ratelimits": [
+    {
+      "name": "NOTEPAD_BURST",
+      "namespace_id": "1001",
+      "simple": { "limit": 2, "period": 10 }
+    }
+  ],
   "vars": {
     "PUBLIC_HOST": "kreth.work",
     "ADMIN_HOST": "admin.kreth.work"

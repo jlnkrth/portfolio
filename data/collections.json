@@ -146,7 +146,7 @@
   "books": {
     "label": "Books",
     "path": "/books/",
-    "count": 217,
+    "count": 218,
     "previewKind": "book",
     "items": [
       {
@@ -1446,6 +1446,12 @@
         "image": "/assets/books/unreasonable-hospitality.jpg"
       },
       {
+        "title": "The Alchemist",
+        "slug": "the-alchemist",
+        "href": "/books/the-alchemist/",
+        "image": "/assets/books/the-alchemist.avif"
+      },
+      {
         "title": "Coming Soon",
         "slug": "coming-soon",
         "href": "/books/coming-soon/",
@@ -1453,156 +1459,8 @@
       }
     ]
   },
-  "clients": {
-    "label": "Clients",
-    "path": "/clients/",
-    "count": 20,
-    "previewKind": "client",
-    "items": [
-      {
-        "title": "Standard Bots",
-        "slug": "standard-bots",
-        "href": "https://standardbots.com/",
-        "external": true,
-        "image": "/assets/clients/standard-bots.svg"
-      },
-      {
-        "title": "HiComply",
-        "slug": "hicomply",
-        "href": "https://www.hicomply.com/",
-        "external": true,
-        "image": "/assets/clients/hicomply.svg"
-      },
-      {
-        "title": "Switchboard",
-        "slug": "switchboard",
-        "href": "#",
-        "external": true,
-        "image": "/assets/clients/switchboard.svg"
-      },
-      {
-        "title": "Metaphysiks",
-        "slug": "metaphysiks",
-        "href": "https://www.metaphysiks.ch/",
-        "external": true,
-        "image": "/assets/clients/metaphysiks.svg"
-      },
-      {
-        "title": "Instaffo",
-        "slug": "instaffo",
-        "href": "https://www.instaffo.com/en/talent",
-        "external": true,
-        "image": "/assets/clients/instaffo.svg"
-      },
-      {
-        "title": "Bestever",
-        "slug": "bestever",
-        "href": "https://www.bestever.ai/",
-        "external": true,
-        "image": "/assets/clients/bestever.svg"
-      },
-      {
-        "title": "Notch.so",
-        "slug": "notch-so",
-        "href": "https://www.notch.so/",
-        "external": true,
-        "image": "/assets/clients/notch-so.svg"
-      },
-      {
-        "title": "Newsbreak",
-        "slug": "newsbreak",
-        "href": "https://www.newsbreak.com/about",
-        "external": true,
-        "image": "/assets/clients/newsbreak.svg"
-      },
-      {
-        "title": "Lantern",
-        "slug": "lantern",
-        "href": "https://www.lanterninsurance.com/",
-        "external": true,
-        "image": "/assets/clients/lantern.svg"
-      },
-      {
-        "title": "Meter",
-        "slug": "meter",
-        "href": "https://www.meter.com/",
-        "external": true,
-        "image": "/assets/clients/meter.svg"
-      },
-      {
-        "title": "Bestow",
-        "slug": "bestow",
-        "href": "https://www.bestow.com/",
-        "external": true,
-        "image": "/assets/clients/bestow.svg"
-      },
-      {
-        "title": "Weights",
-        "slug": "weights",
-        "href": "http://weights.com/",
-        "external": true,
-        "image": "/assets/clients/weights.svg"
-      },
-      {
-        "title": "Banxware",
-        "slug": "banxware",
-        "href": "https://www.banxware.com/",
-        "external": true,
-        "image": "/assets/clients/banxware.svg"
-      },
-      {
-        "title": "Pult",
-        "slug": "pult",
-        "href": "https://www.pult.com/de",
-        "external": true,
-        "image": "/assets/clients/pult.svg"
-      },
-      {
-        "title": "Adalo",
-        "slug": "adalo",
-        "href": "https://www.adalo.com/",
-        "external": true,
-        "image": "/assets/clients/adalo.svg"
-      },
-      {
-        "title": "WorkOS",
-        "slug": "workos",
-        "href": "https://workos.com/",
-        "external": true,
-        "image": "/assets/clients/workos.svg"
-      },
-      {
-        "title": "ElevenLabs",
-        "slug": "elevenlabs",
-        "href": "https://elevenlabs.io/",
-        "external": true,
-        "image": "/assets/clients/elevenlabs.svg"
-      },
-      {
-        "title": "Fiverr",
-        "slug": "fiverr",
-        "href": "https://www.fiverr.com/",
-        "external": true,
-        "image": "/assets/clients/fiverr.svg"
-      },
-      {
-        "title": "Voy.Tax",
-        "slug": "voy-tax",
-        "href": "https://voy.law/",
-        "external": true,
-        "image": "/assets/clients/voy-tax.svg"
-      },
-      {
-        "title": "Lindy.ai",
-        "slug": "lindy-ai",
-        "href": "https://www.lindy.ai/",
-        "external": true,
-        "image": "/assets/clients/lindy-ai.svg"
-      }
-    ]
-  },
   "openSource": {
-    "label": "Projects",
+    "label": "After Hours",
     "path": "/projects/",
     "count": 3,
     "previewKind": "oss",
@@ -1666,7 +1524,252 @@
     "path": "/about/",
     "sections": [
       {
-        "heading": "Julian Kreth \u2014 Head of Strategy Engineering at Masse, founder of Karma Studio."
+        "heading": "Julian Kreth — Head of Strategy Engineering at Masse, founder of Karma Studio."
+      }
+    ]
+  },
+  "work": {
+    "label": "Work",
+    "path": "/work/",
+    "count": 32,
+    "previewKind": "work",
+    "items": [
+      {
+        "title": "ElevenLabs",
+        "slug": "elevenlabs",
+        "href": "https://elevenlabs.io/",
+        "external": true,
+        "image": "/assets/clients/elevenlabs.svg",
+        "fit": "large"
+      },
+      {
+        "title": "WorkOS",
+        "slug": "workos",
+        "href": "https://workos.com/",
+        "external": true,
+        "image": "/assets/clients/workos.svg",
+        "fit": "large"
+      },
+      {
+        "title": "Firecrawl",
+        "slug": "firecrawl",
+        "href": "https://www.firecrawl.dev/",
+        "external": true,
+        "image": "/assets/clients/firecrawl.png"
+      },
+      {
+        "title": "Lindy.ai",
+        "slug": "lindy-ai",
+        "href": "https://www.lindy.ai/",
+        "external": true,
+        "image": "/assets/clients/lindy-ai.svg"
+      },
+      {
+        "title": "Weights",
+        "slug": "weights",
+        "href": "http://weights.com/",
+        "external": true,
+        "image": "/assets/clients/weights.svg",
+        "fit": "large"
+      },
+      {
+        "title": "Orb",
+        "slug": "orb",
+        "href": "https://www.withorb.com/",
+        "external": true,
+        "image": "/assets/clients/orb.png"
+      },
+      {
+        "title": "Meter",
+        "slug": "meter",
+        "href": "https://www.meter.com/",
+        "external": true,
+        "image": "/assets/clients/meter.svg"
+      },
+      {
+        "title": "Eppo",
+        "slug": "eppo",
+        "href": "https://www.geteppo.com/",
+        "external": true,
+        "image": "/assets/clients/eppo.png"
+      },
+      {
+        "title": "Standard Bots",
+        "slug": "standard-bots",
+        "href": "https://standardbots.com/",
+        "external": true,
+        "image": "/assets/clients/standard-bots.svg"
+      },
+      {
+        "title": "Fiverr",
+        "slug": "fiverr",
+        "href": "https://www.fiverr.com/",
+        "external": true,
+        "image": "/assets/clients/fiverr.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Switchboard",
+        "slug": "switchboard",
+        "href": "#",
+        "external": true,
+        "image": "/assets/clients/switchboard.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Adalo",
+        "slug": "adalo",
+        "href": "https://www.adalo.com/",
+        "external": true,
+        "image": "/assets/clients/adalo.svg"
+      },
+      {
+        "title": "Newsbreak",
+        "slug": "newsbreak",
+        "href": "https://www.newsbreak.com/about",
+        "external": true,
+        "image": "/assets/clients/newsbreak.svg"
+      },
+      {
+        "title": "Bestever",
+        "slug": "bestever",
+        "href": "https://www.bestever.ai/",
+        "external": true,
+        "image": "/assets/clients/bestever.svg",
+        "fit": "large"
+      },
+      {
+        "title": "Pult",
+        "slug": "pult",
+        "href": "https://www.pult.com/de",
+        "external": true,
+        "image": "/assets/clients/pult.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Banxware",
+        "slug": "banxware",
+        "href": "https://www.banxware.com/",
+        "external": true,
+        "image": "/assets/clients/banxware.svg"
+      },
+      {
+        "title": "Notch.so",
+        "slug": "notch-so",
+        "href": "https://www.notch.so/",
+        "external": true,
+        "image": "/assets/clients/notch-so.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Instaffo",
+        "slug": "instaffo",
+        "href": "https://www.instaffo.com/en/talent",
+        "external": true,
+        "image": "/assets/clients/instaffo.svg"
+      },
+      {
+        "title": "HiComply",
+        "slug": "hicomply",
+        "href": "https://www.hicomply.com/",
+        "external": true,
+        "image": "/assets/clients/hicomply.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Bestow",
+        "slug": "bestow",
+        "href": "https://www.bestow.com/",
+        "external": true,
+        "image": "/assets/clients/bestow.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Lantern",
+        "slug": "lantern",
+        "href": "https://www.lanterninsurance.com/",
+        "external": true,
+        "image": "/assets/clients/lantern.svg"
+      },
+      {
+        "title": "Contract Hero",
+        "slug": "contract-hero",
+        "href": "https://en.contracthero.com/",
+        "external": true,
+        "image": "/assets/clients/contract-hero.png"
+      },
+      {
+        "title": "Voy.Tax",
+        "slug": "voy-tax",
+        "href": "https://voy.law/",
+        "external": true,
+        "image": "/assets/clients/voy-tax.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "AI Apply",
+        "slug": "ai-apply",
+        "href": "https://aiapply.co/",
+        "external": true,
+        "image": "/assets/clients/ai-apply.png"
+      },
+      {
+        "title": "Blaze Tech",
+        "slug": "blaze-tech",
+        "href": "https://www.blaze.tech/",
+        "external": true,
+        "image": "/assets/clients/blaze-tech.png"
+      },
+      {
+        "title": "Circles",
+        "slug": "circles",
+        "href": "https://www.circles.com/",
+        "external": true,
+        "image": "/assets/clients/circles.png",
+        "fit": "large"
+      },
+      {
+        "title": "Filmless",
+        "slug": "filmless",
+        "href": "https://www.filmless.com/",
+        "external": true,
+        "image": "/assets/clients/filmless.png"
+      },
+      {
+        "title": "Longbow",
+        "slug": "longbow",
+        "href": "https://www.longbowcs.com/",
+        "external": true,
+        "image": "/assets/clients/longbow.png"
+      },
+      {
+        "title": "ExaCare",
+        "slug": "exacare",
+        "href": "https://www.exacare.com/",
+        "external": true,
+        "image": "/assets/clients/exacare.png"
+      },
+      {
+        "title": "Metaphysiks",
+        "slug": "metaphysiks",
+        "href": "https://www.metaphysiks.ch/",
+        "external": true,
+        "image": "/assets/clients/metaphysiks.svg",
+        "fit": "bleed"
+      },
+      {
+        "title": "Trafficguard",
+        "slug": "trafficguard",
+        "href": "https://www.trafficguard.ai/",
+        "external": true,
+        "image": "/assets/clients/trafficguard.png"
+      },
+      {
+        "title": "TDEM",
+        "slug": "tdem",
+        "href": "https://tdem.texas.gov/",
+        "external": true,
+        "image": "/assets/clients/tdem.png"
       }
     ]
   }

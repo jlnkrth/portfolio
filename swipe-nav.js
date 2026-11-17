@@ -91,9 +91,9 @@
     nav.innerHTML =
       '<div class="swipe-nav__panel">' +
       '<nav class="swipe-nav__primary" aria-label="Primary">' +
-      '<a href="/projects/">Projects</a>' +
+      '<a href="/projects/">After Hours</a>' +
       '<a href="/books/">Books</a>' +
-      '<a href="/clients/">Clients</a>' +
+      '<a href="/work/">Work</a>' +
       '<a href="/notes/">Archive</a>' +
       '<a href="/about/">About</a>' +
       "</nav>" +
@@ -138,10 +138,26 @@
     document.body.appendChild(trigger);
     document.body.classList.add("swipe-nav-ready");
 
+    function inStayRun(el) {
+      var n = el.nextSibling;
+      while (n && n !== frame) {
+        if (n.nodeType === 1 && !n.classList.contains("swipe-nav__stay")) return false;
+        n = n.nextSibling;
+      }
+      return n === frame;
+    }
+
     function placeStay(el) {
-      if (!el || el.classList.contains("swipe-nav__stay")) return;
+      if (!el) return;
       el.classList.add("swipe-nav__stay");
-      document.body.insertBefore(el, frame);
+      // Class alone is not enough — cached chrome can re-enter the frame
+      // still tagged swipe-nav__stay. Always park it as a body sibling.
+      // Several stay elements sit before the frame, so only move el when it is
+      // not already in that run. Checking just nextSibling made two stay
+      // elements swap forever under the MutationObserver and froze phones.
+      if (el.parentNode !== document.body || !inStayRun(el)) {
+        document.body.insertBefore(el, frame);
+      }
     }
 
     function ensureStayChrome() {
@@ -391,6 +407,48 @@
       event.preventDefault();
     }
 
+    function setProfileMenuOpen(card, next) {
+      if (!card) return;
+      var willOpen = !!next;
+      card.classList.toggle("is-menu-open", willOpen);
+      var btn = card.querySelector(
+        ".profile-card__menu, [data-nav-menu-toggle]"
+      );
+      var panel = card.querySelector(".profile-card__menu-panel");
+      if (btn) {
+        btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        if (btn.classList.contains("profile-card__menu") || btn.closest(".profile-card")) {
+          btn.textContent = willOpen ? "Close" : "Menu";
+        }
+      }
+      if (panel) {
+        if (willOpen) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+      }
+      document.body.classList.toggle("profile-menu-open", willOpen);
+    }
+
+    function closeProfileMenus() {
+      document.querySelectorAll(".profile-card.is-menu-open").forEach(function (card) {
+        setProfileMenuOpen(card, false);
+      });
+    }
+
+    function markProfileNavCurrent() {
+      var path = (location.pathname || "/").replace(/\/+$/, "") || "/";
+      document.querySelectorAll(".profile-card__nav-link").forEach(function (link) {
+        var href = link.getAttribute("href") || "";
+        var clean = href.replace(/\/+$/, "") || "/";
+        var match =
+          clean === path ||
+          (clean !== "/" && path.indexOf(clean + "/") === 0);
+        if (match) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+    }
+
+    markProfileNavCurrent();
+
     document.addEventListener(
       "click",
       function (event) {
@@ -398,14 +456,41 @@
         var btn = event.target.closest(
           ".top-nav__menu-btn, [data-nav-menu-toggle], .profile-card__menu"
         );
-        if (!btn) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        setOpen(!open);
-        btn.blur();
+        if (btn) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          var card = btn.closest(".profile-card");
+          // Non-note pages: Menu expands the profile card sheet instead of swipe-nav.
+          if (card && !document.body.classList.contains("note-page")) {
+            if (open) setOpen(false);
+            setProfileMenuOpen(card, !card.classList.contains("is-menu-open"));
+            btn.blur();
+            return;
+          }
+          closeProfileMenus();
+          setOpen(!open);
+          btn.blur();
+          return;
+        }
+
+        var openCard = document.querySelector(".profile-card.is-menu-open");
+        if (openCard && !openCard.contains(event.target)) {
+          setProfileMenuOpen(openCard, false);
+        }
       },
       true
     );
+
+    document.addEventListener(
+      "click",
+      function (event) {
+        if (!event.target.closest(".profile-card__nav-link")) return;
+        closeProfileMenus();
+      },
+      false
+    );
+
+    /* Outside click / backdrop (.profile-menu-open::before) closes the overlay. */
 
     frame.addEventListener("pointerdown", onPointerDown);
     frame.addEventListener("pointermove", onPointerMove, { passive: false });
@@ -427,6 +512,7 @@
       panelWidth = Math.min(PANEL, Math.round(window.innerWidth * 0.82));
       if (!isMobile()) {
         setOpen(false);
+        closeProfileMenus();
         frame.style.transform = "";
         frame.style.borderRadius = "";
         document.body.classList.remove("swipe-nav-open");

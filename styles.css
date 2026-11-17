@@ -306,7 +306,13 @@ article,
   }
 
   .home-split > .section {
+    display: flex;
+    flex-direction: column;
     margin-top: 0;
+  }
+
+  .home-split > .section > .label {
+    margin-bottom: 1rem;
   }
 }
 
@@ -497,19 +503,37 @@ article,
   color: var(--kw-text-muted);
 }
 
-.article--soon .note-soon-banner {
-  margin: 1.5rem 0 0;
-  padding: 1rem 1.125rem;
-  background: var(--kw-fill);
-  border: 1px solid var(--kw-fill-muted);
-  border-radius: var(--kw-radius-md);
-  color: var(--kw-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
+.article--soon {
+  display: flex;
+  flex-direction: column;
+  min-height: min(70vh, 36rem);
 }
 
-.article--soon .note-soon-banner a {
-  color: var(--kw-text);
+.article--soon .note-soon-status {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 2rem 1rem;
+  color: var(--kw-text-muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .layout--notes-index .article-shell__scroll:has(.article--soon) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .layout--notes-index .article--soon {
+    flex: 1 1 auto;
+    min-height: 100%;
+  }
 }
 
 .writing-list__item--soon .writing-list__meta,
@@ -847,16 +871,29 @@ article,
 /* ==========================================================================
    Availability in top nav
    ========================================================================== */
-.availability--nav {
-  margin-top: 0;
+/* Same grey tray as .top-nav__inner — location sits inside like a nav item. */
+.top-nav__aside {
+  display: flex;
+  align-items: center;
   margin-left: auto;
   flex-shrink: 0;
-  gap: 8px;
-  padding: 8px 14px;
+  padding: clamp(6px, 0.55vw, 8px);
+  background: var(--kw-fill);
+  border: 1px solid var(--kw-fill-muted);
+  border-radius: var(--kw-radius-lg);
+  box-shadow: var(--kw-shadow-chrome);
+}
+
+.availability--nav {
+  margin-top: 0;
+  margin-left: 0;
+  flex-shrink: 0;
+  gap: clamp(4px, 0.4vw, 6px);
+  padding: clamp(6px, 0.55vw, 8px) clamp(10px, 0.9vw, 14px);
   background: #fff;
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: var(--kw-radius-control);
+  font-size: clamp(12.5px, 0.95vw, 14px);
   font-weight: 500;
   line-height: 1.2;
   color: var(--kw-text);
@@ -892,6 +929,7 @@ article,
   border: 1px solid var(--kw-fill-muted);
   border-radius: var(--kw-radius-card);
   padding: 20px;
+  box-shadow: var(--kw-shadow-chrome);
 }
 
 /* Profile card */
@@ -957,7 +995,7 @@ article,
   display: block;
   flex-shrink: 0;
   line-height: 0;
-  border-radius: 12px;
+  border-radius: var(--kw-radius-md);
 }
 
 .avatar-link:focus-visible {
@@ -969,7 +1007,7 @@ article,
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  border-radius: 12px;
+  border-radius: var(--kw-radius-md);
   object-fit: cover;
   display: grid;
   place-items: center;
@@ -1033,18 +1071,17 @@ a.handle:hover {
   text-decoration-color: var(--kw-text-muted);
 }
 
-/* Keep the masse chip in the text flow — inline-flex was dropping the
-   icon/link below the surrounding baseline and bloating the line box. */
-.profile-card__bio-link {
-  display: inline;
+/* Keep the favicon and label together on the text baseline. */
+.profile-card__bio a.profile-card__bio-link {
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .profile-card__bio-favicon {
   display: inline-block;
   width: 0.95em;
   height: 0.95em;
-  margin-right: 0.28em;
+  margin-right: 0.12em;
   vertical-align: -0.14em;
   object-fit: contain;
   border-radius: 2px;
@@ -1175,7 +1212,7 @@ a.handle:hover {
   margin-top: -40px;
   padding: 36px 20px 20px;
   background: var(--kw-fill);
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 var(--kw-radius-card) var(--kw-radius-card);
 }
 
 .collections .label {
@@ -1461,7 +1498,8 @@ a.collections__item:hover {
   padding: 8px;
   background: var(--kw-fill);
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
+  border-radius: var(--kw-radius-lg);
+  box-shadow: var(--kw-shadow-chrome);
 }
 
 .nowplaying__widget.is-pending {
@@ -1518,7 +1556,8 @@ a.collections__item:hover {
   padding-left: 120px;
   background: var(--kw-surface-subtle);
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
+  /* Nested in 8px-padded lg tray → ~2px; sm keeps a soft inset. */
+  border-radius: var(--kw-radius-sm);
   overflow: hidden;
 }
 
@@ -2016,7 +2055,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   display: none;
   flex-shrink: 0;
   line-height: 0;
-  border-radius: 8px;
+  border-radius: var(--kw-radius-md);
 }
 
 .top-nav__logo:focus-visible {
@@ -2028,7 +2067,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   display: block;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: var(--kw-radius-md);
   object-fit: cover;
 }
 
@@ -2040,7 +2079,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   padding: 0 14px;
   background: #fff;
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
+  border-radius: var(--kw-radius-control);
   font: inherit;
   font-size: 14px;
   font-weight: 500;
@@ -2066,8 +2105,8 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   padding: clamp(6px, 0.55vw, 8px);
   background: var(--kw-fill);
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
-  box-shadow: none;
+  border-radius: var(--kw-radius-lg);
+  box-shadow: var(--kw-shadow-chrome);
 }
 
 .top-nav__track {
@@ -2087,7 +2126,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   padding: clamp(6px, 0.55vw, 8px) clamp(10px, 0.9vw, 14px);
   background: #fff;
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
+  border-radius: var(--kw-radius-control);
   font-size: clamp(12.5px, 0.95vw, 14px);
   font-weight: 500;
   line-height: 1.2;
@@ -2102,7 +2141,8 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   border-color: var(--kw-fill-muted);
 }
 
-.top-nav__item[aria-current="page"] {
+.top-nav__item[aria-current="page"],
+.top-nav__item[aria-current="page"]:hover {
   background: #fff;
   border-color: var(--kw-fill-muted);
 }
@@ -2146,7 +2186,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   justify-content: center;
   background: #fff;
   border: 1px solid var(--kw-fill-muted);
-  border-radius: 8px;
+  border-radius: var(--kw-radius-control);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   flex-shrink: 0;
@@ -2169,7 +2209,7 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   color: var(--kw-text-faint);
 }
 
-.top-nav__fan--client .top-nav__preview-card img {
+.top-nav__fan--work .top-nav__preview-card img {
   width: 32px;
   height: 32px;
   object-fit: fill;
@@ -2211,6 +2251,14 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     opacity: 1;
     pointer-events: auto;
     transform: rotate(18deg) translate(32px, -32px);
+  }
+
+  /* No fan / hover chrome for the section you're already on. */
+  .top-nav__item-wrap:has(> .top-nav__item[aria-current="page"]):hover .top-nav__preview-card,
+  .top-nav__item-wrap:has(> .top-nav__item[aria-current="page"]):focus-within .top-nav__preview-card {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0);
   }
 }
 
@@ -2256,13 +2304,15 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   }
 
   /* Notes hide the profile card, so they keep the slim bar.
-     Everywhere else the card itself is the top nav. */
+     Everywhere else the card itself is the top nav — collapsed to
+     avatar + handle + Menu; Menu expands a profile-card-shaped sheet. */
   body:not(.note-page) .top-nav {
     display: none;
   }
 
   body:not(.note-page) .profile-card {
     position: relative;
+    padding: 12px 14px;
   }
 
   body:not(.note-page) .profile-card .avatar-link {
@@ -2271,23 +2321,131 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
 
   body:not(.note-page) .profile-card .avatar {
     display: grid;
+    width: 36px;
+    height: 36px;
   }
 
   body:not(.note-page) .profile-card__head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 14px;
-    padding-right: 84px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+    padding-right: 0;
+  }
+
+  body:not(.note-page) .profile-card__name,
+  body:not(.note-page) .profile-card__bio,
+  body:not(.note-page) .profile-card__actions--bio {
+    display: none;
+  }
+
+  body:not(.note-page) .profile-card__id {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   body:not(.note-page) .profile-card > .top-nav__menu-btn {
     display: inline-flex;
-    position: absolute;
-    top: 16px;
-    right: 16px;
+    position: static;
+    flex: 0 0 auto;
+    margin: 0 0 0 auto;
     z-index: 2;
+  }
+
+  /* Menu opens as a floating card overlay — bar height stays put. */
+  body:not(.note-page) .profile-card.is-menu-open {
+    z-index: 330;
+  }
+
+  body:not(.note-page) .profile-card__menu-panel {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 6px);
+    z-index: 331;
     margin: 0;
+    padding: 14px 16px 16px;
+    background: var(--kw-surface-raised);
+    border: 1px solid var(--kw-fill-muted);
+    border-radius: var(--kw-radius-card);
+    box-shadow: 0 12px 32px rgba(23, 23, 23, 0.22);
+  }
+
+  body:not(.note-page) .profile-card.is-menu-open .profile-card__menu-panel {
+    display: block;
+  }
+
+  /* Dim page content; stay-chrome sidebar sits above this at 300+. */
+  body.profile-menu-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 250;
+    background: rgba(23, 23, 23, 0.28);
+  }
+
+  body.profile-menu-open {
+    overflow: hidden;
+  }
+
+  body.profile-menu-open .layout > .sidebar,
+  body.profile-menu-open > .sidebar.swipe-nav__stay {
+    z-index: 320;
+    overflow: visible;
+    /* Drop the cream chrome strip that flashed under the rounded card. */
+    background: transparent;
+    padding-bottom: 0;
+  }
+
+  body.profile-menu-open .profile-card {
+    box-shadow: none;
+  }
+
+  .profile-card__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0 0 14px;
+  }
+
+  .profile-card__nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 4px;
+    border-radius: var(--kw-radius-control);
+    color: var(--kw-text);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .profile-card__nav-link:hover,
+  .profile-card__nav-link:focus-visible {
+    background: var(--kw-surface-subtle);
+  }
+
+  .profile-card__nav-link[aria-current="page"] {
+    color: var(--kw-text);
+  }
+
+  /* Desktop keeps the full bio card; menu panel is phone-only. */
+  .profile-card__menu-panel {
+    display: none;
+  }
+
+  /* Work / books desk: keep the sticker grid under the sticky profile. */
+  body:not(.note-page) .layout:has([data-work-desk]) > .root,
+  body:not(.note-page) .layout:has([data-books-desk]) > .root {
+    padding-top: 0.75rem;
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .layout:has([data-work-desk]) .sticker-board,
+  .layout:has([data-books-desk]) .sticker-board {
+    justify-content: center;
   }
 
   /* Notes still tuck the avatar into the swipe trigger. */
@@ -2331,8 +2489,10 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     display: none !important;
   }
 
-  /* Profile card is the phone header, pulled up to the top of the page. */
-  .layout > .sidebar {
+  /* Profile card is the phone header, pulled up to the top of the page.
+     swipe-nav may hoist .sidebar to body.swipe-nav__stay — style both. */
+  .layout > .sidebar,
+  body > .sidebar.swipe-nav__stay {
     display: block;
     width: calc(100% - (2 * var(--page-pad-x)));
     max-width: 692px;
@@ -2349,10 +2509,35 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     background: var(--kw-surface);
   }
 
-  .layout > .sidebar .collections,
-  .layout > .sidebar .nowplaying {
-    display: none;
+  /* Parked outside the swipe frame — fixed so it doesn't steal layout height. */
+  body:not(.note-page) > .sidebar.swipe-nav__stay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    margin: 0 auto;
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+    padding-bottom: 4px;
+    background: var(--kw-surface);
   }
+
+  .layout > .sidebar .collections,
+  .layout > .sidebar .nowplaying,
+  body > .sidebar.swipe-nav__stay .collections,
+  body > .sidebar.swipe-nav__stay .nowplaying,
+  body:has(.layout--work-index) .hidden-footer,
+  body:has([data-work-desk]) .hidden-footer {
+    display: none !important;
+  }
+
+  /* Compact sticky profile height — work preview sticks below it. */
+  body:not(.note-page) {
+    --mobile-profile-sticky: calc(
+      max(10px, env(safe-area-inset-top, 0px)) + 68px
+    );
+  }
+
 
   .layout .header {
     display: none;
@@ -2455,6 +2640,14 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
   .root--full .home-split {
     grid-row: 4;
     margin-top: 0;
+    /* Labels can sit higher; pin the content bottoms together. */
+    align-items: end;
+  }
+
+  .root--full .home-split > .section {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   .root--full .home-split .label {
@@ -2466,12 +2659,70 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     gap: 12px;
   }
 
-  .root--full .project-card__preview {
-    aspect-ratio: 2.2 / 1;
+  /* Description above the preview so the card bottoms can meet Spotify. */
+  .root--full .project-card {
+    flex-direction: column-reverse;
   }
 
-  .root--full .writing-list__item {
-    padding: 0.7rem 0 0.8rem;
+  .root--full .project-card__body {
+    padding: 0 2px 12px;
+  }
+
+  .root--full .project-card__preview {
+    aspect-ratio: 2.05 / 1;
+  }
+
+  @container (width > 920px) {
+    .root--full .home-split .project-card__preview {
+      height: var(--home-player-height, auto);
+    }
+  }
+
+  /* Match After Hours: plain label, no rule under the title. */
+  .root--full .writing-list.notes-archive {
+    margin-top: 0;
+    border-top: 0;
+  }
+
+  .root--full .writing-list .notes-archive__row:first-child {
+    border-top: 1px solid var(--kw-border-muted);
+  }
+
+  /* Single-line titles with a fade instead of wrapping. */
+  .root--full .writing-list .notes-archive__row-title {
+    display: block;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .root--full .writing-list .notes-archive__row-title-inner {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+  }
+
+  .root--full
+    .writing-list
+    .notes-archive__row.is-overflowing
+    .notes-archive__row-title-inner {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - 1.5rem),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - 1.5rem),
+      transparent 100%
+    );
+  }
+
+  .root--full .writing-list .notes-archive__row-meta {
+    flex-shrink: 0;
   }
 
   .sidebar {
@@ -2512,7 +2763,8 @@ body.ed-book-admin .sidebar__meta-links [data-admin-only] {
     gap: calc(0.78125vw - 2px);
   }
 
-  .top-nav__inner {
+  .top-nav__inner,
+  .top-nav__aside {
     padding: calc(0.390625vw + 2px);
   }
 
@@ -2888,6 +3140,50 @@ body.nav-sheet-open {
   .layout--notes-index .article h2 {
     scroll-margin-top: 1.5rem;
   }
+
+  /* Same baseline as sidebar Admin Area / Component Library. */
+  .layout--notes-index > .root:has(.article) {
+    padding-bottom: 30px;
+  }
+
+  .layout--notes-index .article-nav--footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 0.35rem;
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .layout--notes-index .article-nav--footer a {
+    display: inline-flex;
+    width: auto;
+    min-width: 0;
+    flex-direction: row;
+    align-items: center;
+    color: var(--kw-text-faint);
+    text-decoration: none;
+  }
+
+  .layout--notes-index .article-nav--footer a:hover {
+    color: var(--kw-text);
+  }
+
+  .layout--notes-index .article-nav--footer a[data-nav-dir="next"],
+  .layout--notes-index .article-nav--footer a:last-child:not([data-nav-dir="prev"]) {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .layout--notes-index .article-shell .article-nav {
+    display: none;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -2919,28 +3215,28 @@ body.nav-sheet-open {
   }
 
   .layout--notes-index .notes-index {
-    /* Article chrome uses --kw-row-hover */
+    /* Same baseline as /notes/ list + Spotify: pinned to the bottom. */
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 0;
     position: fixed;
-    /* Box starts 10px left of the content so overflow clipping doesn't cut
-       the active TOC indicator bar, which sits just outside the links. */
     left: 350px;
     padding-left: 10px;
-    top: 9rem;
+    top: auto;
+    bottom: 30px;
     width: calc(var(--notes-archive-column) + 10px);
+    max-height: min(42vh, calc(100vh - 9rem - 60px));
     transition:
-      top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
       left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     view-transition-name: notes-index-panel;
   }
 
   .layout--notes-index-expanded .notes-index {
     left: 30px;
-    top: auto;
     /* Sidebar bottom + Spotify card + the standard sidebar gap. */
     bottom: calc(30px + 173px + 24px);
     z-index: 501;
@@ -2960,7 +3256,7 @@ body.nav-sheet-open {
     display: inline-flex;
     align-items: center;
     max-width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: inherit;
     text-decoration: none;
     white-space: nowrap;
@@ -2974,12 +3270,16 @@ body.nav-sheet-open {
 
   .notes-index__title {
     flex-shrink: 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
   }
 
   .notes-index__list-wrap {
-    flex-shrink: 0;
+    flex: 1 1 auto;
     width: 100%;
     min-width: 0;
+    min-height: 0;
+    overflow: hidden;
     container-type: inline-size;
   }
 
@@ -3265,93 +3565,64 @@ body.nav-sheet-open {
     scroll-margin-top: 1.5rem;
   }
 
+  /* Match /notes/ list design, scaled down for the article rail. */
   .notes-index .notes-archive {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    border-top: 0;
+    gap: 0;
+    border-top: 1px solid var(--kw-border-muted);
     margin-bottom: 0;
     min-width: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kw-border-muted) transparent;
   }
 
   .notes-index .notes-archive__row {
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
     margin-inline: 0;
     min-width: 0;
     max-width: 100%;
-    padding: 0 0 0 0.75rem;
-    border-bottom: 0;
-    gap: 0;
-    color: var(--kw-text-muted);
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--kw-border-muted);
+    color: var(--kw-text);
     transition: color 0.15s ease;
   }
 
   .notes-index .notes-archive__row:hover {
     background: transparent;
-    color: var(--kw-text);
+    color: var(--kw-text-muted);
   }
 
   .notes-index .notes-archive__row-title {
     display: block;
-    width: 100%;
     min-width: 0;
+    flex: 1 1 auto;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 0.75rem;
     font-weight: 400;
     line-height: 1.35;
   }
 
   .notes-index .notes-archive__row-title-inner {
     display: block;
-    width: max-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
-    transform: translateX(0);
-  }
-
-  .notes-index .notes-archive__row.is-overflowing .notes-archive__row-title {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 0,
-      #000 calc(100% - 1.25rem),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 0,
-      #000 calc(100% - 1.25rem),
-      transparent 100%
-    );
-  }
-
-  .notes-index
-    .notes-archive__row.is-overflowing:hover
-    .notes-archive__row-title {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 0.75rem,
-      #000 calc(100% - 1.25rem),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 0.75rem,
-      #000 calc(100% - 1.25rem),
-      transparent 100%
-    );
-  }
-
-  .notes-index
-    .notes-archive__row.is-overflowing:hover
-    .notes-archive__row-title-inner {
-    animation: notes-archive-marquee var(--marquee-duration, 3s) 0.25s linear
-      infinite alternate;
   }
 
   .notes-index .notes-archive__row-meta {
-    display: none;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .notes-index .notes-archive__chip {
+    padding: 0.12em 0.45em;
+    font-size: 0.625rem;
   }
 
   .notes-index .notes-archive__row[aria-current="page"] {
@@ -3359,15 +3630,8 @@ body.nav-sheet-open {
     color: var(--kw-text);
   }
 
-  .notes-index .notes-archive__row[aria-current="page"]::before {
-    content: "";
-    position: absolute;
-    top: 0.45em;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--kw-status-ok);
+  .notes-index .notes-archive__row[aria-current="page"] .notes-archive__row-title {
+    font-weight: 500;
   }
 
   .notes-index .list {
@@ -3428,10 +3692,14 @@ body.nav-sheet-open {
 }
 
 /* ==========================================================================
-   Featured book (currently reading, pulled from the about page)
+   Currently reading (same card size as the books grid)
    ========================================================================== */
 .book-featured .label {
   margin-bottom: 0.85rem;
+}
+
+.book-featured .collection-grid.book-featured__grid {
+  margin-top: 0;
 }
 
 .book-featured.is-pending {
@@ -3457,71 +3725,21 @@ body.nav-sheet-open {
 }
 
 .book-featured__link {
-  display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  column-gap: 1.25rem;
-  align-items: center;
-  max-width: 26rem;
   color: inherit;
+  text-decoration: none;
 }
 
 .book-featured__cover {
-  width: 92px;
-  aspect-ratio: 2 / 3;
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid rgba(33, 32, 28, 0.12);
-  box-shadow:
-    0 1px 2px rgba(33, 32, 28, 0.06),
-    0 8px 18px rgba(33, 32, 28, 0.08);
   opacity: 0;
   transition: opacity 0.45s ease;
 }
 
 .book-featured__cover.is-loaded {
   opacity: 1;
-}
-
-.book-featured__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-
-.book-featured__title {
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: var(--kw-text);
-}
-
-.book-featured__author,
-.book-featured__now {
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--kw-text-muted);
-}
-
-.book-featured__now {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.35rem;
-  color: var(--kw-text-subtle);
-}
-
-.book-featured__now-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--kw-status-ok);
-  flex-shrink: 0;
-}
-
-.book-featured__link:hover .book-featured__title {
-  color: var(--kw-text-muted);
 }
 
 .book-featured__link:focus-visible {
@@ -3556,9 +3774,11 @@ body.nav-sheet-open {
   margin-top: 2.5rem;
 }
 
-/* Books / about / clients use the full band right of the sidebar */
+/* Books / about / work use the full band right of the sidebar */
 @media (min-width: 1024px) {
   .layout > .root:has([data-collection="books"]),
+  .layout > .root:has([data-books-desk]),
+  .layout > .root:has([data-work-desk]),
   .layout > .root:has(.book-detail),
   .layout > .root:has(.about-page),
   .layout > .root:has([data-sticker-board]) {
@@ -3572,11 +3792,178 @@ body.nav-sheet-open {
     padding-bottom: 30px;
   }
 
-  /* Clients sticker table: fill the whole content band under the top nav */
-  .layout > .root:has([data-sticker-board]) {
-    padding-top: 7rem;
-    padding-right: 0;
-    padding-bottom: 30px;
+  /* Books / work desk: full-bleed pannable scatter canvas. */
+  .layout:has([data-books-desk]),
+  .layout:has([data-work-desk]) {
+    padding-left: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .layout:has([data-books-desk]) > .root,
+  .layout:has([data-work-desk]) > .root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: none;
+    margin-inline: 0;
+    /* Full-bleed desk — items run under chrome; no white gutters. */
+    padding: 0;
+    min-height: 0;
+  }
+
+  .layout:has([data-books-desk]) > .root > .books-desk,
+  .layout:has([data-work-desk]) > .root > .work-desk {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Empty sidebar space is pass-through so canvas items stay reachable. */
+  .layout:has([data-books-desk]) > .sidebar,
+  .layout:has([data-work-desk]) > .sidebar {
+    pointer-events: none;
+  }
+
+  .layout:has([data-books-desk]) > .sidebar .profile-card,
+  .layout:has([data-books-desk]) > .sidebar .nowplaying,
+  .layout:has([data-work-desk]) > .sidebar .profile-card,
+  .layout:has([data-work-desk]) > .sidebar .nowplaying {
+    pointer-events: auto;
+  }
+
+  /* Desk canvases are busy — lift chrome so it reads above the scatter. */
+  .layout:has([data-books-desk]) > .sidebar .profile-card,
+  .layout:has([data-books-desk]) > .sidebar .nowplaying__widget,
+  .layout:has([data-work-desk]) > .sidebar .profile-card,
+  .layout:has([data-work-desk]) > .sidebar .nowplaying__widget,
+  body:has([data-books-desk]) .top-nav__inner,
+  body:has([data-books-desk]) .top-nav__aside,
+  body:has([data-work-desk]) .top-nav__inner,
+  body:has([data-work-desk]) .top-nav__aside {
+    box-shadow:
+      0 1px 2px rgba(6, 30, 50, 0.08),
+      0 10px 28px rgba(6, 30, 50, 0.14),
+      0 24px 48px rgba(6, 30, 50, 0.1);
+  }
+
+  .books-desk {
+    --book-card-w: 10.0625rem;
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 0;
+  }
+
+  /* Canvas fills the whole desk edge-to-edge. */
+  .books-canvas {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+    outline: none;
+    z-index: 1;
+  }
+
+  .books-canvas:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(33, 32, 28, 0.28);
+  }
+
+  .books-desk.is-panning .books-canvas,
+  .books-canvas.is-panning {
+    cursor: grabbing;
+  }
+
+  .books-desk.is-panning .books-canvas .collection-card {
+    pointer-events: none;
+  }
+
+  .books-canvas__surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  /* Before scatter settles, keep a wide auto grid; then JS flips to absolute. */
+  .layout:has([data-books-desk])
+    .books-canvas
+    .collection-grid--book {
+    --book-card-w: 10.0625rem;
+    grid-template-columns: repeat(auto-fill, var(--book-card-w));
+    width: max-content;
+    min-width: 100%;
+    margin: 0;
+    gap: 88px 72px;
+    justify-content: start;
+  }
+
+  .layout:has([data-books-desk])
+    .books-canvas
+    .collection-grid--scattered {
+    display: block;
+    position: relative;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .layout:has([data-books-desk])
+    .books-canvas
+    .collection-grid--scattered
+    .collection-card {
+    position: absolute;
+    width: var(--book-card-w);
+    margin: 0;
+  }
+
+  .layout:has([data-books-desk])
+    .books-canvas
+    .collection-grid--scattered
+    .collection-card__media {
+    transform: rotate(var(--scatter-rot, 0deg))
+      translate(var(--scatter-shift-x, 0), var(--scatter-shift-y, 0));
+  }
+
+  .layout:has([data-books-desk])
+    .books-canvas
+    .collection-grid--scattered
+    .collection-card:hover
+    .collection-card__media {
+    transform: rotate(0deg) translate(0, -6px) scale(1.03);
+  }
+}
+
+/* Books desk — mobile/tablet keep normal document flow. */
+@media (max-width: 1023px) {
+  .books-desk {
+    display: block;
+    position: relative;
+  }
+
+  .books-canvas,
+  .books-canvas__surface {
+    position: static;
+    inset: auto;
+    overflow: visible;
+    cursor: auto;
+    touch-action: auto;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+    will-change: auto;
+  }
+
+  .books-canvas .collection-grid--scattered {
+    display: grid !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .books-canvas .collection-grid--scattered .collection-card {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
   }
 }
 
@@ -3669,49 +4056,86 @@ body.nav-sheet-open {
   line-height: 1.35;
 }
 
-.collection-grid--client {
+.collection-grid--work {
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 
 /* ==========================================================================
-   Clients sticker board — logos scattered like stickers on a table
+   Work desk — logos on a pannable sticker canvas (books treatment)
    ========================================================================== */
+.work-desk {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 0;
+}
+
+.work-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  outline: none;
+}
+
+.work-canvas__surface {
+  position: relative;
+}
+
 .sticker-board {
   position: relative;
   margin-top: 0;
   width: 100%;
-  /* Exact height is set by clients-board.js so the page never scrolls. */
-  height: 480px;
-  border-radius: 12px;
-  touch-action: none;
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 16px;
+  align-content: flex-start;
+  justify-content: flex-start;
 }
 
 .sticker {
-  position: absolute;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 108px;
   height: 108px;
+  flex: 0 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
   border-radius: 14px;
   border: 1px solid rgba(33, 32, 28, 0.1);
   background: #fff;
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(33, 32, 28, 0.05);
   transform: rotate(var(--rot, 0deg));
-  cursor: grab;
+  cursor: pointer;
   user-select: none;
   -webkit-user-drag: none;
-  touch-action: none;
+  touch-action: manipulation;
   transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s ease;
 }
 
+/* Logos with their own colored plate — fill the tile edge to edge. */
+.sticker--bleed {
+  padding: 0;
+  background: transparent;
+}
+
+.sticker--bleed img {
+  object-fit: cover;
+}
+
+/* Wordmarks / small marks that need less inset. */
+.sticker--large {
+  padding: 4px;
+}
+
 .sticker:hover {
-  transform: rotate(var(--rot, 0deg)) scale(1.05);
+  transform: rotate(0deg) scale(1.05);
   box-shadow:
     0 1px 2px rgba(33, 32, 28, 0.05),
     0 4px 10px rgba(33, 32, 28, 0.07);
+  z-index: 2;
 }
 
 .sticker.is-pending {
@@ -3736,19 +4160,14 @@ body.nav-sheet-open {
   opacity: 1;
 }
 
-.sticker.is-dragging {
-  cursor: grabbing;
-  transform: rotate(0deg) scale(1.08);
-  box-shadow:
-    0 2px 4px rgba(33, 32, 28, 0.06),
-    0 8px 16px rgba(33, 32, 28, 0.09);
-  transition: box-shadow 0.25s ease;
-}
-
 .sticker img {
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+  object-position: center;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -3762,6 +4181,93 @@ body.nav-sheet-open {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--kw-text-faint);
+}
+
+@media (min-width: 1024px) {
+  .work-desk {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .work-canvas {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+    min-height: 0;
+    z-index: 1;
+  }
+
+  .work-canvas:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(33, 32, 28, 0.28);
+  }
+
+  .work-desk.is-panning .work-canvas,
+  .work-canvas.is-panning {
+    cursor: grabbing;
+  }
+
+  .work-desk.is-panning .work-canvas .sticker {
+    pointer-events: none;
+  }
+
+  .work-canvas__surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  .sticker-board--scattered {
+    display: block;
+    position: relative;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .sticker-board--scattered .sticker {
+    position: absolute;
+    margin: 0;
+    touch-action: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .work-desk {
+    display: block;
+    position: relative;
+    padding-top: 1rem;
+  }
+
+  .work-canvas,
+  .work-canvas__surface {
+    position: static;
+    inset: auto;
+    overflow: visible;
+    cursor: auto;
+    touch-action: auto;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+    will-change: auto;
+  }
+
+  .sticker-board--scattered {
+    display: flex !important;
+    flex-wrap: wrap;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .sticker-board--scattered .sticker {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+  }
 }
 
 @media (max-width: 639px) {
@@ -3836,7 +4342,7 @@ body.nav-sheet-open {
   justify-content: center;
 }
 
-.collection-grid--client .collection-card__media {
+.collection-grid--work .collection-card__media {
   aspect-ratio: 1;
   padding: 16px;
 }
@@ -3858,7 +4364,7 @@ body.nav-sheet-open {
   opacity: 1;
 }
 
-.collection-grid--client .collection-card__media img {
+.collection-grid--work .collection-card__media img {
   object-fit: contain;
 }
 
@@ -4122,7 +4628,7 @@ body.nav-sheet-open {
   margin-right: calc(-1 * var(--page-pad-x));
   margin-left: calc(-1 * var(--page-pad-x));
   pointer-events: none;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 var(--kw-radius-card) var(--kw-radius-card);
   background: linear-gradient(
     to bottom,
     rgb(255 255 255 / 0),
@@ -4254,6 +4760,20 @@ body.nav-sheet-open {
   line-height: 1.4;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .home-split .project-card:hover .project-card__preview {
+    border-color: var(--kw-border-muted);
+  }
+
+  .home-split .project-card:hover .project-card__mark {
+    opacity: 0.76;
+  }
+
+  .home-split .project-card:hover .project-card__desc {
+    color: color-mix(in srgb, var(--kw-text-muted) 70%, var(--kw-text-subtle));
+  }
+}
+
 .collections__modal-card-mark {
   font-family: var(--font-mono);
   font-size: 13px;
@@ -4268,6 +4788,7 @@ body.nav-sheet-open {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 2.5rem;
 }
 
@@ -4308,6 +4829,50 @@ body.nav-sheet-open {
 .project-page__share svg {
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
+}
+
+.project-page__crumb-title {
+  margin: 0 auto 0 0;
+  font: 500 1.125rem/1.2 var(--font-mono);
+}
+
+.project-page__share {
+  width: auto;
+  min-width: 36px;
+  flex-shrink: 0;
+  padding-inline: 9px;
+}
+
+.project-page__share-label {
+  display: grid;
+  grid-template-columns: 0fr;
+  font-size: 12px;
+  transition: grid-template-columns 180ms ease, margin-inline-start 180ms ease;
+}
+
+.project-page__share-label > span {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.project-page__share:is(:hover, :focus-visible, [data-copied="true"]) .project-page__share-label {
+  grid-template-columns: 1fr;
+  margin-inline-start: 6px;
+}
+
+.project-page__share-icon--check,
+.project-page__share[data-copied="true"] .project-page__share-icon--link {
+  display: none;
+}
+
+.project-page__share[data-copied="true"] .project-page__share-icon--check {
+  display: block;
+  color: var(--kw-status-ok);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-page__share-label { transition: none; }
 }
 
 .project-page__hero {
@@ -4415,6 +4980,28 @@ body.nav-sheet-open {
 
 .project-table code {
   font-size: 12px;
+}
+
+.project-examples {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.project-examples > div {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--kw-line);
+  border-radius: var(--kw-radius-md);
+  background: var(--kw-fill);
+}
+
+.project-examples dt {
+  font-weight: 550;
+}
+
+.project-examples dd {
+  margin: 0.4rem 0 0;
+  color: var(--kw-text-muted);
 }
 
 /* ==========================================================================
@@ -5719,6 +6306,17 @@ body.note-page.note-page--essay .article-nav {
 
 body.footer-revealed {
   overflow: hidden;
+}
+
+/* Phones: do not show the hidden now-playing peek, and do not reserve
+   space or lock scroll for it. Desktop (fine pointer) stays hidden too. */
+@media (max-width: 767px) {
+  .hidden-footer {
+    display: none !important;
+  }
+  body.footer-revealed {
+    overflow: visible;
+  }
 }
 
 @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
