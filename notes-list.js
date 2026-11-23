@@ -139,7 +139,7 @@
       if (!r.ok) throw new Error("notes");
       return r.json();
     }),
-    fetchJson("/data/notes-upcoming.json?v=1"),
+    fetchJson("/data/notes-upcoming.json?v=2"),
     fetchJson("/data/drafts.json?v=1"),
   ])
     .then(function (triple) {

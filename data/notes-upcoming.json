@@ -1,6 +1,16 @@
 {
   "items": [
     {
+      "title": "Why the Dishwasher Should Make the Menu",
+      "slug": "why-the-dishwasher-should-make-the-menu",
+      "href": "/notes/why-the-dishwasher-should-make-the-menu/",
+      "dek": "The dishwasher sees what every guest leaves on the plate. Nobody ever asks him, but in his head he probably knows it all.",
+      "author": "Julian Kreth",
+      "date": null,
+      "soon": true,
+      "viewTransitionName": "note-soon-5"
+    },
+    {
       "title": "Coding Is the New Excel",
       "slug": "coding-is-the-new-excel",
       "href": "/notes/coding-is-the-new-excel/",
