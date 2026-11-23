@@ -42,20 +42,24 @@
       (item.draft ? " notes-archive__row--draft" : "") +
       (item.soon ? " notes-archive__row--soon" : "");
 
+    var inner;
     if (compact) {
-      return (
-        '<a class="' +
-        rowClass +
-        '" href="' +
-        item.href +
-        '"' +
-        name +
-        current +
-        '><span class="notes-archive__row-title">' +
+      inner =
+        '<span class="notes-archive__row-title">' +
         '<span class="notes-archive__row-title-inner">' +
         item.title +
-        "</span></span></a>"
-      );
+        "</span></span>";
+    } else {
+      inner =
+        '<span class="notes-archive__row-title">' +
+        item.title +
+        '</span><span class="notes-archive__row-meta">' +
+        meta +
+        "</span>";
+    }
+
+    if (item.soon) {
+      return '<div class="' + rowClass + '"' + name + ">" + inner + "</div>";
     }
 
     return (
@@ -66,11 +70,9 @@
       '"' +
       name +
       current +
-      '><span class="notes-archive__row-title">' +
-      item.title +
-      '</span><span class="notes-archive__row-meta">' +
-      meta +
-      "</span></a>"
+      ">" +
+      inner +
+      "</a>"
     );
   }
 
